@@ -1,0 +1,14 @@
+AllCops:
+  TargetRubyVersion: 3.1
+  NewCops: disable
+  SuggestExtensions: false
+  Exclude:
+    - bin/*
+    - vendor/**/*
+    - db/schema.rb
+    - db/seeds.rb
+    - db/migrate/*
+    - Guardfile
+
+Style/Documentation:
+  Enabled: false
