@@ -30,7 +30,10 @@ group :development, :test do
 end
 
 group :development do
+  gem 'guard-rspec', require: false
   gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
   gem 'web-console'
   # gem "rack-mini-profiler"
 end
