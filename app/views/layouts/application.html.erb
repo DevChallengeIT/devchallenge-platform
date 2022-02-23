@@ -16,9 +16,9 @@
       <p><%= notice %></p>
       <p><%= alert %></p>
       <% if current_user %>
-        <%= link_to t('en.words.log_out'), destroy_user_session_path %>
+        <%= link_to t('words.log_out'), destroy_user_session_path %>
       <% else %>
-        <%= link_to t('en.words.log_in'), new_user_session_path %>
+        <%= link_to t('words.log_in'), new_user_session_path %>
       <% end %>
     </header>
     <main class="container mx-auto mt-28 px-5 flex">
