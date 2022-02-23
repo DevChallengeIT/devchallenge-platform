@@ -5,13 +5,22 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%# <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
+    <header>
+      <p><%= notice %></p>
+      <p><%= alert %></p>
+      <% if current_user %>
+        <%= link_to t('en.words.log_out'), destroy_user_session_path %>
+      <% else %>
+        <%= link_to t('en.words.log_in'), new_user_session_path %>
+      <% end %>
+    </header>
     <main class="container mx-auto mt-28 px-5 flex">
       <%= yield %>
     </main>
