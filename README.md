@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup development env
 
-Things you may want to cover:
+Required
+- Ruby 3.1
+- Postgres
+- Redis
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+In console
+```sh
+$ gem install bundler
+$ bundle install
+$ ./bin/dev
+```

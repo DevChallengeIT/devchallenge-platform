@@ -1,4 +1,12 @@
 en:
-  words:
+  devise:
     log_in: Log In
     log_out: Log Out
+    full_name: Full Name
+    email: Email
+    password: Password
+    confirm_password: Confirm password
+    register: Register
+    forgot_password: Forgot password?
+    didnt_receive_confirmation_instructions: Didn't receive confirmation instructions?
+    didnt_receive_unlock_instructions: Didn't receive unlock instructions?

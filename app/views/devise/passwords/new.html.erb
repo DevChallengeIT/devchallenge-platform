@@ -1,16 +1,18 @@
-<h2>Forgot your password?</h2>
+<div class="h-full xs:w-full md:w-7/12 xl:w-4/12 mx-auto align-middle">
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4' }) do |f| %>
+    <h2 class="text-center">Forgot your password?</h2>
+    <%= render "devise/shared/error_messages", resource: resource %>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="mb-4">
+      <%= f.label :email, "Email", class: "block text-sm font-bold mb-2 text-gray-700" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <div class="flex items-center justify-between content-end">
+      <%= f.submit "Send me reset password instructions",
+                   class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-6 rounded focus:outline-none focus:shadow-outline" %>
+      <%= render "devise/shared/links" %>
+    </div>
+  <% end %>
+</div>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>

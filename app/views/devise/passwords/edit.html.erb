@@ -1,25 +1,26 @@
-<h2>Change your password</h2>
+<div class="h-full w-full max-w-xs mx-auto align-middle">
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4' }) do |f| %>
+    <h2 class="text-center">Change your password</h2>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <%= f.hidden_field :reset_password_token %>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
+    <div class="mb-4">
+      <%= f.label :password, "New password", class: "block text-sm font-bold mb-2 text-gray-700" %>
+      <% if @minimum_password_length %>
+        <em class="block text-sm font-normal mb-2 text-gray-900">(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %>
+      <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
-  </div>
+    <div class="mb-4">
+      <%= f.label :password_confirmation, "Confirm new password", class: "block text-sm font-bold mb-2 text-gray-700" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <div class="flex items-center justify-between content-end">
+      <%= f.submit "Change my password", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-6 rounded focus:outline-none focus:shadow-outline" %>
+      <%= render "devise/shared/links" %>
+    </div>
+  <% end %>
+</div>
 
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>

@@ -28,3 +28,13 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
     - 'config/initializers/**/*'
+
+Layout/LineLength:
+  Exclude:
+    - 'app/controllers/ui.rb'
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
