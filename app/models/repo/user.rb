@@ -8,5 +8,7 @@ module Repo
 
     extend FriendlyId
     friendly_id :full_name, use: :slugged
+
+    validates :full_name, presence: true
   end
 end

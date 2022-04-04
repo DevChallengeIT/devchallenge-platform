@@ -6,8 +6,7 @@ RSpec.describe 'Log In' do
   let(:user) { create(:user) }
 
   it 'failure' do
-    visit root_path
-    click_link 'Log In'
+    visit '/login'
 
     expect(page).to have_current_path '/login'
 
@@ -24,11 +23,11 @@ RSpec.describe 'Log In' do
     click_button 'Log In'
 
     expect(page).to have_current_path '/login'
+    expect(page).not_to have_link 'Log Out'
   end
 
   it 'success' do
-    visit root_path
-    click_link 'Log In'
+    visit '/login'
 
     fill_in 'Email',    with: user.email
     fill_in 'Password', with: 'password'

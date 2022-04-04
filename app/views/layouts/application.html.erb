@@ -13,16 +13,24 @@
 
   <body class="container mx-auto mt-3">
     <header class="my-3">
-      <p class="font-semibold"><%= notice %></p>
-      <p class="font-semibold"><%= alert %></p>
-      <nav class="flex items-center space-x-5">
+      <nav id="main-nav" class="flex items-center space-x-5 justify-between">
+        <div>
+          <%= link_to t('words.home'), root_path %>
+        </div>
         <% if current_user %>
-          <%= link_to t('devise.log_out'), destroy_user_session_path %>
+          <div>
+            <%= link_to current_user.full_name, edit_user_registration_path %>
+            <%= link_to t('auth.log_out'), destroy_user_session_path %>
+          </div>
         <% else %>
-          <%= link_to t('devise.log_in'), new_user_session_path %>
-          <%= link_to t('devise.register'), new_user_registration_path %>
+          <div>
+            <%= link_to t('auth.log_in'), new_user_session_path %>
+            <%= link_to t('auth.register'), new_user_registration_path %>
+          </div>
         <% end %>
       </nav>
+      <p class="font-semibold"><%= notice %></p>
+      <p class="font-semibold"><%= alert %></p>
     </header>
     <main>
       <%= yield %>

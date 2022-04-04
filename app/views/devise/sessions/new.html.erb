@@ -4,17 +4,17 @@
     <%= render "devise/shared/error_messages", resource: resource %>
 
     <div class="mb-4">
-      <%= f.label :email, t('devise.email'), class: UI::FORM_LABEL %>
+      <%= f.label :email, t('auth.email'), class: UI::FORM_LABEL %>
       <%= f.email_field :email, autofocus: true, autocomplete: "email", class: UI::FORM_INPUT %>
     </div>
 
     <div class="mb-4">
-      <%= f.label :password, t('devise.password'), class: UI::FORM_LABEL %>
+      <%= f.label :password, t('auth.password'), class: UI::FORM_LABEL %>
       <%= f.password_field :password, autocomplete: "current-password", class: UI::FORM_INPUT %>
     </div>
 
     <div class="flex items-center justify-between content-end">
-      <%= f.submit t('devise.log_in'), class: UI::BUTTON_PRIMARY %>
+      <%= f.submit t('auth.log_in'), class: UI::BUTTON_PRIMARY %>
       <%= render "devise/shared/links" %>
     </div>
   <% end %>

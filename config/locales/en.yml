@@ -1,12 +1,23 @@
 en:
-  devise:
+  words:
+    home: Home
+    add: Add
+    create: Create
+    edit: Edit
+    update: Update
+    delete: Delete
+    back: Back
+  auth:
+    profile: Profile
     log_in: Log In
     log_out: Log Out
     full_name: Full Name
     email: Email
     password: Password
     confirm_password: Confirm password
+    current_password: Current Password
     register: Register
     forgot_password: Forgot password?
     didnt_receive_confirmation_instructions: Didn't receive confirmation instructions?
     didnt_receive_unlock_instructions: Didn't receive unlock instructions?
+    cancel_account: Cancel my account
