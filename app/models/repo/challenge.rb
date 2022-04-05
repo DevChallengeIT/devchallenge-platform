@@ -16,6 +16,8 @@ module Repo
     STATUSES = [DRAFT, MODERATION, PENDING, REGISTRATION, LIVE, COMPLETE, CANCELED].freeze
 
     validates :title, presence: true
+    validates :slug, presence: true, if: :persisted?
+    validates :slug, uniqueness: true, if: :persisted?
     validates :status, inclusion: { in: STATUSES }
   end
 end

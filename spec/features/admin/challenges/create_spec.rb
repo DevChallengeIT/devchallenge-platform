@@ -18,12 +18,16 @@ RSpec.describe 'Admin/Challenges/Create' do
     expect(page).to have_content 'Access denied'
   end
 
-  it 'failure with empty title' do
+  it 'failure with invalid params' do
     assume_logged_in(admin: true)
     visit '/admin/challenges/new'
 
     fill_in 'Title', with: ''
     click_button 'Create'
+
+    within '#title-errors' do
+      expect(page).to have_content "can't be blank"
+    end
 
     expect(page).to have_current_path '/admin/challenges'
     expect(page).not_to have_content 'Challenge was successfully created'
