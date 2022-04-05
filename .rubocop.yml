@@ -24,6 +24,9 @@ Layout/HashAlignment:
   EnforcedColonStyle: table
   EnforcedHashRocketStyle: table
 
+Lint/MissingSuper:
+  Enabled: false
+
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
@@ -31,7 +34,7 @@ Metrics/BlockLength:
 
 Layout/LineLength:
   Exclude:
-    - 'app/controllers/ui.rb'
+    - 'app/components/ui.rb'
 
 RSpec/MultipleExpectations:
   Enabled: false

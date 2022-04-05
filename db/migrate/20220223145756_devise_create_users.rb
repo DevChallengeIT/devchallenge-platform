@@ -12,6 +12,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.citext :full_name, null: false
       t.citext :slug,      null: false
 
+      t.string :time_zone, default: 'UTC'
+
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at

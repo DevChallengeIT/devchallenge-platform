@@ -18,6 +18,7 @@ gem 'slim-rails', '~> 3.4'
 gem 'stimulus-rails', '~> 1.0'
 gem 'tailwindcss-rails', '~> 2.0'
 gem 'turbo-rails', '~> 1.0'
+gem 'view_component', '~> 2.52'
 
 # Support
 gem 'bootsnap', require: false

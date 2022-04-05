@@ -9,6 +9,11 @@
     </div>
 
     <div class="mb-4">
+      <%= f.label :time_zone, t('auth.time_zone'), class: UI::FORM_LABEL %>
+      <%= f.time_zone_select :time_zone, nil, {}, class: UI::FORM_INPUT %>
+    </div>
+
+    <div class="mb-4">
       <%= f.label :email, t('auth.email'), class: UI::FORM_LABEL %>
       <%= f.email_field :email, autofocus: true, autocomplete: "email", class: UI::FORM_INPUT %>
     </div>
