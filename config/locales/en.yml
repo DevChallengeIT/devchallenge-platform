@@ -35,3 +35,8 @@ en:
     challenges:
       plural: Challenges
       singular: Challenge
+      status: Status
+      title: Title
+      registration_at: Registration At
+      start_at: Start At
+      finish_at: Finish At
