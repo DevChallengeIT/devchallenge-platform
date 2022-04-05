@@ -12,7 +12,7 @@ module Admin
       @challenge = Repo::Challenge.new(challenge_params)
 
       if challenge.save
-        redirect_to edit_admin_challenge_path(challenge), notice: 'Challenge was successfully created.'
+        redirect_to(edit_admin_challenge_path(challenge), notice: flash_message(:created, :challenges))
       else
         render :new, status: :unprocessable_entity
       end
@@ -20,7 +20,7 @@ module Admin
 
     def update
       if challenge.update(challenge_params)
-        redirect_to admin_challenges_path, notice: 'Challenge was successfully updated.'
+        redirect_to(admin_challenges_path, notice: flash_message(:updated, :challenges))
       else
         render :edit, status: :unprocessable_entity
       end

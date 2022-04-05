@@ -4,6 +4,12 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   around_action :within_time_zone, if: :current_user
 
+  private
+
+  def flash_message(action, resource_name)
+    t("messages.resource_#{action}", name: t("resources.#{resource_name}.singular"))
+  end
+
   protected
 
   def configure_permitted_parameters
