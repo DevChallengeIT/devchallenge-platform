@@ -29,8 +29,9 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+/config/credentials/test.key
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
 
-/config/credentials/test.key
+

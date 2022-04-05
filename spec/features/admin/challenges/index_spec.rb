@@ -32,4 +32,31 @@ RSpec.describe 'Admin/Challenges/Index' do
       expect(page).to have_content challenge.finish_at.strftime(UI::TimestampComponent::TIME_FORMAT)
     end
   end
+
+  it 'handles user time_zone' do
+    challenge = create(:challenge)
+    user = create(:user, :admin, time_zone: 'Kyiv')
+
+    assume_logged_in(user)
+    visit '/admin/challenges'
+
+    within "#challenge-#{challenge.id}" do
+      expect(page).to have_content challenge.title
+      expect(page).to have_content challenge.status
+      expect(page).to have_content challenge
+        .registration_at
+        .in_time_zone(user.time_zone)
+        .strftime(UI::TimestampComponent::TIME_FORMAT)
+
+      expect(page).to have_content challenge
+        .start_at
+        .in_time_zone(user.time_zone)
+        .strftime(UI::TimestampComponent::TIME_FORMAT)
+
+      expect(page).to have_content challenge
+        .finish_at
+        .in_time_zone(user.time_zone)
+        .strftime(UI::TimestampComponent::TIME_FORMAT)
+    end
+  end
 end
