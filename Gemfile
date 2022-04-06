@@ -13,6 +13,7 @@ gem 'puma', '~> 5.0'
 gem 'rails', '~> 7.0.2'
 
 # Frontend
+gem 'breadcrumbs_on_rails', '~> 4.1'
 gem 'importmap-rails', '~> 1.0'
 gem 'pagy', '~> 5.10'
 gem 'slim-rails', '~> 3.4'
