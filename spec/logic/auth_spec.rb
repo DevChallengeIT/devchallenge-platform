@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Auth do
   describe '.admin?' do
-    it 'reutrns true for admin user' do
+    it 'returns true for admin user' do
       user = create(:user, :admin)
 
       expect(described_class.admin?(user)).to eq true
