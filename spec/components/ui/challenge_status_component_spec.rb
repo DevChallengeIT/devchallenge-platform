@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe UI::ChallengeStatusComponent, type: :component do
-  it 'renders draft staus' do
+  it 'renders draft status' do
     render_inline(described_class.new(challenge: build(:challenge, status: 'draft')))
 
     expect(rendered_component).to have_css "span[class='rounded-xl px-3 py-2 text-white bg-gray-500']", text: 'draft'
