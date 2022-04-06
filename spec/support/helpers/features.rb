@@ -5,10 +5,15 @@ module SpecHelpers
     attr_reader :current_user
 
     def assume_logged_in(user = nil, admin: false)
-      user ||= user || admin ? create(:user, :admin) : create(:user)
-      @current_user = user
+      local_user = if user
+                     user
+                   else
+                     admin ? create(:user, :admin) : create(:user)
+                   end
 
-      login_as(user)
+      @current_user = local_user
+
+      login_as(local_user)
     end
   end
 end
