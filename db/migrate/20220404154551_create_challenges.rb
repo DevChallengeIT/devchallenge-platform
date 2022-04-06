@@ -4,8 +4,8 @@ class CreateChallenges < ActiveRecord::Migration[7.0]
 
     create_table :challenges do |t|
       t.enum :status, enum_type: :challenge_status, default: 'draft', null: false
-      t.string :title, null: false
-      t.string :slug, null: false
+      t.citext :title, null: false
+      t.citext :slug, null: false
       t.text :description
       t.text :terms_and_conditions
       t.datetime :registration_at
@@ -16,7 +16,7 @@ class CreateChallenges < ActiveRecord::Migration[7.0]
     end
 
     add_index :challenges, :status
-    add_index :challenges, :title
+    add_index :challenges, :title, unique: true
     add_index :challenges, :slug, unique: true
   end
 end

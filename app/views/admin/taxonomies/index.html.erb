@@ -1,0 +1,13 @@
+<div class="flex justify-between items-center py-3">
+  <h2 class="<%= UI::H2 %>"><%= t('resources.taxonomies.plural') %></h2>
+</div>
+
+<ul id="taxonomies">
+  <% @taxonomies.each do |taxonomy| %>
+    <li id="taxonomy-<%= taxonomy.id %>" class="my-2">
+      <%= link_to taxonomy.title, admin_taxonomy_taxons_path(taxonomy) %>
+    </li>
+  <% end %>
+</ul>
+
+<%= render(UI::PaginatorComponent.new(paginator: @paginator)) %>

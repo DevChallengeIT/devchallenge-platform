@@ -3,10 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe Repo::Challenge do
-  subject { described_class.new }
+  subject { build(:challenge) }
 
   describe 'validations' do
     it { is_expected.to validate_presence_of(:title) }
+    it { is_expected.to validate_uniqueness_of(:title).case_insensitive }
 
     it 'defines enum for status' do
       expect(subject).to define_enum_for(:status).with_values(

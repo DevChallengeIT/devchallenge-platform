@@ -1,0 +1,15 @@
+<div class="flex justify-between items-center py-3">
+  <h2 class="<%= UI::H2 %>"><%= taxonomy.title %></h2>
+
+  <%= link_to t('words.add'), new_admin_taxonomy_taxon_path(taxonomy), class: UI::BUTTON_PRIMARY %>
+</div>
+
+<ul id="taxons">
+  <% @taxons.each do |taxon| %>
+    <li id="taxon-<%= taxon.id %>" class="my-2">
+      <%= link_to taxon.title, edit_admin_taxonomy_taxon_path(taxonomy, taxon) %>
+    </li>
+  <% end %>
+</ul>
+
+<%= render(UI::PaginatorComponent.new(paginator: @paginator)) %>

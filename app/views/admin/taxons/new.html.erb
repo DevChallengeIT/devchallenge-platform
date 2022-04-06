@@ -1,0 +1,16 @@
+<div class="md:w-2/3 w-full">
+  <h2 class="<%= UI::H2 %>"><%= t('words.new') %> <%= t('resources.taxons.singular') %></h2>
+
+  <%= form_with(model: @taxon, scope: :taxon, url: admin_taxonomy_taxons_path(taxonomy), method: :post, class: "contents") do |form| %>
+    <div class="my-5">
+      <%= form.label :title, class: UI::FORM_LABEL %>
+      <%= form.text_field :title, autofocus: true, class: UI::FORM_INPUT %>
+      <%= render(UI::ErrorTagComponent.new(errors: @taxon.errors, field: :title)) %>
+    </div>
+
+    <div class="flex items-center justify-between">
+      <%= form.submit t('words.create'), class: UI::BUTTON_PRIMARY %>
+      <%= link_to t('words.back'), admin_taxonomy_taxons_path(taxonomy), class: UI::BUTTON_SECONDARY %>
+    </div>
+  <% end %>
+</div>

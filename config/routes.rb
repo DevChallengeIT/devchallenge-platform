@@ -9,6 +9,10 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root 'dashboard#index'
+
     resources :challenges, except: %i[show destroy]
+    resources :taxonomies, only: %i[index] do
+      resources :taxons, except: %i[show]
+    end
   end
 end
