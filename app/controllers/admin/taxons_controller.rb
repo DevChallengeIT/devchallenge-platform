@@ -30,6 +30,11 @@ module Admin
       end
     end
 
+    def destroy
+      taxon.destroy
+      redirect_to(admin_taxonomy_taxons_path(taxonomy), notice: flash_message(:removed, :taxons))
+    end
+
     private
 
     def taxon

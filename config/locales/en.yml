@@ -11,11 +11,13 @@ en:
     delete: Delete
     back: Back
     dashboard: Dashboard
+    remove: Remove
+    danger: Danger!
   messages:
     access_denied: Access denied
     resource_created: '%{name} was successfully created'
-    resource_updated: '%{name} was successfully updated.'
-    resource_removed: '%{name} was successfully removed.'
+    resource_updated: '%{name} was successfully updated'
+    resource_removed: '%{name} was successfully removed'
   auth:
     profile: Profile
     log_in: Log In
