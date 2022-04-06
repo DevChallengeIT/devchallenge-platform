@@ -25,7 +25,7 @@ Repo::Taxon.where(title: 'QA').first_or_create!(taxonomy_id: txn_speciality.id)
 Repo::Taxon.where(title: 'Design').first_or_create!(taxonomy_id: txn_speciality.id)
 
 Repo::Taxon.where(title: 'Ruby').first_or_create!(taxonomy_id: txn_tech.id)
-Repo::Taxon.where(title: 'Elxir').first_or_create!(taxonomy_id: txn_tech.id)
+Repo::Taxon.where(title: 'Elixir').first_or_create!(taxonomy_id: txn_tech.id)
 Repo::Taxon.where(title: 'JS').first_or_create!(taxonomy_id: txn_tech.id)
 Repo::Taxon.where(title: 'HTML').first_or_create!(taxonomy_id: txn_tech.id)
 Repo::Taxon.where(title: 'CSS').first_or_create!(taxonomy_id: txn_tech.id)
