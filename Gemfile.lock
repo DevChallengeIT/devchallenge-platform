@@ -176,6 +176,8 @@ GEM
       nenv (~> 0.1)
       shellany (~> 0.0)
     orm_adapter (0.5.0)
+    pagy (5.10.1)
+      activesupport
     parallel (1.22.1)
     parser (3.1.1.0)
       ast (~> 2.4.1)
@@ -277,6 +279,8 @@ GEM
       rubocop (~> 1.19)
     ruby-progressbar (1.11.0)
     shellany (0.0.1)
+    shoulda-matchers (5.1.0)
+      activesupport (>= 5.2.0)
     slim (4.1.0)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 2.0.6, < 2.1)
@@ -299,6 +303,9 @@ GEM
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.1.0)
+    view_component (2.52.0)
+      activesupport (>= 5.0.0, < 8.0)
+      method_source (~> 1.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.0)
@@ -328,6 +335,7 @@ DEPENDENCIES
   importmap-rails (~> 1.0)
   launchy
   lograge (~> 0.12)
+  pagy (~> 5.10)
   pg (~> 1.1)
   propshaft (~> 0.6)
   pry-rails
@@ -337,11 +345,13 @@ DEPENDENCIES
   rubocop
   rubocop-rails
   rubocop-rspec
+  shoulda-matchers (~> 5.0)
   slim-rails (~> 3.4)
   stimulus-rails (~> 1.0)
   tailwindcss-rails (~> 2.0)
   turbo-rails (~> 1.0)
   tzinfo-data
+  view_component (~> 2.52)
   web-console
 
 RUBY VERSION

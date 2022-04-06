@@ -1,0 +1,7 @@
+<ul id="<%= @field %>-errors">
+  <% @errors[@field].each do |message| %>
+    <li class="text-red-500 font-medium">
+      <%= message %>
+    </li>
+  <% end %>
+</ul>

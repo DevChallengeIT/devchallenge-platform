@@ -14,10 +14,12 @@ gem 'rails', '~> 7.0.2'
 
 # Frontend
 gem 'importmap-rails', '~> 1.0'
+gem 'pagy', '~> 5.10'
 gem 'slim-rails', '~> 3.4'
 gem 'stimulus-rails', '~> 1.0'
 gem 'tailwindcss-rails', '~> 2.0'
 gem 'turbo-rails', '~> 1.0'
+gem 'view_component', '~> 2.52'
 
 # Support
 gem 'bootsnap', require: false
@@ -48,4 +50,5 @@ group :test do
   gem 'factory_bot_rails', '~> 6.2'
   gem 'ffaker', '~> 2.20'
   gem 'launchy'
+  gem 'shoulda-matchers', '~> 5.0'
 end

@@ -10,6 +10,16 @@ require 'rspec/rails'
 require 'capybara/rspec'
 require 'factory_bot_rails'
 require 'ffaker'
+require 'view_component/test_helpers'
+
+Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
 
 begin
   ActiveRecord::Migration.maintain_test_schema!
@@ -23,6 +33,9 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
 
   config.include FactoryBot::Syntax::Methods
+  config.include ViewComponent::TestHelpers, type: :component
+  config.include Capybara::RSpecMatchers,    type: :component
+  config.include SpecHelpers::Features,      type: :feature
   config.include Warden::Test::Helpers
 
   config.before :suite do

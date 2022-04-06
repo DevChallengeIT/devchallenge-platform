@@ -1,0 +1,48 @@
+<div class="flex justify-between items-center py-3">
+  <h2 class="<%= UI::H2 %>"><%= t('resources.challenges.plural') %></h2>
+
+  <%= link_to t('words.add'), new_admin_challenge_path, class: UI::BUTTON_PRIMARY %>
+</div>
+
+<table id="challenges" class="w-full">
+  <thead>
+    <th class="text-left">
+      <%= t('resources.challenges.status') %>
+    </th>
+    <th class="text-left">
+      <%= t('resources.challenges.title') %>
+    </th>
+    <th>
+      <%= t('resources.challenges.registration_at') %>
+    </th>
+    <th>
+      <%= t('resources.challenges.start_at') %>
+    </th>
+    <th>
+      <%= t('resources.challenges.finish_at') %>
+    </th>
+  </thead>
+  <tbody>
+    <% @challenges.each do |challenge| %>
+      <tr id="challenge-<%= challenge.id %>">
+        <td>
+          <%= render(UI::ChallengeStatusComponent.new(challenge: challenge)) %>
+        </td>
+        <td>
+          <%= link_to challenge.title, edit_admin_challenge_path(challenge) %>
+        </td>
+        <td class="text-center">
+          <%= render(UI::TimestampComponent.new(data: challenge.registration_at)) %>
+        </td>
+        <td class="text-center">
+          <%= render(UI::TimestampComponent.new(data: challenge.start_at)) %>
+        </td>
+        <td class="text-center">
+          <%= render(UI::TimestampComponent.new(data: challenge.finish_at)) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= render(UI::PaginatorComponent.new(paginator: @paginator)) %>
