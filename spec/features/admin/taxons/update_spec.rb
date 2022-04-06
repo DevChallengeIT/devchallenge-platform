@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Admin/Taxons/Update' do
   let!(:taxonomy) { create(:taxonomy) }
-  let!(:taxon) { create(:taxon, taxonomy:) }
+  let!(:taxon) { create(:taxon, taxonomy:, position: 1) }
 
   it 'failure without session' do
     visit "/admin/taxonomies/#{taxonomy.slug}/taxons/#{taxon.slug}/edit"
@@ -37,13 +37,17 @@ RSpec.describe 'Admin/Taxons/Update' do
   end
 
   it 'success' do
+    taxon_b = create(:taxon, taxonomy:, position: 2)
     assume_logged_in(admin: true)
-    visit "/admin/taxonomies/#{taxonomy.slug}/taxons/#{taxon.slug}/edit"
+    visit "/admin/taxonomies/#{taxonomy.slug}/taxons/#{taxon_b.slug}/edit"
 
-    fill_in 'Title', with: 'new taxon'
+    fill_in 'Title', with: 'new title'
+    fill_in 'Position', with: '1'
     click_button 'Update'
 
     expect(page).to have_current_path "/admin/taxonomies/#{taxonomy.slug}/taxons"
     expect(page).to have_content 'Taxon was successfully updated'
+    expect(page).to have_content "1. #{taxon_b.reload.title}"
+    expect(page).to have_content "2. #{taxon.reload.title}"
   end
 end

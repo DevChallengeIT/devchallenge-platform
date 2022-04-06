@@ -39,10 +39,12 @@ RSpec.describe 'Admin/Taxons/Create' do
     assume_logged_in(admin: true)
     visit "/admin/taxonomies/#{taxonomy.slug}/taxons/new"
 
-    fill_in 'Title', with: 'new challenge'
+    fill_in 'Title', with: 'New Taxon'
+    fill_in 'Position', with: '0'
     click_button 'Create'
 
     expect(page).to have_current_path "/admin/taxonomies/#{taxonomy.slug}/taxons"
     expect(page).to have_content 'Taxon was successfully created'
+    expect(page).to have_content '1. New Taxon'
   end
 end

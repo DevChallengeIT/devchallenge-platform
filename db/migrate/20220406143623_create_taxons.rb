@@ -3,6 +3,7 @@ class CreateTaxons < ActiveRecord::Migration[7.0]
     create_table :taxons do |t|
       t.citext :title, null: false
       t.citext :slug, null: false
+      t.integer :position
       t.references :taxonomy, index: true, foreign_key: { on_delete: :cascade }, null: false
 
       t.timestamps

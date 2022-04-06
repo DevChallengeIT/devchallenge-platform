@@ -5,7 +5,7 @@ module Admin
     helper_method :taxonomy, :taxon
 
     def index
-      @paginator, @taxons = paginate taxonomy.taxons
+      @paginator, @taxons = paginate taxonomy.taxons.order(:position)
     end
 
     def new
@@ -46,7 +46,7 @@ module Admin
     end
 
     def taxon_params
-      params.require(:taxon).permit(:title)
+      params.require(:taxon).permit(:title, :position)
     end
   end
 end

@@ -8,6 +8,12 @@
       <%= render(UI::ErrorTagComponent.new(errors: taxon.errors, field: :title)) %>
     </div>
 
+    <div class="my-5">
+      <%= form.label :position, class: UI::FORM_LABEL %>
+      <%= form.text_field :position, autofocus: true, class: UI::FORM_INPUT %>
+      <%= render(UI::ErrorTagComponent.new(errors: taxon.errors, field: :position)) %>
+    </div>
+
     <div class="flex items-center justify-between">
       <%= form.submit t('words.update'), class: UI::BUTTON_PRIMARY %>
       <%= link_to t('words.back'), admin_taxonomy_taxons_path(taxonomy), class: UI::BUTTON_SECONDARY %>
