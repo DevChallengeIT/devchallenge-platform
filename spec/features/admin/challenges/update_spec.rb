@@ -26,6 +26,34 @@ RSpec.describe 'Admin/Challenges/Update' do
 
     fill_in 'Title', with: ''
     click_button 'Update'
+    within '#title-errors' do
+      expect(page).to have_content "can't be blank"
+    end
+
+    expect(page).to have_current_path "/admin/challenges/#{challenge.slug}"
+    expect(page).not_to have_content 'Challenge was successfully updated'
+  end
+
+  it 'failure with invalid timestamps' do
+    assume_logged_in(admin: true)
+    visit "/admin/challenges/#{challenge.slug}/edit"
+
+    fill_in 'Registration at', with: '2022-04-06 15:33:14'
+    fill_in 'Start at',        with: '2022-04-06 15:33:13'
+    fill_in 'Finish at',       with: '2022-04-06 15:33:12'
+    click_button 'Update'
+
+    within '#registration_at-errors' do
+      expect(page).to have_content 'must be less than 2022-04-06 15:33:13 UTC'
+    end
+
+    within '#start_at-errors' do
+      expect(page).to have_content 'must be less than 2022-04-06 15:33:12 UTC'
+    end
+
+    within '#finish_at-errors' do
+      expect(page).to have_content 'must be greater than 2022-04-06 15:33:13 UTC'
+    end
 
     expect(page).to have_current_path "/admin/challenges/#{challenge.slug}"
     expect(page).not_to have_content 'Challenge was successfully updated'
