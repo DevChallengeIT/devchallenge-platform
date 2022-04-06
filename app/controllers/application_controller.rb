@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include Pagy::Backend
+
   before_action :configure_permitted_parameters, if: :devise_controller?
   around_action :within_time_zone, if: :current_user
 
@@ -10,7 +12,9 @@ class ApplicationController < ActionController::Base
     t("messages.resource_#{action}", name: t("resources.#{resource_name}.singular"))
   end
 
-  protected
+  def paginate(scope)
+    pagy(scope, items: params.fetch(:per_page, 30))
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:full_name])

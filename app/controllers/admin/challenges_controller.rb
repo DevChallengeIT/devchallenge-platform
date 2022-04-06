@@ -2,7 +2,11 @@
 
 module Admin
   class ChallengesController < BaseController
-    helper_method :challenges, :challenge
+    helper_method :challenge
+
+    def index
+      @paginator, @challenges = paginate Repo::Challenge.all
+    end
 
     def new
       @challenge = Repo::Challenge.new
@@ -27,10 +31,6 @@ module Admin
     end
 
     private
-
-    def challenges
-      @challenges ||= Repo::Challenge.all
-    end
 
     def challenge
       @challenge ||= Repo::Challenge.friendly.find(params[:id])

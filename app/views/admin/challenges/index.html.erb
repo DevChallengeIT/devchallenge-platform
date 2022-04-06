@@ -23,7 +23,7 @@
     </th>
   </thead>
   <tbody>
-    <% challenges.each do |challenge| %>
+    <% @challenges.each do |challenge| %>
       <tr id="challenge-<%= challenge.id %>">
         <td>
           <%= render(UI::ChallengeStatusComponent.new(challenge: challenge)) %>
@@ -44,3 +44,5 @@
     <% end %>
   </tbody>
 </table>
+
+<%= render(UI::PaginatorComponent.new(paginator: @paginator)) %>

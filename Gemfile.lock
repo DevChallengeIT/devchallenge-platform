@@ -176,6 +176,8 @@ GEM
       nenv (~> 0.1)
       shellany (~> 0.0)
     orm_adapter (0.5.0)
+    pagy (5.10.1)
+      activesupport
     parallel (1.22.1)
     parser (3.1.1.0)
       ast (~> 2.4.1)
@@ -333,6 +335,7 @@ DEPENDENCIES
   importmap-rails (~> 1.0)
   launchy
   lograge (~> 0.12)
+  pagy (~> 5.10)
   pg (~> 1.1)
   propshaft (~> 0.6)
   pry-rails
