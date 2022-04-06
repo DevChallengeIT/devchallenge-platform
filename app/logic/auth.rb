@@ -3,7 +3,13 @@
 module Auth
   extend self
 
-  ADMIN_USERS = Rails.application.credentials.admin_users.split(',').index_with { |_email| true }
+  ADMIN_USERS = Rails
+                .application
+                .credentials
+                .admin_users
+                .split(',')
+                .index_with { |_email| true }
+                .freeze
 
   def admin?(user)
     return false unless user

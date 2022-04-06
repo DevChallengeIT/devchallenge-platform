@@ -1,7 +1,7 @@
 <%= form_with(model: challenge, scope: :challenge, url: admin_challenge_path(challenge), method: :put, class: "contents") do |form| %>
   <div class="my-5">
     <%= form.label :status, class: UI::FORM_LABEL %>
-    <%= form.select :status, Repo::Challenge::STATUSES, {}, class: UI::FORM_INPUT %>
+    <%= form.select :status, Repo::Challenge.statuses, {}, class: UI::FORM_INPUT %>
     <%= render(UI::ErrorTagComponent.new(errors: challenge.errors, field: :status)) %>
   </div>
 

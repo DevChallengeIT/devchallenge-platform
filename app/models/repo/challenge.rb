@@ -5,19 +5,18 @@ module Repo
     extend FriendlyId
     friendly_id :title, use: :slugged
 
-    DRAFT = 'draft'
-    MODERATION = 'moderation'
-    PENDING = 'pending'
-    REGISTRATION = 'registration'
-    LIVE = 'live'
-    COMPLETE = 'complete'
-    CANCELED = 'canceled'
-
-    STATUSES = [DRAFT, MODERATION, PENDING, REGISTRATION, LIVE, COMPLETE, CANCELED].freeze
+    enum status: {
+      draft:        'draft',
+      moderation:   'moderation',
+      pending:      'pending',
+      registration: 'registration',
+      live:         'live',
+      complete:     'complete',
+      canceled:     'canceled'
+    }
 
     validates :title, presence: true
     validates :slug, presence: true, if: :persisted?
     validates :slug, uniqueness: true, if: :persisted?
-    validates :status, inclusion: { in: STATUSES }
   end
 end

@@ -7,6 +7,17 @@ RSpec.describe Repo::Challenge do
 
   describe 'validations' do
     it { is_expected.to validate_presence_of(:title) }
-    it { is_expected.to validate_inclusion_of(:status).in_array(Repo::Challenge::STATUSES) }
+
+    it 'defines enum for status' do
+      expect(subject).to define_enum_for(:status).with_values(
+        draft:        'draft',
+        moderation:   'moderation',
+        pending:      'pending',
+        registration: 'registration',
+        live:         'live',
+        complete:     'complete',
+        canceled:     'canceled'
+      ).backed_by_column_of_type(:enum)
+    end
   end
 end
