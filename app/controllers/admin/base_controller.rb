@@ -6,6 +6,7 @@ module Admin
 
     before_action :authenticate_user!
     before_action :authenticate_admin!
+private
 
     def authenticate_admin!
       return if Auth.admin?(current_user)
