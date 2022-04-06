@@ -61,9 +61,19 @@ RSpec.describe 'Navigation' do
         click_link 'Admin'
         expect(page).to have_current_path '/admin'
 
+        click_link 'Challenges'
+        expect(page).to have_current_path '/admin/challenges'
+
+        click_link 'Taxonomies'
+        expect(page).to have_current_path '/admin/taxonomies'
+      end
+
+      within '#profile-nav' do
         click_link 'Log Out'
         expect(page).to have_current_path '/'
+      end
 
+      within '#main-nav' do
         expect(page).not_to have_link current_user.full_name
       end
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_04_154551) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_06_143623) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -21,8 +21,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_04_154551) do
 
   create_table "challenges", force: :cascade do |t|
     t.enum "status", default: "draft", null: false, enum_type: "challenge_status"
-    t.string "title", null: false
-    t.string "slug", null: false
+    t.citext "title", null: false
+    t.citext "slug", null: false
     t.text "description"
     t.text "terms_and_conditions"
     t.datetime "registration_at"
@@ -32,7 +32,28 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_04_154551) do
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_challenges_on_slug", unique: true
     t.index ["status"], name: "index_challenges_on_status"
-    t.index ["title"], name: "index_challenges_on_title"
+    t.index ["title"], name: "index_challenges_on_title", unique: true
+  end
+
+  create_table "taxonomies", force: :cascade do |t|
+    t.citext "title", null: false
+    t.citext "slug", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_taxonomies_on_slug", unique: true
+    t.index ["title"], name: "index_taxonomies_on_title", unique: true
+  end
+
+  create_table "taxons", force: :cascade do |t|
+    t.citext "title", null: false
+    t.citext "slug", null: false
+    t.integer "position"
+    t.bigint "taxonomy_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["taxonomy_id", "slug"], name: "index_taxons_on_taxonomy_id_and_slug", unique: true
+    t.index ["taxonomy_id", "title"], name: "index_taxons_on_taxonomy_id_and_title", unique: true
+    t.index ["taxonomy_id"], name: "index_taxons_on_taxonomy_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -56,4 +77,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_04_154551) do
     t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
+  add_foreign_key "taxons", "taxonomies", on_delete: :cascade
 end

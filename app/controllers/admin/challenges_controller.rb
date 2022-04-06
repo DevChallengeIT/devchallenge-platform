@@ -4,11 +4,15 @@ module Admin
   class ChallengesController < BaseController
     helper_method :challenge
 
+    add_breadcrumb I18n.t('resources.challenges.plural'), :admin_challenges_path
+
     def index
       @paginator, @challenges = paginate Repo::Challenge.all
     end
 
     def new
+      add_breadcrumb I18n.t('words.new')
+
       @challenge = Repo::Challenge.new
     end
 
@@ -20,6 +24,10 @@ module Admin
       else
         render :new, status: :unprocessable_entity
       end
+    end
+
+    def edit
+      add_breadcrumb challenge.title
     end
 
     def update

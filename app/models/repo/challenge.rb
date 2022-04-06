@@ -16,6 +16,7 @@ module Repo
     }
 
     validates :title, presence: true
+    validates :title, uniqueness: { case_sensitive: true }
     validates :slug, presence: true, if: :persisted?
     validates :slug, uniqueness: true, if: :persisted?
 

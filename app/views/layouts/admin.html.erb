@@ -12,23 +12,43 @@
   </head>
 
   <body class="container mx-auto mt-3">
-    <header class="my-3">
-      <nav id="main-nav" class="flex items-center justify-between">
-        <div class="flex space-x-5">
-          <%= link_to t('words.dashboard'), admin_root_path %>
-          <%= link_to t('resources.challenges.plural'), admin_challenges_path %>
-        </div>
-        <div class="flex space-x-5">
-          <%= link_to t('words.app'), root_path %>
-          <%= link_to current_user.full_name, edit_user_registration_path %>
-          <%= link_to t('auth.log_out'), destroy_user_session_path %>
-        </div>
+    <div class="flex">
+      <nav id="main-nav" class="w-1/6">
+        <ul>
+          <li class="py-1">
+            <%= link_to t('words.dashboard'), admin_root_path %>
+          </li>
+          <li class="py-1">
+            <%= link_to t('resources.challenges.plural'), admin_challenges_path %>
+          </li>
+          <li class="py-1">
+            <%= link_to t('resources.taxonomies.plural'), admin_taxonomies_path %>
+          </li>
+        </ul>
       </nav>
-      <p class="font-semibold"><%= notice %></p>
-      <p class="font-semibold"><%= alert %></p>
-    </header>
-    <main>
-      <%= yield %>
-    </main>
+      <div class="w-5/6">
+        <header>
+          <div class="flex items-center justify-between py-1">
+            <div>
+              <%= render_breadcrumbs %>
+            </div>
+            <div>
+              <nav id="profile-nav" class="flex space-x-5">
+                <%= link_to t('words.app'), root_path %>
+                <%= link_to current_user.full_name, edit_user_registration_path %>
+                <%= link_to t('auth.log_out'), destroy_user_session_path %>
+              </nav>
+            </div>
+          </div>
+        </header>
+        <div id="flash-messages">
+          <p class="font-semibold"><%= notice %></p>
+          <p class="font-semibold"><%= alert %></p>
+        </div>
+        <main class="mt-5">
+          <%= yield %>
+        </main>
+      </div>
+    </div>
   </body>
 </html>

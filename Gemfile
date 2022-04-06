@@ -13,6 +13,7 @@ gem 'puma', '~> 5.0'
 gem 'rails', '~> 7.0.2'
 
 # Frontend
+gem 'breadcrumbs_on_rails', '~> 4.1'
 gem 'importmap-rails', '~> 1.0'
 gem 'pagy', '~> 5.10'
 gem 'slim-rails', '~> 3.4'
@@ -26,6 +27,7 @@ gem 'bootsnap', require: false
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Tools
+gem 'acts_as_list', '~> 1.0.4'
 gem 'friendly_id', '~> 5.4.0'
 gem 'lograge', '~> 0.12'
 

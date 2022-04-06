@@ -25,7 +25,7 @@ RSpec.describe 'Admin/Challenges/Index' do
     visit '/admin/challenges'
 
     within "#challenge-#{challenge.id}" do
-      expect(page).to have_content challenge.title
+      expect(page).to have_link challenge.title, href: "/admin/challenges/#{challenge.slug}/edit"
       expect(page).to have_content challenge.status
       expect(page).to have_content challenge.registration_at.strftime(UI::TimestampComponent::TIME_FORMAT)
       expect(page).to have_content challenge.start_at.strftime(UI::TimestampComponent::TIME_FORMAT)
@@ -66,7 +66,7 @@ RSpec.describe 'Admin/Challenges/Index' do
     visit '/admin/challenges'
 
     within "#challenge-#{challenge.id}" do
-      expect(page).to have_content challenge.title
+      expect(page).to have_link challenge.title, href: "/admin/challenges/#{challenge.slug}/edit"
       expect(page).to have_content challenge.status
       expect(page).to have_content challenge
         .registration_at
