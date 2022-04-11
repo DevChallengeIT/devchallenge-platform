@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_06_143623) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_11_175218) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -33,6 +33,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_06_143623) do
     t.index ["slug"], name: "index_challenges_on_slug", unique: true
     t.index ["status"], name: "index_challenges_on_status"
     t.index ["title"], name: "index_challenges_on_title", unique: true
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.citext "title", null: false
+    t.citext "slug", null: false
+    t.text "description"
+    t.bigint "challenge_id", null: false
+    t.datetime "start_at"
+    t.datetime "submit_at"
+    t.datetime "result_at"
+    t.bigint "dependent_task_id"
+    t.integer "min_assestment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["challenge_id"], name: "index_tasks_on_challenge_id"
+    t.index ["dependent_task_id"], name: "index_tasks_on_dependent_task_id"
+    t.index ["slug"], name: "index_tasks_on_slug", unique: true
+    t.index ["title"], name: "index_tasks_on_title", unique: true
   end
 
   create_table "taxonomies", force: :cascade do |t|
@@ -77,5 +95,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_06_143623) do
     t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
+  add_foreign_key "tasks", "challenges"
+  add_foreign_key "tasks", "tasks", column: "dependent_task_id"
   add_foreign_key "taxons", "taxonomies", on_delete: :cascade
 end
