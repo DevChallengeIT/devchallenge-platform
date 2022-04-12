@@ -26,6 +26,14 @@ module Admin
       @tasks = task.challenge.tasks.where.not(id: task.id)
     end
 
+    def update
+      if task.update(task_params)
+        redirect_to(admin_tasks_path, notice: flash_message(:updated, :tasks))
+      else
+        render :edit, status: :unprocessable_entity
+      end
+    end
+
     private
 
     def task
