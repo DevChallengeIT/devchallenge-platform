@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     root 'dashboard#index'
 
     resources :challenges, except: %i[show destroy]
+    resources :tasks
     resources :taxonomies, only: %i[index] do
       resources :taxons, except: %i[show]
     end

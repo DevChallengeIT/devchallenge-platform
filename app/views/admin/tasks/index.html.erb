@@ -1,0 +1,36 @@
+<div class="flex justify-between items-center py-3">
+  <h2 class="<%= UI::H2 %>"><%= t('resources.tasks.plural') %></h2>
+
+  <%= link_to t('words.add'), new_admin_task_path, class: UI::BUTTON_PRIMARY %>
+</div>
+
+<table id="tasks" class="w-full">
+  <thead>
+    <th class="text-left">
+      <%= t('resources.tasks.title') %>
+    </th>
+    <th>
+      <%= t('resources.tasks.description') %>
+    </th>
+    <th>
+      <%= t('resources.tasks.start_at') %>
+    </th>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr id="task-<%= task.id %>">
+        <td>
+          <%= link_to task.title, edit_admin_task_path(task) %>
+        </td>
+        <td class="text-center">
+          <%= task.description %>
+        </td>
+        <td class="text-center">
+          <%= render(UI::TimestampComponent.new(data: task.start_at)) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= render(UI::PaginatorComponent.new(paginator: @paginator)) %>
