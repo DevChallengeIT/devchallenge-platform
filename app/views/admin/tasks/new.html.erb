@@ -10,7 +10,7 @@
 
     <div class="my-5">
       <%= form.label :challenge, class: UI::FORM_LABEL %>
-      <%= form.select :challenge, Repo::Challenge.all.pluck(:title, :id), {}, class: UI::FORM_INPUT %>
+      <%= form.select :challenge_id, Repo::Challenge.all.pluck(:title, :id), {}, class: UI::FORM_INPUT %>
       <%= render(UI::ErrorTagComponent.new(errors: @task.errors, field: :challenge)) %>
     </div>
 
