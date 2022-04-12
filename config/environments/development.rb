@@ -61,6 +61,7 @@ Rails.application.configure do
   config.active_record.verbose_query_logs = true
 
   config.active_record.strict_loading_by_default = true
+  config.active_record.action_on_strict_loading_violation = :log
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
