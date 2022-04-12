@@ -2,6 +2,8 @@
 
 module Admin
   class TasksController < BaseController
+    helper_method :task
+
     def index
       @paginator, @tasks = paginate Repo::Task.all
     end
@@ -20,7 +22,15 @@ module Admin
       end
     end
 
+    def edit
+      @tasks = task.challenge.tasks.where.not(id: task.id)
+    end
+
     private
+
+    def task
+      @task ||= Repo::Task.friendly.find(params[:id])
+    end
 
     def task_params
       params.require(:task).permit(:title, :description, :slug, :registration_at, :challenge_id,
