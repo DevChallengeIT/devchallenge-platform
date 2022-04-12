@@ -28,7 +28,7 @@ Repo::Task.where(
   challenge:      first_task.challenge,
   description:    'This is extra task wich depends on the first one',
   dependent_task: first_task,
-  start_at:       first_task.start_at + 1.days.from_now.end_of_day,
+  start_at:       first_task.start_at + 2.days,
 )
 
 txn_speciality = Repo::Taxonomy.where(title: 'Speciality').first_or_create!
