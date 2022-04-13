@@ -22,11 +22,13 @@
       <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :challenge)) %>
     </div>
 
-    <div class="my-5">
-      <%= form.label :dependent_task, class: UI::FORM_LABEL %>
-      <%= form.select :dependent_task_id, @tasks.pluck(:title, :id), {}, class: UI::FORM_INPUT %>
-      <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :dependent_task)) %>
-    </div>
+    <% if @tasks.present? %>
+      <div class="my-5">
+        <%= form.label :dependent_task, class: UI::FORM_LABEL %>
+        <%= form.select :dependent_task_id, @tasks.pluck(:title, :id), {}, class: UI::FORM_INPUT %>
+        <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :dependent_task)) %>
+      </div>
+    <% end %>
 
     <div class="my-5">
       <%= form.label :description, class: UI::FORM_LABEL %>
@@ -48,9 +50,9 @@
       </div>
 
       <div class="w-full">
-        <%= form.label :start_at, class: UI::FORM_LABEL %>
-        <%= form.datetime_field :start_at, class: UI::FORM_INPUT %>
-        <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :start_at)) %>
+        <%= form.label :submit_at, class: UI::FORM_LABEL %>
+        <%= form.datetime_field :submit_at, class: UI::FORM_INPUT %>
+        <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :submit_at)) %>
       </div>
 
       <div class="w-full">
