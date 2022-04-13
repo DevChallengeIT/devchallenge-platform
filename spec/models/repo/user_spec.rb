@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Repo::User do
-  subject { described_class.new }
+  subject { build(:user) }
 
   describe 'associations' do
     it { is_expected.to have_many(:taxon_entities) }
