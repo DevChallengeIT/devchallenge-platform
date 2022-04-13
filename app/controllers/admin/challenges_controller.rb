@@ -7,7 +7,7 @@ module Admin
     add_breadcrumb I18n.t('resources.challenges.plural'), :admin_challenges_path
 
     def index
-      @paginator, @challenges = paginate Repo::Challenge.all
+      @paginator, @challenges = paginate(list_challenges)
     end
 
     def new
@@ -40,6 +40,14 @@ module Admin
     end
 
     private
+
+    def list_challenges
+      if params[:search].present?
+        Repo::Challenge.where('challenges.title LIKE ?', "%#{params[:search]}%")
+      else
+        Repo::Challenge.all
+      end
+    end
 
     def challenge
       @challenge ||= Repo::Challenge.preload(:taxons).friendly.find(params[:id])

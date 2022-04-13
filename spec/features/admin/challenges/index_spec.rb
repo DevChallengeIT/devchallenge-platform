@@ -84,4 +84,15 @@ RSpec.describe 'Admin/Challenges/Index' do
         .strftime(UI::TimestampComponent::TIME_FORMAT)
     end
   end
+
+  it 'can search' do
+    challenge_a = create(:challenge, title: 'Yellow')
+    challenge_b = create(:challenge, title: 'Blue')
+
+    assume_logged_in(admin: true)
+    visit '/admin/challenges?search=ell'
+
+    expect(page).to have_content challenge_a.title
+    expect(page).not_to have_content challenge_b.title
+  end
 end
