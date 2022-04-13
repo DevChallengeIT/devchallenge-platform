@@ -54,32 +54,34 @@
     </div>
   </div>
 
-  <div class="my-5">
-    <h3 class="<%= UI::H3 %>">
-      <%= t('resources.taxons.plural') %>
-    </h3>
-    <div class="flex items-center space-x-5">
-      <% taxonomies.each do |taxonomy| %>
-        <div class="w-1/3">
-          <div class="my-5">
-            <span class="font-semibold">
-              <%= taxonomy.title %>
-            </span>
+  <% if taxonomies.any? %>
+    <div class="my-5">
+      <h3 class="<%= UI::H3 %>">
+        <%= t('resources.taxons.plural') %>
+      </h3>
+      <div class="flex items-center space-x-5">
+        <% taxonomies.each do |taxonomy| %>
+          <div class="w-1/3">
+            <div class="mt-3">
+              <span class="font-semibold">
+                <%= taxonomy.title %>
+              </span>
+            </div>
+            <ul>
+              <% taxonomy.taxons.each_with_index do |taxon, index| %>
+                <li>
+                  <%= check_box_tag "taxons[#{taxon.id}", taxon.id, challenge.taxons.include?(taxon), id: dom_id(taxon) %>
+                  <%= label_tag dom_id(taxon), taxon.title %>
+                </li>
+              <% end %>
+            </ul>
           </div>
-          <ul>
-            <% taxonomy.taxons.each_with_index do |taxon, index| %>
-              <li>
-                <%= check_box_tag "taxons[#{taxon.id}", taxon.id, challenge.taxons.include?(taxon), id: dom_id(taxon) %>
-                <%= label_tag dom_id(taxon), taxon.title %>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 
-  <div class="flex items-center justify-between">
+  <div class="flex items-center justify-between mb-24">
     <%= form.submit class: UI::BUTTON_PRIMARY %>
     <%= link_to t('words.back'), admin_challenges_path, class: UI::BUTTON_SECONDARY %>
   </div>
