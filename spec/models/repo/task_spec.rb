@@ -7,6 +7,6 @@ RSpec.describe Repo::Task, type: :model do
 
   describe 'validations' do
     it { is_expected.to validate_presence_of(:title) }
-    it { is_expected.to validate_uniqueness_of(:title).case_insensitive }
+    it { is_expected.to validate_uniqueness_of(:title).scoped_to(:challenge_id).case_insensitive }
   end
 end
