@@ -17,6 +17,9 @@ module Repo
       canceled:     'canceled'
     }
 
+    has_many :taxon_entities, as: :entity, dependent: :destroy_async
+    has_many :taxons, through: :taxon_entities
+
     validates :title, presence: true
     validates :title, uniqueness: { case_sensitive: true }
     validates :slug, presence: true, if: :persisted?

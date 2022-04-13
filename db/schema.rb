@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_13_114159) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_13_142812) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -51,6 +51,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_13_114159) do
     t.index ["dependent_task_id"], name: "index_tasks_on_dependent_task_id"
     t.index ["slug"], name: "index_tasks_on_slug", unique: true
     t.index ["title"], name: "index_tasks_on_title", unique: true
+  end
+
+  create_table "taxon_entities", force: :cascade do |t|
+    t.bigint "taxon_id", null: false
+    t.integer "entity_id", null: false
+    t.string "entity_type", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["taxon_id", "entity_id", "entity_type"], name: "index_taxon_entities_on_taxon_id_and_entity_id_and_entity_type", unique: true
+    t.index ["taxon_id"], name: "index_taxon_entities_on_taxon_id"
   end
 
   create_table "taxonomies", force: :cascade do |t|
@@ -106,6 +116,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_13_114159) do
 
   add_foreign_key "tasks", "challenges"
   add_foreign_key "tasks", "tasks", column: "dependent_task_id"
+  add_foreign_key "taxon_entities", "taxons", on_delete: :cascade
   add_foreign_key "taxonomy_repos", "taxonomies", on_delete: :cascade
   add_foreign_key "taxons", "taxonomies", on_delete: :cascade
 end

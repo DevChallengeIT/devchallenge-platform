@@ -85,4 +85,29 @@ RSpec.describe 'Admin/Challenges/Update' do
       expect(page).to have_content Time.zone.parse('2022-05-15 18:00:00').strftime(UI::TimestampComponent::TIME_FORMAT)
     end
   end
+
+  it 'success with taxons' do
+    taxonomy = create(:taxonomy)
+    create(:taxonomy_repo, repo: :challenges, taxonomy:)
+    taxon_a = create(:taxon, taxonomy:)
+    taxon_b = create(:taxon, taxonomy:)
+    challenge.taxons << taxon_a
+
+    assume_logged_in(admin: true)
+    visit "/admin/challenges/#{challenge.slug}/edit"
+    expect(page).to have_checked_field taxon_a.title
+    expect(page).to have_unchecked_field taxon_b.title
+
+    uncheck taxon_a.title
+    check taxon_b.title
+
+    click_button 'Update'
+
+    expect(page).to have_current_path '/admin/challenges'
+    expect(page).to have_content 'Challenge was successfully updated'
+
+    visit "/admin/challenges/#{challenge.slug}/edit"
+    expect(page).to have_unchecked_field taxon_a.title
+    expect(page).to have_checked_field taxon_b.title
+  end
 end

@@ -5,6 +5,11 @@ require 'rails_helper'
 RSpec.describe Repo::Challenge do
   subject { build(:challenge) }
 
+  describe 'associations' do
+    it { is_expected.to have_many(:taxon_entities) }
+    it { is_expected.to have_many(:taxons) }
+  end
+
   describe 'validations' do
     it { is_expected.to validate_presence_of(:title) }
     it { is_expected.to validate_uniqueness_of(:title).case_insensitive }
