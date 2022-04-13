@@ -1,7 +1,10 @@
-<div class="flex justify-between items-center py-3">
+<div id="challenges-nav" class="flex justify-between items-center py-3">
   <h2 class="<%= UI::H2 %>"><%= t('resources.challenges.plural') %></h2>
 
-  <%= link_to t('words.add'), new_admin_challenge_path, class: UI::BUTTON_PRIMARY %>
+  <div class="flex justify-between items-center py-3 space-x-3">
+    <%= link_to t('resources.taxonomies.plural'), taxonomies_admin_challenges_path, class: UI::BUTTON_SECONDARY %>
+    <%= link_to t('words.add'), new_admin_challenge_path, class: UI::BUTTON_PRIMARY %>
+  </div>
 </div>
 
 <table id="challenges" class="w-full">

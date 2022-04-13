@@ -2,6 +2,7 @@
 
 module UI
   H2 = 'text-2xl font-semibold'
+  H3 = 'text-xl font-semibold'
   FORM_LABEL = 'block text-sm font-bold mb-2 text-gray-700'
   FORM_INPUT = 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
   BUTTON_PRIMARY = 'rounded py-3 px-5 bg-blue-600 text-white block font-medium'

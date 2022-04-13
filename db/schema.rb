@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_11_175218) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_13_114159) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -62,6 +62,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_11_175218) do
     t.index ["title"], name: "index_taxonomies_on_title", unique: true
   end
 
+  create_table "taxonomy_repos", force: :cascade do |t|
+    t.bigint "taxonomy_id", null: false
+    t.string "repo", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["taxonomy_id", "repo"], name: "index_taxonomy_repos_on_taxonomy_id_and_repo", unique: true
+    t.index ["taxonomy_id"], name: "index_taxonomy_repos_on_taxonomy_id"
+  end
+
   create_table "taxons", force: :cascade do |t|
     t.citext "title", null: false
     t.citext "slug", null: false
@@ -97,5 +106,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_11_175218) do
 
   add_foreign_key "tasks", "challenges"
   add_foreign_key "tasks", "tasks", column: "dependent_task_id"
+  add_foreign_key "taxonomy_repos", "taxonomies", on_delete: :cascade
   add_foreign_key "taxons", "taxonomies", on_delete: :cascade
 end

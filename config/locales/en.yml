@@ -13,6 +13,10 @@ en:
     dashboard: Dashboard
     remove: Remove
     danger: Danger!
+    config: Config
+    potential: Potential
+    assigned: Assigned
+    none: None
   messages:
     access_denied: Access denied
     resource_created: '%{name} was successfully created'

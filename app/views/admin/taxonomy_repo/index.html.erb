@@ -1,0 +1,41 @@
+<div class="flex justify-between items-center py-3">
+  <h2 class="<%= UI::H2 %>">
+    <%= repo_title %>
+    <%= t('resources.taxonomies.plural') %>
+  </h2>
+</div>
+
+<div id="assigned-taxonomies" class="py-5">
+  <h3 class="<%= UI::H3 %>">
+    <%= t('words.assigned') %>
+  </h3>
+
+  <% if @assigned_taxonomy_repos.any? %>
+    <ul>
+      <% @assigned_taxonomy_repos.each do |taxonomy_repo| %>
+        <li id="taxonomy-repo-<%= taxonomy_repo.id %>" class="my-2">
+          <%= button_to "- #{taxonomy_repo.taxonomy.title}", "/admin/#{repo}/taxonomies/#{taxonomy_repo.id}", method: :delete  %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <small><%= t('words.none') %></small>
+  <% end %>
+</div>
+
+<div  id="potential-taxonomies" class="py-5">
+  <h3 class="<%= UI::H3 %>">
+    <%= t('words.potential') %>
+  </h3>
+  <% if @potential_taxonomies.any? %>
+    <ul>
+      <% @potential_taxonomies.each do |taxonomy| %>
+        <li id="taxonomy-<%= taxonomy.id %>" class="my-2">
+          <%= button_to "+ #{taxonomy.title}", "/admin/#{repo}/taxonomies/#{taxonomy.id}", method: :post  %>
+        </li>
+      <% end %>
+    </ul>
+   <% else %>
+    <small><%= t('words.none') %></small>
+  <% end %>
+</div>
