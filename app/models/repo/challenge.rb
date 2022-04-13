@@ -8,13 +8,10 @@ module Repo
     has_many :tasks, dependent: :destroy
 
     enum status: {
-      draft:        'draft',
-      moderation:   'moderation',
-      pending:      'pending',
-      registration: 'registration',
-      live:         'live',
-      complete:     'complete',
-      canceled:     'canceled'
+      draft:      'draft',
+      moderation: 'moderation',
+      ready:      'ready',
+      canceled:   'canceled'
     }
 
     has_many :taxon_entities, as: :entity, dependent: :destroy_async

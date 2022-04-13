@@ -16,13 +16,10 @@ RSpec.describe Repo::Challenge do
 
     it 'defines enum for status' do
       expect(subject).to define_enum_for(:status).with_values(
-        draft:        'draft',
-        moderation:   'moderation',
-        pending:      'pending',
-        registration: 'registration',
-        live:         'live',
-        complete:     'complete',
-        canceled:     'canceled'
+        draft:      'draft',
+        moderation: 'moderation',
+        ready:      'ready',
+        canceled:   'canceled'
       ).backed_by_column_of_type(:enum)
     end
   end

@@ -8,7 +8,7 @@ Repo::User.where(
 challenge = Repo::Challenge.where(
   title:           'Test Challenge'
 ).first_or_create!(
-  status:          'registration',
+  status:          'ready',
   registration_at: Time.now.beginning_of_day,
   start_at:        10.days.from_now.end_of_day,
   finish_at:       15.days.from_now.end_of_day

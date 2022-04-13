@@ -17,7 +17,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_13_142812) do
 
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
-  create_enum "challenge_status", ["draft", "moderation", "pending", "registration", "live", "complete", "canceled"]
+  create_enum "challenge_status", ["draft", "moderation", "ready", "canceled"]
 
   create_table "challenges", force: :cascade do |t|
     t.enum "status", default: "draft", null: false, enum_type: "challenge_status"
