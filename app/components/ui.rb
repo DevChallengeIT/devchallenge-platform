@@ -9,5 +9,5 @@ module UI
   BUTTON_SECONDARY = 'ml-2 rounded py-3 px-5 bg-gray-100 inline-block font-medium'
   BUTTON_DANGER = 'bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
   PANEL = 'h-full w-full max-w-xs mx-auto align-middle'
-  LINK = 'block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800'
+  LINK = 'align-baseline font-bold text-sm text-blue-500 hover:text-blue-800'
 end
