@@ -5,7 +5,7 @@ module Repo
     extend FriendlyId
     friendly_id :title, use: :slugged
 
-    has_many :tasks
+    has_many :tasks, dependent: :destroy
 
     enum status: {
       draft:        'draft',
