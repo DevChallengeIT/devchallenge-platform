@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root 'dashboard#index'
 
-    concern :config_taxonomies do
+    concern :manage_taxonomies do
       collection do
         get '/taxonomies', to: 'taxonomy_repo#index'
         post '/taxonomies/:taxonomy_id', to: 'taxonomy_repo#create'
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :challenges, except: %i[destroy], concerns: :config_taxonomies, repo: :challenges
+    resources :challenges, except: %i[destroy], concerns: :manage_taxonomies, repo: :challenges
     resources :tasks, except: %i[destroy]
 
     resources :taxonomies, only: %i[index] do
