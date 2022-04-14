@@ -7,7 +7,7 @@
   <% end %>
 </div>
 
-<div class="flex">
+<div class="flex my-5">
   <div>
     <%= form_with(url: challenges_path, method: :get, id: 'search-form') do |form| %>
       <% @taxonomies.each do |taxonomy| %>
@@ -30,7 +30,7 @@
     <% end %>
   </div>
 
-  <div class="p-8">
+  <div class="">
     <ul>
       <% @challenges.each do |challenge| %>
         <li id="challenge-<%= challenge.id %>">
