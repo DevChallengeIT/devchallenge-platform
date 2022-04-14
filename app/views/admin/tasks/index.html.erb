@@ -4,19 +4,22 @@
   <%= link_to t('words.add'), new_admin_task_path, class: UI::BUTTON_PRIMARY %>
 </div>
 
-<table id="tasks" class="w-full">
+<table id="tasks" class="table">
   <thead>
     <th class="text-left">
       <%= t('resources.tasks.title') %>
     </th>
     <th>
-      <%= t('resources.tasks.description') %>
+      <%= t('resources.challenges.singular') %>
     </th>
-    <th>
+    <th class="text-center">
       <%= t('resources.tasks.start_at') %>
     </th>
-    <th>
-      <%= t('resources.challenges.singular') %>
+    <th class="text-center">
+      <%= t('resources.tasks.submit_at') %>
+    </th>
+    <th class="text-center">
+      <%= t('resources.tasks.result_at') %>
     </th>
   </thead>
   <tbody>
@@ -25,14 +28,17 @@
         <td>
           <%= link_to task.title, edit_admin_task_path(task) %>
         </td>
-        <td class="text-center">
-          <%= task.description %>
+         <td>
+          <%= link_to task.challenge.title, edit_admin_challenge_path(task.challenge) %>
         </td>
         <td class="text-center">
           <%= render(UI::TimestampComponent.new(data: task.start_at)) %>
         </td>
         <td class="text-center">
-          <%= link_to task.challenge.title, edit_admin_challenge_path(task.challenge) %>
+          <%= render(UI::TimestampComponent.new(data: task.submit_at)) %>
+        </td>
+        <td class="text-center">
+          <%= render(UI::TimestampComponent.new(data: task.result_at)) %>
         </td>
       </tr>
     <% end %>

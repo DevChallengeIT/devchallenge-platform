@@ -1,7 +1,7 @@
 <div id="challenges-nav" class="flex justify-between items-center py-3">
   <h2 class="<%= UI::H2 %>"><%= t('resources.challenges.plural') %></h2>
 
-  <div class="flex justify-between items-center py-3 space-x-3">
+  <div class="flex justify-between items-center space-x-3">
     <div>
       <%= form_with(url: admin_challenges_path, method: :get, id: 'search-form') do |form| %>
         <%= text_field_tag :search, params[:search], placeholder: t('words.search') %>
