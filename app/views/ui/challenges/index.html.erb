@@ -1,0 +1,42 @@
+<div>
+  <%= form_with(url: challenges_path, method: :get, id: 'search-form') do |form| %>
+    <div class="flex">
+      <%= text_field_tag :search, params[:search], placeholder: t('words.search') %>
+      <%= submit_tag t('words.search'), class: UI::BUTTON_PRIMARY %>
+    </div>
+  <% end %>
+</div>
+
+<div class="flex">
+  <div>
+    <%= form_with(url: challenges_path, method: :get, id: 'search-form') do |form| %>
+      <% @taxonomies.each do |taxonomy| %>
+        <div class="my-3">
+          <h4 class="<%= UI::H4 %>">
+            <%= taxonomy.title %>
+          </h3>
+          <ul>
+            <% taxonomy.taxons.each do |taxon| %>
+              <li>
+                <%= check_box_tag "filter[taxon_ids][]", taxon.id, filter_taxon_ids.include?(taxon.id.to_s), id: dom_id(taxon) %>
+                <%= label_tag dom_id(taxon), taxon.title %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <%= submit_tag t('words.filter'), class: UI::BUTTON_PRIMARY %>
+    <% end %>
+  </div>
+
+  <div class="p-8">
+    <ul>
+      <% @challenges.each do |challenge| %>
+        <li id="challenge-<%= challenge.id %>">
+          <%= link_to challenge.title, challenge_path(challenge)  %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
