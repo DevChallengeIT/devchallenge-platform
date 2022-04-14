@@ -50,7 +50,7 @@ module Admin
     end
 
     def challenge
-      @challenge ||= Repo::Challenge.preload(:taxons).friendly.find(params[:id])
+      @challenge ||= Repo::Challenge.preload(:taxons, :rich_text_description).friendly.find(params[:id])
     end
 
     def taxonomies

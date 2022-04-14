@@ -24,13 +24,12 @@
 
   <div class="my-5">
     <%= form.label :description, class: UI::FORM_LABEL %>
-    <%= form.text_area :description, rows: 4, class: UI::FORM_INPUT %>
-    <%= render(UI::ErrorTagComponent.new(errors: challenge.errors, field: :description)) %>
+    <%= form.rich_text_area :description, rows: 4, class: UI::FORM_INPUT %>
   </div>
 
   <div class="my-5">
     <%= form.label :terms_and_conditions, class: UI::FORM_LABEL %>
-    <%= form.text_area :terms_and_conditions, rows: 4, class: UI::FORM_INPUT %>
+    <%= form.rich_text_area :terms_and_conditions, rows: 4, class: UI::FORM_INPUT %>
     <%= render(UI::ErrorTagComponent.new(errors: challenge.errors, field: :terms_and_conditions)) %>
   </div>
 

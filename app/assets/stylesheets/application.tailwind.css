@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import 'actiontext.css';
+
 @layer base {
   .table {
     @apply w-full text-sm text-left text-gray-500 dark:text-gray-400;
@@ -23,3 +25,4 @@
     @apply px-6 py-4
   }
 }
+

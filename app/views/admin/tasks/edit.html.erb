@@ -32,7 +32,7 @@
 
     <div class="my-5">
       <%= form.label :description, class: UI::FORM_LABEL %>
-      <%= form.text_area :description, rows: 4, class: UI::FORM_INPUT %>
+      <%= form.rich_text_area :description, rows: 4, class: UI::FORM_INPUT %>
       <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :description)) %>
     </div>
 
