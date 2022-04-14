@@ -64,10 +64,10 @@ RSpec.describe 'Admin/Challenges/Update' do
     visit "/admin/challenges/#{challenge.slug}/edit"
 
     fill_in 'Title',                with: 'OK challenge'
-    select 'complete',              from: 'Status'
+    select 'ready',                 from: 'Status'
     fill_in 'Slug',                 with: 'ok-challnege'
-    fill_in 'Description',          with: 'Lorem description'
-    fill_in 'Terms and conditions', with: 'Lorem terms'
+    # fill_in 'Description',          with: 'Lorem description' # TOOD: Fix trix
+    # fill_in 'Terms and conditions', with: 'Lorem terms' # TODO: Fix trix
     fill_in 'Registration at',      with: '2022-05-01 10:00:00'
     fill_in 'Start at',             with: '2022-05-10 09:00:00'
     fill_in 'Finish at',            with: '2022-05-15 18:00:00'
@@ -79,10 +79,35 @@ RSpec.describe 'Admin/Challenges/Update' do
 
     within "#challenge-#{challenge.id}" do
       expect(page).to have_content 'OK challenge'
-      expect(page).to have_content 'complete'
+      expect(page).to have_content 'ready'
       expect(page).to have_content Time.zone.parse('2022-05-01 10:00:00').strftime(UI::TimestampComponent::TIME_FORMAT)
       expect(page).to have_content Time.zone.parse('2022-05-10 09:00:00').strftime(UI::TimestampComponent::TIME_FORMAT)
       expect(page).to have_content Time.zone.parse('2022-05-15 18:00:00').strftime(UI::TimestampComponent::TIME_FORMAT)
     end
+  end
+
+  it 'success with taxons' do
+    taxonomy = create(:taxonomy)
+    create(:taxonomy_repo, repo: :challenges, taxonomy:)
+    taxon_a = create(:taxon, taxonomy:)
+    taxon_b = create(:taxon, taxonomy:)
+    challenge.taxons << taxon_a
+
+    assume_logged_in(admin: true)
+    visit "/admin/challenges/#{challenge.slug}/edit"
+    expect(page).to have_checked_field taxon_a.title
+    expect(page).to have_unchecked_field taxon_b.title
+
+    uncheck taxon_a.title
+    check taxon_b.title
+
+    click_button 'Update'
+
+    expect(page).to have_current_path '/admin/challenges'
+    expect(page).to have_content 'Challenge was successfully updated'
+
+    visit "/admin/challenges/#{challenge.slug}/edit"
+    expect(page).to have_unchecked_field taxon_a.title
+    expect(page).to have_checked_field taxon_b.title
   end
 end

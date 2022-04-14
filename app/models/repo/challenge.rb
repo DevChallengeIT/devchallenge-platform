@@ -7,15 +7,18 @@ module Repo
 
     has_many :tasks, dependent: :destroy
 
+    has_rich_text :description
+    has_rich_text :terms_and_condition
+
     enum status: {
-      draft:        'draft',
-      moderation:   'moderation',
-      pending:      'pending',
-      registration: 'registration',
-      live:         'live',
-      complete:     'complete',
-      canceled:     'canceled'
+      draft:      'draft',
+      moderation: 'moderation',
+      ready:      'ready',
+      canceled:   'canceled'
     }
+
+    has_many :taxon_entities, as: :entity, dependent: :destroy_async
+    has_many :taxons, through: :taxon_entities
 
     validates :title, presence: true
     validates :title, uniqueness: { case_sensitive: true }

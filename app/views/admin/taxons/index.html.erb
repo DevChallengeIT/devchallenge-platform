@@ -1,7 +1,14 @@
 <div class="flex justify-between items-center py-3">
-  <h2 class="<%= UI::H2 %>"><%= taxonomy.title %></h2>
+  <h2 class="<%= UI::H2 %>">
+    <%= taxonomy.title %>
+    <small>
+      <%= link_to t('words.edit'), edit_admin_taxonomy_path(taxonomy), class: UI::LINK %>
+    </small>
+  </h2>
 
-  <%= link_to t('words.add'), new_admin_taxonomy_taxon_path(taxonomy), class: UI::BUTTON_PRIMARY %>
+  <div class="flex justify-between items-center space-x-3">
+    <%= link_to t('words.add'), new_admin_taxonomy_taxon_path(taxonomy), class: UI::BUTTON_PRIMARY %>
+  </div>
 </div>
 
 <ul id="taxons">

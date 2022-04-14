@@ -19,15 +19,16 @@ RSpec.describe 'Admin/Tasks/Index' do
   end
 
   it 'success' do
-    task = create(:task, start_at: '2022-05-01 10:00:00', description: 'Some description')
+    task = create(:task)
 
     assume_logged_in(admin: true)
     visit '/admin/tasks'
 
     within "#task-#{task.id}" do
       expect(page).to have_link task.title, href: "/admin/tasks/#{task.slug}/edit"
-      expect(page).to have_content task.description
       expect(page).to have_content task.start_at.strftime(UI::TimestampComponent::TIME_FORMAT)
+      expect(page).to have_content task.submit_at.strftime(UI::TimestampComponent::TIME_FORMAT)
+      expect(page).to have_content task.result_at.strftime(UI::TimestampComponent::TIME_FORMAT)
       expect(page).to have_content task.challenge.title
     end
   end

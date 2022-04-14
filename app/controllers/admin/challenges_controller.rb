@@ -2,12 +2,12 @@
 
 module Admin
   class ChallengesController < BaseController
-    helper_method :challenge
+    helper_method :challenge, :taxonomies
 
     add_breadcrumb I18n.t('resources.challenges.plural'), :admin_challenges_path
 
     def index
-      @paginator, @challenges = paginate Repo::Challenge.all
+      @paginator, @challenges = paginate(list_challenges)
     end
 
     def new
@@ -32,6 +32,7 @@ module Admin
 
     def update
       if challenge.update(challenge_params)
+        challenge.taxon_ids = taxons_keys
         redirect_to(admin_challenges_path, notice: flash_message(:updated, :challenges))
       else
         render :edit, status: :unprocessable_entity
@@ -40,13 +41,33 @@ module Admin
 
     private
 
+    def list_challenges
+      if params[:search].present?
+        Repo::Challenge.where('challenges.title LIKE ?', "%#{params[:search]}%")
+      else
+        Repo::Challenge.all
+      end
+    end
+
     def challenge
-      @challenge ||= Repo::Challenge.friendly.find(params[:id])
+      @challenge ||= Repo::Challenge.preload(:taxons, :rich_text_description).friendly.find(params[:id])
+    end
+
+    def taxonomies
+      @taxonomies ||= Repo::TaxonomyRepo
+                      .where(repo: :challenges)
+                      .preload(taxonomy: :taxons)
+                      .map(&:taxonomy)
+    end
+
+    def taxons_keys
+      params[:taxons]&.keys
     end
 
     def challenge_params
-      params.require(:challenge).permit(:status, :title, :description, :terms_and_conditions, :slug, :registration_at,
-                                        :start_at, :finish_at)
+      params.require(:challenge).permit(
+        :status, :title, :description, :terms_and_conditions, :slug, :registration_at, :start_at, :finish_at, :taxons
+      )
     end
   end
 end

@@ -9,6 +9,9 @@ module Repo
     extend FriendlyId
     friendly_id :full_name, use: :slugged
 
+    has_many :taxon_entities, as: :entity, dependent: :destroy_async
+    has_many :taxons, through: :taxon_entities
+
     validates :full_name, presence: true
   end
 end

@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Repo::Taxon do
-  subject { create(:taxon) }
+  subject { build(:taxon) }
 
   describe 'validations' do
     it { is_expected.to validate_presence_of(:title) }

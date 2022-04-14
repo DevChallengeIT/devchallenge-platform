@@ -13,6 +13,11 @@ en:
     dashboard: Dashboard
     remove: Remove
     danger: Danger!
+    config: Config
+    potential: Potential
+    assigned: Assigned
+    none: None
+    search: Search
   messages:
     access_denied: Access denied
     resource_created: '%{name} was successfully created'
@@ -48,6 +53,8 @@ en:
       title: Title
       description: Description
       start_at: Start At
+      submit_at: Submit At
+      result_at: Result At
     taxonomies:
       plural: Taxonomies
       singular: Taxonomy

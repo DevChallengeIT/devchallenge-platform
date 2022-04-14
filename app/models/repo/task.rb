@@ -5,6 +5,8 @@ module Repo
     extend FriendlyId
     friendly_id :title, use: :slugged
 
+    has_rich_text :description
+
     belongs_to :challenge
     belongs_to :dependent_task, class_name: 'Repo::Task', optional: true
 

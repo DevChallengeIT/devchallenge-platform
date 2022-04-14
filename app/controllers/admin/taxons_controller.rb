@@ -5,20 +5,22 @@ module Admin
     helper_method :taxonomy, :taxon
 
     add_breadcrumb(I18n.t('resources.taxonomies.plural'), :admin_taxonomies_path)
-    add_breadcrumb(proc { |ctx| ctx.taxonomy.title }, proc { |ctx| ctx.admin_taxonomies_path(ctx.taxonomy) })
 
     def index
+      add_breadcrumb(taxonomy.title)
       @paginator, @taxons = paginate taxonomy.taxons.order(:position)
     end
 
     def new
+      add_breadcrumb(taxonomy.title, proc { |ctx| ctx.admin_taxonomy_taxons_path(taxonomy, taxon) })
       add_breadcrumb I18n.t('words.new')
 
       @taxon = Repo::Taxon.new
     end
 
     def edit
-      add_breadcrumb taxon.title
+      add_breadcrumb(taxonomy.title, proc { |ctx| ctx.admin_taxonomy_taxons_path(taxonomy, taxon) })
+      add_breadcrumb(taxon.title)
     end
 
     def create

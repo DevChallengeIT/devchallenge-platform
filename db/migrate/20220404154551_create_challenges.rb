@@ -1,6 +1,6 @@
 class CreateChallenges < ActiveRecord::Migration[7.0]
   def change
-    create_enum :challenge_status, %w[draft moderation pending registration live complete canceled]
+    create_enum :challenge_status, %w[draft moderation ready canceled]
 
     create_table :challenges do |t|
       t.enum :status, enum_type: :challenge_status, default: 'draft', null: false

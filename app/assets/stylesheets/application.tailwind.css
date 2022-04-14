@@ -2,12 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
+@import 'actiontext.css';
 
-@layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
+@layer base {
+  .table {
+    @apply w-full text-sm text-left text-gray-500 dark:text-gray-400;
+  }
+
+  .table thead {
+    @apply text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400
+  }
+
+  .table thead th {
+    @apply px-6 py-3
+  }
+
+  .table tbody tr {
+    @apply bg-white border-b dark:bg-gray-800 dark:border-gray-700
+  }
+
+  .table tbody td {
+    @apply px-6 py-4
   }
 }
 
-*/
