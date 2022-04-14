@@ -6,17 +6,15 @@ module UI
 
     def index
       @taxonomies = Competition.list_taxonomies(repo: :challenges).load_async
-      @paginator, @challenges = paginate(list_challenges.load_async)
+      @paginator, @challenges = paginate(
+        Competition.list_challenges(search:, filter: filter.merge(status_in: [:ready])).load_async
+      )
     end
 
     private
 
     def challenge
       @challenge ||= Repo::Challenge.friendly.find(params[:id])
-    end
-
-    def list_challenges
-      Competition.list_actual_challenges(search:, filter:)
     end
 
     def search
