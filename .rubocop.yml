@@ -31,6 +31,7 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
     - 'config/initializers/**/*'
+    - 'config/environments/*'
 
 Layout/LineLength:
   Exclude:

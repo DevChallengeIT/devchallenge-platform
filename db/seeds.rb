@@ -5,13 +5,30 @@ Repo::User.where(
   password:  'password'
 )
 
-Repo::Challenge.where(
+challenge = Repo::Challenge.where(
   title:           'Test Challenge'
 ).first_or_create!(
   status:          'registration',
   registration_at: Time.now.beginning_of_day,
   start_at:        10.days.from_now.end_of_day,
   finish_at:       15.days.from_now.end_of_day
+)
+
+first_task = Repo::Task.where(
+  title:           'First Task'
+).first_or_create!(
+  challenge:   challenge,
+  start_at:    challenge.start_at + 1.day,
+  description: 'Some description to make this task done'
+)
+
+Repo::Task.where(
+  title:           'Second Task'
+).first_or_create!(
+  challenge:      first_task.challenge,
+  description:    'This is extra task wich depends on the first one',
+  dependent_task: first_task,
+  start_at:       first_task.start_at + 2.days,
 )
 
 txn_speciality = Repo::Taxonomy.where(title: 'Speciality').first_or_create!
