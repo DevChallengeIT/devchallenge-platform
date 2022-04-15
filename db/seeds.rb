@@ -22,7 +22,7 @@ first_task = Repo::Task.where(
   description: 'Some description to make this task done'
 )
 
-Repo::Task.where(
+second_task = Repo::Task.where(
   title:           'Second Task'
 ).first_or_create!(
   challenge:      first_task.challenge,
@@ -30,6 +30,17 @@ Repo::Task.where(
   dependent_task: first_task,
   start_at:       first_task.start_at + 2.days,
 )
+
+# TODO: need to add member!
+Repo::TaskSubmission.where(
+  task:   first_task,
+  member: member
+).first_or_create!(notes: "Submitted: '#{first_task.title}' task")
+
+Repo::TaskSubmission.where(
+  task:   second_task,
+  member: member
+).first_or_create!(notes: "Submitted: '#{second_task.title}' task")
 
 txn_speciality = Repo::Taxonomy.where(title: 'Speciality').first_or_create!
 txn_tech = Repo::Taxonomy.where(title: 'Technology').first_or_create!
