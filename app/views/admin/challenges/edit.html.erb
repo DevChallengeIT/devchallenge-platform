@@ -67,7 +67,7 @@
               </span>
             </div>
             <ul>
-              <% taxonomy.taxons.each_with_index do |taxon, index| %>
+              <% taxonomy.taxons.each do |taxon| %>
                 <li>
                   <%= check_box_tag "taxons[#{taxon.id}", taxon.id, challenge.taxons.include?(taxon), id: dom_id(taxon) %>
                   <%= label_tag dom_id(taxon), taxon.title %>

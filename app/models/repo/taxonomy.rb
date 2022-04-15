@@ -6,6 +6,7 @@ module Repo
     friendly_id :title, use: :slugged
 
     has_many :taxons, dependent: :destroy_async
+    has_many :taxonomy_repos, dependent: :destroy_async
 
     validates :title, presence: true
     validates :title, uniqueness: { case_sensitive: true }

@@ -18,6 +18,7 @@ en:
     assigned: Assigned
     none: None
     search: Search
+    filter: Filter
   messages:
     access_denied: Access denied
     resource_created: '%{name} was successfully created'
