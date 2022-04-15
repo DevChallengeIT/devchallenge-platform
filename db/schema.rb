@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_15_125558) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_15_171540) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -83,6 +83,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_15_125558) do
     t.index ["challenge_id"], name: "index_members_on_challenge_id"
     t.index ["role"], name: "index_members_on_role"
     t.index ["user_id"], name: "index_members_on_user_id"
+  end
+
+  create_table "task_submissions", force: :cascade do |t|
+    t.bigint "task_id", null: false
+    t.bigint "member_id", null: false
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_task_submissions_on_member_id"
+    t.index ["task_id", "member_id"], name: "index_task_submissions_on_task_id_and_member_id", unique: true
+    t.index ["task_id"], name: "index_task_submissions_on_task_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -168,6 +179,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_15_125558) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "members", "challenges"
   add_foreign_key "members", "users"
+  add_foreign_key "task_submissions", "members"
+  add_foreign_key "task_submissions", "tasks"
   add_foreign_key "tasks", "challenges"
   add_foreign_key "tasks", "tasks", column: "dependent_task_id"
   add_foreign_key "taxon_entities", "taxons", on_delete: :cascade
