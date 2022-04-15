@@ -18,7 +18,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_15_125558) do
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
   create_enum "challenge_status", ["draft", "moderation", "pending", "registration", "live", "complete", "canceled"]
-  create_enum "judge_role", ["participant", "judge"]
   create_enum "member_role", ["participant", "judge"]
 
   create_table "action_text_rich_texts", force: :cascade do |t|
