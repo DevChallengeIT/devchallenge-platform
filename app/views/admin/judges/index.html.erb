@@ -1,0 +1,30 @@
+<div class="flex justify-between items-center py-3">
+  <h2 class="<%= UI::H2 %>"><%= t('resources.judges.plural') %></h2>
+
+  <%= link_to t('words.add'), new_admin_judge_path, class: UI::BUTTON_PRIMARY %>
+</div>
+
+<table id="judges" class="table">
+  <thead>
+    <th class="text-left">
+      <%= t('resources.judges.user') %>
+    </th>
+    <th>
+      <%= t('resources.judges.challenge') %>
+    </th>
+  </thead>
+  <tbody>
+    <% @judges.each do |judge| %>
+      <tr id="judge-<%= judge.id %>">
+        <td>
+          <%= judge.user.email %>
+        </td>
+         <td>
+          <%= judge.challenge.title %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= render(UI::PaginatorComponent.new(paginator: @paginator)) %>

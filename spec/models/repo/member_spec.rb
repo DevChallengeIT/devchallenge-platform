@@ -9,4 +9,9 @@ RSpec.describe Repo::Member do
     it { is_expected.to belong_to(:user) }
     it { is_expected.to belong_to(:challenge) }
   end
+
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:user) }
+    it { is_expected.to validate_presence_of(:challenge) }
+  end
 end

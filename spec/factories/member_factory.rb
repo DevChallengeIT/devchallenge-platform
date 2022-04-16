@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :member, class: Repo::Judge.name do
+  factory :member, class: Repo::Member.name do
     user
     challenge
 

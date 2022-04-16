@@ -19,6 +19,7 @@ module Repo
 
     has_many :taxon_entities, as: :entity, dependent: :destroy_async
     has_many :taxons, through: :taxon_entities
+    has_many :members, dependent: :destroy_async
 
     validates :title, presence: true
     validates :title, uniqueness: { case_sensitive: true }
