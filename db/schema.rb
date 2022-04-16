@@ -17,7 +17,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_15_125558) do
 
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
-  create_enum "challenge_status", ["draft", "moderation", "pending", "registration", "live", "complete", "canceled"]
+  create_enum "challenge_status", ["draft", "moderation", "ready", "canceled"]
   create_enum "member_role", ["participant", "judge"]
 
   create_table "action_text_rich_texts", force: :cascade do |t|
@@ -60,8 +60,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_15_125558) do
 
   create_table "challenges", force: :cascade do |t|
     t.enum "status", default: "draft", null: false, enum_type: "challenge_status"
-    t.string "title", null: false
-    t.string "slug", null: false
+    t.citext "title", null: false
+    t.citext "slug", null: false
     t.text "description"
     t.text "terms_and_conditions"
     t.datetime "registration_at"
@@ -71,7 +71,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_15_125558) do
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_challenges_on_slug", unique: true
     t.index ["status"], name: "index_challenges_on_status"
-    t.index ["title"], name: "index_challenges_on_title"
+    t.index ["title"], name: "index_challenges_on_title", unique: true
   end
 
   create_table "members", force: :cascade do |t|
