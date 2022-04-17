@@ -32,7 +32,7 @@ jobs:
       - name: Set up database schema
         run: bundle exec rails db:schema:load
       - name: Precompile assets
-        run: bundle exec rake assets:precompile
+        run: bundle exec rails assets:precompile
       - name: Run tests
         run: bundle exec rspec
 

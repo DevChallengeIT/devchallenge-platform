@@ -1,10 +1,32 @@
 # syntax=docker/dockerfile:1
-FROM ruby:2.5
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
-WORKDIR /myapp
-COPY Gemfile /myapp/Gemfile
-COPY Gemfile.lock /myapp/Gemfile.lock
-RUN bundle install
+FROM ruby:3.1.1
+
+ENV RAILS_ENV staging
+
+RUN apt-get update -qq && apt-get install -y vim nodejs postgresql-client nginx
+
+WORKDIR /devchallenge
+COPY Gemfile Gemfile
+COPY Gemfile.lock Gemfile.lock
+# Install gems
+RUN bundle install --full-index --jobs 4 --without development test
+
+COPY app ./app
+COPY config ./config
+COPY db ./db
+COPY lib ./lib
+COPY public ./public
+COPY storage ./storage
+COPY vendor ./vendor
+COPY config.ru .
+
+# Precompile assets
+RUN rails assets:precompile
+
+COPY run_container.sh .
+RUN chmod +x ./run_container.sh
+COPY nginx.${RAILS_ENV}.conf /etc/nginx/sites-enabled/default
+COPY nginx.${RAILS_ENV}.conf /etc/nginx/sites-available/default
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
@@ -13,4 +35,4 @@ ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
 
 # Configure the main process to run when running the image
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD service nginx restart && rails server -b 0.0.0.0 -p 3000

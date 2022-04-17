@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:14.2
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: devchallenge_staging
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+  web:
+    image: devchallenge-platform_web:latest
+    volumes:
+      - .:/devchallenge
+    ports:
+      - "8081:8080"
+    depends_on:
+      - db
