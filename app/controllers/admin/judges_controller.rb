@@ -5,7 +5,7 @@ module Admin
     add_breadcrumb I18n.t('resources.judges.plural'), :admin_judges_path
 
     def index
-      @paginator, @judges = paginate Repo::Member.preload(:user, :challenge).all.judge
+      @paginator, @judges = paginate Repo::Member.preload(:user, :challenge).judge
     end
   end
 end

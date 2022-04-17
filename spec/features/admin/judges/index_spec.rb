@@ -26,7 +26,8 @@ RSpec.describe 'Admin/Judges/Index' do
 
     within "#judge-#{judge.id}" do
       expect(page).to have_content judge.user.email
-      expect(page).to have_content judge.challenge.title
+      expect(page).to have_link judge.challenge.title,
+                                href: "/admin/challenges/#{judge.challenge.slug}/members"
     end
   end
 

@@ -2,7 +2,7 @@
 
 module Admin
   class MembersController < BaseController
-    helper_method :challenge, :member
+    helper_method :challenge, :member, :roles
 
     add_breadcrumb I18n.t('resources.challenges.plural'), :admin_challenges_path
     add_breadcrumb I18n.t('resources.members.plural'), :admin_challenge_members_path
@@ -17,7 +17,8 @@ module Admin
 
     def update
       if member.update(member_params)
-        redirect_to(admin_challenge_members_path(challenge), notice: flash_message(:updated, :member))
+        redirect_to(admin_challenge_members_path(challenge),
+                    notice: flash_message(:updated, :members))
       else
         render :edit, status: :unprocessable_entity
       end
@@ -25,7 +26,8 @@ module Admin
 
     def destroy
       member.destroy
-      redirect_to(admin_challenge_members_path, notice: flash_message(:removed, :member))
+      redirect_to(admin_challenge_members_path,
+                  notice: flash_message(:removed, :members))
     end
 
     private
@@ -44,6 +46,10 @@ module Admin
 
     def member_params
       params.require(:member).permit(:role)
+    end
+
+    def roles
+      Repo::Member.roles.except(member.role)
     end
   end
 end

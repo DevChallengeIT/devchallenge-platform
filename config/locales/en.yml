@@ -73,5 +73,3 @@ en:
       user: User
       role: Role
       joined: Joined
-    member:
-      singular: Member

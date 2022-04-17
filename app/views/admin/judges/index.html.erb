@@ -18,7 +18,7 @@
           <%= judge.user.email %>
         </td>
          <td>
-          <%= judge.challenge.title %>
+           <%= link_to judge.challenge.title, admin_challenge_members_path(judge.challenge) %>
         </td>
       </tr>
     <% end %>

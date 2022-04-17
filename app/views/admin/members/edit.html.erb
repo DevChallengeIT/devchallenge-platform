@@ -3,8 +3,8 @@
 
   <%= form_with(model: member, scope: :member, url: admin_challenge_member_path(challenge, member), method: :put, class: "contents") do |form| %>
     <div class="my-5">
-      <%= form.label :member, class: UI::FORM_LABEL %>
-      <%= form.select :role, Repo::Member.roles, {}, class: UI::FORM_INPUT %>
+      <%= form.label :role, class: UI::FORM_LABEL %>
+      <%= form.select :role, roles, {}, class: UI::FORM_INPUT %>
       <%= render(UI::ErrorTagComponent.new(errors: member.errors, field: :title)) %>
     </div>
 
