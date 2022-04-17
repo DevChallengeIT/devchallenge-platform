@@ -1,0 +1,29 @@
+<div class="flex justify-between items-center py-3">
+  <h2 class="<%= UI::H2 %>"><%= t('resources.task_submissions.plural') %></h2>
+</div>
+
+<table id="task_submissions" class="table">
+  <thead>
+    <th class="text-left">
+      <%= t('resources.member.user') %>
+    </th>
+    <th class="text-center">
+      <%= t('resources.task_submissions.notes') %>
+    </th>
+  </thead>
+  <tbody>
+    <% @task_submissions.each do |task_submission| %>
+      <tr id="task_submission-<%= task_submission.id %>">
+        <td>
+          <%= link_to task_submission.member.user.email, edit_admin_challenge_member_path(task.challenge, task_submission.member) %>
+        </td>
+         <td>
+          <%= task_submission.notes %>
+        </td>
+        <!-- # TODO: add delete button -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= render(UI::PaginatorComponent.new(paginator: @paginator)) %>
