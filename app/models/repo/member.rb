@@ -10,13 +10,8 @@ module Repo
       judge:       'judge'
     }
 
-    validates :user, presence: true
     validates :challenge, presence: true
-    validates :user, uniqueness: { scope:   %i[challenge role],
-                                   message: I18n.t('messages.participant_exists') },
-                     if:         :participant?
-    validates :user, uniqueness: { scope:   %i[challenge role],
-                                   message: I18n.t('messages.judge_exists') },
-                     if:         :judge?
+    validates :user, presence: true, uniqueness: { scope:   :challenge,
+                                                   message: I18n.t('messages.member_exists') }
   end
 end

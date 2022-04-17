@@ -23,8 +23,7 @@ en:
     resource_created: '%{name} was successfully created'
     resource_updated: '%{name} was successfully updated'
     resource_removed: '%{name} was successfully removed'
-    participant_exists: 'User with such email is already a participant in the selected challenge'
-    judge_exists: 'User with such email is already a judge in the selected challenge'
+    member_exists: 'User with such email is already assigned to the selected challenge'
   auth:
     profile: Profile
     log_in: Log In
@@ -68,3 +67,11 @@ en:
       singular: Judge
       user: User
       challenge: Challenge
+    members:
+      plural: Members
+      singular: Member
+      user: User
+      role: Role
+      joined: Joined
+    member:
+      singular: Member
