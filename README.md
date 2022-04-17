@@ -32,7 +32,7 @@ bin/rails server -p 3000
 bin/rails tailwindcss:watch
 ```
 
-#### Run docker container
+#### Run docker container locally
 
 Run all commands in the app folder
 
