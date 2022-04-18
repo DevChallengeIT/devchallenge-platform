@@ -4,7 +4,8 @@ module Repo
   class TaskSubmission < ApplicationRecord
     belongs_to :task
     belongs_to :member
-    # TODO: add attachments
+
+    has_one_attached :zip_file
 
     validates :task, presence: true
     validates :member, presence: true
