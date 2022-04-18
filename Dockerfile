@@ -23,8 +23,6 @@ COPY config.ru .
 # Precompile assets
 RUN rails assets:precompile
 
-COPY run_container.sh .
-RUN chmod +x ./run_container.sh
 COPY nginx.${RAILS_ENV}.conf /etc/nginx/sites-enabled/default
 COPY nginx.${RAILS_ENV}.conf /etc/nginx/sites-available/default
 
