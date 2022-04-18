@@ -51,6 +51,7 @@ en:
     task_submissions:
       plural: Task Submissions
       singular: Task Submission
+      notes: Notes
     tasks:
       plural: Tasks
       singular: Task

@@ -4,6 +4,9 @@ module Admin
   class TaskSubmissionsController < BaseController
     helper_method :task, :task_submission, :member
 
+    add_breadcrumb I18n.t('resources.tasks.plural'), :admin_tasks_path
+    add_breadcrumb I18n.t('resources.task_submissions.plural'), :admin_task_submissions_path
+
     def index
       @paginator, @task_submissions = paginate task.task_submissions
     end
