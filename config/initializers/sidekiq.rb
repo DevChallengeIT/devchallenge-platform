@@ -1,4 +1,4 @@
-sidekiq_config = { url: Rails.application.credentials.job_worker_url }
+sidekiq_config = { url: Rails.application.credentials.job_worker_url }.freeze
 
 Sidekiq.configure_server do |config|
   config.redis = sidekiq_config
