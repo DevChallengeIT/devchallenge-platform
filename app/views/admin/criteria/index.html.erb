@@ -1,0 +1,30 @@
+<div class="flex justify-between items-center py-3">
+  <h2 class="<%= UI::H2 %>"><%= t('resources.criteria.plural') %></h2>
+
+  <%= link_to t('words.add'), new_admin_task_criterium_path, class: UI::BUTTON_PRIMARY %>
+</div>
+
+<table id="criteria" class="table">
+  <thead>
+    <th class="text-left">
+      <%= t('resources.criteria.title') %>
+    </th>
+    <th>
+      <%= t('resources.criteria.max_value') %>
+    </th>
+  </thead>
+  <tbody>
+    <% @criteria.each do |criterium| %>
+      <tr id="criterium-<%= criterium.id %>">
+        <td>
+          <%= link_to criterium.title, edit_admin_task_criterium_path(task, criterium) %>
+        </td>
+        <td>
+          <%= criterium.max_value %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= render(UI::PaginatorComponent.new(paginator: @paginator)) %>

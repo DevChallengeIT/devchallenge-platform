@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_15_171540) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_18_185856) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -94,6 +94,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_15_171540) do
     t.index ["member_id"], name: "index_task_submissions_on_member_id"
     t.index ["task_id", "member_id"], name: "index_task_submissions_on_task_id_and_member_id", unique: true
     t.index ["task_id"], name: "index_task_submissions_on_task_id"
+  end
+
+  create_table "task_criteria", force: :cascade do |t|
+    t.string "title"
+    t.integer "max_value", default: 0, null: false
+    t.bigint "task_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_task_criteria_on_task_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -181,6 +190,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_15_171540) do
   add_foreign_key "members", "users"
   add_foreign_key "task_submissions", "members"
   add_foreign_key "task_submissions", "tasks"
+  add_foreign_key "task_criteria", "tasks"
   add_foreign_key "tasks", "challenges"
   add_foreign_key "tasks", "tasks", column: "dependent_task_id"
   add_foreign_key "taxon_entities", "taxons", on_delete: :cascade

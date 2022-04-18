@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     end
     resources :tasks, except: %i[destroy] do
       resources :task_submissions, only: %i[index destroy], as: :submissions, path: :submissions
+      resources :criteria
     end
     resources :judges, only: :index
     resources :users, except: %i[show]
