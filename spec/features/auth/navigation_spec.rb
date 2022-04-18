@@ -69,6 +69,9 @@ RSpec.describe 'Navigation' do
 
         click_link 'Taxonomies'
         expect(page).to have_current_path '/admin/taxonomies'
+
+        click_link 'Judges'
+        expect(page).to have_current_path '/admin/judges'
       end
 
       within '#profile-nav' do

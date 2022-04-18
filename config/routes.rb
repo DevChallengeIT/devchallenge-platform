@@ -20,8 +20,11 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :challenges, except: %i[destroy], concerns: :manage_taxonomies, repo: :challenges
+    resources :challenges, except: %i[destroy], concerns: :manage_taxonomies, repo: :challenges do
+      resources :members, except: :show
+    end
     resources :tasks, except: %i[destroy]
+    resources :judges, only: :index
 
     resources :taxonomies, except: %i[destroy] do
       resources :taxons, except: %i[show]

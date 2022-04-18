@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_14_073843) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_15_125558) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_14_073843) do
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
   create_enum "challenge_status", ["draft", "moderation", "ready", "canceled"]
+  create_enum "member_role", ["participant", "judge"]
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -71,6 +72,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_14_073843) do
     t.index ["slug"], name: "index_challenges_on_slug", unique: true
     t.index ["status"], name: "index_challenges_on_status"
     t.index ["title"], name: "index_challenges_on_title", unique: true
+  end
+
+  create_table "members", force: :cascade do |t|
+    t.enum "role", default: "participant", null: false, enum_type: "member_role"
+    t.bigint "user_id"
+    t.bigint "challenge_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["challenge_id"], name: "index_members_on_challenge_id"
+    t.index ["role"], name: "index_members_on_role"
+    t.index ["user_id"], name: "index_members_on_user_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -154,6 +166,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_14_073843) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "members", "challenges"
+  add_foreign_key "members", "users"
   add_foreign_key "tasks", "challenges"
   add_foreign_key "tasks", "tasks", column: "dependent_task_id"
   add_foreign_key "taxon_entities", "taxons", on_delete: :cascade

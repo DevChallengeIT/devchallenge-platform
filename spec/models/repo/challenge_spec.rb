@@ -8,6 +8,7 @@ RSpec.describe Repo::Challenge do
   describe 'associations' do
     it { is_expected.to have_many(:taxon_entities) }
     it { is_expected.to have_many(:taxons) }
+    it { is_expected.to have_many(:members) }
   end
 
   describe 'validations' do
