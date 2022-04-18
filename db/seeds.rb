@@ -31,15 +31,39 @@ second_task = Repo::Task.where(
   start_at:       first_task.start_at + 2.days,
 )
 
-# TODO: need to add member!
+participant = Repo::User.where(
+  email:     'participant@devchallenge.it'
+).first_or_create!(
+  full_name: 'Test Participant',
+  password:  'password'
+)
+
+judge = Repo::User.where(
+  email:     'judge@devchallenge.it'
+).first_or_create!(
+  full_name: 'Test Judge',
+  password:  'password'
+)
+
+participant_member = Repo::Member.where(
+  challenge: challenge,
+  user: participant,
+).first_or_create!
+
+judge_member = Repo::Member.where(
+  challenge: challenge,
+  user: judge,
+  role: :judge
+).first_or_create!
+
 Repo::TaskSubmission.where(
   task:   first_task,
-  member: member
+  member: participant_member
 ).first_or_create!(notes: "Submitted: '#{first_task.title}' task")
 
 Repo::TaskSubmission.where(
   task:   second_task,
-  member: member
+  member: participant_member
 ).first_or_create!(notes: "Submitted: '#{second_task.title}' task")
 
 txn_speciality = Repo::Taxonomy.where(title: 'Speciality').first_or_create!
