@@ -8,7 +8,7 @@ module Admin
     add_breadcrumb I18n.t('resources.task_submissions.plural'), :admin_task_submissions_path
 
     def index
-      @paginator, @task_submissions = paginate task.task_submissions
+      @paginator, @task_submissions = paginate task.task_submissions.preload(member: :user)
     end
 
     def destroy
@@ -23,7 +23,7 @@ module Admin
     end
 
     def task
-      @task ||= Repo::Task.friendly.find(params[:task_id])
+      @task ||= Repo::Task.friendly.preload(:challenge).find(params[:task_id])
     end
   end
 end
