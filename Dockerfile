@@ -20,9 +20,6 @@ COPY storage ./storage
 COPY vendor ./vendor
 COPY config.ru .
 
-# Precompile assets
-RUN rails assets:precompile
-
 COPY nginx.${RAILS_ENV}.conf /etc/nginx/sites-enabled/default
 COPY nginx.${RAILS_ENV}.conf /etc/nginx/sites-available/default
 
@@ -33,4 +30,4 @@ ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
 
 # Configure the main process to run when running the image
-CMD service nginx restart && rails server -b 0.0.0.0 -p 3000
+CMD rails server -b 0.0.0.0 -p 3000
