@@ -21,6 +21,8 @@
     <th class="text-center">
       <%= t('resources.tasks.result_at') %>
     </th>
+    <th>
+    </th>
   </thead>
   <tbody>
     <% @tasks.each do |task| %>
@@ -39,6 +41,9 @@
         </td>
         <td class="text-center">
           <%= render(UI::TimestampComponent.new(data: task.result_at)) %>
+        </td>
+        <td class="text-center">
+          <%= link_to t('resources.task_submissions.plural'), admin_task_submissions_path(task) %>
         </td>
       </tr>
     <% end %>

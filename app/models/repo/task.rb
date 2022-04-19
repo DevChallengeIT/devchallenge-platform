@@ -10,6 +10,8 @@ module Repo
     belongs_to :challenge
     belongs_to :dependent_task, class_name: 'Repo::Task', optional: true
 
+    has_many :task_submissions, dependent: :destroy_async
+
     validates :title, presence: true
     validates :title, uniqueness: { case_sensitive: true, scope: :challenge_id }
     validates :slug, presence: true, if: :persisted?

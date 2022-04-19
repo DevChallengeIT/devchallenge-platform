@@ -49,6 +49,10 @@ en:
       registration_at: Registration At
       start_at: Start At
       finish_at: Finish At
+    task_submissions:
+      plural: Task Submissions
+      singular: Task Submission
+      notes: Notes
     tasks:
       plural: Tasks
       singular: Task

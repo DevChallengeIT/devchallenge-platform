@@ -1,0 +1,35 @@
+<div class="flex justify-between items-center py-3">
+  <h2 class="<%= UI::H2 %>">
+    <%= "#{task.title}: #{t('resources.task_submissions.plural')}"%>
+  </h2>
+</div>
+
+<table id="task_submissions" class="table">
+  <thead>
+    <th class="text-left">
+      <%= t('resources.members.user') %>
+    </th>
+    <th class="text-center">
+      <%= t('resources.task_submissions.notes') %>
+    </th>
+    <th>
+    </th>
+  </thead>
+  <tbody>
+    <% @task_submissions.each do |task_submission| %>
+      <tr id="task_submission-<%= task_submission.id %>">
+        <td>
+          <%= link_to task_submission.member.user.email, edit_admin_challenge_member_path(task.challenge, task_submission.member) %>
+        </td>
+         <td class="text-center">
+          <%= task_submission.notes %>
+        </td>
+        <td class="text-center">
+          <%= button_to t('words.remove'), admin_task_submission_path(task, task_submission), method: :delete, class: UI::BUTTON_DANGER, form: { data: { turbo_confirm: 'Are you sure?' } } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= render(UI::PaginatorComponent.new(paginator: @paginator)) %>
