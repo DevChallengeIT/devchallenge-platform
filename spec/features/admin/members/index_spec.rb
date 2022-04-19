@@ -4,8 +4,8 @@ require 'rails_helper'
 
 RSpec.describe 'Admin/Members/Index' do
   let!(:challenge) { create(:challenge) }
-  let!(:member1) { create(:member, challenge:) }
-  let!(:member2) { create(:member, challenge:) }
+  let!(:member1) { create(:member, challenge: challenge) }
+  let!(:member2) { create(:member, challenge: challenge) }
 
   it 'failure without session' do
     visit "/admin/challenges/#{challenge.slug}/members"
