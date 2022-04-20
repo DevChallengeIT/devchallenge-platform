@@ -1,31 +1,26 @@
 <div class="md:w-2/3 w-full">
-  <h2 class="<%= UI::H2 %>"><%= t('words.new') %> <%= t('resources.users.singular') %></h2>
-
+  <h2 class="<%= UI::H2 %>"><%= t('words.new') %> <%= t('resources.users.singular') %></h2
   <%= form_with(model: @user, scope: :user, url: admin_users_path(user), method: :post, class: "contents") do |form| %>
     <div class="my-5">
       <%= form.label :email, class: UI::FORM_LABEL %>
       <%= form.text_field :email, autofocus: true, autocomplete: "disabled", class: UI::FORM_INPUT %>
       <%= render(UI::ErrorTagComponent.new(errors: @user.errors, field: :email)) %>
     </div>
-
     <div class="my-5">
       <%= form.label :full_name, class: UI::FORM_LABEL %>
       <%= form.text_field :full_name, class: UI::FORM_INPUT %>
       <%= render(UI::ErrorTagComponent.new(errors: @user.errors, field: :full_name)) %>
     </div>
-
     <div class="my-5">
       <%= form.label :password, class: UI::FORM_LABEL %>
       <%= form.password_field :password, class: UI::FORM_INPUT %>
       <%= render(UI::ErrorTagComponent.new(errors: @user.errors, field: :password)) %>
     </div>
-
     <div class="my-5">
       <%= form.label :password_confirmation, class: UI::FORM_LABEL %>
       <%= form.password_field :password_confirmation, autofocus: true, class: UI::FORM_INPUT %>
       <%= render(UI::ErrorTagComponent.new(errors: @user.errors, field: :password_confirmation)) %>
     </div>
-
     <div class="flex items-center justify-between">
       <%= form.submit t('words.create'), class: UI::BUTTON_PRIMARY %>
       <%= link_to t('words.back'), admin_users_path(user), class: UI::BUTTON_SECONDARY %>

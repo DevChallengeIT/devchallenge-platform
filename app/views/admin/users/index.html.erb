@@ -1,10 +1,8 @@
 <div class="flex justify-between items-center py-3">
   <h2 class="<%= UI::H2 %>"><%= t('resources.users.plural') %></h2>
-
   <%= link_to t('words.add'), new_admin_user_path, class: UI::BUTTON_PRIMARY %>
 </div>
-
-<table id="users" class="w-full">
+<table id="users" class="table">
   <thead>
     <th class="text-left">
       <%= t('resources.users.email') %>
@@ -36,8 +34,6 @@
     <th>
       <%= t('resources.users.last_sign_in_ip') %>
     </th>
-
-
   </thead>
   <tbody>
     <% @users.each do |user| %>
@@ -76,5 +72,4 @@
     <% end %>
   </tbody>
 </table>
-
 <%= render(UI::PaginatorComponent.new(paginator: @paginator)) %>
