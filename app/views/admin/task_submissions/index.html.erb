@@ -12,6 +12,9 @@
     <th class="text-center">
       <%= t('resources.task_submissions.notes') %>
     </th>
+    <th class="text-center">
+      <%= t('resources.task_assessments.singular') %>
+    </th>
     <th>
     </th>
   </thead>
@@ -23,6 +26,9 @@
         </td>
          <td class="text-center">
           <%= task_submission.notes %>
+        </td>
+        <td class="text-center">
+          <%= link_to task_submission.task_assessment&.value, edit_admin_task_assessment_path(task_submission.task, task_submission.task_assessment), class: UI::BUTTON_SECONDARY %>
         </td>
         <td class="text-center">
           <%= button_to t('words.remove'), admin_challenge_task_submission_path(challenge, task, task_submission), method: :delete, class: UI::BUTTON_DANGER, form: { data: { turbo_confirm: t('messages.are_you_sure') } } %>

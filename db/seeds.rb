@@ -68,15 +68,33 @@ second_task_criterium_1 = Repo::TaskCriterium.where(
   task:   first_task
 ).first_or_create!
 
-Repo::TaskSubmission.where(
+task_submission = Repo::TaskSubmission.where(
   task:   first_task,
   member: participant_member
 ).first_or_create!(notes: "Submitted: '#{first_task.title}' task")
 
-Repo::TaskSubmission.where(
+task_submission2 = Repo::TaskSubmission.where(
   task:   second_task,
   member: participant_member
 ).first_or_create!(notes: "Submitted: '#{second_task.title}' task")
+
+Repo::TaskAssessment.where(
+  member: judge_member,
+  task_submission: task_submission,
+).first_or_create!(
+  value: 8,
+  comment: 'Nice job!!!',
+  task_criteria: first_task_criterium_1
+)
+
+Repo::TaskAssessment.where(
+  member: judge_member,
+  task_submission: task_submission2,
+).first_or_create!(
+  value: 7,
+  comment: 'Really good work:)',
+  task_criteria: second_task_criterium_1
+)
 
 txn_speciality = Repo::Taxonomy.where(title: 'Speciality').first_or_create!
 txn_tech = Repo::Taxonomy.where(title: 'Technology').first_or_create!
