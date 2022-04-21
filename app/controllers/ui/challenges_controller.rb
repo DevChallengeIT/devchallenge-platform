@@ -2,7 +2,9 @@
 
 module UI
   class ChallengesController < BaseController
-    helper_method :challenge, :filter_taxon_ids
+    include CompetitionContext
+
+    helper_method :filter_taxon_ids
 
     def index
       @taxonomies = Competition.list_taxonomies(repo: :challenges).load_async
@@ -11,11 +13,9 @@ module UI
       )
     end
 
-    private
+    def show; end
 
-    def challenge
-      @challenge ||= Repo::Challenge.friendly.find(params[:id])
-    end
+    private
 
     def search
       @search ||= params[:search]

@@ -1,1 +1,18 @@
 <%= challenge.title %>
+
+<div class="my-5">
+  <% if current_user && Competition.can_join?(user: current_user, challenge: challenge) %>
+    <%= button_to t('words.join'), challenge_members_path(challenge), method: :post, class: UI::BUTTON_PRIMARY %>
+  <% elsif current_member %>
+    <%= button_to t('words.leave'), challenge_member_path(challenge, current_member), method: :delete, class: UI::BUTTON_DANGER, form: { data: {turbo_confirm: t('messages.are_you_sure')}} %>
+  <% else %>
+    <%= t('messages.register_for_join')%>
+    <%= link_to "#{t('auth.log_in')} / #{t('auth.register')}", new_user_session_path, class: UI::LINK %>
+  <% end %>
+</div>
+
+<div class="my-5">
+  <% if Auth.admin?(current_user) %>
+    <%= link_to t('words.edit'), edit_admin_challenge_path(challenge), class: UI::BUTTON_SECONDARY %>
+  <% end %>
+</div>

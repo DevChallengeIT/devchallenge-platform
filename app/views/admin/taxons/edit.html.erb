@@ -23,5 +23,5 @@
 
 <div class="mt-8">
   <%= t('words.danger') %>
-  <%= button_to t('words.remove'), admin_taxonomy_taxon_path(taxonomy, taxon), method: :delete, class: UI::BUTTON_DANGER, form: {data: {turbo_confirm: 'Are you sure?'}} %>
+  <%= button_to t('words.remove'), admin_taxonomy_taxon_path(taxonomy, taxon), method: :delete, class: UI::BUTTON_DANGER, form: {data: {turbo_confirm: t('messages.are_you_sure')}} %>
 </div>
