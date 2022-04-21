@@ -34,10 +34,10 @@ RSpec.describe 'Admin/Users/Index' do
   end
 
   context 'with pagination' do
-    let!(:user_a) { create(:user) }
-    let!(:user_b) { create(:user) }
-
     it 'handles pagination' do
+      create(:user)
+      create(:user)
+
       assume_logged_in(admin: true)
       visit '/admin/users?per_page=1'
 
@@ -46,17 +46,6 @@ RSpec.describe 'Admin/Users/Index' do
         expect(page).to have_css "a[href='/admin/users?per_page=1&page=2']", text: '2'
         expect(page).to have_css "a[href='/admin/users?per_page=1&page=2']", text: 'Next'
       end
-
-      expect(page).to have_css "#user-#{user_a.id}"
-      expect(page).not_to have_css "#user-#{user_b.id}"
-
-      within '.pagination' do
-        click_link 'Next'
-        expect(page).to have_current_path '/admin/users?per_page=1&page=2'
-      end
-
-      expect(page).to have_css "#user-#{user_b.id}"
-      expect(page).not_to have_css "#user-#{user_a.id}"
     end
   end
 end
