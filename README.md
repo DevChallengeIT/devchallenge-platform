@@ -31,3 +31,24 @@ or
 bin/rails server -p 3000
 bin/rails tailwindcss:watch
 ```
+
+#### Run docker container locally
+
+Run all commands in the app folder
+
+1. build docker image
+```sh
+docker build -t devchallenge-platform_web:latest .
+```
+2. run docker containers
+```sh
+docker compose up
+```
+or start DB in detached mode
+```sh
+docker compose up -d db
+```
+and attached rails server
+```sh
+docker compose up web
+```

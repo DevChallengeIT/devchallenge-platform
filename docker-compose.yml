@@ -1,0 +1,34 @@
+version: '3.9'
+services:
+  db:
+    image: postgres:14.2
+    environment:
+      POSTGRES_DB: devchallenge_staging
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - '5433:5432'
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+  redis:
+    image: redis:6.2.6
+    ports:
+      - '6380:6379'
+    volumes:
+      - ./tmp/redis:/var/lib/redis/data
+  sidekiq:
+    build: .
+    command: bundle exec sidekiq
+    depends_on:
+      - db
+      - redis
+  web:
+    image: devchallenge-platform_web:latest
+    volumes:
+      - .:/devchallenge
+    ports:
+      - '8081:8080'
+    depends_on:
+      - db
+      - redis
+      - sidekiq

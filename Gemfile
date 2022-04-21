@@ -11,6 +11,8 @@ gem 'pg', '~> 1.1'
 gem 'propshaft', '~> 0.6'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 7.0.2'
+gem 'redis', '~> 4.6.0'
+gem 'sidekiq', '~> 6.4.1'
 
 # Frontend
 gem 'breadcrumbs_on_rails', '~> 4.1'
