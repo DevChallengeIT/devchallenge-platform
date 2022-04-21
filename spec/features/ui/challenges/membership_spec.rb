@@ -11,7 +11,7 @@ RSpec.describe 'UI/Challenges/Join' do
 
       expect(page).not_to have_button 'Join'
       expect(page).not_to have_button 'Leave'
-      expect(page).to have_content 'Please register for joining this challenge'
+      expect(page).to have_content 'Please register to join this challenge'
     end
   end
 

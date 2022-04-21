@@ -6,7 +6,7 @@
   <% elsif current_member %>
     <%= button_to t('words.leave'), challenge_member_path(challenge, current_member), method: :delete, class: UI::BUTTON_DANGER, form: { data: {turbo_confirm: t('messages.are_you_sure')}} %>
   <% else %>
-    <%= t('messages.register_for_join')%>
+    <%= t('messages.register_to_join')%>
     <%= link_to "#{t('auth.log_in')} / #{t('auth.register')}", new_user_session_path, class: UI::LINK %>
   <% end %>
 </div>

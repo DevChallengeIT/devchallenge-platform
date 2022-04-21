@@ -12,10 +12,6 @@ module Competition
       new(**args).can_join?
     end
 
-    def self.can_leave?(**args)
-      new(**args).can_leave?
-    end
-
     def initialize(user:, challenge:)
       @user = user
       @challenge = challenge

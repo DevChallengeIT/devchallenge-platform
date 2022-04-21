@@ -28,7 +28,7 @@ en:
     resource_removed: '%{name} was successfully removed'
     member_exists: 'User with such email is already assigned to the selected challenge'
     access_denied: Access denied
-    register_for_join: Please register for joining this challenge
+    register_to_join: Please register to join this challenge
     challenge_joined: Thanks! You joined the challenge
     challenge_leaved: So pity that you leaving us...
     are_you_sure: Are you sure?
