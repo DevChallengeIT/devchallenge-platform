@@ -78,3 +78,16 @@ en:
       user: User
       role: Role
       joined: Joined
+    users:
+      plural: Users
+      singular: User
+      email: Email
+      full_name: Full Name
+      slug: Slug
+      time_zone: Time Zone
+      reset_password_sent_at: Reset Password Sent At
+      sign_in_count: Sign In Count
+      current_sign_in_at: Current Sign In At
+      last_sign_in_at: Last Sign In At
+      current_sign_in_ip: Current Sign In Ip
+      last_sign_in_ip: Last Sign In Ip
