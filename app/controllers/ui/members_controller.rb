@@ -15,11 +15,5 @@ module UI
       current_member.destroy
       redirect_to challenge_path(challenge), notice: t('messages.challenge_leaved')
     end
-
-    private
-
-    def challenge
-      @challenge ||= Repo::Challenge.friendly.find(params[:challenge_id])
-    end
   end
 end

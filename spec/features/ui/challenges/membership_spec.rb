@@ -28,7 +28,7 @@ RSpec.describe 'UI/Challenges/Join' do
       expect(page).to have_button 'Leave'
     end
 
-    it 'can leave the challenge if not yet joined' do
+    it 'can leave the challenge if the user is already a member of the challenge' do
       create(:member, challenge:, user: current_user)
 
       visit "/challenges/#{challenge.slug}"
