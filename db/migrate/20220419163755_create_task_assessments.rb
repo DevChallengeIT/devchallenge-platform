@@ -4,7 +4,7 @@ class CreateTaskAssessments < ActiveRecord::Migration[7.0]
       t.integer :value
       t.text :comment
       t.references :member, null: false, foreign_key: true
-      t.references :task_criteria, null: false, foreign_key: true
+      t.references :task_criterium, null: false, foreign_key: true
       t.references :task_submission, null: false, foreign_key: true
 
       t.timestamps

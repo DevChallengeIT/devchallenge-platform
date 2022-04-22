@@ -5,7 +5,7 @@ module Repo
     belongs_to :task
     belongs_to :member
 
-    has_one :task_assessment, required: false
+    has_one :task_assessment, required: false, dependent: :destroy
 
     has_one_attached :zip_file
 

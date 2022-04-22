@@ -89,12 +89,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_163755) do
     t.integer "value"
     t.text "comment"
     t.bigint "member_id", null: false
-    t.bigint "task_criteria_id", null: false
+    t.bigint "task_criterium_id", null: false
     t.bigint "task_submission_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["member_id"], name: "index_task_assessments_on_member_id"
-    t.index ["task_criteria_id"], name: "index_task_assessments_on_task_criteria_id"
+    t.index ["task_criterium_id"], name: "index_task_assessments_on_task_criterium_id"
     t.index ["task_submission_id"], name: "index_task_assessments_on_task_submission_id"
   end
 
@@ -116,15 +116,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_163755) do
     t.index ["member_id"], name: "index_task_submissions_on_member_id"
     t.index ["task_id", "member_id"], name: "index_task_submissions_on_task_id_and_member_id", unique: true
     t.index ["task_id"], name: "index_task_submissions_on_task_id"
-  end
-
-  create_table "task_criteria", force: :cascade do |t|
-    t.string "title"
-    t.integer "max_value", default: 0, null: false
-    t.bigint "task_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["task_id"], name: "index_task_criteria_on_task_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -211,12 +202,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_163755) do
   add_foreign_key "members", "challenges"
   add_foreign_key "members", "users"
   add_foreign_key "task_assessments", "members"
-  add_foreign_key "task_assessments", "task_criteria", column: "task_criteria_id"
+  add_foreign_key "task_assessments", "task_criteria"
   add_foreign_key "task_assessments", "task_submissions"
   add_foreign_key "task_criteria", "tasks"
   add_foreign_key "task_submissions", "members"
   add_foreign_key "task_submissions", "tasks"
-  add_foreign_key "task_criteria", "tasks"
   add_foreign_key "tasks", "challenges"
   add_foreign_key "tasks", "tasks", column: "dependent_task_id"
   add_foreign_key "taxon_entities", "taxons", on_delete: :cascade
