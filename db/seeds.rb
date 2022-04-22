@@ -56,6 +56,18 @@ judge_member = Repo::Member.where(
   role: :judge
 ).first_or_create!
 
+first_task_criterium_1 = Repo::TaskCriterium.where(
+  title: "First criterion",
+  max_value: 10,
+  task:   first_task
+).first_or_create!
+
+second_task_criterium_1 = Repo::TaskCriterium.where(
+  title: "Second criterion",
+  max_value: 5,
+  task:   first_task
+).first_or_create!
+
 Repo::TaskSubmission.where(
   task:   first_task,
   member: participant_member
