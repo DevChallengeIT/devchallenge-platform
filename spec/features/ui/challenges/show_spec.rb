@@ -35,7 +35,7 @@ RSpec.describe 'UI/Challenges/Show' do
       expect(page).to have_content 'Access denied'
     end
 
-    it 'can access read challenge' do
+    it 'can access ready challenge' do
       challenge = create(:challenge, status: 'ready')
 
       visit "/challenges/#{challenge.slug}"
