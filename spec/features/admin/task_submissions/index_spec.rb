@@ -23,6 +23,7 @@ RSpec.describe 'Admin/TaskSubmissions/Index' do
 
   it 'success' do
     task_submission = create(:task_submission, notes: 'first submission', task:)
+    create(:task_assessment, task_submission:)
 
     assume_logged_in(admin: true)
     visit "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/submissions"
@@ -36,6 +37,8 @@ RSpec.describe 'Admin/TaskSubmissions/Index' do
   it 'handles pagination' do
     task_submission_a = create(:task_submission, task:)
     task_submission_b = create(:task_submission, task:)
+    create(:task_assessment, task_submission: task_submission_a)
+    create(:task_assessment, task_submission: task_submission_b)
 
     assume_logged_in(admin: true)
     visit "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/submissions?per_page=1"
