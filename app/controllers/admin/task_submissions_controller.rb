@@ -2,7 +2,7 @@
 
 module Admin
   class TaskSubmissionsController < BaseController
-    helper_method :task, :task_submission, :member
+    helper_method :task, :task_submission, :challenge
 
     add_breadcrumb I18n.t('resources.challenges.plural'), :admin_challenges_path
     add_breadcrumb I18n.t('resources.tasks.plural'), :admin_challenge_tasks_path
@@ -26,6 +26,10 @@ module Admin
 
     def task
       @task ||= Repo::Task.friendly.preload(:challenge).find(params[:task_id])
+    end
+
+    def challenge
+      @challenge ||= task.challenge
     end
   end
 end
