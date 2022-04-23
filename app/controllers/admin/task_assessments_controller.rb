@@ -2,19 +2,29 @@
 
 module Admin
   class TaskAssessmentsController < BaseController
-    helper_method :task, :task_assessment
+    helper_method :task, :task_assessment, :challenge
 
     def edit; end
 
     def update
       if task_assessment.update(task_assessment_params)
-        redirect_to(admin_task_assessments_path, notice: flash_message(:updated, :task_assessments))
+        redirect_to(admin_challenge_task_submissions_path, notice: flash_message(:updated, :task_assessments))
       else
         render :edit, status: :unprocessable_entity
       end
     end
 
+    def destroy
+      task_assessment.destroy
+      redirect_to(admin_challenge_task_submissions_path,
+                  notice: flash_message(:removed, :task_submissions))
+    end
+
     private
+
+    def challenge
+      @challenge ||= task.challenge
+    end
 
     def task_assessment
       @task_assessment ||= task.task_assessments.find(params[:id])

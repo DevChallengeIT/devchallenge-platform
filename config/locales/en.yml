@@ -53,6 +53,7 @@ en:
       singular: Task Assessment
       comment: Comment
       points: Points
+      edit: Edit assessment
     challenges:
       plural: Challenges
       singular: Challenge

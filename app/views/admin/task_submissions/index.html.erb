@@ -33,7 +33,7 @@
           <%= task_submission.notes %>
         </td>
         <td class="text-center">
-          <%= button_to t('words.remove'), admin_challenge_task_submission_path(challenge, task, task_submission), method: :delete, class: UI::BUTTON_DANGER, form: { data: { turbo_confirm: t('messages.are_you_sure') } } %>
+          <%= link_to t('resources.task_assessments.edit'), edit_admin_challenge_task_assessment_path(challenge, task, task_submission.task_assessment), class: UI::BUTTON_SECONDARY %>
         </td>
         <td class="text-center">
           <%= button_to t('words.remove'), admin_challenge_task_submission_path(challenge, task, task_submission), method: :delete, class: UI::BUTTON_DANGER, form: { data: { turbo_confirm: t('messages.are_you_sure') } } %>

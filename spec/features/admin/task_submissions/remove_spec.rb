@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Admin/TaskSubmissions/Remove' do
   it 'success' do
     task_submission = create(:task_submission)
-    task_assessment = create(:task_assessment, task_submission:)
+    create(:task_assessment, task_submission:)
     task = task_submission.task
     challenge = task.challenge
 
