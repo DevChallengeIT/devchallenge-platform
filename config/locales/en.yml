@@ -60,8 +60,8 @@ en:
       start_at: Start At
       finish_at: Finish At
     task_submissions:
-      plural: Task Submissions
-      singular: Task Submission
+      plural: Submissions
+      singular: Submission
       notes: Notes
     tasks:
       plural: Tasks
