@@ -51,6 +51,8 @@ en:
     task_assessments:
       plural: Task Assessments
       singular: Task Assessment
+      comment: Comment
+      points: Points
     challenges:
       plural: Challenges
       singular: Challenge

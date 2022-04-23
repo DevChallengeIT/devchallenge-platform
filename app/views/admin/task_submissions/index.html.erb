@@ -10,10 +10,12 @@
       <%= t('resources.members.user') %>
     </th>
     <th class="text-center">
-      <%= t('resources.task_submissions.notes') %>
+      <%= t('resources.task_assessments.points') %>
     </th>
     <th class="text-center">
-      <%= t('resources.task_assessments.singular') %>
+      <%= t('resources.task_assessments.comment') %>
+    </th>
+    <th>
     </th>
     <th>
     </th>
@@ -22,13 +24,16 @@
     <% @task_submissions.each do |task_submission| %>
       <tr id="task_submission-<%= task_submission.id %>">
         <td>
-          <%= link_to task_submission.member.user.email, edit_admin_challenge_member_path(task.challenge, task_submission.member) %>
+          <%= link_to task_submission.member.user.email, edit_admin_challenge_member_path(challenge, task_submission.member) %>
         </td>
-         <td class="text-center">
+        <td class="text-center">
+          <%= task_submission.task_assessment&.value %>
+        </td>
+        <td class="text-center">
           <%= task_submission.notes %>
         </td>
         <td class="text-center">
-          <%= link_to task_submission.task_assessment&.value, edit_admin_task_assessment_path(task_submission.task, task_submission.task_assessment), class: UI::BUTTON_SECONDARY %>
+          <%= button_to t('words.remove'), admin_challenge_task_submission_path(challenge, task, task_submission), method: :delete, class: UI::BUTTON_DANGER, form: { data: { turbo_confirm: t('messages.are_you_sure') } } %>
         </td>
         <td class="text-center">
           <%= button_to t('words.remove'), admin_challenge_task_submission_path(challenge, task, task_submission), method: :delete, class: UI::BUTTON_DANGER, form: { data: { turbo_confirm: t('messages.are_you_sure') } } %>
