@@ -35,6 +35,24 @@ RSpec.describe 'Admin/Tasks/Index' do
     end
   end
 
+  it 'show tasks of the challenge' do
+    task_a = create(:task, challenge:)
+    task_b = create(:task, challenge:)
+    task_c = create(:task, challenge: build(:challenge))
+
+    assume_logged_in(admin: true)
+    visit "/admin/challenges/#{challenge.slug}/tasks"
+
+    expect(Repo::Task.count).to eq(3)
+    expect(page).to have_link task_a.title, href: "/admin/challenges/#{challenge.slug}/tasks/#{task_a.slug}/edit"
+    expect(page).to have_content task_a.challenge.title
+    expect(page).to have_link task_b.title, href: "/admin/challenges/#{challenge.slug}/tasks/#{task_b.slug}/edit"
+    expect(page).to have_content task_b.challenge.title
+
+    expect(page).not_to have_link task_c.title, href: "/admin/challenges/#{challenge.slug}/tasks/#{task_c.slug}/edit"
+    expect(page).not_to have_content task_c.challenge.title
+  end
+
   it 'handles pagination' do
     task_a = create(:task, challenge:)
     task_b = create(:task, challenge:)
