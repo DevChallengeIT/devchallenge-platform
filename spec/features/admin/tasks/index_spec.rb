@@ -35,7 +35,7 @@ RSpec.describe 'Admin/Tasks/Index' do
     end
   end
 
-  it 'show tasks of the challenge' do
+  it 'shows tasks of the challenge' do
     task_a = create(:task, challenge:)
     task_b = create(:task, challenge:)
     task_c = create(:task, challenge: build(:challenge))
