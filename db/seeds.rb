@@ -54,6 +54,13 @@ participant = Repo::User.where(
   password:  'password'
 )
 
+participant2 = Repo::User.where(
+  email:     'participant2@devchallenge.it'
+).first_or_create!(
+  full_name: 'Test2 Participant',
+  password:  'password'
+)
+
 judge = Repo::User.where(
   email:     'judge@devchallenge.it'
 ).first_or_create!(
@@ -64,6 +71,11 @@ judge = Repo::User.where(
 participant_member = Repo::Member.where(
   challenge: challenge,
   user: participant,
+).first_or_create!
+
+participant_member2 = Repo::Member.where(
+  challenge: challenge,
+  user: participant2,
 ).first_or_create!
 
 judge_member = Repo::Member.where(
@@ -88,6 +100,11 @@ task_submission = Repo::TaskSubmission.where(
   task:   first_task,
   member: participant_member
 ).first_or_create!(notes: "Submitted: '#{first_task.title}' task")
+
+task_submission = Repo::TaskSubmission.where(
+  task:   first_task,
+  member: participant_member2
+).first_or_create!(notes: "Submitted2: '#{first_task.title}' task")
 
 task_submission2 = Repo::TaskSubmission.where(
   task:   second_task,
