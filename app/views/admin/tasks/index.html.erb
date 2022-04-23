@@ -1,3 +1,8 @@
+<div class="">
+  <h2 class="<%= UI::H2 %>">
+    <%= link_to challenge.title, edit_admin_challenge_path(challenge) %>
+ </h2>
+</div>
 <div class="flex justify-between items-center py-3">
   <h2 class="<%= UI::H2 %>"><%= t('resources.tasks.plural') %></h2>
 
@@ -8,9 +13,6 @@
   <thead>
     <th class="text-left">
       <%= t('resources.tasks.title') %>
-    </th>
-    <th>
-      <%= t('resources.challenges.singular') %>
     </th>
     <th class="text-center">
       <%= t('resources.tasks.start_at') %>
@@ -31,9 +33,6 @@
       <tr id="task-<%= task.id %>">
         <td>
           <%= link_to task.title, edit_admin_challenge_task_path(challenge, task) %>
-        </td>
-         <td>
-          <%= link_to task.challenge.title, edit_admin_challenge_path(task.challenge) %>
         </td>
         <td class="text-center">
           <%= render(UI::TimestampComponent.new(data: task.start_at)) %>

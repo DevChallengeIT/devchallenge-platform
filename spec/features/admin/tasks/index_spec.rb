@@ -26,12 +26,13 @@ RSpec.describe 'Admin/Tasks/Index' do
     assume_logged_in(admin: true)
     visit "/admin/challenges/#{challenge.slug}/tasks"
 
+    expect(page).to have_content task.challenge.title
+
     within "#task-#{task.id}" do
       expect(page).to have_link task.title, href: "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/edit"
       expect(page).to have_content task.start_at.strftime(UI::TimestampComponent::TIME_FORMAT)
       expect(page).to have_content task.submit_at.strftime(UI::TimestampComponent::TIME_FORMAT)
       expect(page).to have_content task.result_at.strftime(UI::TimestampComponent::TIME_FORMAT)
-      expect(page).to have_content task.challenge.title
     end
   end
 
