@@ -1,7 +1,7 @@
 <div class="flex justify-between items-center py-3">
   <h2 class="<%= UI::H2 %>"><%= t('resources.tasks.plural') %></h2>
 
-  <%= link_to t('words.add'), new_admin_task_path, class: UI::BUTTON_PRIMARY %>
+  <%= link_to t('words.add'), new_admin_challenge_task_path(challenge), class: UI::BUTTON_PRIMARY %>
 </div>
 
 <table id="tasks" class="table">
@@ -30,7 +30,7 @@
     <% @tasks.each do |task| %>
       <tr id="task-<%= task.id %>">
         <td>
-          <%= link_to task.title, edit_admin_task_path(task) %>
+          <%= link_to task.title, edit_admin_challenge_task_path(challenge, task) %>
         </td>
          <td>
           <%= link_to task.challenge.title, edit_admin_challenge_path(task.challenge) %>
@@ -45,7 +45,7 @@
           <%= render(UI::TimestampComponent.new(data: task.result_at)) %>
         </td>
         <td class="text-center">
-          <%= link_to t('resources.task_submissions.plural'), admin_task_submissions_path(task) %>
+          <%= link_to t('resources.task_submissions.plural'), admin_challenge_task_submissions_path(challenge, task) %>
         </td>
         <td class="text-center">
           <%= link_to t('resources.criteria.plural'), admin_task_criteria_path(task) %>

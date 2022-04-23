@@ -4,8 +4,9 @@ module Admin
   class TaskSubmissionsController < BaseController
     helper_method :task, :task_submission, :member
 
-    add_breadcrumb I18n.t('resources.tasks.plural'), :admin_tasks_path
-    add_breadcrumb I18n.t('resources.task_submissions.plural'), :admin_task_submissions_path
+    add_breadcrumb I18n.t('resources.challenges.plural'), :admin_challenges_path
+    add_breadcrumb I18n.t('resources.tasks.plural'), :admin_challenge_tasks_path
+    add_breadcrumb I18n.t('resources.task_submissions.plural'), :admin_challenge_task_submissions_path
 
     def index
       @paginator, @task_submissions = paginate task.task_submissions.preload(member: :user)
@@ -13,7 +14,8 @@ module Admin
 
     def destroy
       task_submission.destroy
-      redirect_to(admin_task_submissions_path(task), notice: flash_message(:removed, :task_submissions))
+      redirect_to(admin_challenge_task_submissions_path(challenge, task),
+                  notice: flash_message(:removed, :task_submissions))
     end
 
     private

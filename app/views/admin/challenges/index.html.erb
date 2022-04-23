@@ -31,6 +31,8 @@
     </th>
     <th>
     </th>
+    <th>
+    </th>
   </thead>
   <tbody>
     <% @challenges.each do |challenge| %>
@@ -49,6 +51,9 @@
         </td>
         <td class="text-center">
           <%= render(UI::TimestampComponent.new(data: challenge.finish_at)) %>
+        </td>
+        <td class="text-center">
+          <%= link_to t('resources.tasks.plural'), admin_challenge_tasks_path(challenge) %>
         </td>
         <td class="text-center">
           <%= link_to t('resources.members.plural'), admin_challenge_members_path(challenge) %>

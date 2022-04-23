@@ -25,7 +25,7 @@
           <%= task_submission.notes %>
         </td>
         <td class="text-center">
-          <%= button_to t('words.remove'), admin_task_submission_path(task, task_submission), method: :delete, class: UI::BUTTON_DANGER, form: { data: { turbo_confirm: t('messages.are_you_sure') } } %>
+          <%= button_to t('words.remove'), admin_challenge_task_submission_path(task.challenge, task, task_submission), method: :delete, class: UI::BUTTON_DANGER, form: { data: { turbo_confirm: t('messages.are_you_sure') } } %>
         </td>
       </tr>
     <% end %>
