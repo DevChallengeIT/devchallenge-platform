@@ -13,6 +13,22 @@ challenge = Repo::Challenge.where(
   start_at:        10.days.from_now.end_of_day,
   finish_at:       15.days.from_now.end_of_day
 )
+challenge2 = Repo::Challenge.where(
+  title:           'Test2 Challenge'
+).first_or_create!(
+  status:          'ready',
+  registration_at: Time.now.beginning_of_day,
+  start_at:        10.days.from_now.end_of_day,
+  finish_at:       15.days.from_now.end_of_day
+)
+
+another_task = Repo::Task.where(
+  title:           'Not First Task'
+).first_or_create!(
+  challenge:   challenge2,
+  start_at:    challenge2.start_at + 1.day,
+  description: 'Some description to make this task done'
+)
 
 first_task = Repo::Task.where(
   title:           'First Task'
