@@ -19,7 +19,7 @@ RSpec.describe 'Admin/TaskSubmissions/Remove' do
     end
 
     expect(page).to have_current_path "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/submissions"
-    expect(page).to have_content 'Task Submission was successfully removed'
+    expect(page).to have_content 'Submission was successfully removed'
     expect(page).not_to have_content task_submission.member.user.email
   end
 end

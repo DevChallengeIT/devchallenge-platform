@@ -21,7 +21,20 @@ RSpec.describe 'Admin/TaskSubmissions/Index' do
     expect(page).to have_content 'Access denied'
   end
 
-  it 'success' do
+  it 'success without assessment' do
+    task_submission = create(:task_submission, notes: 'first submission', task:)
+
+    assume_logged_in(admin: true)
+    visit "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/submissions"
+
+    within "#task_submission-#{task_submission.id}" do
+      expect(page).to have_content task_submission.member.user.email
+      expect(page).to have_content 'Pending'
+      expect(page).to have_content 'Add assessment'
+    end
+  end
+
+  it 'success with an assessment' do
     task_submission = create(:task_submission, notes: 'first submission', task:)
     create(:task_assessment, task_submission:)
 
@@ -30,7 +43,8 @@ RSpec.describe 'Admin/TaskSubmissions/Index' do
 
     within "#task_submission-#{task_submission.id}" do
       expect(page).to have_content task_submission.member.user.email
-      expect(page).to have_content 'first submission'
+      expect(page).to have_content 'Edit assessment'
+      expect(page).not_to have_content 'Pending'
     end
   end
 
