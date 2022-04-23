@@ -42,8 +42,14 @@ RSpec.describe 'Admin/TaskSubmissions/Index' do
 
     within '.pagination' do
       expect(page).to have_css "span[class='page active']", text: '1'
-      expect(page).to have_css "a[href='/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/submissions?per_page=1&page=2']", text: '2'
-      expect(page).to have_css "a[href='/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/submissions?per_page=1&page=2']", text: 'Next'
+      expect(page).to have_css(
+        "a[href='/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/submissions?per_page=1&page=2']",
+        text: '2'
+      )
+      expect(page).to have_css(
+        "a[href='/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/submissions?per_page=1&page=2']",
+        text: 'Next'
+      )
     end
 
     expect(page).to have_css "#task_submission-#{task_submission_a.id}"
@@ -51,7 +57,9 @@ RSpec.describe 'Admin/TaskSubmissions/Index' do
 
     within '.pagination' do
       click_link 'Next'
-      expect(page).to have_current_path "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/submissions?per_page=1&page=2"
+      expect(page).to have_current_path(
+        "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/submissions?per_page=1&page=2"
+      )
     end
 
     expect(page).to have_css "#task_submission-#{task_submission_b.id}"
