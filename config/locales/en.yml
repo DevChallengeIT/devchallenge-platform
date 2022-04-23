@@ -21,6 +21,7 @@ en:
     filter: Filter
     join: Join
     leave: Leave
+    pending: Pending
   messages:
     access_denied: Access denied
     resource_created: '%{name} was successfully created'
@@ -54,6 +55,7 @@ en:
       comment: Comment
       points: Points
       edit: Edit assessment
+      add: Add assessment
     challenges:
       plural: Challenges
       singular: Challenge

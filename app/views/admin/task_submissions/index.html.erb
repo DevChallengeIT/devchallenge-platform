@@ -27,13 +27,21 @@
           <%= link_to task_submission.member.user.email, edit_admin_challenge_member_path(challenge, task_submission.member) %>
         </td>
         <td class="text-center">
-          <%= task_submission.task_assessment&.value %>
+          <% if task_submission.task_assessment.present? %>
+            <%= task_submission.task_assessment&.value %>
+          <% else %>
+            <%= t('words.pending') %>
+          <% end %>
         </td>
         <td class="text-center">
-          <%= task_submission.notes %>
+          <%= task_submission.task_assessment&.comment %>
         </td>
         <td class="text-center">
-          <%= link_to t('resources.task_assessments.edit'), edit_admin_challenge_task_assessment_path(challenge, task, task_submission.task_assessment), class: UI::BUTTON_SECONDARY %>
+          <% if task_submission.task_assessment.present? %>
+            <%= link_to t('resources.task_assessments.edit'), edit_admin_challenge_task_assessment_path(challenge, task, task_submission.task_assessment), class: UI::BUTTON_SECONDARY %>
+          <% else %>
+            <%= link_to t('resources.task_assessments.add'), new_admin_challenge_task_assessment_path(challenge, task, task_submission_id: task_submission), class: UI::BUTTON_SECONDARY %>
+          <% end %>
         </td>
         <td class="text-center">
           <%= button_to t('words.remove'), admin_challenge_task_submission_path(challenge, task, task_submission), method: :delete, class: UI::BUTTON_DANGER, form: { data: { turbo_confirm: t('messages.are_you_sure') } } %>
