@@ -11,6 +11,7 @@ module Repo
     validates :member, presence: true # TODO: only judge!
     validates :task_submission, presence: true, uniqueness: { scope: :member_id }
     validates :task_criterium, presence: true
+    validates :value, presence: true
     # TODO: can't be larger than task_criterium.max_value
   end
 end
