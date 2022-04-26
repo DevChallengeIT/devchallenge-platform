@@ -86,7 +86,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_163755) do
   end
 
   create_table "task_assessments", force: :cascade do |t|
-    t.integer "value"
+    t.integer "value", default: 0, null: false
     t.text "comment"
     t.bigint "member_id", null: false
     t.bigint "task_criterium_id", null: false
