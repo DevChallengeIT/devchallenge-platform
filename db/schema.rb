@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_18_185856) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_19_163755) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -83,6 +83,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_185856) do
     t.index ["challenge_id"], name: "index_members_on_challenge_id"
     t.index ["role"], name: "index_members_on_role"
     t.index ["user_id"], name: "index_members_on_user_id"
+  end
+
+  create_table "task_assessments", force: :cascade do |t|
+    t.integer "value", default: 0, null: false
+    t.text "comment"
+    t.bigint "member_id", null: false
+    t.bigint "task_criterium_id", null: false
+    t.bigint "task_submission_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_task_assessments_on_member_id"
+    t.index ["task_criterium_id"], name: "index_task_assessments_on_task_criterium_id"
+    t.index ["task_submission_id"], name: "index_task_assessments_on_task_submission_id"
   end
 
   create_table "task_criteria", force: :cascade do |t|
@@ -188,6 +201,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_185856) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "members", "challenges"
   add_foreign_key "members", "users"
+  add_foreign_key "task_assessments", "members"
+  add_foreign_key "task_assessments", "task_criteria"
+  add_foreign_key "task_assessments", "task_submissions"
   add_foreign_key "task_criteria", "tasks"
   add_foreign_key "task_submissions", "members"
   add_foreign_key "task_submissions", "tasks"

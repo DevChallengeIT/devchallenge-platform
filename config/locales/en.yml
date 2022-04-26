@@ -21,6 +21,7 @@ en:
     filter: Filter
     join: Join
     leave: Leave
+    pending: Pending
   messages:
     access_denied: Access denied
     resource_created: '%{name} was successfully created'
@@ -48,6 +49,13 @@ en:
     didnt_receive_unlock_instructions: Didn't receive unlock instructions?
     cancel_account: Cancel my account
   resources:
+    task_assessments:
+      plural: Task Assessments
+      singular: Task Assessment
+      comment: Comment
+      points: Points
+      edit: Edit assessment
+      add: Add assessment
     challenges:
       plural: Challenges
       singular: Challenge
@@ -57,8 +65,8 @@ en:
       start_at: Start At
       finish_at: Finish At
     task_submissions:
-      plural: Task Submissions
-      singular: Task Submission
+      plural: Submissions
+      singular: Submission
       notes: Notes
     tasks:
       plural: Tasks

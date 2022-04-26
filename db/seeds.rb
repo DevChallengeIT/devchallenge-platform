@@ -13,6 +13,22 @@ challenge = Repo::Challenge.where(
   start_at:        10.days.from_now.end_of_day,
   finish_at:       15.days.from_now.end_of_day
 )
+challenge2 = Repo::Challenge.where(
+  title:           'Test2 Challenge'
+).first_or_create!(
+  status:          'ready',
+  registration_at: Time.now.beginning_of_day,
+  start_at:        10.days.from_now.end_of_day,
+  finish_at:       15.days.from_now.end_of_day
+)
+
+another_task = Repo::Task.where(
+  title:           'Not First Task'
+).first_or_create!(
+  challenge:   challenge2,
+  start_at:    challenge2.start_at + 1.day,
+  description: 'Some description to make this task done'
+)
 
 first_task = Repo::Task.where(
   title:           'First Task'
@@ -38,6 +54,13 @@ participant = Repo::User.where(
   password:  'password'
 )
 
+participant2 = Repo::User.where(
+  email:     'participant2@devchallenge.it'
+).first_or_create!(
+  full_name: 'Test2 Participant',
+  password:  'password'
+)
+
 judge = Repo::User.where(
   email:     'judge@devchallenge.it'
 ).first_or_create!(
@@ -48,6 +71,11 @@ judge = Repo::User.where(
 participant_member = Repo::Member.where(
   challenge: challenge,
   user: participant,
+).first_or_create!
+
+participant_member2 = Repo::Member.where(
+  challenge: challenge,
+  user: participant2,
 ).first_or_create!
 
 judge_member = Repo::Member.where(
@@ -68,15 +96,38 @@ second_task_criterium_1 = Repo::TaskCriterium.where(
   task:   first_task
 ).first_or_create!
 
-Repo::TaskSubmission.where(
+task_submission = Repo::TaskSubmission.where(
   task:   first_task,
   member: participant_member
 ).first_or_create!(notes: "Submitted: '#{first_task.title}' task")
 
-Repo::TaskSubmission.where(
+task_submission2 = Repo::TaskSubmission.where(
   task:   second_task,
   member: participant_member
 ).first_or_create!(notes: "Submitted: '#{second_task.title}' task")
+
+task_submission3 = Repo::TaskSubmission.where(
+  task:   first_task,
+  member: participant_member2
+).first_or_create!(notes: "Submitted2: '#{first_task.title}' task")
+
+Repo::TaskAssessment.where(
+  member: judge_member,
+  task_submission: task_submission,
+).first_or_create!(
+  value: 8,
+  comment: 'Nice job!!!',
+  task_criterium: first_task_criterium_1
+)
+
+Repo::TaskAssessment.where(
+  member: judge_member,
+  task_submission: task_submission2,
+).first_or_create!(
+  value: 7,
+  comment: 'Really good work:)',
+  task_criterium: second_task_criterium_1
+)
 
 txn_speciality = Repo::Taxonomy.where(title: 'Speciality').first_or_create!
 txn_tech = Repo::Taxonomy.where(title: 'Technology').first_or_create!
