@@ -2,12 +2,13 @@
 
 module Admin
   class TasksController < BaseController
-    helper_method :task
+    helper_method :task, :challenge
 
-    add_breadcrumb I18n.t('resources.tasks.plural'), :admin_tasks_path
+    add_breadcrumb I18n.t('resources.challenges.plural'), :admin_challenges_path
+    add_breadcrumb I18n.t('resources.tasks.plural'), :admin_challenge_tasks_path
 
     def index
-      @paginator, @tasks = paginate Repo::Task.preload(:challenge).all
+      @paginator, @tasks = paginate challenge_tasks
     end
 
     def new
@@ -20,7 +21,7 @@ module Admin
       @task = Repo::Task.new(task_params)
 
       if task.save
-        redirect_to(edit_admin_task_path(task), notice: flash_message(:created, :tasks))
+        redirect_to(edit_admin_challenge_task_path(challenge, task), notice: flash_message(:created, :tasks))
       else
         render :new, status: :unprocessable_entity
       end
@@ -33,13 +34,21 @@ module Admin
 
     def update
       if task.update(task_params)
-        redirect_to(admin_tasks_path, notice: flash_message(:updated, :tasks))
+        redirect_to(admin_challenge_tasks_path(challenge), notice: flash_message(:updated, :tasks))
       else
         render :edit, status: :unprocessable_entity
       end
     end
 
     private
+
+    def challenge_tasks
+      @challenge_tasks ||= Repo::Task.preload(:challenge).where(challenge:)
+    end
+
+    def challenge
+      @challenge ||= Repo::Challenge.friendly.find(params[:challenge_id])
+    end
 
     def task
       @task ||= Repo::Task.preload(:challenge).friendly.find(params[:id])

@@ -2,10 +2,11 @@
 
 module Admin
   class CriteriaController < BaseController
-    helper_method :task, :criterium
+    helper_method :task, :criterium, :challenge
 
-    add_breadcrumb I18n.t('resources.tasks.plural'), :admin_tasks_path
-    add_breadcrumb I18n.t('resources.criteria.plural'), :admin_task_criteria_path
+    add_breadcrumb I18n.t('resources.challenges.plural'), :admin_challenges_path
+    add_breadcrumb I18n.t('resources.tasks.plural'), :admin_challenge_tasks_path
+    add_breadcrumb I18n.t('resources.criteria.plural'), :admin_challenge_task_criteria_path
 
     def index
       @paginator, @criteria = paginate task_criteria
@@ -21,7 +22,7 @@ module Admin
       @criterium = Repo::TaskCriterium.new(criterium_params.merge(task_id: task.id))
 
       if criterium.save
-        redirect_to(admin_task_criteria_path(task), notice: flash_message(:created, :criteria))
+        redirect_to(admin_challenge_task_criteria_path(challenge, task), notice: flash_message(:created, :criteria))
       else
         render :new, status: :unprocessable_entity
       end
@@ -33,7 +34,7 @@ module Admin
 
     def update
       if criterium.update(criterium_params)
-        redirect_to(admin_task_criteria_path(task),
+        redirect_to(admin_challenge_task_criteria_path(challenge, task),
                     notice: flash_message(:updated, :criteria))
       else
         render :edit, status: :unprocessable_entity
@@ -42,7 +43,7 @@ module Admin
 
     def destroy
       criterium.destroy
-      redirect_to(admin_task_criteria_path,
+      redirect_to(admin_challenge_task_criteria_path(challenge, task),
                   notice: flash_message(:removed, :criteria))
     end
 
@@ -58,6 +59,10 @@ module Admin
 
     def criterium
       @criterium ||= Repo::TaskCriterium.find(params[:id])
+    end
+
+    def challenge
+      @challenge ||= task.challenge
     end
 
     def criterium_params
