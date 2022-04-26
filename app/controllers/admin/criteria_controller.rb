@@ -5,6 +5,7 @@ module Admin
     helper_method :task, :criterium, :challenge
 
     add_breadcrumb I18n.t('resources.challenges.plural'), :admin_challenges_path
+    add_breadcrumb(proc { |ctx| ctx.challenge.title }, proc { |ctx| ctx.admin_challenges_path(ctx.challenge) })
     add_breadcrumb I18n.t('resources.tasks.plural'), :admin_challenge_tasks_path
     add_breadcrumb I18n.t('resources.criteria.plural'), :admin_challenge_task_criteria_path
 
