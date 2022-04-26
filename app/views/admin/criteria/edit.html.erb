@@ -1,0 +1,27 @@
+<div class="md:w-2/3 w-full">
+  <h2 class="<%= UI::H2 %>"><%= t('words.edit') %> <%= t('resources.criteria.singular') %></h2>
+
+  <%= form_with(model: criterium, scope: :criterium, url: admin_task_criterium_path(task, criterium), method: :put, class: "contents") do |form| %>
+    <div class="my-5">
+      <%= form.label :title, class: UI::FORM_LABEL %>
+      <%= form.text_field :title, autofocus: true, class: UI::FORM_INPUT %>
+      <%= render(UI::ErrorTagComponent.new(errors: criterium.errors, field: :title)) %>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :max_value, class: UI::FORM_LABEL %>
+      <%= form.text_field :max_value, autofocus: true, class: UI::FORM_INPUT %>
+      <%= render(UI::ErrorTagComponent.new(errors: criterium.errors, field: :max_value)) %>
+    </div>
+
+    <div class="flex items-center justify-between">
+      <%= form.submit t('words.update'), class: UI::BUTTON_PRIMARY %>
+      <%= link_to t('words.back'), admin_task_criteria_path(task), class: UI::BUTTON_SECONDARY %>
+    </div>
+  <% end %>
+</div>
+
+<div class="mt-8">
+  <%= t('words.danger') %>
+  <%= button_to t('words.remove'), admin_task_criterium_path(task, criterium), method: :delete, class: UI::BUTTON_DANGER, form: {data: {turbo_confirm: 'Are you sure?'}} %>
+</div>

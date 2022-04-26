@@ -98,3 +98,8 @@ en:
       last_sign_in_at: Last Sign In At
       current_sign_in_ip: Current Sign In Ip
       last_sign_in_ip: Last Sign In Ip
+    criteria:
+      plural: Criteria
+      singular: Criterion
+      title: Title
+      max_value: Max value

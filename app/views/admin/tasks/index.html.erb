@@ -23,6 +23,8 @@
     </th>
     <th>
     </th>
+    <th>
+    </th>
   </thead>
   <tbody>
     <% @tasks.each do |task| %>
@@ -44,6 +46,9 @@
         </td>
         <td class="text-center">
           <%= link_to t('resources.task_submissions.plural'), admin_task_submissions_path(task) %>
+        </td>
+        <td class="text-center">
+          <%= link_to t('resources.criteria.plural'), admin_task_criteria_path(task) %>
         </td>
       </tr>
     <% end %>
