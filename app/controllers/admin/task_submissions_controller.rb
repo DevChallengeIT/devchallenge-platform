@@ -2,7 +2,7 @@
 
 module Admin
   class TaskSubmissionsController < BaseController
-    helper_method :task, :task_submission, :challenge
+    helper_method :task, :task_submission, :challenge, :task_criterium
 
     add_breadcrumb I18n.t('resources.challenges.plural'), :admin_challenges_path
     add_breadcrumb I18n.t('resources.tasks.plural'), :admin_challenge_tasks_path
@@ -22,6 +22,12 @@ module Admin
 
     def task_submission
       @task_submission ||= task.task_submissions.find(params[:id])
+    end
+
+    def task_criterium
+      # TODO: change it
+      # @task_criterium ||= task.task_criteria.find(params[:id])
+      @task_criterium ||= task.task_criteria.first
     end
 
     def task

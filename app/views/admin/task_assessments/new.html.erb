@@ -3,7 +3,7 @@
     <%= "#{task.title} #{t('resources.task_assessments.singular')}" %>
   </h2>
 
-  <%= form_with(model: @task_assessment, scope: :task_assessment, url: admin_challenge_task_assessments_path(challenge, task, task_submission_id: task_submission), method: :post, class: "contents") do |form| %>
+  <%= form_with(model: @task_assessment, scope: :task_assessment, url: admin_challenge_task_assessments_path(challenge, task, task_submission_id: task_submission, task_criterium_id: task_criterium), method: :post, class: "contents") do |form| %>
     <div class="my-5">
       <%= form.label :value, class: UI::FORM_LABEL %>
       <%= form.number_field :value, rows: 4, class: UI::FORM_INPUT %>

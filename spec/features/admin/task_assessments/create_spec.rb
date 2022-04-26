@@ -6,9 +6,10 @@ RSpec.describe 'Admin/TaskAssessment/Create' do
   let!(:task_submission) { create(:task_submission) }
   let!(:task) { task_submission.task }
   let!(:challenge) { task.challenge }
+  let!(:task_criterium) { create(:task_criterium, task:) }
 
   it 'failure without session' do
-    visit "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/assessments/new?task_submission_id=#{task_submission.id}" # rubocop:disable Layout/LineLength
+    visit "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/assessments/new?task_criterium_id=#{task_criterium.id}&task_submission_id=#{task_submission.id}" # rubocop:disable Layout/LineLength
 
     expect(page).to have_current_path '/login'
     expect(page).to have_content 'You need to sign in or sign up before continuing.'
@@ -16,7 +17,7 @@ RSpec.describe 'Admin/TaskAssessment/Create' do
 
   it 'failure without admin account' do
     assume_logged_in
-    visit "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/assessments/new?task_submission_id=#{task_submission.id}" # rubocop:disable Layout/LineLength
+    visit "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/assessments/new?task_criterium_id=#{task_criterium.id}&task_submission_id=#{task_submission.id}" # rubocop:disable Layout/LineLength
 
     expect(page).to have_current_path '/'
     expect(page).to have_content 'Access denied'
@@ -24,7 +25,7 @@ RSpec.describe 'Admin/TaskAssessment/Create' do
 
   it 'failure with invalid params' do
     assume_logged_in(admin: true)
-    visit "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/assessments/new?task_submission_id=#{task_submission.id}" # rubocop:disable Layout/LineLength
+    visit "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/assessments/new?task_criterium_id=#{task_criterium.id}&task_submission_id=#{task_submission.id}" # rubocop:disable Layout/LineLength
 
     fill_in 'task_assessment_value', with: ''
     click_button 'Create Task assessment'
@@ -34,7 +35,7 @@ RSpec.describe 'Admin/TaskAssessment/Create' do
     end
 
     expect(page).to have_current_path(
-      "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/assessments?task_submission_id=#{task_submission.id}"
+      "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/assessments?task_criterium_id=#{task_criterium.id}&task_submission_id=#{task_submission.id}" # rubocop:disable Layout/LineLength
     )
     expect(page).not_to have_content 'Task Assessment was successfully created'
   end
@@ -43,7 +44,7 @@ RSpec.describe 'Admin/TaskAssessment/Create' do
     create(:task_criterium, task:)
     assume_logged_in(admin: true)
     create(:member, challenge:, user: current_user)
-    visit "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/assessments/new?task_submission_id=#{task_submission.id}" # rubocop:disable Layout/LineLength
+    visit "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/assessments/new?task_criterium_id=#{task_criterium.id}&task_submission_id=#{task_submission.id}" # rubocop:disable Layout/LineLength
 
     fill_in 'task_assessment_value', with: '15'
     click_button 'Create Task assessment'

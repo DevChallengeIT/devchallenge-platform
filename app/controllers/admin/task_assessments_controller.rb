@@ -2,7 +2,7 @@
 
 module Admin
   class TaskAssessmentsController < BaseController
-    helper_method :task, :task_assessment, :challenge, :task_submission
+    helper_method :task, :task_assessment, :challenge, :task_submission, :task_criterium
 
     def new
       @task_assessment = Repo::TaskAssessment.new
@@ -53,12 +53,16 @@ module Admin
       @task_submission ||= Repo::TaskSubmission.find(params[:task_submission_id])
     end
 
+    def task_criterium
+      @task_criterium ||= Repo::TaskCriterium.find(params[:task_criterium_id])
+    end
+
     def new_task_assessment_params
       task_assessment_params.merge(
         {
           member:          challenge.members.find_by(user: current_user),
           task_submission:,
-          task_criterium:  Repo::TaskCriterium.where(task:).first # TODO: change it after assoc clarification!
+          task_criterium:
         }
       )
     end
