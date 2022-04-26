@@ -1,7 +1,7 @@
 <div class="flex justify-between items-center py-3">
   <h2 class="<%= UI::H2 %>"><%= t('resources.criteria.plural') %></h2>
 
-  <%= link_to t('words.add'), new_admin_task_criterium_path, class: UI::BUTTON_PRIMARY %>
+  <%= link_to t('words.add'), new_admin_challenge_task_criterium_path, class: UI::BUTTON_PRIMARY %>
 </div>
 
 <table id="criteria" class="table">
@@ -17,7 +17,7 @@
     <% @criteria.each do |criterium| %>
       <tr id="criterium-<%= criterium.id %>">
         <td>
-          <%= link_to criterium.title, edit_admin_task_criterium_path(task, criterium) %>
+          <%= link_to criterium.title, edit_admin_challenge_task_criterium_path(challenge, task, criterium) %>
         </td>
         <td>
           <%= criterium.max_value %>
