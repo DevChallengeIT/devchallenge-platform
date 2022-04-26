@@ -5,6 +5,8 @@ module Repo
     belongs_to :user
     belongs_to :challenge
 
+    has_many :task_submissions, dependent: :destroy
+
     enum role: {
       participant: 'participant',
       judge:       'judge'

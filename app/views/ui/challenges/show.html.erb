@@ -3,11 +3,13 @@
 <div class="my-5">
   <% if current_user && Competition.can_join?(user: current_user, challenge: challenge) %>
     <%= button_to t('words.join'), challenge_members_path(challenge), method: :post, class: UI::BUTTON_PRIMARY %>
-  <% elsif current_member %>
+  <% elsif current_member && Competition.can_leave?(user: current_user, challenge: challenge) %>
     <%= button_to t('words.leave'), challenge_member_path(challenge, current_member), method: :delete, class: UI::BUTTON_DANGER, form: { data: {turbo_confirm: t('messages.are_you_sure')}} %>
   <% else %>
-    <%= t('messages.register_to_join')%>
-    <%= link_to "#{t('auth.log_in')} / #{t('auth.register')}", new_user_session_path, class: UI::LINK %>
+    <%= render(UI::ChallengeRegistrationInfoComponent.new(challenge:)) %>
+    <% if Competition.registration_opened?(user: current_user, challenge: challenge) %>
+      <%= link_to "#{t('auth.log_in')} / #{t('auth.register')}", new_user_session_path, class: UI::LINK %>
+    <% end %>
   <% end %>
 </div>
 
