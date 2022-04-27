@@ -8,6 +8,7 @@ RSpec.describe Repo::Member do
   describe 'associations' do
     it { is_expected.to belong_to(:user) }
     it { is_expected.to belong_to(:challenge) }
+    it { is_expected.to have_many(:task_submissions) }
   end
 
   describe 'validations' do

@@ -4,8 +4,17 @@ FactoryBot.define do
   factory :challenge, class: Repo::Challenge.name do
     status { 'ready' }
     sequence(:title) { |n| "Challenge-#{n}" }
-    registration_at { '2022-04-01 10:00:00' }
-    start_at        { '2022-04-10 09:00:00' }
-    finish_at       { '2022-04-15 18:00:00' }
+    registration_at { Time.zone.now - 3.days }
+    start_at        { Time.zone.now + 2.days }
+    finish_at       { Time.zone.now + 2.weeks }
+
+    trait :registration_not_opened do
+      registration_at { Time.zone.now + 1.day }
+      start_at        { Time.zone.now + 2.days }
+    end
+
+    trait :registration_closed do
+      start_at { Time.zone.now - 1.day }
+    end
   end
 end

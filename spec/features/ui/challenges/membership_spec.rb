@@ -6,38 +6,78 @@ RSpec.describe 'UI/Challenges/Join' do
   let(:challenge) { create(:challenge) }
 
   context 'without session' do
-    it 'do not renders join button' do
-      visit "/challenges/#{challenge.slug}"
+    context 'when challenge is opened' do
+      it 'do not renders join button' do
+        visit "/challenges/#{challenge.slug}"
 
-      expect(page).not_to have_button 'Join'
-      expect(page).not_to have_button 'Leave'
-      expect(page).to have_content 'Please register to join this challenge'
+        expect(page).not_to have_button 'Join'
+        expect(page).not_to have_button 'Leave'
+        expect(page).to have_content 'Please register to join this challenge'
+      end
+    end
+
+    context 'when challenge is closed' do
+      let(:challenge) { create(:challenge, :registration_closed) }
+
+      it 'do not renders join button' do
+        visit "/challenges/#{challenge.slug}"
+
+        expect(page).not_to have_button 'Join'
+        expect(page).not_to have_button 'Leave'
+        expect(page).to have_content 'Sorry! The registration is already closed'
+      end
     end
   end
 
   context 'with session' do
     before { assume_logged_in }
 
-    it 'can join the challenge if not yet joined' do
-      visit "/challenges/#{challenge.slug}"
+    context 'when challenge registration is opened' do
+      it 'can join the challenge if not yet joined' do
+        visit "/challenges/#{challenge.slug}"
 
-      click_button 'Join'
-      expect(page).to have_current_path "/challenges/#{challenge.slug}"
-      expect(page).to have_content 'Thanks! You joined the challenge'
-      expect(page).not_to have_button 'Join'
-      expect(page).to have_button 'Leave'
+        click_button 'Join'
+        expect(page).to have_current_path "/challenges/#{challenge.slug}"
+        expect(page).to have_content 'Thanks! You joined the challenge'
+        expect(page).not_to have_button 'Join'
+        expect(page).to have_button 'Leave'
+      end
+
+      it 'can leave the challenge if the user is already a member of the challenge' do
+        create(:member, challenge:, user: current_user)
+
+        visit "/challenges/#{challenge.slug}"
+
+        click_button 'Leave'
+        expect(page).to have_current_path "/challenges/#{challenge.slug}"
+        expect(page).to have_content 'So pity that you leaving us...'
+        expect(page).to have_button 'Join'
+        expect(page).not_to have_button 'Leave'
+      end
     end
 
-    it 'can leave the challenge if the user is already a member of the challenge' do
-      create(:member, challenge:, user: current_user)
+    context 'when challenge is registration is not yet opened' do
+      let(:challenge) { create(:challenge, :registration_not_opened) }
 
-      visit "/challenges/#{challenge.slug}"
+      it 'do not renders join button' do
+        visit "/challenges/#{challenge.slug}"
 
-      click_button 'Leave'
-      expect(page).to have_current_path "/challenges/#{challenge.slug}"
-      expect(page).to have_content 'So pity that you leaving us...'
-      expect(page).to have_button 'Join'
-      expect(page).not_to have_button 'Leave'
+        expect(page).not_to have_button 'Join'
+        expect(page).not_to have_button 'Leave'
+        expect(page).to have_content 'Sorry! The registration is not yet opened'
+      end
+    end
+
+    context 'when challenge is registration is closed' do
+      let(:challenge) { create(:challenge, :registration_closed) }
+
+      it 'do not renders join button' do
+        visit "/challenges/#{challenge.slug}"
+
+        expect(page).not_to have_button 'Join'
+        expect(page).not_to have_button 'Leave'
+        expect(page).to have_content 'Sorry! The registration is already closed'
+      end
     end
   end
 end

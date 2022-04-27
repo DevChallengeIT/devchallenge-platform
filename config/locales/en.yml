@@ -33,6 +33,8 @@ en:
     register_to_join: Please register to join this challenge
     challenge_joined: Thanks! You joined the challenge
     challenge_leaved: So pity that you leaving us...
+    challenge_registration_closed: Sorry! The registration is already closed
+    challenge_registration_not_opened_yet: Sorry! The registration is not yet opened
     are_you_sure: Are you sure?
   auth:
     profile: Profile
