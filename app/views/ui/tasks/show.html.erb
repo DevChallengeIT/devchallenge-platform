@@ -1,0 +1,6 @@
+<%= @task.title %>
+<%= @task.description %>
+
+Start at: <%= render(UI::TimestampComponent.new(data: @task.start_at)) %>
+Submit at: <%= render(UI::TimestampComponent.new(data: @task.submit_at)) %>
+Result at: <%= render(UI::TimestampComponent.new(data: @task.result_at)) %>

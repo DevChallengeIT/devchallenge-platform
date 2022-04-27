@@ -10,31 +10,19 @@
   </div>
 
   <%= form_with(model: task, scope: :task, url: admin_challenge_task_path(challenge, task), method: :put, class: "contents") do |form| %>
-    <div class="my-5">
-      <%= form.label :title, class: UI::FORM_LABEL %>
-      <%= form.text_field :title, autofocus: true, class: UI::FORM_INPUT %>
-      <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :title)) %>
-    </div>
-
-    <div class="my-5">
-      <%= form.label :slug, class: UI::FORM_LABEL %>
-      <%= form.text_field :slug, class: UI::FORM_INPUT %>
-      <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :slug)) %>
-    </div>
-
-    <div class="my-5">
-      <%= form.label :challenge, class: UI::FORM_LABEL %>
-      <%= form.select :challenge_id, Repo::Challenge.all.pluck(:title, :id), {}, class: UI::FORM_INPUT %>
-      <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :challenge)) %>
-    </div>
-
-    <% if @tasks.present? %>
-      <div class="my-5">
-        <%= form.label :dependent_task, class: UI::FORM_LABEL %>
-        <%= form.select :dependent_task_id, @tasks.pluck(:title, :id), {}, class: UI::FORM_INPUT %>
-        <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :dependent_task)) %>
+    <div class="flex my-5 items-center justify-between space-x-5">
+      <div class="w-full">
+        <%= form.label :title, class: UI::FORM_LABEL %>
+        <%= form.text_field :title, autofocus: true, class: UI::FORM_INPUT %>
+        <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :title)) %>
       </div>
-    <% end %>
+
+      <div class="w-full">
+        <%= form.label :slug, class: UI::FORM_LABEL %>
+        <%= form.text_field :slug, class: UI::FORM_INPUT %>
+        <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :slug)) %>
+      </div>
+    </div>
 
     <div class="my-5">
       <%= form.label :description, class: UI::FORM_LABEL %>
@@ -42,10 +30,20 @@
       <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :description)) %>
     </div>
 
-    <div class="my-5">
-      <%= form.label :min_assestment, class: UI::FORM_LABEL %>
-      <%= form.number_field :min_assestment, rows: 4, class: UI::FORM_INPUT %>
-      <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :min_assestment)) %>
+    <div class="flex my-5 items-center justify-between space-x-5">
+      <% if @tasks.present? %>
+        <div class="w-full">
+          <%= form.label :dependent_task, class: UI::FORM_LABEL %>
+          <%= form.select :dependent_task_id, [['', nil], *@tasks.pluck(:title, :id)], {}, class: UI::FORM_INPUT, include_blank: true %>
+          <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :dependent_task)) %>
+        </div>
+      <% end %>
+
+      <div class="w-full">
+        <%= form.label :min_assestment, class: UI::FORM_LABEL %>
+        <%= form.number_field :min_assestment, rows: 4, class: UI::FORM_INPUT %>
+        <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :min_assestment)) %>
+      </div>
     </div>
 
     <div class="flex my-5 items-center justify-between space-x-5">

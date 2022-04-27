@@ -13,7 +13,9 @@ module UI
       )
     end
 
-    def show; end
+    def show
+      @tasks = challenge.tasks.order(:start_at)
+    end
 
     private
 
