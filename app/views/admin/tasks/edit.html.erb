@@ -24,28 +24,6 @@
       </div>
     </div>
 
-    <div class="my-5">
-      <%= form.label :description, class: UI::FORM_LABEL %>
-      <%= form.rich_text_area :description, rows: 4, class: UI::FORM_INPUT %>
-      <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :description)) %>
-    </div>
-
-    <div class="flex my-5 items-center justify-between space-x-5">
-      <% if @tasks.present? %>
-        <div class="w-full">
-          <%= form.label :dependent_task, class: UI::FORM_LABEL %>
-          <%= form.select :dependent_task_id, [['', nil], *@tasks.pluck(:title, :id)], {}, class: UI::FORM_INPUT, include_blank: true %>
-          <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :dependent_task)) %>
-        </div>
-      <% end %>
-
-      <div class="w-full">
-        <%= form.label :min_assestment, class: UI::FORM_LABEL %>
-        <%= form.number_field :min_assestment, rows: 4, class: UI::FORM_INPUT %>
-        <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :min_assestment)) %>
-      </div>
-    </div>
-
     <div class="flex my-5 items-center justify-between space-x-5">
       <div class="w-full">
         <%= form.label :start_at, class: UI::FORM_LABEL %>
@@ -64,6 +42,12 @@
         <%= form.datetime_field :result_at, class: UI::FORM_INPUT %>
         <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :result_at)) %>
       </div>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :description, class: UI::FORM_LABEL %>
+      <%= form.rich_text_area :description, rows: 4, class: UI::FORM_INPUT %>
+      <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :description)) %>
     </div>
 
     <div class="flex items-center justify-between">
