@@ -5,11 +5,12 @@ module Admin
     helper_method :task, :task_submission, :challenge, :task_criterium
 
     add_breadcrumb I18n.t('resources.challenges.plural'), :admin_challenges_path
+    add_breadcrumb(proc { |ctx| ctx.challenge.title }, proc { |ctx| ctx.admin_challenges_path(ctx.challenge) })
     add_breadcrumb I18n.t('resources.tasks.plural'), :admin_challenge_tasks_path
     add_breadcrumb I18n.t('resources.task_submissions.plural'), :admin_challenge_task_submissions_path
 
     def index
-      @paginator, @task_submissions = paginate task.task_submissions.preload(:task_assessment, member: :user)
+      @paginator, @task_submissions = paginate task.task_submissions.preload(member: :user)
     end
 
     def destroy

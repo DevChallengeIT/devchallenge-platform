@@ -8,6 +8,7 @@ RSpec.describe Repo::TaskSubmission, type: :model do
   describe 'associations' do
     it { is_expected.to belong_to(:member) }
     it { is_expected.to belong_to(:task) }
+    it { is_expected.to have_many(:task_assessments) }
   end
 
   describe 'validations' do

@@ -15,7 +15,7 @@
     <% @judges.each do |judge| %>
       <tr id="judge-<%= judge.id %>">
         <td>
-          <%= "#{judge.user.full_name} (#{judge.user.email})" %>
+          <%= render(UI::UserNameComponent.new(user: judge.user)) %>
         </td>
          <td>
            <%= link_to judge.challenge.title, admin_challenge_members_path(judge.challenge) %>
