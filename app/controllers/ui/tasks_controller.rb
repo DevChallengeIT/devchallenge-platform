@@ -14,7 +14,7 @@ module UI
     end
 
     def task
-      @task ||= Repo::Task.friendly.find(params[:id])
+      @task ||= Repo::Task.preload(:challenge, :rich_text_description).friendly.find(params[:id])
     end
   end
 end

@@ -31,6 +31,7 @@ RSpec.describe 'UI/Tasks/Show' do
       visit "/tasks/#{task.slug}"
 
       expect(page).to have_current_path "/tasks/#{task.slug}"
+      expect(page).not_to have_link 'Edit'
     end
 
     it 'can access as admin' do
@@ -39,6 +40,7 @@ RSpec.describe 'UI/Tasks/Show' do
       visit "/tasks/#{task.slug}"
 
       expect(page).to have_current_path "/tasks/#{task.slug}"
+      expect(page).to have_link 'Edit'
     end
   end
 end

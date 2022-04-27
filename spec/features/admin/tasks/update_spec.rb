@@ -64,6 +64,7 @@ RSpec.describe 'Admin/Tasks/Update' do
     assume_logged_in(admin: true)
     visit "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/edit"
 
+    expect(page).to have_link 'View', href: "/tasks/#{task.slug}"
     expect(page).to have_link 'Submissions', href: "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/submissions"
     expect(page).to have_link 'Criteria', href: "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/criteria"
 

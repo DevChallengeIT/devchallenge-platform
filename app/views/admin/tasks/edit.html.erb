@@ -6,6 +6,7 @@
     <div class="flex space-x-3">
       <%= link_to t('resources.task_submissions.plural'), admin_challenge_task_submissions_path(challenge, task), class: UI::BUTTON_SECONDARY %>
       <%= link_to t('resources.criteria.plural'), admin_challenge_task_criteria_path(challenge, task), class: UI::BUTTON_SECONDARY %>
+      <%= link_to t('words.view'), task_path(task), class: UI::BUTTON_PRIMARY %>
     </div>
   </div>
 
