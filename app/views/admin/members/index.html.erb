@@ -18,7 +18,7 @@
     <% @members.each do |member| %>
       <tr id="member-<%= member.id %>">
         <td>
-          <%= link_to member.user.email, edit_admin_challenge_member_path(challenge, member) %>
+          <%= link_to "#{member.user.full_name} (#{member.user.email})", edit_admin_challenge_member_path(challenge, member) %>
         </td>
         <td>
           <%= member.role %>
