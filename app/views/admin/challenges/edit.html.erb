@@ -1,7 +1,12 @@
-<div class="md:w-2/3 w-full">
-  <h2 class="<%= UI::H2 %>">
-    <%= challenge.title %>
-  </h2>
+<div>
+  <div class="flex items-center justify-between">
+    <h2 class="<%= UI::H2 %>">
+      <%= challenge.title %>
+    </h2>
+    <div>
+      <%= link_to t('words.view'), challenge_path(challenge), class: UI::BUTTON_PRIMARY %>
+    </div>
+  </div>
 
   <%= form_with(model: challenge, scope: :challenge, url: admin_challenge_path(challenge), method: :put, class: "contents") do |form| %>
   <div class="my-5">

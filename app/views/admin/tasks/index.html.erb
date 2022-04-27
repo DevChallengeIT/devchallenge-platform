@@ -44,10 +44,10 @@
           <%= render(UI::TimestampComponent.new(data: task.result_at)) %>
         </td>
         <td class="text-center">
-          <%= link_to t('resources.task_submissions.plural'), admin_challenge_task_submissions_path(challenge, task) %>
+          <%= link_to t('resources.task_submissions.plural'), admin_challenge_task_submissions_path(challenge, task), class: UI::BUTTON_SECONDARY %>
         </td>
         <td class="text-center">
-          <%= link_to t('resources.criteria.plural'), admin_challenge_task_criteria_path(challenge, task) %>
+          <%= link_to t('resources.criteria.plural'), admin_challenge_task_criteria_path(challenge, task), class: UI::BUTTON_SECONDARY %>
         </td>
       </tr>
     <% end %>

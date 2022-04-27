@@ -63,6 +63,8 @@ RSpec.describe 'Admin/Challenges/Update' do
     assume_logged_in(admin: true)
     visit "/admin/challenges/#{challenge.slug}/edit"
 
+    expect(page).to have_link 'View', href: "/challenges/#{challenge.slug}"
+
     fill_in 'Title',                with: 'OK challenge'
     select 'ready',                 from: 'Status'
     fill_in 'Slug',                 with: 'ok-challnege'
@@ -74,9 +76,10 @@ RSpec.describe 'Admin/Challenges/Update' do
 
     click_button 'Update'
 
-    expect(page).to have_current_path '/admin/challenges'
+    expect(page).to have_current_path '/admin/challenges/ok-challnege/edit'
     expect(page).to have_content 'Challenge was successfully updated'
 
+    visit '/admin/challenges'
     within "#challenge-#{challenge.id}" do
       expect(page).to have_content 'OK challenge'
       expect(page).to have_content 'ready'
@@ -103,7 +106,7 @@ RSpec.describe 'Admin/Challenges/Update' do
 
     click_button 'Update'
 
-    expect(page).to have_current_path '/admin/challenges'
+    expect(page).to have_current_path "/admin/challenges/#{challenge.slug}/edit"
     expect(page).to have_content 'Challenge was successfully updated'
 
     visit "/admin/challenges/#{challenge.slug}/edit"
