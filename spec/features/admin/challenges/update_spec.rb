@@ -64,6 +64,8 @@ RSpec.describe 'Admin/Challenges/Update' do
     visit "/admin/challenges/#{challenge.slug}/edit"
 
     expect(page).to have_link 'View', href: "/challenges/#{challenge.slug}"
+    expect(page).to have_link 'Tasks', href: "/admin/challenges/#{challenge.slug}/tasks"
+    expect(page).to have_link 'Members', href: "/admin/challenges/#{challenge.slug}/members"
 
     fill_in 'Title',                with: 'OK challenge'
     select 'ready',                 from: 'Status'

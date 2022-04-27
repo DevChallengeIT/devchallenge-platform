@@ -64,6 +64,9 @@ RSpec.describe 'Admin/Tasks/Update' do
     assume_logged_in(admin: true)
     visit "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/edit"
 
+    expect(page).to have_link 'Submissions', href: "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/submissions"
+    expect(page).to have_link 'Criteria', href: "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/criteria"
+
     fill_in 'Title',                with: 'OK task'
     fill_in 'Slug',                 with: 'ok-task'
     # fill_in 'Description',          with: 'Lorem description' # TODO: Fix trix

@@ -25,8 +25,7 @@ Rails.application.routes.draw do
     resources :challenges, except: %i[destroy], concerns: :manage_taxonomies, repo: :challenges do
       resources :members, except: :show
       resources :tasks, except: %i[destroy] do
-        resources :task_assessments, as: :assessments, path: :assessments
-        resources :task_submissions, only: %i[index destroy], as: :submissions, path: :submissions
+        resources :submissions, only: %i[index destroy]
         resources :criteria, except: :show
       end
     end

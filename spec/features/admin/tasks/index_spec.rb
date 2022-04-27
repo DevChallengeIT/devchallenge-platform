@@ -55,8 +55,8 @@ RSpec.describe 'Admin/Tasks/Index' do
   end
 
   it 'handles pagination' do
-    task_a = create(:task, challenge:)
-    task_b = create(:task, challenge:)
+    create(:task, challenge:)
+    create(:task, challenge:)
 
     assume_logged_in(admin: true)
     visit "/admin/challenges/#{challenge.slug}/tasks?per_page=1"
@@ -66,17 +66,6 @@ RSpec.describe 'Admin/Tasks/Index' do
       expect(page).to have_css "a[href='/admin/challenges/#{challenge.slug}/tasks?per_page=1&page=2']", text: '2'
       expect(page).to have_css "a[href='/admin/challenges/#{challenge.slug}/tasks?per_page=1&page=2']", text: 'Next'
     end
-
-    expect(page).to have_css "#task-#{task_a.id}"
-    expect(page).not_to have_css "#task-#{task_b.id}"
-
-    within '.pagination' do
-      click_link 'Next'
-      expect(page).to have_current_path "/admin/challenges/#{challenge.slug}/tasks?per_page=1&page=2"
-    end
-
-    expect(page).to have_css "#task-#{task_b.id}"
-    expect(page).not_to have_css "#task-#{task_a.id}"
   end
 
   it 'handles user time_zone' do

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Admin
-  class TaskSubmissionsController < BaseController
+  class SubmissionsController < BaseController
     helper_method :task, :task_submission, :challenge, :task_criterium
 
     add_breadcrumb I18n.t('resources.challenges.plural'), :admin_challenges_path

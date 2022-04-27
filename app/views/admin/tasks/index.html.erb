@@ -1,10 +1,7 @@
-<div class="">
-  <h2 class="<%= UI::H2 %>">
-    <%= link_to challenge.title, edit_admin_challenge_path(challenge) %>
- </h2>
-</div>
 <div class="flex justify-between items-center py-3">
-  <h2 class="<%= UI::H2 %>"><%= t('resources.tasks.plural') %></h2>
+  <h2 class="<%= UI::H2 %>">
+    <%=  challenge.title %> <%= t('resources.tasks.plural') %>
+  </h2>
 
   <%= link_to t('words.add'), new_admin_challenge_task_path(challenge), class: UI::BUTTON_PRIMARY %>
 </div>
@@ -23,10 +20,6 @@
     <th class="text-center">
       <%= t('resources.tasks.result_at') %>
     </th>
-    <th>
-    </th>
-    <th>
-    </th>
   </thead>
   <tbody>
     <% @tasks.each do |task| %>
@@ -35,19 +28,13 @@
           <%= link_to task.title, edit_admin_challenge_task_path(challenge, task) %>
         </td>
         <td class="text-center">
-          <%= render(UI::TimestampComponent.new(data: task.start_at)) %>
+          <%= render(UI::TimestampComponent.new(data: task.start_at, highlight_now: true)) %>
         </td>
         <td class="text-center">
-          <%= render(UI::TimestampComponent.new(data: task.submit_at)) %>
+          <%= render(UI::TimestampComponent.new(data: task.submit_at, highlight_now: true)) %>
         </td>
         <td class="text-center">
-          <%= render(UI::TimestampComponent.new(data: task.result_at)) %>
-        </td>
-        <td class="text-center">
-          <%= link_to t('resources.task_submissions.plural'), admin_challenge_task_submissions_path(challenge, task), class: UI::BUTTON_SECONDARY %>
-        </td>
-        <td class="text-center">
-          <%= link_to t('resources.criteria.plural'), admin_challenge_task_criteria_path(challenge, task), class: UI::BUTTON_SECONDARY %>
+          <%= render(UI::TimestampComponent.new(data: task.result_at, highlight_now: true)) %>
         </td>
       </tr>
     <% end %>

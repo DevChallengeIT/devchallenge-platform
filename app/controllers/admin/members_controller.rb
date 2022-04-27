@@ -5,7 +5,7 @@ module Admin
     helper_method :challenge, :member, :roles
 
     add_breadcrumb I18n.t('resources.challenges.plural'), :admin_challenges_path
-    add_breadcrumb(proc { |ctx| ctx.challenge.title }, proc { |ctx| ctx.admin_challenges_path(ctx.challenge) })
+    add_breadcrumb(proc { |ctx| ctx.challenge.title }, proc { |ctx| ctx.edit_admin_challenge_path(ctx.challenge) })
     add_breadcrumb I18n.t('resources.members.plural'), :admin_challenge_members_path
 
     def index

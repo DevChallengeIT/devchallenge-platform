@@ -1,7 +1,13 @@
-<div class="md:w-2/3 w-full">
-  <h2 class="<%= UI::H2 %>">
-    <%= task.title %>
-  </h2>
+<div>
+  <div class="flex items-center justify-between py-3">
+    <h2 class="<%= UI::H2 %>">
+      <%= task.title %>
+    </h2>
+    <div class="flex space-x-3">
+      <%= link_to t('resources.task_submissions.plural'), admin_challenge_task_submissions_path(challenge, task), class: UI::BUTTON_SECONDARY %>
+      <%= link_to t('resources.criteria.plural'), admin_challenge_task_criteria_path(challenge, task), class: UI::BUTTON_SECONDARY %>
+    </div>
+  </div>
 
   <%= form_with(model: task, scope: :task, url: admin_challenge_task_path(challenge, task), method: :put, class: "contents") do |form| %>
     <div class="my-5">
