@@ -71,6 +71,7 @@ en:
       plural: Submissions
       singular: Submission
       notes: Notes
+      submitted: Task submitted
     tasks:
       plural: Tasks
       singular: Task
