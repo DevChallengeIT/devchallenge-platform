@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :challenges, only: %i[index show], controller: 'ui/challenges' do
     resources :members, only: %i[create destroy], controller: 'ui/members'
   end
+  resources :tasks, only: :show, controller: 'ui/tasks'
 
   namespace :admin do
     root 'dashboard#index'

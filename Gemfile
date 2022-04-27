@@ -30,6 +30,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 # Tools
 gem 'acts_as_list', '~> 1.0.4'
 gem 'friendly_id', '~> 5.4.0'
+gem 'image_processing'
 gem 'lograge', '~> 0.12'
 
 group :development, :test do

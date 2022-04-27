@@ -10,36 +10,27 @@
 </div>
 
 <%= form_with(model: challenge, scope: :challenge, url: admin_challenge_path(challenge), method: :put, class: "contents") do |form| %>
-  <div class="my-5">
-    <%= form.label :status, class: UI::FORM_LABEL %>
-    <%= form.select :status, Repo::Challenge.statuses, {}, class: UI::FORM_INPUT %>
-    <%= render(UI::ErrorTagComponent.new(errors: challenge.errors, field: :status)) %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :title, class: UI::FORM_LABEL %>
-    <%= form.text_field :title, autofocus: true, class: UI::FORM_INPUT %>
-    <%= render(UI::ErrorTagComponent.new(errors: challenge.errors, field: :title)) %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :slug, class: UI::FORM_LABEL %>
-    <%= form.text_field :slug, class: UI::FORM_INPUT %>
-    <%= render(UI::ErrorTagComponent.new(errors: challenge.errors, field: :slug)) %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :description, class: UI::FORM_LABEL %>
-    <%= form.rich_text_area :description, rows: 4, class: UI::FORM_INPUT %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :terms_and_conditions, class: UI::FORM_LABEL %>
-    <%= form.rich_text_area :terms_and_conditions, rows: 4, class: UI::FORM_INPUT %>
-    <%= render(UI::ErrorTagComponent.new(errors: challenge.errors, field: :terms_and_conditions)) %>
-  </div>
-
   <div class="flex my-5 items-center justify-between space-x-5">
+    <div class="w-full">
+      <%= form.label :status, class: UI::FORM_LABEL %>
+      <%= form.select :status, Repo::Challenge.statuses, {}, class: UI::FORM_INPUT %>
+      <%= render(UI::ErrorTagComponent.new(errors: challenge.errors, field: :status)) %>
+    </div>
+
+    <div class="w-full">
+      <%= form.label :title, class: UI::FORM_LABEL %>
+      <%= form.text_field :title, autofocus: true, class: UI::FORM_INPUT %>
+      <%= render(UI::ErrorTagComponent.new(errors: challenge.errors, field: :title)) %>
+    </div>
+
+    <div class="w-full">
+      <%= form.label :slug, class: UI::FORM_LABEL %>
+      <%= form.text_field :slug, class: UI::FORM_INPUT %>
+      <%= render(UI::ErrorTagComponent.new(errors: challenge.errors, field: :slug)) %>
+    </div>
+  </div>
+
+    <div class="flex my-5 items-center justify-between space-x-5">
     <div class="w-full">
       <%= form.label :registration_at, class: UI::FORM_LABEL %>
       <%= form.datetime_field :registration_at, class: UI::FORM_INPUT %>
@@ -57,6 +48,17 @@
       <%= form.datetime_field :finish_at, class: UI::FORM_INPUT %>
       <%= render(UI::ErrorTagComponent.new(errors: challenge.errors, field: :finish_at)) %>
     </div>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :description, class: UI::FORM_LABEL %>
+    <%= form.rich_text_area :description, rows: 4, class: UI::FORM_INPUT %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :terms_and_conditions, class: UI::FORM_LABEL %>
+    <%= form.rich_text_area :terms_and_conditions, rows: 4, class: UI::FORM_INPUT %>
+    <%= render(UI::ErrorTagComponent.new(errors: challenge.errors, field: :terms_and_conditions)) %>
   </div>
 
   <% if taxonomies.any? %>

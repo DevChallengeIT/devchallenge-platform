@@ -6,7 +6,7 @@ module UI
 
     included do
       helper_method :challenge, :current_member
-      before_action :authorize_challenge, only: :show
+      before_action :authorize_challenge!, only: :show
     end
 
     def show; end
@@ -19,8 +19,14 @@ module UI
       @current_member ||= challenge.members.find_by(user: current_user)
     end
 
-    def authorize_challenge
+    def authorize_challenge!
       return true if Competition.can_read?(user: current_user, challenge:)
+
+      redirect_to root_path, notice: t('messages.access_denied')
+    end
+
+    def authorize_member!
+      return true if current_member || Auth.admin?(current_user)
 
       redirect_to root_path, notice: t('messages.access_denied')
     end

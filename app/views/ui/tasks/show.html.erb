@@ -1,0 +1,12 @@
+<%= @task.title %>
+<%= @task.description %>
+
+Start at: <%= render(UI::TimestampComponent.new(data: @task.start_at)) %>
+Submit at: <%= render(UI::TimestampComponent.new(data: @task.submit_at)) %>
+Result at: <%= render(UI::TimestampComponent.new(data: @task.result_at)) %>
+
+<div class="my-5">
+  <% if Auth.admin?(current_user) %>
+    <%= link_to t('words.edit'), edit_admin_challenge_path(challenge), class: UI::BUTTON_SECONDARY %>
+  <% end %>
+</div>
