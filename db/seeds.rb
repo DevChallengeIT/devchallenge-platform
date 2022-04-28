@@ -184,6 +184,11 @@ task_3_submission_2 = Repo::TaskSubmission.where(
   member: participant_member_2
 ).first_or_create(notes: "Submitted: '#{be_task_3.title}' task")
 
+file_path = Rails.root.join('spec', 'support', 'assets', 'submission.zip')
+file = File.open(file_path)
+
+task_1_submission_1.zip_file.attach(io: file, filename: 'submitted file')
+
 # === ASSESSMENTS =============================================================
 # === FIRST PARICIPANT
 Repo::TaskAssessment.where(
