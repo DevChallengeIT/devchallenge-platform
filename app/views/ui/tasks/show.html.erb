@@ -27,14 +27,15 @@ Result at: <%= render(UI::TimestampComponent.new(data: task.result_at)) %>
   </div>
 
   <%= form.submit class: UI::BUTTON_PRIMARY %>
-  <div class="flex items-center justify-between mb-24">
-    <div class="mt-8">
-      <% unless task_submission.new_record? %>
-        <%= t('words.danger') %>
-        <%= button_to t('words.remove'), task_submission_path(task, task_submission), method: :delete, class: UI::BUTTON_DANGER, form: {data: {turbo_confirm: t('messages.are_you_sure')}} %>
-      <% end %>
-      <%= link_to t('words.back'), challenge_path(challenge), class: UI::BUTTON_SECONDARY %>
-    </div>
 
-  </div>
 <% end %>
+
+<div class="flex items-center justify-between mb-24">
+  <div class="mt-8">
+    <% unless task_submission.new_record? %>
+      <%= t('words.danger') %>
+      <%= button_to t('words.remove'), task_submission_path(task, task_submission), method: :delete, class: UI::BUTTON_DANGER, form: {data: {turbo_confirm: t('messages.are_you_sure')}} %>
+    <% end %>
+    <%= link_to t('words.back'), challenge_path(challenge), class: UI::BUTTON_SECONDARY %>
+  </div>
+</div>

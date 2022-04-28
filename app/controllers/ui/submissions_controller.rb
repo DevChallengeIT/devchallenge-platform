@@ -40,8 +40,7 @@ module UI
     end
 
     def task_submission
-      # @task_submission ||= task.task_submissions.preload(:zip_file).find(params[:id])
-      @task_submission ||= task.task_submissions.find(params[:id])
+      @task_submission ||= task.task_submissions.preload(:task_assessments).find(params[:id])
     end
 
     def task_submission_params
