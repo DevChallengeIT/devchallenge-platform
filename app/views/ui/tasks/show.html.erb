@@ -1,12 +1,41 @@
-<%= @task.title %>
-<%= @task.description %>
+<%= task.title %>
+<%= task.description %>
 
-Start at: <%= render(UI::TimestampComponent.new(data: @task.start_at)) %>
-Submit at: <%= render(UI::TimestampComponent.new(data: @task.submit_at)) %>
-Result at: <%= render(UI::TimestampComponent.new(data: @task.result_at)) %>
+Start at: <%= render(UI::TimestampComponent.new(data: task.start_at)) %>
+Submit at: <%= render(UI::TimestampComponent.new(data: task.submit_at)) %>
+Result at: <%= render(UI::TimestampComponent.new(data: task.result_at)) %>
 
 <div class="my-5">
   <% if Auth.admin?(current_user) %>
     <%= link_to t('words.edit'), edit_admin_challenge_path(challenge), class: UI::BUTTON_SECONDARY %>
   <% end %>
+</div>
+
+<%= form_with(model: task_submission, scope: :task_submission, url: (task_submission.new_record? ? task_submissions_path(task) : task_submission_path(task, task_submission)), method: (task_submission.new_record? ? :post : :put), class: "contents") do |form| %>
+  <div class="flex my-5 items-center justify-between space-x-5">
+    <div class="w-full">
+      <%= form.label :notes, class: UI::FORM_LABEL %>
+      <%= form.text_field :notes, autofocus: true, class: UI::FORM_INPUT %>
+      <%= render(UI::ErrorTagComponent.new(errors: task_submission.errors, field: :notes)) %>
+    </div>
+
+    <div class="w-full">
+      <%= form.label :zip_file, class: UI::FORM_LABEL %>
+      <%= form.file_field :zip_file, autofocus: true, class: UI::FORM_INPUT %>
+      <%= render(UI::ErrorTagComponent.new(errors: task_submission.errors, field: :zip_file)) %>
+    </div>
+  </div>
+
+  <%= form.submit class: UI::BUTTON_PRIMARY %>
+
+<% end %>
+
+<div class="flex items-center justify-between mb-24">
+  <div class="mt-8">
+    <% unless task_submission.new_record? %>
+      <%= t('words.danger') %>
+      <%= button_to t('words.remove'), task_submission_path(task, task_submission), method: :delete, class: UI::BUTTON_DANGER, form: {data: {turbo_confirm: t('messages.are_you_sure')}} %>
+    <% end %>
+    <%= link_to t('words.back'), challenge_path(challenge), class: UI::BUTTON_SECONDARY %>
+  </div>
 </div>
