@@ -1,0 +1,54 @@
+<%= task.title %>
+<%= task.description %>
+
+Start at: <%= render(UI::TimestampComponent.new(data: task.start_at)) %>
+Submit at: <%= render(UI::TimestampComponent.new(data: task.submit_at)) %>
+Result at: <%= render(UI::TimestampComponent.new(data: task.result_at)) %>
+
+<div class="my-5">
+  <% if Auth.admin?(current_user) %>
+    <%= link_to t('words.edit'), edit_admin_challenge_path(challenge), class: UI::BUTTON_SECONDARY %>
+  <% end %>
+</div>
+
+<table id="submissions" class="table">
+  <thead>
+    <th>
+      <!-- TODO: change it -->
+      <%= "id" %>
+    </th>
+    <th>
+      <%= t('resources.task_assessments.points') %>
+    </th>
+    <th>
+      <%= t('resources.task_submissions.notes') %>
+    </th>
+    <th>
+    </th>
+  </thead>
+  <tbody>
+    <% @task_submissions.each do |task_submission| %>
+      <tr id="submission-<%= task_submission.id %>">
+        <td>
+          <%= task_submission.id %>
+        </td>
+        <td>
+          <!-- TODO: the result of calculation submission assessment mark goes here -->
+          <%= task_submission.task_assessments.first&.value || t('words.pending') %>
+        </td>
+        <td>
+          <%= task_submission.notes %>
+        </td>
+        <td>
+          <% if task_submission.task_assessments.first&.value.present? %>
+            <%= link_to t('resources.task_assessments.edit'), edit_assessment_path(task_submission.task_assessments.first) %>
+          <% else %>
+            <%= link_to t('resources.task_assessments.add'), new_assessment_path %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= render(UI::PaginatorComponent.new(paginator: @paginator)) %>
