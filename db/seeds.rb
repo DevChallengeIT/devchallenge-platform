@@ -15,6 +15,15 @@ be_challenge = Repo::Challenge.where(
   finish_at:       40.days.from_now.end_of_day
 )
 
+fe_challenge = Repo::Challenge.where(
+  title:           'Frontend Challenge'
+).first_or_create(
+  status:          'ready',
+  registration_at: Time.now.beginning_of_day + 1.day,
+  start_at:        10.days.from_now.end_of_day + 1.day,
+  finish_at:       40.days.from_now.end_of_day + 1.day
+)
+
 # === TASKS ===================================================================
 be_task_1 = Repo::Task.where(
   title:           'Qualification'
@@ -46,6 +55,27 @@ be_task_3 = Repo::Task.where(
   start_at:       be_task_2.result_at + 5.days,
   submit_at:      be_task_2.result_at + 6.days,
   result_at:      be_task_2.result_at + 7.days,
+)
+
+fe_task_1 = Repo::Task.where(
+  title:           'FE Qualification'
+).first_or_create(
+  challenge:   fe_challenge,
+  start_at:    fe_challenge.start_at + 1.day,
+  submit_at:   fe_challenge.start_at + 20.days,
+  result_at:   fe_challenge.start_at + 21.day,
+  description: 'Some description to make this task done'
+)
+
+fe_task_2 = Repo::Task.where(
+  title:           'FE Online'
+).first_or_create(
+  challenge:      fe_challenge,
+  description:    'This is extra task wich depends on the first one',
+  dependent_task: fe_task_1,
+  start_at:       fe_task_1.result_at + 6.days,
+  submit_at:      fe_task_1.result_at + 7.days,
+  result_at:      fe_task_1.result_at + 8.days,
 )
 
 # === MEMBERS =================================================================
