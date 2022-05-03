@@ -8,6 +8,22 @@ module UI
 
     before_action :authenticate_user!
 
+    def new
+      @task_assessment = Repo::TaskAssessment.new
+    end
+
+    def create
+      @task_assessment = Repo::TaskAssessment.new(
+        task_assessment_params.merge(member: current_member, task_criterium: task_criteria.first, task_submission:)
+      )
+
+      if @task_assessment.save
+        redirect_to task_path(task), notice: flash_message(:updated, :task_assessments)
+      else
+        redirect_to task_path(task), status: :unprocessable_entity
+      end
+    end
+
     def edit
       @task_assessment = task_submission.task_assessments.first
     end
@@ -44,7 +60,9 @@ module UI
     end
 
     def task_submission
-      @task_submission ||= Repo::TaskSubmission.preload(:task_assessments, task: [:challenge, :task_criteria]).find(params[:task_submission])
+      @task_submission ||= Repo::TaskSubmission.preload(:task_assessments,
+                                                        task: %i[challenge
+                                                                 task_criteria]).find(params[:task_submission])
     end
 
     def task_assessment_params
