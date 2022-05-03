@@ -41,9 +41,9 @@ Result at: <%= render(UI::TimestampComponent.new(data: task.result_at)) %>
         </td>
         <td>
           <% if task_submission.task_assessments.first&.value.present? %>
-            <%= link_to t('resources.task_assessments.edit'), edit_assessment_path(task_submission.task_assessments.first) %>
+            <%= link_to t('resources.task_assessments.edit'), edit_assessment_path(task_submission.task_assessments.first, task_submission:) %>
           <% else %>
-            <%= link_to t('resources.task_assessments.add'), new_assessment_path %>
+            <%= link_to t('resources.task_assessments.add'), new_assessment_path(task_submission:) %>
           <% end %>
         </td>
       </tr>
