@@ -9,16 +9,18 @@ module UI
     before_action :authenticate_user!
 
     def new
-      @task_assessment = Repo::TaskAssessment.new
+      task_criteria.each do |criterium|
+        task_submission.task_assessments.build(task_criterium: criterium)
+      end
     end
 
     def create
-      @task_assessment = Repo::TaskAssessment.new(
-        task_assessment_params.merge(member: current_member, task_criterium: task_criteria.first, task_submission:)
-      )
+      assessments_hash = task_assessment_params[:task_assessments_attributes].to_h.values.map do |params|
+        params.merge(member: current_member)
+      end
 
-      if @task_assessment.save
-        redirect_to task_path(task), notice: flash_message(:updated, :task_assessments)
+      if task_submission.update(task_assessments_attributes: assessments_hash)
+        redirect_to task_path(task), notice: flash_message(:created, :task_assessments)
       else
         redirect_to task_path(task), status: :unprocessable_entity
       end
@@ -66,7 +68,7 @@ module UI
     end
 
     def task_assessment_params
-      params.require(:task_assessment).permit(:value, :comment)
+      params.require(:task_assessments).permit(task_assessments_attributes: %i[task_criterium_id value comment])
     end
   end
 end
