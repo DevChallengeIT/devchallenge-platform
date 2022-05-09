@@ -31,7 +31,9 @@ Result at: <%= render(UI::TimestampComponent.new(data: task.result_at)) %>
       </div>
 
       <div>
-        <%= "#{task_submission.notes}" %>
+        <%= form.label :notes, class: UI::FORM_LABEL %>
+        <%= form.text_field :notes, autofocus: true, class: UI::FORM_INPUT %>
+        <%= render(UI::ErrorTagComponent.new(errors: task_submission.errors, field: :notes)) %>
       </div>
     </div>
 
