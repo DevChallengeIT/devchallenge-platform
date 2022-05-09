@@ -12,6 +12,11 @@ module Repo
     validates :task_submission, presence: true, uniqueness: { scope: :task_criterium_id }
     validates :task_criterium, presence: true
     validates :value, presence: true
+    validate :within_task_cirerium_range?
     # TODO: can't be larger than task_criterium.max_value
+
+    def within_task_cirerium_range?
+      value <= task_criterium.max_value
+    end
   end
 end

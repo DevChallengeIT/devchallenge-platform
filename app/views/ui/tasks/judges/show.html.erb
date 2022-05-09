@@ -33,14 +33,17 @@ Result at: <%= render(UI::TimestampComponent.new(data: task.result_at)) %>
           <%= task_submission.id %>
         </td>
         <td>
-          <!-- TODO: the result of calculation submission assessment mark goes here -->
-          <%= task_submission.task_assessments.first&.value || t('words.pending') %>
+          <% if task_submission.task_assessments.any? %>
+            <%= task_submission.task_assessments.pluck(:value).sum / task_submission.task_assessments.count.to_f %>
+          <% else %>
+            <% t('words.pending') %>
+          <% end %>
         </td>
         <td>
           <%= task_submission.notes %>
         </td>
         <td>
-          <% if task_submission.task_assessments.first&.value.present? %>
+          <% if task_submission.task_assessments.any? %>
             <%= link_to t('resources.task_assessments.edit'), edit_assessment_path(task_submission.task_assessments.first, task_submission:) %>
           <% else %>
             <%= link_to t('resources.task_assessments.add'), new_assessment_path(task_submission:) %>
