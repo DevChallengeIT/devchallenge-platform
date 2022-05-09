@@ -22,13 +22,8 @@ module UI
       end
     end
 
-    def edit
-      @task_assessment = task_submission.task_assessments.first
-    end
-
     def update
-      @task_submission = task_assessment.task_submission
-      if @task_assessment.update(task_assessment_params)
+      if task_submission.update(task_assessment_params)
         redirect_to task_path(task), notice: flash_message(:updated, :task_assessments)
       else
         redirect_to task_path(task), status: :unprocessable_entity
@@ -49,19 +44,15 @@ module UI
       @task_assessments ||= task_submission.task_assessments
     end
 
-    def task_assessment
-      @task_assessment ||= Repo::TaskAssessment.find(params[:id])
-    end
-
     def challenge
       @challenge ||= task.challenge
     end
 
     def task_submission
       @task_submission ||= Repo::TaskSubmission.preload(
-        :task_assessments,
         :zip_file_blob,
-        task: %i[challenge rich_text_description task_criteria]
+        task:             %i[challenge rich_text_description task_criteria],
+        task_assessments: :task_criterium
       ).find(params[:task_submission])
     end
 
@@ -71,7 +62,7 @@ module UI
 
     def set_assessment_params
       assessment_params = params.require(:task_assessments).permit(
-        :notes, task_assessments_attributes: %i[task_criterium_id value comment]
+        :notes, task_assessments_attributes: %i[id task_criterium_id value comment]
       )
 
       assessment_params[:task_assessments_attributes].each do |attributes|
