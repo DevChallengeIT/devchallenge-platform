@@ -18,7 +18,8 @@ module UI
       if task_submission.update(task_assessment_params)
         redirect_to task_path(task), notice: flash_message(:created, :task_assessments)
       else
-        redirect_to task_path(task), status: :unprocessable_entity
+        # TODO: show errors
+        render :new, status: :unprocessable_entity
       end
     end
 
@@ -26,7 +27,8 @@ module UI
       if task_submission.update(task_assessment_params)
         redirect_to task_path(task), notice: flash_message(:updated, :task_assessments)
       else
-        redirect_to task_path(task), status: :unprocessable_entity
+        # TODO: show errors
+        render :edit, status: :unprocessable_entity
       end
     end
 
