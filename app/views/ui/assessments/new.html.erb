@@ -12,29 +12,27 @@ Result at: <%= render(UI::TimestampComponent.new(data: task.result_at)) %>
   <% end %>
 
   <%= form_with(model: task_submission, scope: :task_assessments, url: assessments_path(task_submission:), method: :post, class: "contents") do |form| %>
-    <div class="flex my-5 items-center space-x-5">
-      <div class="">
-        <%= form.fields_for :task_assessments do |task_assessment| %>
-          <div class="flex my-5 items-center justify-between space-x-5">
-            <div class="w-full">
-              <%= "#{task_assessment.object.task_criterium.title} (max #{task_assessment.object.task_criterium.max_value})" %>
-              <%= task_assessment.hidden_field :task_criterium_id, class: UI::FORM_LABEL %>
-            </div>
-
-            <div class="w-full">
-              <%= task_assessment.label :value, class: UI::FORM_LABEL %>
-              <%= task_assessment.number_field :value, autofocus: true, class: UI::FORM_INPUT %>
-              <%= render(UI::ErrorTagComponent.new(errors: task_submission.errors, field: :value)) %>
-            </div>
+    <div>
+      <%= form.fields_for :task_assessments do |task_assessment| %>
+        <div class="flex my-5 items-center justify-between space-x-5">
+          <div class="w-full">
+            <%= "#{task_assessment.object.task_criterium.title} (max #{task_assessment.object.task_criterium.max_value})" %>
+            <%= task_assessment.hidden_field :task_criterium_id, class: UI::FORM_LABEL %>
           </div>
-        <% end %>
-      </div>
 
-      <div>
-        <%= form.label :notes, class: UI::FORM_LABEL %>
-        <%= form.text_field :notes, autofocus: true, class: UI::FORM_INPUT %>
-        <%= render(UI::ErrorTagComponent.new(errors: task_submission.errors, field: :notes)) %>
-      </div>
+          <div class="w-full">
+            <%= task_assessment.label :value, class: UI::FORM_LABEL %>
+            <%= task_assessment.number_field :value, autofocus: true, class: UI::FORM_INPUT %>
+            <%= render(UI::ErrorTagComponent.new(errors: task_submission.errors, field: :value)) %>
+          </div>
+
+          <div class="w-full">
+            <%= task_assessment.label :comment, class: UI::FORM_LABEL %>
+            <%= task_assessment.text_field :comment, autofocus: true, class: UI::FORM_INPUT %>
+            <%= render(UI::ErrorTagComponent.new(errors: task_submission.errors, field: :comment)) %>
+          </div>
+        </div>
+      <% end %>
     </div>
 
     <div class="flex items-center justify-between">

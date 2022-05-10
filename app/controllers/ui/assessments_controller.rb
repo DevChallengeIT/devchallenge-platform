@@ -64,7 +64,7 @@ module UI
 
     def set_assessment_params
       assessment_params = params.require(:task_assessments).permit(
-        :notes, task_assessments_attributes: %i[id task_criterium_id value comment]
+        task_assessments_attributes: %i[id task_criterium_id value comment]
       )
 
       assessment_params[:task_assessments_attributes].each do |attributes|
