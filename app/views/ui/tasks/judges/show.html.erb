@@ -11,6 +11,8 @@ Result at: <%= render(UI::TimestampComponent.new(data: task.result_at)) %>
   <% end %>
 </div>
 
+<%= t("resources.task_submissions.plural") %>
+
 <table id="submissions" class="table">
   <thead>
     <th>
@@ -53,5 +55,7 @@ Result at: <%= render(UI::TimestampComponent.new(data: task.result_at)) %>
     <% end %>
   </tbody>
 </table>
+
+<%= link_to t('words.back'), challenge_path(challenge), class: UI::BUTTON_SECONDARY %>
 
 <%= render(UI::PaginatorComponent.new(paginator: @paginator)) %>
