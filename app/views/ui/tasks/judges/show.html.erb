@@ -38,7 +38,7 @@ Result at: <%= render(UI::TimestampComponent.new(data: task.result_at)) %>
           <% if task_submission.task_assessments.any? %>
             <%= task_submission.task_assessments.pluck(:value).sum / task_submission.task_assessments.count.to_f %>
           <% else %>
-            <% t('words.pending') %>
+            <%= t('words.pending') %>
           <% end %>
         </td>
         <td>
