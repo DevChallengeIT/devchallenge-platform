@@ -23,13 +23,13 @@ Result at: <%= render(UI::TimestampComponent.new(data: task.result_at)) %>
           <div class="w-full">
             <%= task_assessment.label :value, class: UI::FORM_LABEL %>
             <%= task_assessment.number_field :value, autofocus: true, class: UI::FORM_INPUT %>
-            <%= render(UI::ErrorTagComponent.new(errors: task_submission.errors, field: :value)) %>
+            <%= render(UI::ErrorTagComponent.new(errors: task_assessment.object.errors, field: :value)) %>
           </div>
 
           <div class="w-full">
             <%= task_assessment.label :comment, class: UI::FORM_LABEL %>
             <%= task_assessment.text_field :comment, autofocus: true, class: UI::FORM_INPUT %>
-            <%= render(UI::ErrorTagComponent.new(errors: task_submission.errors, field: :comment)) %>
+            <%= render(UI::ErrorTagComponent.new(errors: task_assessment.object.errors, field: :comment)) %>
           </div>
         </div>
       <% end %>
