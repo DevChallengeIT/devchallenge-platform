@@ -25,16 +25,7 @@ RSpec.describe 'UI/Assessments/Update' do
     )
   end
 
-  context 'without session' do
-    it 'does not show task submissions' do
-      visit "assessments/#{assessment.id}/edit?task_submission=#{submission.id}"
-
-      expect(page).not_to have_button 'Update'
-      expect(page).to have_content 'You need to sign in or sign up before continuing.'
-    end
-  end
-
-  context 'with session' do
+  context "with judge's session" do
     before { assume_logged_in(judge.user) }
 
     it 'updates assessment' do
@@ -102,6 +93,31 @@ RSpec.describe 'UI/Assessments/Update' do
       expect(page).not_to have_current_path "/tasks/#{task.slug}"
       expect(page).not_to have_content 'Task Assessment was successfully updated'
       expect(page).to have_content "can't be larger than criterium max value"
+    end
+  end
+
+  context "with not judge's session" do
+    it 'does not show task submissions if there is not session' do
+      visit "assessments/#{assessment.id}/edit?task_submission=#{submission.id}"
+
+      expect(page).not_to have_button 'Update'
+      expect(page).to have_content 'You need to sign in or sign up before continuing.'
+    end
+
+    it "redirects to root in case of regular admin's session" do
+      assume_logged_in(admin: true)
+      visit "assessments/#{assessment.id}/edit?task_submission=#{submission.id}"
+
+      expect(page).to have_current_path root_path
+      expect(page).to have_content 'Access denied'
+    end
+
+    it "redirects to root in case of participant's session" do
+      assume_logged_in(submission.member.user)
+      visit "assessments/#{assessment.id}/edit?task_submission=#{submission.id}"
+
+      expect(page).to have_current_path root_path
+      expect(page).to have_content 'Access denied'
     end
   end
 end

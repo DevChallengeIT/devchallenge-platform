@@ -30,5 +30,9 @@ module UI
 
       redirect_to root_path, notice: t('messages.access_denied')
     end
+
+    def authorize_judge!
+      redirect_to root_path, notice: t('messages.access_denied') unless current_member&.judge?
+    end
   end
 end

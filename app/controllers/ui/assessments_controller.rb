@@ -7,6 +7,7 @@ module UI
     helper_method :task, :task_submission, :task_criteria, :task_assessments
 
     before_action :authenticate_user!
+    before_action :authorize_judge!
 
     def new
       task_criteria.each do |criterium|
