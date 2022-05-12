@@ -43,7 +43,6 @@ RSpec.describe 'Admin/Tasks/Create' do
     visit "/admin/challenges/#{challenge.slug}/tasks/new"
 
     fill_in 'Title', with: 'new task'
-    select challenge.title, from: 'task_challenge_id'
     click_button 'Create'
 
     expect(page).to have_current_path "/admin/challenges/#{challenge.slug}/tasks/new-task/edit"

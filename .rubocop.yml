@@ -13,6 +13,7 @@ AllCops:
     - db/seeds.rb
     - db/migrate/*
     - Guardfile
+    - public/**/*
 
 Style/Documentation:
   Enabled: false

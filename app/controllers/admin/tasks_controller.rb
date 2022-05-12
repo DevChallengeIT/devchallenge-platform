@@ -19,7 +19,7 @@ module Admin
     end
 
     def create
-      @task = Repo::Task.new(task_params)
+      @task = Repo::Task.new(task_params.merge(challenge_id: challenge.id))
 
       if task.save
         redirect_to(edit_admin_challenge_task_path(challenge, task), notice: flash_message(:created, :tasks))

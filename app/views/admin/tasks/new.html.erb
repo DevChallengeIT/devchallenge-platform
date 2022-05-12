@@ -8,12 +8,6 @@
       <%= render(UI::ErrorTagComponent.new(errors: @task.errors, field: :title)) %>
     </div>
 
-    <div class="my-5">
-      <%= form.label :challenge, class: UI::FORM_LABEL %>
-      <%= form.select :challenge_id, Repo::Challenge.all.pluck(:title, :id), {}, class: UI::FORM_INPUT %>
-      <%= render(UI::ErrorTagComponent.new(errors: @task.errors, field: :challenge)) %>
-    </div>
-
     <div class="flex items-center justify-between">
       <%= form.submit t('words.create'), class: UI::BUTTON_PRIMARY %>
       <%= link_to t('words.back'), admin_challenge_tasks_path(challenge), class: UI::BUTTON_SECONDARY %>
