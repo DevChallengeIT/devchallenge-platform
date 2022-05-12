@@ -15,6 +15,15 @@ be_challenge = Repo::Challenge.where(
   finish_at:       40.days.from_now.end_of_day
 )
 
+fe_challenge = Repo::Challenge.where(
+  title:           'Frontend Challenge'
+).first_or_create(
+  status:          'ready',
+  registration_at: Time.now.beginning_of_day + 1.day,
+  start_at:        10.days.from_now.end_of_day + 1.day,
+  finish_at:       40.days.from_now.end_of_day + 1.day
+)
+
 # === TASKS ===================================================================
 be_task_1 = Repo::Task.where(
   title:           'Qualification'
@@ -46,6 +55,27 @@ be_task_3 = Repo::Task.where(
   start_at:       be_task_2.result_at + 5.days,
   submit_at:      be_task_2.result_at + 6.days,
   result_at:      be_task_2.result_at + 7.days,
+)
+
+fe_task_1 = Repo::Task.where(
+  title:           'FE Qualification'
+).first_or_create(
+  challenge:   fe_challenge,
+  start_at:    fe_challenge.start_at + 1.day,
+  submit_at:   fe_challenge.start_at + 20.days,
+  result_at:   fe_challenge.start_at + 21.day,
+  description: 'Some description to make this task done'
+)
+
+fe_task_2 = Repo::Task.where(
+  title:           'FE Online'
+).first_or_create(
+  challenge:      fe_challenge,
+  description:    'This is extra task wich depends on the first one',
+  dependent_task: fe_task_1,
+  start_at:       fe_task_1.result_at + 6.days,
+  submit_at:      fe_task_1.result_at + 7.days,
+  result_at:      fe_task_1.result_at + 8.days,
 )
 
 # === MEMBERS =================================================================
@@ -184,10 +214,39 @@ task_3_submission_2 = Repo::TaskSubmission.where(
   member: participant_member_2
 ).first_or_create(notes: "Submitted: '#{be_task_3.title}' task")
 
-file_path = Rails.root.join('spec', 'support', 'assets', 'submission.zip')
-file = File.open(file_path)
+submissions_hash = [
+  {
+    submission: task_1_submission_1,
+    file_name: 'submission.zip'
+  },
+  {
+    submission: task_2_submission_1,
+    file_name: 'submission2.zip'
+  },
+  {
+    submission: task_3_submission_1,
+    file_name: 'submission3.zip'
+  },
+  {
+    submission: task_1_submission_2,
+    file_name: 'submission_2-1.zip'
+  },
+  {
+    submission: task_2_submission_2,
+    file_name: 'submission_2-2.zip'
+  },
+  {
+    submission: task_3_submission_2,
+    file_name: 'submission_2-3.zip'
+  }
+]
 
-task_1_submission_1.zip_file.attach(io: file, filename: 'submitted file')
+submissions_hash.each do |submission_hash|
+   file_path = Rails.root.join('spec', 'support', 'assets', submission_hash[:file_name])
+   file = File.open(file_path)
+
+   submission_hash[:submission].zip_file.attach(io: file, filename: "submitted #{submission_hash[:file_name]} file")
+end
 
 # === ASSESSMENTS =============================================================
 # === FIRST PARICIPANT

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :tasks, only: :show, controller: 'ui/tasks' do
     resources :submissions, only: %i[create update destroy], controller: 'ui/submissions'
   end
+  resources :assessments, only: %i[new create edit update], controller: 'ui/assessments'
 
   namespace :admin do
     root 'dashboard#index'

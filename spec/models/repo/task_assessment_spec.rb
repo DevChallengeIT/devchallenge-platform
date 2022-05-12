@@ -17,6 +17,6 @@ RSpec.describe Repo::TaskAssessment, type: :model do
     it { is_expected.to validate_presence_of(:member) }
     it { is_expected.to validate_presence_of(:task_submission) }
     it { is_expected.to validate_presence_of(:task_criterium) }
-    it { is_expected.to validate_uniqueness_of(:task_submission).scoped_to(:member_id) }
+    it { is_expected.to validate_uniqueness_of(:task_submission).scoped_to(:task_criterium_id) }
   end
 end

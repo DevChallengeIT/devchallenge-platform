@@ -9,6 +9,8 @@ module Repo
 
     has_one_attached :zip_file
 
+    accepts_nested_attributes_for :task_assessments
+
     validates :task, presence: true
     validates :member, presence: true
     validates :task, uniqueness: { scope: :member_id }

@@ -9,9 +9,13 @@ module Repo
     has_one :task, through: :task_submission
 
     validates :member, presence: true # TODO: only judge!
-    validates :task_submission, presence: true, uniqueness: { scope: :member_id }
+    validates :task_submission, presence: true, uniqueness: { scope: :task_criterium_id }
     validates :task_criterium, presence: true
     validates :value, presence: true
-    # TODO: can't be larger than task_criterium.max_value
+    validate :within_task_criterium_range?
+
+    def within_task_criterium_range?
+      errors.add(:value, :larger_than_max_value) if task_criterium&.max_value && value > task_criterium.max_value
+    end
   end
 end
