@@ -132,7 +132,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_163755) do
     t.datetime "updated_at", null: false
     t.index ["challenge_id"], name: "index_tasks_on_challenge_id"
     t.index ["dependent_task_id"], name: "index_tasks_on_dependent_task_id"
-    t.index ["slug"], name: "index_tasks_on_slug", unique: true
+    t.index ["slug", "challenge_id"], name: "index_tasks_on_slug_and_challenge_id", unique: true
     t.index ["title", "challenge_id"], name: "index_tasks_on_title_and_challenge_id", unique: true
   end
 
