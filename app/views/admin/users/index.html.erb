@@ -1,6 +1,13 @@
 <div class="flex justify-between items-center py-3">
   <h2 class="<%= UI::H2 %>"><%= t('resources.users.plural') %></h2>
-  <%= link_to t('words.add'), new_admin_user_path, class: UI::BUTTON_PRIMARY %>
+  <div class="flex justify-between items-center space-x-3">
+    <div>
+      <%= form_with(url: admin_users_path, method: :get, id: 'search-form') do |_form| %>
+        <%= text_field_tag :search, params[:search], placeholder: t('words.search') %>
+      <% end %>
+    </div>
+    <%= link_to t('words.add'), new_admin_user_path, class: UI::BUTTON_PRIMARY %>
+  </div>
 </div>
 <table id="users" class="table">
   <thead>
