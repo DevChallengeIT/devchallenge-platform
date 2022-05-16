@@ -18,18 +18,35 @@ RSpec.describe 'Admin/Users/Index' do
     expect(page).to have_content 'Access denied'
   end
 
-  it 'success' do
-    user = create(:user)
+  context 'when logged in as admin' do
+    let!(:user) { create(:user) }
 
-    assume_logged_in(admin: true)
-    visit '/admin/users'
+    before do
+      assume_logged_in(admin: true)
+    end
 
-    within "#user-#{user.id}" do
-      expect(page).to have_link user.email, href: "/admin/users/#{user.slug}/edit"
-      expect(page).to have_content user.full_name
-      expect(page).to have_content user.slug
-      expect(page).to have_content user.time_zone
-      expect(page).to have_content user.sign_in_count
+    it 'success' do
+      visit '/admin/users'
+
+      within "#user-#{user.id}" do
+        expect(page).to have_link user.email, href: "/admin/users/#{user.slug}/edit"
+        expect(page).to have_content user.full_name
+        expect(page).to have_content user.slug
+        expect(page).to have_content user.time_zone
+        expect(page).to have_content user.sign_in_count
+      end
+    end
+
+    context 'when with search param' do
+      let!(:user1) { create(:user, email: 'stan.rock@gmail.com') }
+      let!(:user2) { create(:user, email: 'stan.rick@gmail.com') }
+
+      it 'searches' do
+        visit '/admin/users?search=ock'
+
+        expect(page).to have_content user1.email
+        expect(page).not_to have_content user2.email
+      end
     end
   end
 

@@ -7,7 +7,7 @@ module Admin
     add_breadcrumb I18n.t('resources.users.plural'), :admin_users_path
 
     def index
-      @paginator, @users = paginate Repo::User.all
+      @paginator, @users = paginate Users.list_users(search: params[:search])
     end
 
     def new
