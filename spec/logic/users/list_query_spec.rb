@@ -23,5 +23,13 @@ RSpec.describe Users::ListQuery do
     it 'returns matched uses' do
       expect(result).to contain_exactly(user_by_email, user_by_full_name)
     end
+
+    context 'with blank search param' do
+      let(:search_text) { '' }
+
+      it 'returns all users' do
+        expect(result).to contain_exactly(*users_list, user_by_email, user_by_full_name)
+      end
+    end
   end
 end
