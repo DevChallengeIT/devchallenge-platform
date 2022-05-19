@@ -15,7 +15,7 @@
 
 <div class="my-5">
   <% @tasks.each do |task| %>
-    <% if current_member || Auth.admin?(current_user) %>
+    <% if member_authorized_for_task?(task) || Auth.admin?(current_user) %>
       <%= link_to task.title, task_path(task) %>
     <% else %>
       <%= task.title %> -> <%= task.start_at %> - <%= task.submit_at %>

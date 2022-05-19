@@ -56,7 +56,7 @@ module Admin
 
     def task_params
       params.require(:task).permit(:title, :description, :slug, :registration_at, :challenge_id,
-                                   :start_at, :submit_at, :result_at, :dependent_task_id, :min_assestment)
+                                   :start_at, :submit_at, :result_at, :dependent_task_id, :min_assessment)
     end
   end
 end

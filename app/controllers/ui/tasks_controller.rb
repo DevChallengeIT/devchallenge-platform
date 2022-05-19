@@ -11,6 +11,8 @@ module UI
       if current_member&.judge?
         @paginator, @task_submissions = paginate task_submissions
         render 'ui/tasks/judges/show'
+      elsif !member_authorized_for_task?(task)
+        redirect_to root_path, notice: t('messages.access_denied')
       else
         super
       end
@@ -19,7 +21,7 @@ module UI
     private
 
     def challenge
-      @challenge ||= task.challenge
+      @challenge ||= task&.challenge
     end
 
     def task
@@ -28,6 +30,8 @@ module UI
         :rich_text_description,
         :task_submissions
       ).friendly.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      nil
     end
 
     def task_submission
