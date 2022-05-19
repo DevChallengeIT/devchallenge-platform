@@ -4,21 +4,25 @@ module UI
   class TasksController < BaseController
     include CompetitionContext
 
-    before_action :authenticate_user!, :authorize_member!
+    before_action :authenticate_user!, :authorize_member!, :authorize_member_for_task!
     helper_method :task, :task_submission, :task_submissions
 
     def show
       if current_member&.judge?
         @paginator, @task_submissions = paginate task_submissions
         render 'ui/tasks/judges/show'
-      elsif !member_authorized_for_task?(task)
-        redirect_to root_path, notice: t('messages.access_denied')
       else
         super
       end
     end
 
     private
+
+    def authorize_member_for_task!
+      return true if member_authorized_for_task?(task)
+
+      redirect_to root_path, notice: t('messages.access_denied')
+    end
 
     def challenge
       @challenge ||= task&.challenge
