@@ -20,11 +20,11 @@ module Tasks
     private
 
     def member?
-      task.challenge.members.find_by(user: user)
+      task.challenge.members.find_by(user:)
     end
 
     def task_started?
-      Time.now > task.start_at
+      Time.now.utc > task.start_at
     end
 
     def assessed_enough?
@@ -38,7 +38,7 @@ module Tasks
     end
 
     def current_assessment
-      Tasks::AssessmentCalculator.total_assessment_for(member: user, task: task)
+      Tasks::AssessmentCalculator.total_assessment_for(member: user, task:)
     end
   end
 end

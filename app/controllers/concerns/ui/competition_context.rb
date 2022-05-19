@@ -36,7 +36,7 @@ module UI
     end
 
     def member_authorized_for_task?(task)
-      Tasks.can_user_do_task?(user: current_user, task: task)
+      Tasks.can_user_do_task?(user: current_user, task:)
     end
   end
 end

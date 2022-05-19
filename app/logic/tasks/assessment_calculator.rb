@@ -15,7 +15,7 @@ module Tasks
 
     # TODO: check this
     def total_assessment
-      task.task_assessments.where(member: member).sum(:value)
+      task.task_assessments.where(member:).sum(:value)
     end
   end
 end
