@@ -1,8 +1,8 @@
 class CreateTasks < ActiveRecord::Migration[7.0]
   def change
     create_table :tasks do |t|
-      t.citext :title, null: false, index: { unique: true }
-      t.citext :slug, null: false, index: { unique: true }
+      t.citext :title, null: false
+      t.citext :slug, null: false
       t.text :description
       t.references :challenge, null: false, foreign_key: true
       t.datetime :start_at
@@ -13,5 +13,8 @@ class CreateTasks < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+
+    add_index :tasks, [:title, :challenge_id], unique: true
+    add_index :tasks, [:slug, :challenge_id], unique: true
   end
 end

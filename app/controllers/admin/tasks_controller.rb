@@ -30,7 +30,6 @@ module Admin
 
     def edit
       add_breadcrumb task.title
-      @tasks = task.challenge.tasks.where.not(id: task.id)
     end
 
     def update
@@ -52,7 +51,7 @@ module Admin
     end
 
     def task
-      @task ||= Repo::Task.preload(:challenge).friendly.find(params[:id])
+      @task ||= challenge_tasks.friendly.find(params[:id])
     end
 
     def task_params
