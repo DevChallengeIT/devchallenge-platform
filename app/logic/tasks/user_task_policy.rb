@@ -20,7 +20,7 @@ module Tasks
     private
 
     def member?
-      task.challenge.members.find_by(user:)
+      task.challenge.members.exists?(user:)
     end
 
     def task_started?

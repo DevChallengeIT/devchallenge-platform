@@ -14,7 +14,7 @@ module Tasks
     end
 
     def total_assessment
-      task.task_submissions.join(:task_assessments).where(task_submissions: { member: member }).sum(:value)
+      task.task_submissions.joins(:task_assessments).where(task_submissions: { member: member }).sum(:value)
     end
   end
 end
