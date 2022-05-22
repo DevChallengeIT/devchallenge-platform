@@ -13,9 +13,8 @@ module Tasks
       @task   = task
     end
 
-    # TODO: check this
     def total_assessment
-      task.task_assessments.where(member:).sum(:value)
+      task.task_submissions.join(:task_assessments).where(task_submissions: { member: member }).sum(:value)
     end
   end
 end
