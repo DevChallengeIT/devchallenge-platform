@@ -6,15 +6,15 @@ module Tasks
       new(**params).total_assessment
     end
 
-    attr_reader :member, :task
+    attr_reader :participant, :task
 
-    def initialize(member:, task:)
-      @member = member
+    def initialize(participant:, task:)
+      @participant = participant
       @task   = task
     end
 
     def total_assessment
-      task.task_submissions.joins(:task_assessments).where(task_submissions: { member: member }).sum(:value)
+      task.task_submissions.joins(:task_assessments).where(task_submissions: { member: participant }).sum(:value)
     end
   end
 end

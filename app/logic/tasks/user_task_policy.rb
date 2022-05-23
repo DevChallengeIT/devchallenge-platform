@@ -8,26 +8,31 @@ module Tasks
 
     attr_reader :user, :task
 
+    delegate :admin?, to: Auth
+    delegate :judge?, :participant?, to: :member, allow_nil: true
+
     def initialize(user:, task:)
       @user = user
       @task = task
     end
 
     def can_do?
-      member? && task_started? && assessed_enough?
+      return true if admin?(user) || judge?
+
+      participant? && task_started? && dependent_assessed_enough?
     end
 
     private
 
-    def member?
-      task.challenge.members.exists?(user:)
+    def member
+      @member ||= task.challenge.members.find_by(user:)
     end
 
     def task_started?
       Time.now.utc > task.start_at
     end
 
-    def assessed_enough?
+    def dependent_assessed_enough?
       return true if dependent_task.blank?
 
       current_assessment >= dependent_task.min_assessment
@@ -38,7 +43,7 @@ module Tasks
     end
 
     def current_assessment
-      Tasks::AssessmentCalculator.total_assessment_for(member: user, task:)
+      Tasks::AssessmentCalculator.total_assessment_for(participant: member, task: dependent_task)
     end
   end
 end

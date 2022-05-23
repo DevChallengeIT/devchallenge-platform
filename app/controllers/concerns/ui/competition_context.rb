@@ -5,7 +5,7 @@ module UI
     extend ActiveSupport::Concern
 
     included do
-      helper_method :challenge, :current_member, :member_authorized_for_task?
+      helper_method :challenge, :current_member, :user_authorized_for_task?
       before_action :authorize_challenge!, only: :show
     end
 
@@ -35,7 +35,7 @@ module UI
       redirect_to root_path, notice: t('messages.access_denied') unless current_member&.judge?
     end
 
-    def member_authorized_for_task?(task)
+    def user_authorized_for_task?(task)
       Tasks.can_user_do_task?(user: current_user, task:)
     end
   end

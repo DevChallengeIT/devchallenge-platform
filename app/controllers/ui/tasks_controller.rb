@@ -19,7 +19,7 @@ module UI
     private
 
     def authorize_member_for_task!
-      return true if member_authorized_for_task?(task)
+      return true if user_authorized_for_task?(task)
 
       redirect_to root_path, notice: t('messages.access_denied')
     end
