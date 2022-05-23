@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Tasks::UserTaskPolicy do
-  subject(:policy) { Tasks.can_user_do_task?(user: user, task: task) }
+  subject(:policy) { Tasks.can_user_do_task?(user:, task:) }
 
   let(:user) { create(:user) }
   let(:task) { create(:task) }
@@ -45,21 +45,25 @@ RSpec.describe Tasks::UserTaskPolicy do
         context 'when the dependent task present and assessed enough' do
           let(:dependent_task) do
             create(:task,
-              challenge: participant.challenge,
-              task_submissions: task_submissions,
-              min_assessment: 27
-            )
+                   challenge:        participant.challenge,
+                   task_submissions:,
+                   min_assessment:   27)
           end
           let(:task_submissions) do
             create_list(:task_submission, 1,
-              task_assessments: task_assessments,
-              member: participant
-            )
+                        task_assessments:,
+                        member:           participant)
           end
-          let(:task_assessments) { create_list(:task_assessment, 3, value: value) }
+          let(:task_assessments) { create_list(:task_assessment, 3, value:) }
           let(:value) { 10 }
 
           it { expect(policy).to be true }
+
+          context 'when assessment is equal to minimum assessment' do
+            let(:value) { 9 }
+
+            it { expect(policy).to be true }
+          end
 
           context 'when the dependent task not assessed enough' do
             let(:value) { 8 }

@@ -10,7 +10,7 @@ module Tasks
 
     def initialize(participant:, task:)
       @participant = participant
-      @task   = task
+      @task = task
     end
 
     def total_assessment
