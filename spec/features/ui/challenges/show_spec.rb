@@ -119,6 +119,7 @@ RSpec.describe 'UI/Challenges/Show' do
       expect(page).to have_link task_b.title, href: "/tasks/#{task_b.slug}"
     end
 
+    # TODO: check it
     context 'without access to tasks' do
       include_examples 'displaying tasks info'
     end
