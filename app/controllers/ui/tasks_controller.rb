@@ -4,7 +4,8 @@ module UI
   class TasksController < BaseController
     include CompetitionContext
 
-    before_action :authenticate_user!, :authorize_member!, :authorize_member_for_task!
+    before_action :authenticate_user!, :authorize_member!
+    before_action :authorize_member_for_task!, only: :show
     helper_method :task, :task_submission, :task_submissions
 
     def show
