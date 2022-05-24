@@ -3,6 +3,20 @@
 require 'rails_helper'
 
 RSpec.describe 'UI/Challenges/Show' do
+  shared_examples 'displaying tasks info' do
+    it 'displays tasks info' do
+      challenge = create(:challenge, status: 'ready')
+      task_a = create(:task, challenge:)
+      task_b = create(:task, challenge:)
+
+      visit "/challenges/#{challenge.slug}"
+      expect(page).not_to have_link task_a.title, href: "/tasks/#{task_a.slug}"
+      expect(page).not_to have_link task_b.title, href: "/tasks/#{task_b.slug}"
+      expect(page).to have_content task_a.title
+      expect(page).to have_content task_b.title
+    end
+  end
+
   context 'without session' do
     it 'can not access draft challenge' do
       challenge = create(:challenge, status: 'draft')
@@ -44,17 +58,7 @@ RSpec.describe 'UI/Challenges/Show' do
       expect(page).not_to have_link 'Edit', href: "/admin/challenges/#{challenge.slug}/edit"
     end
 
-    it 'displays tasks info' do
-      challenge = create(:challenge, status: 'ready')
-      task_a = create(:task, challenge:)
-      task_b = create(:task, challenge:)
-
-      visit "/challenges/#{challenge.slug}"
-      expect(page).not_to have_link task_a.title, href: "/tasks/#{task_a.slug}"
-      expect(page).not_to have_link task_b.title, href: "/tasks/#{task_b.slug}"
-      expect(page).to have_content task_a.title
-      expect(page).to have_content task_b.title
-    end
+    include_examples 'displaying tasks info'
   end
 
   context 'with regular user/member session' do
@@ -113,6 +117,10 @@ RSpec.describe 'UI/Challenges/Show' do
       visit "/challenges/#{challenge.slug}"
       expect(page).to have_link task_a.title, href: "/tasks/#{task_a.slug}"
       expect(page).to have_link task_b.title, href: "/tasks/#{task_b.slug}"
+    end
+
+    context 'without access to tasks' do
+      include_examples 'displaying tasks info'
     end
   end
 
