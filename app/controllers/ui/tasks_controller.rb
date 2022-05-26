@@ -5,6 +5,7 @@ module UI
     include CompetitionContext
 
     before_action :authenticate_user!, :authorize_member!
+    before_action :authorize_member_for_task!, only: :show
     helper_method :task, :task_submission, :task_submissions
 
     def show
@@ -18,8 +19,14 @@ module UI
 
     private
 
+    def authorize_member_for_task!
+      return true if user_authorized_for_task?(task)
+
+      redirect_to root_path, notice: t('messages.access_denied')
+    end
+
     def challenge
-      @challenge ||= task.challenge
+      @challenge ||= task&.challenge
     end
 
     def task
@@ -28,6 +35,8 @@ module UI
         :rich_text_description,
         :task_submissions
       ).friendly.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      nil
     end
 
     def task_submission

@@ -114,6 +114,22 @@ RSpec.describe 'UI/Challenges/Show' do
       expect(page).to have_link task_a.title, href: "/tasks/#{task_a.slug}"
       expect(page).to have_link task_b.title, href: "/tasks/#{task_b.slug}"
     end
+
+    context 'without access to tasks, not a participant' do
+      it 'displays tasks info' do
+        challenge = create(:challenge, status: 'ready')
+        task_a = create(:task, challenge:)
+        task_b = create(:task, challenge:)
+        current_member = challenge.members.find_by(user: current_user)
+        expect(current_member).not_to be_present
+
+        visit "/challenges/#{challenge.slug}"
+        expect(page).not_to have_link task_a.title, href: "/tasks/#{task_a.slug}"
+        expect(page).not_to have_link task_b.title, href: "/tasks/#{task_b.slug}"
+        expect(page).to have_content task_a.title
+        expect(page).to have_content task_b.title
+      end
+    end
   end
 
   context 'with admin session' do

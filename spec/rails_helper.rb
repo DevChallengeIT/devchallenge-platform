@@ -37,6 +37,7 @@ RSpec.configure do |config|
   config.include Capybara::RSpecMatchers,    type: :component
   config.include SpecHelpers::Features,      type: :feature
   config.include Warden::Test::Helpers
+  config.include ActiveSupport::Testing::TimeHelpers
 
   config.before :suite do
     Warden.test_mode!
