@@ -11,15 +11,15 @@ RSpec.describe Competition::TasksAssessmentCalculator do
       :task,
       challenge:        participant.challenge,
       task_submissions: create_list(
-                          :task_submission,
-                          1,
-                          task_assessments: [
-                                              create(:task_assessment, value: values[0]),
-                                              create(:task_assessment, value: values[1]),
-                                              create(:task_assessment, value: values[2])
-                                            ],
-                          member:           participant
-                        ),
+        :task_submission,
+        1,
+        task_assessments: [
+          create(:task_assessment, value: values[0]),
+          create(:task_assessment, value: values[1]),
+          create(:task_assessment, value: values[2])
+        ],
+        member:           participant
+      ),
       min_assessment:   27
     )
   end
