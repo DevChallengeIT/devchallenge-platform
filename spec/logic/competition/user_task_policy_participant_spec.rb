@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe Tasks::UserTaskPolicy do
-  subject(:policy) { Tasks.can_user_do_task?(user:, task:) }
+RSpec.describe Competition::UserTaskPolicy do
+  subject(:policy) { Competition.can_user_do_task?(user:, task:) }
 
   let(:user) { participant.user }
   let(:participant) { create(:member) }
@@ -24,12 +24,17 @@ RSpec.describe Tasks::UserTaskPolicy do
 
   context 'when a dependent task assessed enough' do
     let(:dependent_task) do
-      create(:task,
-             challenge:        participant.challenge,
-             task_submissions: create_list(:task_submission, 1,
-                                           task_assessments: create_list(:task_assessment, 3, value:),
-                                           member:           participant),
-             min_assessment:   27)
+      create(
+        :task,
+        challenge:        participant.challenge,
+        task_submissions: create_list(
+          :task_submission,
+          1,
+          task_assessments: create_list(:task_assessment, 3, value:),
+          member:           participant
+        ),
+        min_assessment:   27
+      )
     end
     let(:value) { 10 }
 

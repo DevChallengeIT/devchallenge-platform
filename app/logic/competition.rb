@@ -11,4 +11,5 @@ module Competition
   delegate :registration_opened?, to: ChallengePolicy
   delegate :registration_closed?, to: ChallengePolicy
   delegate :registration_not_started?, to: ChallengePolicy
+  delegate :can_user_do_task?, to: UserTaskPolicy
 end

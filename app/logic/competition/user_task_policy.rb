@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Tasks
+module Competition
   class UserTaskPolicy
     def self.can_user_do_task?(**params)
       new(**params).can_do?
@@ -43,7 +43,7 @@ module Tasks
     end
 
     def current_assessment
-      Tasks::AssessmentCalculator.total_assessment_for(participant: member, task: dependent_task)
+      TasksAssessmentCalculator.total_assessment_for(participant: member, task: dependent_task)
     end
   end
 end

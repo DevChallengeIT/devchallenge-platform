@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Tasks
-  class AssessmentCalculator
+module Competition
+  class TasksAssessmentCalculator
     def self.total_assessment_for(**params)
       new(**params).total_assessment
     end

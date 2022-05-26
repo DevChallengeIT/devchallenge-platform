@@ -26,7 +26,8 @@ RSpec.describe 'UI/Tasks/Show' do
 
     it 'can access with challenge membership' do
       assume_logged_in
-      create(:member, user: current_user, challenge: task.challenge)
+      member = create(:member, user: current_user, challenge: task.challenge)
+      expect(member).to be_participant
 
       visit "/tasks/#{task.slug}"
 

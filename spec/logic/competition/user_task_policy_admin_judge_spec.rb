@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe Tasks::UserTaskPolicy do
-  subject(:policy) { Tasks.can_user_do_task?(user:, task:) }
+RSpec.describe Competition::UserTaskPolicy do
+  subject(:policy) { Competition.can_user_do_task?(user:, task:) }
 
   let(:user) { create(:user) }
   let(:task) { create(:task) }
