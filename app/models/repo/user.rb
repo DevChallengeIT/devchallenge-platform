@@ -4,7 +4,7 @@ module Repo
   class User < ApplicationRecord
     # Include default devise modules. Others available are:
     # :confirmable, :lockable, :timeoutable, and :omniauthable
-    devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :trackable
+    devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :trackable, :omniauthable
 
     extend FriendlyId
     friendly_id :full_name, use: :slugged

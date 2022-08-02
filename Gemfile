@@ -13,6 +13,7 @@ gem 'puma', '~> 5.0'
 gem 'rails', '~> 7.0.3'
 gem 'redis', '~> 4.6.0'
 gem 'sidekiq', '~> 6.4.1'
+gem 'omniauth-github', '~> 2.0'
 
 # Frontend
 gem 'breadcrumbs_on_rails', '~> 4.1'

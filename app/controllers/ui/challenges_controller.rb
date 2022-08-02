@@ -14,7 +14,7 @@ module UI
     end
 
     def show
-      @tasks = challenge.tasks.includes(:dependent_task).order(:start_at)
+      @tasks = challenge.tasks.includes(:dependent_task, challenge: :members).order(:start_at)
     end
 
     private
