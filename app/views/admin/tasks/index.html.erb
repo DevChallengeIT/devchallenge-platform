@@ -25,7 +25,7 @@
     <% @tasks.each do |task| %>
       <tr id="task-<%= task.id %>">
         <td>
-          <%= link_to task.title, edit_admin_challenge_task_path(challenge, task) %>
+          <%= link_to task.title, edit_admin_challenge_task_path(challenge, task), class: UI::LINK %>
         </td>
         <td class="text-center">
           <%= render(UI::TimestampComponent.new(data: task.start_at, highlight_now: true)) %>

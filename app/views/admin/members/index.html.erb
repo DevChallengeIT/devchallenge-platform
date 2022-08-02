@@ -18,7 +18,7 @@
     <% @members.each do |member| %>
       <tr id="member-<%= member.id %>">
         <td>
-          <%= link_to render(UI::UserNameComponent.new(user: member.user)), edit_admin_challenge_member_path(challenge, member) %>
+          <%= link_to render(UI::UserNameComponent.new(user: member.user)), edit_admin_challenge_member_path(challenge, member), class: UI::LINK %>
         </td>
         <td>
           <%= member.role %>

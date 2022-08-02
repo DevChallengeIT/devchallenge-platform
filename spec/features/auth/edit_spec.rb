@@ -21,6 +21,8 @@ RSpec.describe 'Log In' do
 
     # Empty current_password
     fill_in 'Full Name', with: 'New User Name'
+    fill_in 'Password', with: 'NewPassword'
+    fill_in 'Confirm password', with: 'NewPassword'
     fill_in 'Current Password', with: ''
     click_button 'Update'
     expect(page).to have_content "Current password can't be blank"

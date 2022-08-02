@@ -12,15 +12,30 @@
 
   <body class="container mx-auto mt-3">
     <header class="my-3">
+      <% if notice %>
+        <div class="<%= UI::FLASH_NOTICE %>" role="alert">
+          <%= notice %>
+        </div>
+      <% end %>
+
+       <% if alert %>
+        <div class="<%= UI::FLASH_ALERT %>" role="alert">
+          <%= alert %>
+        </div>
+      <% end %>
+      
       <nav id="main-nav" class="flex items-center space-x-5 justify-between py-1">
         <div class="flex space-x-5">
           <%= link_to t('words.home'), root_path %>
         </div>
         <% if current_user %>
           <div class="flex space-x-5">
+            <div><%= Time.zone.now %></div>
+            
             <% if Auth.admin?(current_user) %>
               <%= link_to t('words.admin'), admin_root_path %>
             <% end %>
+            
             <%= link_to current_user.full_name, edit_user_registration_path %>
             <%= link_to t('auth.log_out'), destroy_user_session_path %>
           </div>
@@ -31,8 +46,6 @@
           </div>
         <% end %>
       </nav>
-      <p class="font-semibold"><%= notice %></p>
-      <p class="font-semibold"><%= alert %></p>
     </header>
     <main>
       <%= yield %>

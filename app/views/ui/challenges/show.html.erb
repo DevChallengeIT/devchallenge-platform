@@ -1,5 +1,11 @@
 <%= challenge.title %>
 
+<ul>
+  <li><%= challenge.registration_at %></li>
+  <li><%= challenge.start_at %></li>
+  <li><%= challenge.finish_at %></li>
+<ul>
+
 <div class="my-5">
   <% if current_user && Competition.can_join?(user: current_user, challenge: challenge) %>
     <%= button_to t('words.join'), challenge_members_path(challenge), method: :post, class: UI::BUTTON_PRIMARY %>

@@ -4,7 +4,7 @@
   <div class="flex justify-between items-center space-x-3">
     <div>
       <%= form_with(url: admin_challenges_path, method: :get, id: 'search-form') do |form| %>
-        <%= text_field_tag :search, params[:search], placeholder: t('words.search') %>
+        <%= text_field_tag :search, params[:search], placeholder: t('words.search'), class: UI::FORM_INPUT %>
       <% end %>
     </div>
     <%= link_to t('resources.taxonomies.plural'), taxonomies_admin_challenges_path, class: UI::BUTTON_SECONDARY %>
@@ -37,7 +37,7 @@
           <%= render(UI::ChallengeStatusComponent.new(challenge: challenge)) %>
         </td>
         <td>
-          <%= link_to challenge.title, edit_admin_challenge_path(challenge) %>
+          <%= link_to challenge.title, edit_admin_challenge_path(challenge), class: UI::LINK %>
         </td>
         <td class="text-center">
           <%= render(UI::TimestampComponent.new(data: challenge.registration_at, highlight_now: true)) %>
