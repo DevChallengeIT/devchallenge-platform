@@ -8,6 +8,6 @@ RSpec.describe UI::ErrorTagComponent, type: :component do
   it 'renders list of errors' do
     render_inline(described_class.new(errors:, field: :test))
 
-    expect(rendered_component).to have_css "ul > li[class='text-red-500 font-medium']", text: "can't be blank"
+    expect(page).to have_css "ul > li[class='text-red-500 font-medium']", text: "can't be blank"
   end
 end

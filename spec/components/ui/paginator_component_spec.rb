@@ -8,6 +8,6 @@ RSpec.describe UI::PaginatorComponent, type: :component do
   it 'renders list of errors' do
     render_inline(described_class.new(paginator:))
 
-    expect(rendered_component).to be_present # :)
+    expect(page).to be_present # :)
   end
 end
