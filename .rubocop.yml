@@ -39,6 +39,9 @@ Layout/LineLength:
   Exclude:
     - 'app/components/ui.rb'
 
+Metrics/AbcSize:
+  Max: 30
+
 RSpec/MultipleExpectations:
   Enabled: false
 

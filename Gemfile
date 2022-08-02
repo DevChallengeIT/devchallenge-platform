@@ -7,13 +7,14 @@ ruby '3.1.1'
 
 # CORE
 gem 'devise', '~> 4.8.1'
+gem 'omniauth-github', '~> 2.0'
+gem 'omniauth-google-oauth2'
 gem 'pg', '~> 1.1'
 gem 'propshaft', '~> 0.6'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 7.0.3'
 gem 'redis', '~> 4.6.0'
 gem 'sidekiq', '~> 6.4.1'
-gem 'omniauth-github', '~> 2.0'
 
 # Frontend
 gem 'breadcrumbs_on_rails', '~> 4.1'
