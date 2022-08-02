@@ -1,0 +1,2 @@
+- Remove task title unique idx
+- Task form missing dep task and min_value
