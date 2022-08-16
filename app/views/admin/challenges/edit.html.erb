@@ -13,7 +13,7 @@
   <div class="flex my-5 items-center justify-between space-x-5">
     <div class="w-full">
       <%= form.label :status, class: UI::FORM_LABEL %>
-      <%= form.select :status, Repo::Challenge.statuses, {}, class: UI::FORM_INPUT %>
+      <%= form.select :status, Repo::Challenge.statuses, {}, class: UI::FORM_SELECT %>
       <%= render(UI::ErrorTagComponent.new(errors: challenge.errors, field: :status)) %>
     </div>
 

@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import 'actiontext.css';
-
 @layer base {
   .table {
     @apply min-w-full divide-y divide-gray-200 dark:divide-gray-700

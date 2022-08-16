@@ -62,6 +62,8 @@ Rails.application.configure do
 
   config.active_record.strict_loading_by_default = true
   config.active_record.action_on_strict_loading_violation = :log
+  # Suppress logger output for asset requests.
+  config.assets.quiet = true
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
