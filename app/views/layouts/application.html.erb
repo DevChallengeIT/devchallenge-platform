@@ -42,7 +42,9 @@
       <div class="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:pl-5">
         <% if current_user %>
           <div class="flex space-x-5">
-            <div><%= Time.zone.now %></div>
+            <div>
+              <%= render(UI::TimestampComponent.new(data: Time.zone.now)) %>              
+            </div>
             
             <% if Auth.admin?(current_user) %>
               <%= link_to t('words.admin'), admin_root_path, class: UI::NAVBAR_LINK %>
