@@ -38,6 +38,7 @@ Metrics/BlockLength:
 Layout/LineLength:
   Exclude:
     - 'app/components/ui.rb'
+    - 'spec/**/*'
 
 Metrics/AbcSize:
   Max: 30

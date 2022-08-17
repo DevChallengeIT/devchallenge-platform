@@ -4,8 +4,8 @@ module UI
   class TimestampComponent < ViewComponent::Base
     TIME_FORMAT = '%Y %b %d - %H:%M'
     HIGHLIGHT_BG = {
-      true  => 'text-white bg-green-500',
-      false => 'text-white bg-gray-500'
+      true  => 'bg-green-100 text-green-800',
+      false => 'bg-gray-100 text-gray-800'
     }.freeze
     WHITE_BG_COLOR = 'bg-white'
 

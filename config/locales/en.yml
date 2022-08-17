@@ -30,6 +30,7 @@ en:
     leave: Leave
     pending: Pending
     view: View
+    details: Details
   messages:
     access_denied: Access denied
     resource_created: '%{name} was successfully created'

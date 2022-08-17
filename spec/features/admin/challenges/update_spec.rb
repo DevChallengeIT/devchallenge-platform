@@ -84,7 +84,7 @@ RSpec.describe 'Admin/Challenges/Update' do
     visit '/admin/challenges'
     within "#challenge-#{challenge.id}" do
       expect(page).to have_content 'OK challenge'
-      expect(page).to have_content 'ready'
+      expect(page).to have_content 'completed'
       expect(page).to have_content Time.zone.parse('2022-05-01 10:00:00').strftime(UI::TimestampComponent::TIME_FORMAT)
       expect(page).to have_content Time.zone.parse('2022-05-10 09:00:00').strftime(UI::TimestampComponent::TIME_FORMAT)
       expect(page).to have_content Time.zone.parse('2022-05-15 18:00:00').strftime(UI::TimestampComponent::TIME_FORMAT)

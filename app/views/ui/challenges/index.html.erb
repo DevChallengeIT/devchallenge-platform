@@ -1,43 +1,64 @@
-<div>
-  <%= form_with(url: challenges_path, method: :get, id: 'search-form') do |form| %>
-    <div class="flex">
-      <%= text_field_tag :search, params[:search], placeholder: t('words.search') %>
-      <%= submit_tag t('words.search'), class: UI::BUTTON_PRIMARY %>
-    </div>
-  <% end %>
-</div>
 
-<div class="flex my-5">
-  <div>
-    <%= form_with(url: challenges_path, method: :get, id: 'search-form') do |form| %>
-      <% @taxonomies.each do |taxonomy| %>
-        <div class="my-3">
-          <h4 class="<%= UI::H4 %>">
-            <%= taxonomy.title %>
-          </h3>
-          <ul>
-            <% taxonomy.taxons.each do |taxon| %>
-              <li>
-                <%= check_box_tag "filter[taxon_ids][]", taxon.id, filter_taxon_ids.include?(taxon.id.to_s), id: dom_id(taxon) %>
-                <%= label_tag dom_id(taxon), taxon.title %>
-              </li>
-            <% end %>
-          </ul>
+
+<div class="flex space-x-8 py-3">
+  <div class="w-1/4">
+    <div>
+      <%= form_with(url: challenges_path, method: :get, id: 'search-form') do |form| %>
+        <div class="flex space-x-1.5">
+          <%= text_field_tag :search, params[:search], placeholder: t('words.search'), class: UI::FORM_INPUT %>
+          <%= submit_tag t('words.search'), class: UI::BUTTON_PRIMARY %>
         </div>
       <% end %>
+    </div>
+    <div>
+      <%= form_with(url: challenges_path, method: :get, id: 'search-form') do |form| %>
+        <% @taxonomies.each do |taxonomy| %>
+          <div class="my-3">
+            <h4 class="<%= UI::H4 %>">
+              <%= taxonomy.title %>
+            </h4>
+            <ul>
+              <% taxonomy.taxons.each do |taxon| %>
+                <li>
+                  <%= check_box_tag "filter[taxon_ids][]", taxon.id, filter_taxon_ids.include?(taxon.id.to_s), id: dom_id(taxon) %>
+                  <%= label_tag dom_id(taxon), taxon.title %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
 
-      <%= submit_tag t('words.filter'), class: UI::BUTTON_PRIMARY %>
-    <% end %>
+        <%= submit_tag t('words.filter'), class: UI::BUTTON_PRIMARY %>
+      <% end %>
+    </div>
   </div>
 
-  <div class="">
-    <ul>
-      <% @challenges.each do |challenge| %>
-        <li id="challenge-<%= challenge.id %>">
-          <%= link_to challenge.title, challenge_path(challenge)  %>
-        </li>
-      <% end %>
-    </ul>
+  <div class="w-3/4">
+    <% @challenges.each do |challenge| %>
+      <div id="challenge-<%= challenge.id %>" class="bg-white border shadow-sm rounded-xl p-4 md:p-5 dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7] mb-3">
+        <div class="flex justify-between">
+          <div>
+            <%= link_to challenge_path(challenge) do %>
+              <h3 class="text-lg font-bold text-gray-800 dark:text-white">
+                <%= challenge.title %>
+              </h3>
+            <% end %>
+          
+            <p class="mt-1 text-xs font-medium uppercase text-gray-500 dark:text-gray-500">
+              <%= render(UI::TimestampComponent.new(data: challenge.registration_at)) %> - <%= render(UI::TimestampComponent.new(data: challenge.finish_at)) %>
+            </p>
+          </div>
+          <div>
+            <%= render(UI::ChallengeStatusComponent.new(challenge: challenge)) %>
+          </div>
+        </div>
+        <p class="mt-2 text-gray-800 dark:text-gray-400">
+          <%= challenge.description %>
+        </p>
+
+        <%= link_to t("words.details"), challenge_path(challenge), class: 'inline-flex items-center gap-2 mt-5 text-sm font-medium text-blue-500 hover:text-blue-700' %>
+      </div>
+    <% end %>
 
     <%= render(UI::PaginatorComponent.new(paginator: @paginator)) %>
   </div>

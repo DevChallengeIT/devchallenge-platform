@@ -26,7 +26,7 @@ module Competition
     private
 
     def base_scope
-      Repo::Challenge
+      Repo::Challenge.preload(:rich_text_description)
     end
 
     def maybe_search(scope)

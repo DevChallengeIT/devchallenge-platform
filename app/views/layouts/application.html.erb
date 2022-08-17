@@ -43,7 +43,7 @@
         <% if current_user %>
           <div class="flex space-x-5">
             <div>
-              <%= render(UI::TimestampComponent.new(data: Time.zone.now)) %>              
+              <%= render(UI::TimestampComponent.new(data: Time.zone.now)) %>
             </div>
             
             <% if Auth.admin?(current_user) %>
