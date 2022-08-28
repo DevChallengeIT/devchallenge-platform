@@ -61,6 +61,7 @@ en:
     didnt_receive_unlock_instructions: Didn't receive unlock instructions?
     cancel_account: Cancel my account
     already_have_an_account: Already have an account?
+    donot_have_an_account: Don't have an account yet?
     log_in_here: Log In here
     sign_up_with_google: Sign up with Google
     sign_up_with_github: Sign up with Github
