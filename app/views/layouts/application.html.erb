@@ -9,7 +9,7 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
-  <body class="container mx-auto mt-3 bg-gray-100">
+  <body class="container mx-auto md:mt-3 bg-gray-100">
     <% if notice %>
       <div class="<%= UI::FLASH_NOTICE %>" role="alert">
         <%= notice %>
@@ -21,44 +21,38 @@
         <%= alert %>
       </div>
     <% end %>
-      
-    <header class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white text-sm py-4 dark:bg-gray-800 shadow-sm rounded-md">
+
+    <header class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white text-sm py-4 dark:bg-gray-800">
       <nav id="main-nav" class="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
-        <%= link_to 'DEV Challenge', root_path, class: 'flex-none text-xl font-semibold dark:text-white' %>
-
-        <div class="sm:hidden">
-          <button type="button" class="hs-collapse-toggle p-2 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800" data-hs-collapse="#navbar-with-collapse" aria-controls="navbar-with-collapse" aria-label="Toggle navigation">
-            <svg class="hs-collapse-open:hidden w-4 h-4" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-            </svg>
-            <svg class="hs-collapse-open:block hidden w-4 h-4" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-            </svg>
-          </button>
-      </div>
-    </div>
-
-    <div id="navbar-with-collapse" class="hidden basis-full grow sm:block">
-      <div class="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:pl-5">
-        <% if current_user %>
-          <div class="flex space-x-5">
-            <div>
+        <div class="flex items-center justify-between">
+        <a class="flex-none text-xl font-semibold dark:text-white" href=<%= root_path %>><%= t(:title) %></a>
+          <div class="sm:hidden">
+            <button type="button" class="hs-collapse-toggle p-2 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800" data-hs-collapse="#navbar-collapse-with-animation" aria-controls="navbar-collapse-with-animation" aria-label="Toggle navigation">
+              <svg class="hs-collapse-open:hidden w-4 h-4" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+              </svg>
+              <svg class="hs-collapse-open:block hidden w-4 h-4" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div id="navbar-collapse-with-animation" class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block">
+          <div class="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:pl-5">
+            <% if current_user %>
               <%= render(UI::TimestampComponent.new(data: Time.zone.now)) %>
-            </div>
-            
-            <% if Auth.admin?(current_user) %>
-              <%= link_to t('words.admin'), admin_root_path, class: UI::NAVBAR_LINK %>
+              
+              <% if Auth.admin?(current_user) %>
+                <%= link_to t('words.admin'), admin_root_path, class: UI::NAVBAR_LINK %>
+              <% end %>
+              
+              <%= link_to current_user.full_name, edit_user_registration_path, class: UI::NAVBAR_LINK %>
+              <%= link_to t('auth.log_out'), destroy_user_session_path, class: UI::NAVBAR_LINK %>
+            <% else %>
+              <%= link_to t('auth.log_in'), new_user_session_path, class: UI::NAVBAR_LINK %>
+              <%= link_to t('auth.register'), new_user_registration_path, class: UI::NAVBAR_LINK %>
             <% end %>
-            
-            <%= link_to current_user.full_name, edit_user_registration_path, class: UI::NAVBAR_LINK %>
-            <%= link_to t('auth.log_out'), destroy_user_session_path, class: UI::NAVBAR_LINK %>
           </div>
-        <% else %>
-          <div class="flex space-x-5">
-            <%= link_to t('auth.log_in'), new_user_session_path, class: UI::NAVBAR_LINK %>
-            <%= link_to t('auth.register'), new_user_registration_path, class: UI::NAVBAR_LINK %>
-          </div>
-        <% end %>
         </div>
       </nav>
     </header>

@@ -16,6 +16,6 @@ module UI
   LINK = 'text-blue-600 decoration-2 hover:underline font-medium'
   NAVBAR_LINK = 'font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500'
 
-  FLASH_NOTICE = 'font-semibold bg-blue-500 text-md text-white rounded py-2 px-4 my-2'
-  FLASH_ALERT = 'font-semibold bg-red-500 text-md text-white rounded py-2 px-4 my-2'
+  FLASH_NOTICE = 'font-semibold bg-blue-500 text-md text-white py-2 px-4 md:my-2'
+  FLASH_ALERT = 'font-semibold bg-red-500 text-md text-white py-2 px-4 md:my-2'
 end

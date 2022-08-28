@@ -318,7 +318,7 @@ Repo::TaskAssessment.where(
 ).first_or_create(value: 2, comment: 'No comments')
 
 # === TAXONOMIES & TAXONS =====================================================
-txn_speciality = Repo::Taxonomy.where(title: 'Speciality').first_or_create
+txn_speciality = Repo::Taxonomy.where(title: 'Specialty').first_or_create
 txn_tech = Repo::Taxonomy.where(title: 'Technology').first_or_create
 txn_location = Repo::Taxonomy.where(title: 'Location').first_or_create
 

@@ -6,6 +6,7 @@ en:
           attributes:
             value:
               larger_than_max_value: can't be larger than criterium max value
+  title: DEV Challenge
   words:
     app: App
     admin: Admin
