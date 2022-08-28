@@ -2,17 +2,22 @@
 
 module UI
   class ChallengeRegistrationInfoComponent < ViewComponent::Base
-    def initialize(challenge:)
-      @policy = Competition::ChallengePolicy.new(user: nil, challenge:)
+    def initialize(challenge:, user: nil)
+      @policy = Competition::ChallengePolicy.new(user:, challenge:)
+      @user = user
+      @challenge = challenge
+      @status, @message = registration_info
     end
+
+    private
 
     def registration_info
       if @policy.registration_closed?
-        t('messages.challenge_registration_closed')
+        ['bg-red-500', t('messages.challenge_registration_closed')]
       elsif @policy.registration_not_started?
-        t('messages.challenge_registration_not_opened_yet')
+        ['bg-blue-500', t('messages.challenge_registration_not_opened_yet')]
       else
-        t('messages.register_to_join')
+        ['bg-gray-500', t('messages.register_to_join')]
       end
     end
   end

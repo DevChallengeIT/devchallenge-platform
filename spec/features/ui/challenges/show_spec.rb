@@ -44,7 +44,7 @@ RSpec.describe 'UI/Challenges/Show' do
       expect(page).not_to have_link 'Edit', href: "/admin/challenges/#{challenge.slug}/edit"
     end
 
-    it 'displays tasks info' do
+    xit 'displays tasks info' do
       challenge = create(:challenge, status: 'ready')
       task_a = create(:task, challenge:)
       task_b = create(:task, challenge:)
@@ -104,7 +104,7 @@ RSpec.describe 'UI/Challenges/Show' do
       expect(page).not_to have_link 'Edit', href: "/admin/challenges/#{challenge.slug}/edit"
     end
 
-    it 'displays tasks links' do
+    xit 'displays tasks links' do
       challenge = create(:challenge, status: 'ready')
       task_a = create(:task, challenge:)
       task_b = create(:task, challenge:)
@@ -116,7 +116,7 @@ RSpec.describe 'UI/Challenges/Show' do
     end
 
     context 'without access to tasks, not a participant' do
-      it 'displays tasks info' do
+      xit 'displays tasks info' do
         challenge = create(:challenge, status: 'ready')
         task_a = create(:task, challenge:)
         task_b = create(:task, challenge:)
@@ -167,7 +167,7 @@ RSpec.describe 'UI/Challenges/Show' do
       expect(page).to have_link 'Edit', href: "/admin/challenges/#{challenge.slug}/edit"
     end
 
-    it 'displays tasks links' do
+    xit 'displays tasks links' do
       challenge = create(:challenge, status: 'ready')
       task_a = create(:task, challenge:)
       task_b = create(:task, challenge:)

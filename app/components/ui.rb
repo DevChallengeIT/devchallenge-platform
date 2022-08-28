@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 module UI
-  H2 = 'text-2xl font-semibold'
-  H3 = 'text-xl font-semibold'
-  H4 = 'text-md font-semibold'
+  H1 = 'block text-2xl font-bold text-gray-800 dark:text-white'
+  H2 = 'block text-xl font-bold text-gray-800 dark:text-white'
+  H3 = 'text-lg font-semibold text-gray-800 dark:text-white'
+  H4 = 'text-md font-semibold text-gray-800 dark:text-white'
   FORM_LABEL = 'block text-sm mb-2 dark:text-white'
   FORM_INPUT = 'py-3 px-4 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400'
   FORM_SELECT = 'py-3 px-4 pr-9 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400'

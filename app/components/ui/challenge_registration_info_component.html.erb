@@ -1,1 +1,7 @@
-<%= registration_info %>
+<div class="<%= @status %> text-sm text-white rounded-md p-4" role="alert">
+  <span class="font-bold"><%= @message %></span>
+  <% if Competition.registration_opened?(user: @user, challenge: @challenge) %>
+      <%= link_to "#{t('auth.log_in')} / #{t('auth.register')}", new_user_session_path, class: 'text-white decoration-2 hover:underline font-medium' %>
+  <% end %>
+</div>
+
