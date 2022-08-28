@@ -36,6 +36,7 @@ gem 'acts_as_list', '~> 1.0.4'
 gem 'friendly_id', '~> 5.4.0'
 gem 'image_processing'
 gem 'lograge', '~> 0.12'
+gem 'newrelic_rpm'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

@@ -191,6 +191,7 @@ GEM
       digest
       net-protocol
       timeout
+    newrelic_rpm (8.10.0)
     nio4r (2.5.8)
     nokogiri (1.13.8-arm64-darwin)
       racc (~> 1.4)
@@ -394,6 +395,7 @@ DEPENDENCIES
   jsbundling-rails
   launchy
   lograge (~> 0.12)
+  newrelic_rpm
   omniauth-github (~> 2.0)
   omniauth-google-oauth2
   pagy (~> 5.10)

@@ -10,9 +10,6 @@ RSpec.describe 'Navigation' do
       visit root_path
 
       within '#main-nav' do
-        click_link 'DEV Challenge'
-        expect(page).to have_current_path '/'
-
         click_link 'Log In'
         expect(page).to have_current_path '/login'
 
@@ -32,9 +29,6 @@ RSpec.describe 'Navigation' do
       visit root_path
 
       within '#main-nav' do
-        click_link 'DEV Challenge'
-        expect(page).to have_current_path '/'
-
         click_link current_user.full_name
         expect(page).to have_current_path '/profile'
 
@@ -53,9 +47,6 @@ RSpec.describe 'Navigation' do
       visit root_path
 
       within '#main-nav' do
-        click_link 'DEV Challenge'
-        expect(page).to have_current_path '/'
-
         click_link current_user.full_name
         expect(page).to have_current_path '/profile'
 
