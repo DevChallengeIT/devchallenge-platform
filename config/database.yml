@@ -13,5 +13,4 @@ test:
 
 production:
   <<: *default
-  database: devchallenge_production
   url: <%= ENV['DATABASE_URL'] %>
