@@ -12,7 +12,7 @@ module UI
     def show; end
 
     def challenge
-      @challenge ||= Repo::Challenge.preload(:members).friendly.find(params[:challenge_id] || params[:id])
+      @challenge ||= Repo::Challenge.preload(:rich_text_description, :members).friendly.find(params[:challenge_id] || params[:id])
     end
 
     def current_member
