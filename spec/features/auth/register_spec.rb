@@ -13,8 +13,18 @@ RSpec.describe 'Log In' do
     fill_in 'Confirm password', with: ''
     click_button 'Register'
 
-    expect(page).to have_content "Email can't be blank"
-    expect(page).to have_content "Password can't be blank"
+    within '#full_name-errors' do
+      expect(page).to have_content "can't be blank"
+    end
+
+    within '#email-errors' do
+      expect(page).to have_content "can't be blank"
+    end
+
+    within '#password-errors' do
+      expect(page).to have_content "can't be blank"
+    end
+
     expect(page).not_to have_link 'Log Out'
 
     # Existing user
@@ -25,7 +35,10 @@ RSpec.describe 'Log In' do
     fill_in 'Password',         with: 'password'
     fill_in 'Confirm password', with: 'password'
     click_button 'Register'
-    expect(page).to have_content 'Email has already been taken'
+    within '#email-errors' do
+      expect(page).to have_content 'has already been taken'
+    end
+
     expect(page).not_to have_link 'Log Out'
 
     # Password conformation didn't match
@@ -34,7 +47,9 @@ RSpec.describe 'Log In' do
     fill_in 'Password',         with: 'password'
     fill_in 'Confirm password', with: 'ooops'
     click_button 'Register'
-    expect(page).to have_content "Password confirmation doesn't match Password"
+    within '#password_confirmation-errors' do
+      expect(page).to have_content "doesn't match Password"
+    end
     expect(page).not_to have_link 'Log Out'
   end
 

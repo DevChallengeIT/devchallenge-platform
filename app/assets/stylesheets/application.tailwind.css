@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.translation_missing {
+  background-color: red !important;
+}
+
 @layer base {
   .table {
     @apply min-w-full divide-y divide-gray-200 dark:divide-gray-700

@@ -31,6 +31,7 @@ en:
     pending: Pending
     view: View
     details: Details
+    or: Or
   messages:
     access_denied: Access denied
     resource_created: '%{name} was successfully created'
@@ -54,10 +55,15 @@ en:
     confirm_password: Confirm password
     current_password: Current Password
     register: Register
+    registration: Registration
     forgot_password: Forgot password?
     didnt_receive_confirmation_instructions: Didn't receive confirmation instructions?
     didnt_receive_unlock_instructions: Didn't receive unlock instructions?
     cancel_account: Cancel my account
+    already_have_an_account: Already have an account?
+    log_in_here: Log In here
+    sign_up_with_google: Sign up with Google
+    sign_up_with_github: Sign up with Github
   resources:
     task_assessments:
       plural: Task Assessments

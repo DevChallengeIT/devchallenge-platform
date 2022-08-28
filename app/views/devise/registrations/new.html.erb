@@ -1,34 +1,69 @@
-<div class="<%= UI::PANEL %>">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'}, data: {turbo: false}) do |f| %>
-    <h2 class="<%= UI::H2 %> text-center mb-5"><%= t('auth.register') %></h2>
-    <%= render "devise/shared/error_messages", resource: resource %>
+<div class="flex">
+  <div class="w-1/2">
+  </div>
+  <div class="w-1/2">
+    <div class="mt-7 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:border-gray-700 max-w-md mx-auto p-6">
+      <div class="p-4 sm:p-7">
+        <div class="text-center">
+          <h1 class="block text-2xl font-bold text-gray-800 dark:text-white"><%= t('auth.registration') %></h1>
+          <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+            <%= t('auth.already_have_an_account') %>
+            <%= link_to t('auth.log_in_here'), new_user_session_path, class: UI::LINK %>
+          </p>
+        </div>
 
-    <div class="mb-4">
-      <%= f.label :full_name, t('auth.full_name'), class: UI::FORM_LABEL %>
-      <%= f.text_field :full_name, autofocus: true, class: UI::FORM_INPUT %>
-    </div>
+        <div class="mt-5">
+          <%= link_to user_google_oauth2_omniauth_authorize_path, class: UI::BUTTON_GHOST do %>
+            <%= inline_svg_tag 'google', class: 'w-4 h-auto', with: '46', height: '47' %>
+            <%= t('auth.sign_up_with_google') %>
+          <% end %>
+        </div>
 
-    <div class="mb-4">
-      <%= f.label :email, t('auth.email'), class: UI::FORM_LABEL %>
-      <%= f.email_field :email,autocomplete: "email", class: UI::FORM_INPUT %>
-    </div>
+        <div class="mt-3">
+          <%= link_to user_github_omniauth_authorize_path, class: UI::BUTTON_GHOST do %>
+            <%= inline_svg_tag 'github', class: 'w-4 h-auto', with: '46', height: '47' %>
+            <%= t('auth.sign_up_with_github') %>
+          <% end %>
 
-    <div class="mb-4">
-      <%= f.label :password, t('auth.password'), class: UI::FORM_LABEL %>
-      <% if @minimum_password_length %>
-      <em class="block text-sm font-normal mb-2 text-gray-900">(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %>
-      <%= f.password_field :password, autocomplete: "new-password", class: UI::FORM_INPUT %>
-    </div>
+          <div class="py-3 flex items-center text-xs text-gray-400 uppercase before:flex-[1_1_0%] before:border-t before:border-gray-200 before:mr-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ml-6 dark:text-gray-500 dark:before:border-gray-600 dark:after:border-gray-600"><%= t('words.or') %></div>
 
-    <div class="mb-4">
-      <%= f.label :password_confirmation, t('auth.confirm_password'), class: UI::FORM_LABEL %>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: UI::FORM_INPUT %>
-    </div>
+          <!-- Form -->
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { data: {turbo: false}}) do |f| %>
+            <div class="grid gap-y-4">
+              <div>
+                <%= f.label :full_name, t('auth.full_name'), class: UI::FORM_LABEL %>
+                <%= f.text_field :full_name, autofocus: true, class: UI::FORM_INPUT %>
+                <%= render(UI::ErrorTagComponent.new(errors: resource.errors, field: :full_name)) %>
+              </div>
 
-    <div class="flex items-center justify-between content-end">
-      <%= f.submit t('auth.register'), class: UI::BUTTON_PRIMARY %>
-      <%= render "devise/shared/links" %>
+              <div>
+                <%= f.label :email, t('auth.email'), class: UI::FORM_LABEL %>
+                <%= f.email_field :email, autocomplete: "email", class: UI::FORM_INPUT %>
+                <%= render(UI::ErrorTagComponent.new(errors: resource.errors, field: :email)) %>
+              </div>
+
+              <div>
+                <div class="flex space-x-1.5">
+                  <%= f.label :password, t('auth.password'), class: UI::FORM_LABEL %>
+                  <% if @minimum_password_length %>
+                  <em class="block text-sm font-normal mb-2 text-gray-900">(<%= @minimum_password_length %> characters minimum)</em>
+                  <% end %>
+                </div>
+                <%= f.password_field :password, autocomplete: "new-password", class: UI::FORM_INPUT %>
+                <%= render(UI::ErrorTagComponent.new(errors: resource.errors, field: :password)) %>
+              </div>
+
+              <div>
+                <%= f.label :password_confirmation, t('auth.confirm_password'), class: UI::FORM_LABEL %>
+                <%= f.password_field :password_confirmation, autocomplete: "new-password", class: UI::FORM_INPUT %>
+                <%= render(UI::ErrorTagComponent.new(errors: resource.errors, field: :password_confirmation)) %>
+              </div>
+
+              <%= f.submit t('auth.register'), class: UI::BUTTON_PRIMARY %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
-  <% end %>
+  </div>
 </div>

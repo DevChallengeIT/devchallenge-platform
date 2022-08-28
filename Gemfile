@@ -19,6 +19,7 @@ gem 'sprockets-rails'
 # Frontend
 gem 'breadcrumbs_on_rails', '~> 4.1'
 gem 'cssbundling-rails'
+gem 'inline_svg'
 gem 'jsbundling-rails'
 gem 'pagy', '~> 5.10'
 gem 'stimulus-rails', '~> 1.0'
