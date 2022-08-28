@@ -1,61 +1,71 @@
-<div class="<%= UI::PANEL %>">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4' }, data: {turbo: false}) do |f| %>
-    <h2 class="<%= UI::H2 %> text-center mb-3"><%= t('auth.profile') %></h2>
-    <%= render "devise/shared/error_messages", resource: resource %>
+<div class="flex">
+  <div class="hidden lg:inline lg:w-1/2">
+  </div>
+  <div class="md:w-1/2 mx-auto">
+    <div class="mt-7 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:border-gray-700 p-6">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, data: {turbo: false}) do |f| %>
+        <h2 class="<%= UI::H2 %> text-center mb-3"><%= t('auth.profile') %></h2>
 
-    <div class="mb-4">
-      <%= f.label :full_name, t('auth.full_name'), class: UI::FORM_LABEL %>
-      <%= f.text_field :full_name, autofocus: true, class: UI::FORM_INPUT %>
-    </div>
+        <div class="mb-4">
+          <%= f.label :full_name, t('auth.full_name'), class: UI::FORM_LABEL %>
+          <%= f.text_field :full_name, autofocus: true, class: UI::FORM_INPUT %>
+          <%= render(UI::ErrorTagComponent.new(errors: resource.errors, field: :full_name)) %>
+        </div>
 
-    <div class="mb-4">
-      <%= f.label :time_zone, t('auth.time_zone'), class: UI::FORM_LABEL %>
-      <%= f.time_zone_select :time_zone, nil, {}, class: UI::FORM_INPUT %>
-    </div>
+        <div class="mb-4">
+          <%= f.label :time_zone, t('auth.time_zone'), class: UI::FORM_LABEL %>
+          <%= f.time_zone_select :time_zone, nil, {}, class: UI::FORM_SELECT %>
+          <%= render(UI::ErrorTagComponent.new(errors: resource.errors, field: :time_zone)) %>
+        </div>
 
-    <div class="mb-4">
-      <%= f.label :email, t('auth.email'), class: UI::FORM_LABEL %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: UI::FORM_INPUT %>
-    </div>
+        <div class="mb-4">
+          <%= f.label :email, t('auth.email'), class: UI::FORM_LABEL %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: UI::FORM_INPUT %>
+          <%= render(UI::ErrorTagComponent.new(errors: resource.errors, field: :email)) %>
+        </div>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <div class="block text-sm font-normal mb-2 text-gray-500">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-    <% end %>
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div class="block text-sm font-normal mb-2 text-gray-500">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
 
-    <div class="mb-4">
-      <%= f.label :password, t('auth.password'), class: UI::FORM_LABEL %>
-      <i class="block text-sm font-normal mb-2 text-gray-900">(leave blank if you don't want to change it)</i>
-      <%= f.password_field :password, autocomplete: "new-password", class: UI::FORM_INPUT %>
-      <% if @minimum_password_length %>
-        <em class="block text-sm font-normal mb-2 text-gray-900"><%= @minimum_password_length %> characters minimum</em>
+        <div class="mb-4">
+          <%= f.label :password, t('auth.password'), class: UI::FORM_LABEL %>
+          <i class="block text-sm font-normal mb-2 text-gray-900">(leave blank if you don't want to change it)</i>
+          <%= f.password_field :password, autocomplete: "new-password", class: UI::FORM_INPUT %>
+          <% if @minimum_password_length %>
+            <em class="block text-sm font-normal mb-2 text-gray-900"><%= @minimum_password_length %> characters minimum</em>
+          <% end %>
+          <%= render(UI::ErrorTagComponent.new(errors: resource.errors, field: :password)) %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :password_confirmation, t('auth.confirm_password'), class: UI::FORM_LABEL %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: UI::FORM_INPUT %>
+          <%= render(UI::ErrorTagComponent.new(errors: resource.errors, field: :password_confirmation)) %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :current_password, t('auth.current_password'), class: UI::FORM_LABEL %>
+          <i class="block text-sm font-normal mb-2 text-gray-900">(we need your current password to confirm your changes)</i>
+          <%= f.password_field :current_password, autocomplete: "current-password", class: UI::FORM_INPUT %>
+          <%= render(UI::ErrorTagComponent.new(errors: resource.errors, field: :current_password)) %>
+        </div>
+
+        <div class="flex items-center justify-between content-end">
+          <%= f.submit t('words.update'), class: UI::BUTTON_PRIMARY %>
+          <%= link_to t('words.back'), :back, class: UI::BUTTON_SECONDARY %>
+        </div>
       <% end %>
     </div>
 
-    <div class="mb-4">
-      <%= f.label :password_confirmation, t('auth.confirm_password'), class: UI::FORM_LABEL %>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: UI::FORM_INPUT %>
-    </div>
+    <div class="my-6">
+      <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <h3 class="text-center"><%= t('auth.cancel_account') %></h3>
 
-    <div class="mb-4">
-      <%= f.label :current_password, t('auth.current_password'), class: UI::FORM_LABEL %>
-      <i class="block text-sm font-normal mb-2 text-gray-900">(we need your current password to confirm your changes)</i>
-      <%= f.password_field :current_password, autocomplete: "current-password", class: UI::FORM_INPUT %>
-    </div>
-
-    <div class="flex items-center justify-between content-end">
-      <%= f.submit t('words.update'), class: UI::BUTTON_PRIMARY %>
-      <%= link_to t('words.back'), :back, class: UI::BUTTON_SECONDARY %>
-    </div>
-  <% end %>
-</div>
-
-<div class="<%= UI::PANEL %>">
-  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-    <h3 class="text-center"><%= t('auth.cancel_account') %></h3>
-
-    <div class="mb-4 text-center my-3">
-      <%= button_to t('auth.cancel_account'), registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: UI::BUTTON_DANGER %>
+        <div class="mb-4 text-center my-3">
+          <%= button_to t('auth.cancel_account'), registration_path(resource_name), form: { data: { turbo_confirm: "Are you sure?" }}, method: :delete, class: UI::BUTTON_DANGER %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-

@@ -14,7 +14,9 @@ RSpec.describe 'Log In' do
     fill_in 'Full Name', with: ''
     fill_in 'Current Password', with: 'password'
     click_button 'Update'
-    expect(page).to have_content "Full name can't be blank"
+    within '#full_name-errors' do
+      expect(page).to have_content "can't be blank"
+    end
 
     expect(page).to have_current_path '/'
     expect(page).to have_link user.full_name
@@ -25,7 +27,9 @@ RSpec.describe 'Log In' do
     fill_in 'Confirm password', with: 'NewPassword'
     fill_in 'Current Password', with: ''
     click_button 'Update'
-    expect(page).to have_content "Current password can't be blank"
+    within '#current_password-errors' do
+      expect(page).to have_content "can't be blank"
+    end
 
     expect(page).to have_current_path '/'
     expect(page).to have_link user.full_name

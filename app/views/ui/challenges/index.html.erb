@@ -35,7 +35,7 @@
 
   <div class="w-3/4">
     <% @challenges.each do |challenge| %>
-      <div id="challenge-<%= challenge.id %>" class="bg-white border shadow-sm rounded-xl p-4 md:p-5 dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7] mb-3">
+      <div id="challenge-<%= challenge.id %>" class="bg-white border shadow-sm rounded-md p-4 md:p-5 dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7] mb-3">
         <div class="flex justify-between">
           <div>
             <%= link_to challenge_path(challenge) do %>

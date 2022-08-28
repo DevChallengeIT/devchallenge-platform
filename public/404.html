@@ -1,67 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="h-full">
 <head>
-  <title>The page you were looking for doesn't exist (404)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
+  <!-- Required Meta Tags Always Come First -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Error 404 using Tailwind CSS">
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
+  <meta name="twitter:site" content="@preline">
+  <meta name="twitter:creator" content="@htmlstream">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Error 404 using Tailwind CSS">
+  <meta name="twitter:description" content="Error 404 using Tailwind CSS">
+  <meta name="twitter:image" content="https://preline.co/preline-logo.svg">
 
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+  <meta property="og:url" content="https://preline.co/">
+  <meta property="og:site_name" content="Preline">
+  <meta property="og:title" content="Error 404 using Tailwind CSS">
+  <meta property="og:description" content="Error 404 using Tailwind CSS">
+  <meta property="og:image" content="https://preline.co/preline-logo.svg">
 
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
+  <!-- Title -->
+  <title>Error 404 using Tailwind CSS</title>
 
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-  </style>
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../../favicon.ico">
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Link your Tailwind CSS file -->
+  <link rel="stylesheet" href="your_file.css">
 </head>
 
-<body class="rails-default-error-page">
-  <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <div>
-      <h1>The page you were looking for doesn't exist.</h1>
-      <p>You may have mistyped the address or the page may have moved.</p>
-    </div>
-    <p>If you are the application owner check the logs for more information.</p>
+<body class="dark:bg-slate-900 flex h-full">
+  <script src="../../assets/js/hs.theme-appearance.js"></script>
+
+  <div class="max-w-[50rem] flex flex-col mx-auto w-full h-full">
+    <!-- ========== MAIN CONTENT ========== -->
+    <main id="content" role="main">
+      <div class="text-center py-10 px-4 sm:px-6 lg:px-8">
+        <h1 class="block text-7xl font-bold text-gray-800 sm:text-9xl dark:text-white">404</h1>
+        <h1 class="block text-2xl font-bold text-white"></h1>
+        <p class="mt-3 text-gray-600 dark:text-gray-400">Oops, something went wrong.</p>
+        <p class="text-gray-600 dark:text-gray-400">Sorry, we couldn't find your page.</p>
+      </div>
+    </main>
+    <!-- ========== END MAIN CONTENT ========== -->
   </div>
+
+  <!-- JS Implementing Plugins -->
+  <script src="./node_modules/preline/dist/hs-ui.bundle.js"></script>
 </body>
 </html>
