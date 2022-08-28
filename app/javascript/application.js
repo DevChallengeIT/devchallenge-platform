@@ -2,3 +2,5 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import 'preline'
+import "trix"
+import "@rails/actiontext"
