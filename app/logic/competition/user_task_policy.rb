@@ -25,7 +25,7 @@ module Competition
     private
 
     def member
-      @member ||= task.challenge.members.find_by(user:)
+      @member ||= task.challenge.members.find { |m| m.user_id == @user&.id }
     end
 
     def task_started?
