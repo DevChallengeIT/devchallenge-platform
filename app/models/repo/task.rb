@@ -9,6 +9,10 @@ module Repo
 
     belongs_to :challenge
     belongs_to :dependent_task, class_name: 'Repo::Task', optional: true
+
+    has_one :dependency, class_name: 'Repo::Task', foreign_key: :dependent_task_id, dependent: :destroy_async,
+inverse_of: :dependent_task
+
     has_many :task_criteria, dependent: :destroy_async
     has_many :task_submissions, dependent: :destroy_async
     has_many :task_assessments, through: :task_submissions, dependent: :destroy_async

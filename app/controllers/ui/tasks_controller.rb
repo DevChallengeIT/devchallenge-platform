@@ -12,6 +12,11 @@ module UI
       if current_member&.judge?
         render 'ui/tasks/judges/show'
       else
+        @result = Competition::TasksAssessmentCalculator.total_assessment_for(
+          participant: current_member,
+          task:
+        )
+
         super
       end
     end
@@ -21,7 +26,7 @@ module UI
     def authorize_member_for_task!
       return true if user_authorized_for_task?(task)
 
-      redirect_to root_path, notice: t('messages.access_denied')
+      redirect_to root_path, alert: t('messages.access_denied')
     end
 
     def challenge
@@ -33,6 +38,7 @@ module UI
         :rich_text_description,
         :task_submissions,
         :dependent_task,
+        :dependency,
         challenge: :members
       ).friendly.find(params[:id])
     rescue ActiveRecord::RecordNotFound

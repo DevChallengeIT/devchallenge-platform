@@ -10,7 +10,7 @@
 
   <div id="assessments" class="my-5">
     <% if task_submission.zip_file.present? %>
-      <%= link_to "Zip file", rails_blob_path(task_submission.zip_file, disposition: 'attachment'), class: UI::BUTTON_SECONDARY %>
+      <%= link_to t('words.download'), rails_blob_path(task_submission.zip_file, disposition: 'attachment'), class: UI::BUTTON_SECONDARY %>
     <% end %>
 
     <%= form_with(model: task_submission, scope: :task_assessments, url: assessment_path(task_submission:), method: :put, class: "contents") do |form| %>

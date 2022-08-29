@@ -8,6 +8,7 @@ RSpec.describe Repo::Task, type: :model do
   describe 'associations' do
     it { is_expected.to belong_to(:challenge) }
     it { is_expected.to belong_to(:dependent_task).optional }
+    it { is_expected.to have_one(:dependency) }
     it { is_expected.to have_many(:task_submissions) }
     it { is_expected.to have_many(:task_criteria) }
   end

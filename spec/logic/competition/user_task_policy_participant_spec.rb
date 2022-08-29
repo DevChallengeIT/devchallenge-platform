@@ -11,9 +11,9 @@ RSpec.describe Competition::UserTaskPolicy do
   let(:dependent_task) {}
 
   context 'when a task is not started' do
-    it 'returns falsey' do
+    it 'returns true' do
       travel_to Time.parse('2022-04-30 10:00:00').utc do
-        expect(policy).to be_falsey
+        expect(policy).to be true
       end
     end
   end

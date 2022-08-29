@@ -23,17 +23,17 @@ module UI
     def authorize_challenge!
       return true if challenge && Competition.can_read?(user: current_user, challenge:)
 
-      redirect_to root_path, notice: t('messages.access_denied')
+      redirect_to root_path, alert: t('messages.access_denied')
     end
 
     def authorize_member!
       return true if current_member || Auth.admin?(current_user)
 
-      redirect_to root_path, notice: t('messages.access_denied')
+      redirect_to root_path, alert: t('messages.access_denied')
     end
 
     def authorize_judge!
-      redirect_to root_path, notice: t('messages.access_denied') unless current_member&.judge?
+      redirect_to root_path, alert: t('messages.access_denied') unless current_member&.judge?
     end
 
     def user_authorized_for_task?(task)

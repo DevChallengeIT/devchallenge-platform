@@ -19,17 +19,13 @@ module Competition
     def can_do?
       return true if admin?(user) || judge?
 
-      participant? && task_started? && dependent_assessed_enough?
+      participant? && dependent_assessed_enough?
     end
 
     private
 
     def member
       @member ||= task.challenge.members.find { |m| m.user_id == @user&.id }
-    end
-
-    def task_started?
-      Time.now.utc > task.start_at
     end
 
     def dependent_assessed_enough?

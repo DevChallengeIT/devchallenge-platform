@@ -6,14 +6,11 @@
         <%= link_to t('words.edit'), edit_admin_challenge_task_path(challenge, task), class: UI::LINK %>
       <% end %>
     </h1>
-
-    <%= link_to t('words.back'), challenge_path(challenge), class: UI::BUTTON_SECONDARY %>
   </div>
-</div>
 
-<ul id="assessments">
+  <div id="assessments" class="my-5">
   <% if task_submission.zip_file.present? %>
-    <%= link_to "Zip file", rails_blob_path(task_submission.zip_file, disposition: 'attachment'), class: UI::BUTTON_SECONDARY %>
+    <%= link_to t('words.download'), rails_blob_path(task_submission.zip_file, disposition: 'attachment'), class: UI::BUTTON_SECONDARY %>
   <% end %>
 
   <%= form_with(model: task_submission, scope: :task_assessments, url: assessments_path(task_submission:), method: :post, class: "contents") do |form| %>
@@ -45,4 +42,6 @@
       <%= link_to t('words.back'), task_path(task), class: UI::BUTTON_SECONDARY %>
     </div>
   <% end %>
-</ul>
+</div>
+
+</div>

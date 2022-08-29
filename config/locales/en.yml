@@ -39,6 +39,7 @@ en:
     submit: Submit
     result: Result
     description: Description
+    download: Download
   messages:
     access_denied: Access denied
     resource_created: '%{name} was successfully created'
@@ -53,6 +54,10 @@ en:
     are_you_sure: Are you sure?
     task_description_will_be: Task description will be available after
     remove_my_submission: Remove my submission
+    you_qualified_to: You are qualified to 
+    you_not_qualified_to: You are not qualified to 
+    submission_has_already_been_assessed: Your submission has already been assessed. Result will be available after
+    submission_is_not_available: Submission is  not available
   auth:
     profile: Profile
     log_in: Log In
