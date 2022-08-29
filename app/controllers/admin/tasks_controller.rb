@@ -43,11 +43,12 @@ module Admin
     private
 
     def challenge_tasks
-      @challenge_tasks ||= Repo::Task.preload(:challenge).where(challenge:)
+      @challenge_tasks ||= Repo::Task.preload(:challenge, :dependent_task,
+                                              :rich_text_description).where(challenge:).order(:start_at)
     end
 
     def challenge
-      @challenge ||= Repo::Challenge.friendly.find(params[:challenge_id])
+      @challenge ||= Repo::Challenge.preload(:tasks).friendly.find(params[:challenge_id])
     end
 
     def task
@@ -55,8 +56,10 @@ module Admin
     end
 
     def task_params
-      params.require(:task).permit(:title, :description, :slug, :registration_at, :challenge_id,
-                                   :start_at, :submit_at, :result_at, :dependent_task_id, :min_assessment)
+      params.require(:task).permit(
+        :title, :description, :slug, :registration_at, :challenge_id, :start_at, :submit_at,
+        :result_at, :dependent_task_id, :min_assessment, :require_attachment
+      )
     end
   end
 end

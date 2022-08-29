@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'UI/Submissions/Update' do
-  let!(:task) { create(:task) }
+  let!(:task) { create(:task, require_attachment: true) }
   let!(:member) { create(:member, challenge: task.challenge) }
   let!(:user) { member.user }
   let!(:task_submission) do

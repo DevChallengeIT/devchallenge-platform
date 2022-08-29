@@ -45,6 +45,25 @@
       </div>
     </div>
 
+    <div class="my-5 flex items-center space-x-5">
+      <div class="w-full">
+        <%= form.label :dependent_task_id, class: UI::FORM_LABEL %>
+        <%= form.select :dependent_task_id, challenge.tasks.map {|t| [t.title, t.id] }, {include_blank: true}, class: UI::FORM_SELECT %>
+        <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :dependent_task_id)) %>
+      </div>
+
+      <div class="w-full">
+        <%= form.label :min_assessment, class: UI::FORM_LABEL %>
+        <%= form.number_field :min_assessment, autofocus: true, class: UI::FORM_INPUT %>
+        <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :min_assessment)) %>
+      </div>
+
+       <div class="w-full flex items-center space-x-1.5">
+        <%= form.check_box :require_attachment %>
+        <%= form.label :require_attachment, class: UI::FORM_LABEL %>
+      </div>
+    </div>
+
     <div class="my-5">
       <%= form.label :description, class: UI::FORM_LABEL %>
       <%= form.rich_text_area :description, rows: 4, class: UI::FORM_INPUT %>

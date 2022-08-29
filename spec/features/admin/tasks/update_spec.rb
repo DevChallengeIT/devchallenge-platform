@@ -74,6 +74,7 @@ RSpec.describe 'Admin/Tasks/Update' do
     fill_in 'Start at',             with: '2022-05-01 10:00:00'
     fill_in 'Submit at',            with: '2022-05-10 09:00:00'
     fill_in 'Result at',            with: '2022-05-15 18:00:00'
+    fill_in 'Min assessment', with: '100'
 
     click_button 'Update'
 
@@ -86,6 +87,7 @@ RSpec.describe 'Admin/Tasks/Update' do
       expect(page).to have_content Time.zone.parse('2022-05-01 10:00:00').strftime(UI::TimestampComponent::TIME_FORMAT)
       expect(page).to have_content Time.zone.parse('2022-05-10 09:00:00').strftime(UI::TimestampComponent::TIME_FORMAT)
       expect(page).to have_content Time.zone.parse('2022-05-15 18:00:00').strftime(UI::TimestampComponent::TIME_FORMAT)
+      expect(page).to have_content '100'
     end
   end
 end

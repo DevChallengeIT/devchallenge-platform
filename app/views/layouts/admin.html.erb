@@ -48,8 +48,17 @@
           </div>
         </header>
         <div id="flash-messages">
-          <p class="font-semibold"><%= notice %></p>
-          <p class="font-semibold"><%= alert %></p>
+          <% if notice %>
+            <div class="<%= UI::FLASH_NOTICE %>" role="alert">
+              <%= notice %>
+            </div>
+          <% end %>
+
+          <% if alert %>
+            <div class="<%= UI::FLASH_ALERT %>" role="alert">
+              <%= alert %>
+            </div>
+          <% end %>
         </div>
         <main class="mt-5">
           <%= yield %>

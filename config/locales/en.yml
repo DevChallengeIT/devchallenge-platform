@@ -94,6 +94,8 @@ en:
       start_at: Start At
       submit_at: Submit At
       result_at: Result At
+      dependent_task: Dependent
+      min_assessment: Min assessment
     taxonomies:
       plural: Taxonomies
       singular: Taxonomy

@@ -1,15 +1,17 @@
-<div class="flex items-center justify-between py-3">
-  <h2 class="<%= UI::H2 %>">
-    <%= challenge.title %>
-  </h2>
-  <div class="flex space-x-3">
-    <%= link_to t('resources.tasks.plural'), admin_challenge_tasks_path(challenge), class: UI::BUTTON_SECONDARY %>
-    <%= link_to t('resources.members.plural'), admin_challenge_members_path(challenge), class: UI::BUTTON_SECONDARY %>
-    <%= link_to t('words.view'), challenge_path(challenge), class: UI::BUTTON_PRIMARY %>
-  </div>
-</div>
-
 <%= form_with(model: challenge, scope: :challenge, url: admin_challenge_path(challenge), method: :put, class: "contents") do |form| %>
+  <div class="flex items-center justify-between py-3">
+    <h2 class="<%= UI::H2 %>">
+      <%= challenge.title %>
+    </h2>
+    <div class="flex space-x-3">
+      <%= form.submit t('words.update'), class: UI::BUTTON_PRIMARY %>
+      <%= link_to t('words.view'), challenge_path(challenge), class: UI::BUTTON_PRIMARY %>
+      <%= link_to t('resources.tasks.plural'), admin_challenge_tasks_path(challenge), class: UI::BUTTON_SECONDARY %>
+      <%= link_to t('resources.members.plural'), admin_challenge_members_path(challenge), class: UI::BUTTON_SECONDARY %>
+      <%= link_to t('words.back'), admin_challenges_path, class: UI::BUTTON_SECONDARY %>
+    </div>
+  </div>
+
   <div class="flex my-5 items-center justify-between space-x-5">
     <div class="w-full">
       <%= form.label :status, class: UI::FORM_LABEL %>
@@ -87,9 +89,4 @@
       </div>
     </div>
   <% end %>
-
-  <div class="flex items-center justify-between mb-24">
-    <%= form.submit class: UI::BUTTON_PRIMARY %>
-    <%= link_to t('words.back'), admin_challenges_path, class: UI::BUTTON_SECONDARY %>
-  </div>
 <% end %>

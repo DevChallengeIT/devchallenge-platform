@@ -50,11 +50,11 @@
             <%= render(UI::ChallengeStatusComponent.new(challenge: challenge)) %>
           </div>
         </div>
-        <p class="mt-2 text-gray-800 dark:text-gray-400">
+        <p class="my-2 text-gray-800 dark:text-gray-400">
           <%= challenge.description %>
         </p>
 
-        <%= link_to t("words.details"), challenge_path(challenge), class: 'inline-flex items-center gap-2 mt-5 text-sm font-medium text-blue-500 hover:text-blue-700' %>
+        <%= link_to t("words.details"), challenge_path(challenge), class: UI::LINK %>
       </div>
     <% end %>
 

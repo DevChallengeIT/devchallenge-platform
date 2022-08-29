@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'UI/Submissions/Create' do
-  let!(:task) { create(:task) }
+  let!(:task) { create(:task, require_attachment: true) }
   let!(:user) { create(:member, challenge: task.challenge).user }
 
   context 'without session' do

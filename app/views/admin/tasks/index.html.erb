@@ -20,6 +20,12 @@
     <th class="text-center">
       <%= t('resources.tasks.result_at') %>
     </th>
+    <th class="text-center">
+      <%= t('resources.tasks.dependent_task') %>
+    </th>
+    <th class="text-center">
+      <%= t('resources.tasks.min_assessment') %>
+    </th>
   </thead>
   <tbody>
     <% @tasks.each do |task| %>
@@ -35,6 +41,14 @@
         </td>
         <td class="text-center">
           <%= render(UI::TimestampComponent.new(data: task.result_at, highlight_now: true)) %>
+        </td>
+        <td>
+          <% if task.dependent_task %>
+            <%= link_to task.dependent_task.title, edit_admin_challenge_task_path(challenge, task.dependent_task), class: UI::LINK %>
+          <% end %>
+        </td>
+        <td class="text-center">
+          <%= task.min_assessment %>
         </td>
       </tr>
     <% end %>

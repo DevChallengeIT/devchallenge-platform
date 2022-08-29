@@ -19,11 +19,13 @@ Result at: <%= render(UI::TimestampComponent.new(data: task.result_at)) %>
       <%= render(UI::ErrorTagComponent.new(errors: task_submission.errors, field: :notes)) %>
     </div>
 
-    <div class="w-full">
-      <%= form.label :zip_file, class: UI::FORM_LABEL %>
-      <%= form.file_field :zip_file, autofocus: true, class: UI::FORM_INPUT %>
-      <%= render(UI::ErrorTagComponent.new(errors: task_submission.errors, field: :zip_file)) %>
-    </div>
+    <% if task.require_attachment? %>
+      <div class="w-full">
+        <%= form.label :zip_file, class: UI::FORM_LABEL %>
+        <%= form.file_field :zip_file, autofocus: true, class: UI::FORM_INPUT %>
+        <%= render(UI::ErrorTagComponent.new(errors: task_submission.errors, field: :zip_file)) %>
+      </div>
+    <% end %>
   </div>
 
   <%= form.submit class: UI::BUTTON_PRIMARY %>
