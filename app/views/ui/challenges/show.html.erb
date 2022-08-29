@@ -27,28 +27,55 @@
       <%= render(UI::TimestampComponent.new(data: challenge.registration_at)) %>
     </div>
     <div>
-      <h4 class="<%= UI::H3 %>">Start</h4>
-      <%= render(UI::TimestampComponent.new(data: challenge.start_at)) %>
-    </div>
-    <div>
       <h4 class="<%= UI::H3 %>">Finish</h4>
       <%= render(UI::TimestampComponent.new(data: challenge.finish_at)) %>
     </div>
   </div>
 
-  <% if true %>
-    <div class="my-5">
-      <% @tasks.each do |task| %>
-        <% if user_authorized_for_task?(task) %>
-          <%= link_to task.title, task_path(task) %>
-        <% else %>
-          <%= task.title %> -> <%= task.start_at %> - <%= task.submit_at %>
+  <nav class="my-12 flex items-center justify-between">
+    <% @tasks.each_with_index do |task, idx| %>
+      <% if user_authorized_for_task?(task) %>
+        <%= link_to task_path(task), class: 'block p-8 rounded-md hover:text-gray-700 hover:bg-gray-50' do %>
+          <h3 class="block lg:text-2xl md:text-l sm:text-m font-bold text-gray-800 dark:text-white">
+            <%= task.title %>
+          </h3>
+          <small class="text-sm font-medium">
+            <%= render(UI::TimestampComponent.new(data: task.start_at)) %> -
+            <%= render(UI::TimestampComponent.new(data: task.submit_at)) %>
+          </small>
         <% end %>
+      <% else %>
+        <div class='p-4 h'>
+          <h3 class="<%= UI::H3 %>">
+            <%= task.title %>
+          </h3>
+          <small class="text-xs font-light">
+            <%= render(UI::TimestampComponent.new(data: task.start_at)) %> -
+            <%= render(UI::TimestampComponent.new(data: task.submit_at)) %>
+          </small>
+        <div>
       <% end %>
-    </div>
-  <% end %>
+      <% if idx + 1 < @tasks.size %>
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#000000" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></polyline></svg>
+        <% end %>
+    <% end %>
+  </nav>
 
-  <div class="flex items-center justify-between my-5">
-    <%= link_to t('words.back'), root_path, class: UI::BUTTON_SECONDARY %>
-  </div>
+  <% if false %>
+    <nav class="relative z-0 flex divide-x divide-gray-200 overflow-hidden dark:border-gray-700 dark:divide-gray-700">
+      <div class="my-5">
+        <% @tasks.each do |task| %>
+          <% if user_authorized_for_task?(task) %>
+            <%= link_to task_path(task), class: '' do %>
+              <%= task.title %>
+            <% end %>
+          <% else %>
+            <span class=<%= '' %>>
+              <%= task.title %> -> <%= task.start_at %> - <%= task.submit_at %>
+            </span>
+          <% end %>
+        <% end %>
+      </div>
+    </nav>
+  <% end %>
 </div>
