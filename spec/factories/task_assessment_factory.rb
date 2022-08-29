@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :task_assessment, class: Repo::TaskAssessment.name do
     value { 10 }
-    member
+    judge factory: :member
     task_submission
     task_criterium
   end

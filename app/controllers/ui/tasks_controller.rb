@@ -10,7 +10,6 @@ module UI
 
     def show
       if current_member&.judge?
-        @paginator, @task_submissions = paginate task_submissions
         render 'ui/tasks/judges/show'
       else
         super
@@ -31,9 +30,10 @@ module UI
 
     def task
       @task ||= Repo::Task.preload(
-        :challenge,
         :rich_text_description,
-        :task_submissions
+        :task_submissions,
+        :dependent_task,
+        challenge: :members
       ).friendly.find(params[:id])
     rescue ActiveRecord::RecordNotFound
       nil

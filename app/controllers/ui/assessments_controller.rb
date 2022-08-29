@@ -67,7 +67,7 @@ module UI
       )
 
       assessment_params[:task_assessments_attributes].each do |attributes|
-        attributes.last[:member] = current_member
+        attributes.last[:judge] = current_member
       end
 
       assessment_params

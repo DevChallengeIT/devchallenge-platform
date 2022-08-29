@@ -41,7 +41,7 @@ RSpec.describe 'UI/Submissions/Update' do
 
       fill_in 'Notes', with: 'updated task submission'
 
-      click_button 'Submit'
+      click_button 'Update'
 
       expect(task.task_submissions.count).to eq(1)
       expect(task.task_submissions.first.zip_file.attachment.present?).to eq(false)
@@ -50,7 +50,7 @@ RSpec.describe 'UI/Submissions/Update' do
       expect(page).not_to have_button 'Create Task submission'
       expect(page).not_to eq('professionally submitted task')
       expect(task_submission.reload.notes).to eq('updated task submission')
-      expect(page).to have_button 'Submit'
+      expect(page).to have_button 'Update'
       expect(page).to have_button 'Remove'
     end
 
@@ -63,7 +63,7 @@ RSpec.describe 'UI/Submissions/Update' do
       fill_in 'Notes', with: 'updated task submission'
       page.attach_file('Zip file', 'spec/support/assets/submission.zip')
 
-      click_button 'Submit'
+      click_button 'Update'
 
       expect(task.task_submissions.count).to eq(1)
       expect(task.task_submissions.first.zip_file.attachment.present?).to eq(true)

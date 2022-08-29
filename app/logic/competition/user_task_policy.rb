@@ -35,15 +35,16 @@ module Competition
     def dependent_assessed_enough?
       return true if dependent_task.blank?
 
-      current_assessment >= dependent_task.min_assessment
+      current_assessment_value >= (dependent_task&.min_assessment || 0)
     end
 
     def dependent_task
       @dependent_task ||= task.dependent_task
     end
 
-    def current_assessment
-      TasksAssessmentCalculator.total_assessment_for(participant: member, task: dependent_task)
+    def current_assessment_value
+      @current_assessment_value ||= TasksAssessmentCalculator.total_assessment_for(participant: member,
+                                                                                   task:        dependent_task)
     end
   end
 end

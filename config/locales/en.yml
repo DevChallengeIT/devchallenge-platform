@@ -48,10 +48,11 @@ en:
     register_to_join: Please register to join this challenge
     challenge_joined: Thanks! You joined the challenge
     challenge_leaved: So pity that you leaving us...
-    challenge_registration_closed: Sorry! The registration is already closed
+    challenge_registration_closed: Registration is already closed
     challenge_registration_not_opened_yet: Registration is not yet open
     are_you_sure: Are you sure?
     task_description_will_be: Task description will be available after
+    remove_my_submission: Remove my submission
   auth:
     profile: Profile
     log_in: Log In

@@ -19,7 +19,7 @@ RSpec.describe 'UI/Assessments/Update' do
       :task_assessment,
       task_criterium:,
       task_submission: submission,
-      member:          judge,
+      judge:,
       value:           10,
       comment:         'nice job!!!'
     )
@@ -52,7 +52,7 @@ RSpec.describe 'UI/Assessments/Update' do
         :task_assessment,
         task_criterium:  second_criterium,
         task_submission: submission,
-        member:          judge,
+        judge:,
         value:           9,
         comment:         'looks good'
       )

@@ -1,43 +1,46 @@
-<%= task.title %>
-<%= task.description %>
-
-Start at: <%= render(UI::TimestampComponent.new(data: task.start_at)) %>
-Submit at: <%= render(UI::TimestampComponent.new(data: task.submit_at)) %>
-Result at: <%= render(UI::TimestampComponent.new(data: task.result_at)) %>
-
-
-<ul id="assessments">
-  <% if task_submission.zip_file.present? %>
-    <%= link_to "Zip file", rails_blob_path(task_submission.zip_file, disposition: 'attachment'), class: UI::BUTTON_SECONDARY %>
-  <% end %>
-
-  <%= form_with(model: task_submission, scope: :task_assessments, url: assessment_path(task_submission:), method: :put, class: "contents") do |form| %>
-    <div>
-      <%= form.fields_for :task_assessments do |task_assessment| %>
-        <div class="flex my-5 items-center justify-between space-x-5" id="assessment-<%= task_assessment.object.id %>">
-          <div class="w-full">
-            <%= "#{task_assessment.object.task_criterium.title} (max #{task_assessment.object.task_criterium.max_value})" %>
-            <%= task_assessment.hidden_field :id, class: UI::FORM_LABEL %>
-          </div>
-
-          <div class="w-full">
-            <%= task_assessment.label :value, class: UI::FORM_LABEL %>
-            <%= task_assessment.number_field :value, autofocus: true, class: UI::FORM_INPUT %>
-            <%= render(UI::ErrorTagComponent.new(errors: task_assessment.object.errors, field: :value)) %>
-          </div>
-
-          <div class="w-full">
-            <%= task_assessment.label :comment, class: UI::FORM_LABEL %>
-            <%= task_assessment.text_field :comment, autofocus: true, class: UI::FORM_INPUT %>
-            <%= render(UI::ErrorTagComponent.new(errors: task_assessment.object.errors, field: :comment)) %>
-          </div>
-        </div>
+<div class="bg-white border my-3 shadow-sm rounded-md p-4 md:p-5 dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7] mb-3">
+  <div class="flex justify-between">
+    <h1 class="<%= UI::H1 %> mb-5">
+      <%= link_to challenge.title, challenge_path(challenge), class: UI::LINK %> / <%= task.title %>
+      <% if Auth.admin?(current_user) %>
+        <%= link_to t('words.edit'), edit_admin_challenge_task_path(challenge, task), class: UI::LINK %>
       <% end %>
-    </div>
+    </h1>
+  </div>
 
-    <div class="flex items-center justify-between">
-      <%= form.submit t('words.update'), class: UI::BUTTON_PRIMARY %>
-      <%= link_to t('words.back'), task_path(task), class: UI::BUTTON_SECONDARY %>
-    </div>
-  <% end %>
-</ul>
+  <div id="assessments" class="my-5">
+    <% if task_submission.zip_file.present? %>
+      <%= link_to "Zip file", rails_blob_path(task_submission.zip_file, disposition: 'attachment'), class: UI::BUTTON_SECONDARY %>
+    <% end %>
+
+    <%= form_with(model: task_submission, scope: :task_assessments, url: assessment_path(task_submission:), method: :put, class: "contents") do |form| %>
+      <div>
+        <%= form.fields_for :task_assessments do |task_assessment| %>
+          <div class="flex my-5 items-center justify-between space-x-5" id="assessment-<%= task_assessment.object.id %>">
+            <div class="w-full">
+              <%= "#{task_assessment.object.task_criterium.title} (max #{task_assessment.object.task_criterium.max_value})" %>
+              <%= task_assessment.hidden_field :id, class: UI::FORM_LABEL %>
+            </div>
+
+            <div class="w-full">
+              <%= task_assessment.label :value, class: UI::FORM_LABEL %>
+              <%= task_assessment.number_field :value, autofocus: true, class: UI::FORM_INPUT %>
+              <%= render(UI::ErrorTagComponent.new(errors: task_assessment.object.errors, field: :value)) %>
+            </div>
+
+            <div class="w-full">
+              <%= task_assessment.label :comment, class: UI::FORM_LABEL %>
+              <%= task_assessment.text_field :comment, autofocus: true, class: UI::FORM_INPUT %>
+              <%= render(UI::ErrorTagComponent.new(errors: task_assessment.object.errors, field: :comment)) %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <%= form.submit t('words.update'), class: UI::BUTTON_PRIMARY %>
+        <%= link_to t('words.back'), task_path(task), class: UI::BUTTON_SECONDARY %>
+      </div>
+    <% end %>
+  </div>
+</div>

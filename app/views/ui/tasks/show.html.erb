@@ -54,13 +54,13 @@
           <% end %>
         </div>
 
-        <%= form.submit t('words.submit'), class: UI::BUTTON_PRIMARY %>
+        <%= form.submit task_submission.new_record? ? t('words.submit') : t('words.update'), class: UI::BUTTON_PRIMARY %>
       <% end %>
 
       <div class="flex items-center justify-between mb-24">
-        <div class="mt-8">
+        <div class="mt-8 font-semibold">
           <% unless task_submission.new_record? %>
-            <%= t('words.danger') %>
+            <%= t('messages.remove_my_submission') %>
             <%= button_to t('words.remove'), task_submission_path(task, task_submission), method: :delete, class: UI::BUTTON_DANGER, form: {data: {turbo_confirm: t('messages.are_you_sure')}} %>
           <% end %>
         </div>

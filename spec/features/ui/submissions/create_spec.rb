@@ -37,7 +37,7 @@ RSpec.describe 'UI/Submissions/Create' do
       expect(task.task_submissions.first.zip_file.attachment.present?).to eq(false)
       expect(page).to have_current_path "/tasks/#{task.slug}"
       expect(page).to have_content 'Submission was successfully created'
-      expect(page).to have_button 'Submit'
+      expect(page).to have_button 'Update'
       expect(page).to have_button 'Remove'
     end
 

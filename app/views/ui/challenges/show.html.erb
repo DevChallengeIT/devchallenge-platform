@@ -59,22 +59,4 @@
         <% end %>
     <% end %>
   </nav>
-
-  <% if false %>
-    <nav class="relative z-0 flex divide-x divide-gray-200 overflow-hidden dark:border-gray-700 dark:divide-gray-700">
-      <div class="my-5">
-        <% @tasks.each do |task| %>
-          <% if user_authorized_for_task?(task) %>
-            <%= link_to task_path(task), class: '' do %>
-              <%= task.title %>
-            <% end %>
-          <% else %>
-            <span class=<%= '' %>>
-              <%= task.title %> -> <%= task.start_at %> - <%= task.submit_at %>
-            </span>
-          <% end %>
-        <% end %>
-      </div>
-    </nav>
-  <% end %>
 </div>

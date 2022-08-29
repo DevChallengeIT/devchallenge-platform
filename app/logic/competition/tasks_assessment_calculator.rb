@@ -14,7 +14,7 @@ module Competition
     end
 
     def total_assessment
-      task.task_submissions.joins(:task_assessments).where(task_submissions: { member: participant }).sum(:value)
+      task.task_submissions.joins(:task_assessments).where(task_submissions: { member: participant }).sum(:value) || 0
     end
   end
 end
