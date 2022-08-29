@@ -5,7 +5,7 @@ module UI
   H2 = 'block text-xl font-bold text-gray-800 dark:text-white'
   H3 = 'text-lg font-semibold text-gray-800 dark:text-white'
   H4 = 'text-md font-semibold text-gray-800 dark:text-white'
-  FORM_LABEL = 'block text-sm mb-2 dark:text-white'
+  FORM_LABEL = 'block text-sm mb-2 dark:text-white font-medium'
   FORM_INPUT = 'py-3 px-4 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400'
   FORM_SELECT = 'py-3 px-4 pr-9 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400'
   FORM_CHECKBOX = 'shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 pointer-events-none focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800'

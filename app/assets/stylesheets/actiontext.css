@@ -29,3 +29,54 @@
   padding: 0 !important;
   max-width: 100% !important;
 }
+
+.trix-content a {
+  @apply text-blue-600 decoration-2 hover:underline font-medium
+}
+
+trix-editor a {
+  @apply text-blue-600 decoration-2 hover:underline font-medium
+}
+
+.trix-content h1 {
+  @apply block text-2xl font-bold text-gray-800 dark:text-white
+}
+
+trix-editor h1 {
+  @apply block text-2xl font-bold text-gray-800 dark:text-white
+}
+
+.trix-content ul {
+  @apply list-disc ml-4
+}
+
+trix-editor ul {
+  @apply list-disc ml-4
+}
+
+.trix-content ol {
+  @apply list-decimal ml-4
+}
+
+trix-editor ol {
+  @apply list-decimal ml-4
+}
+
+trix-editor blockquote {
+  border: 0 solid #ccc;
+  border-left-width: 0.3em;
+  margin-left: 0.3em;
+  padding-left: 0.6em;
+}
+
+trix-editor pre {
+  display: inline-block;
+  width: 100%;
+  vertical-align: top;
+  font-family: monospace;
+  font-size: 0.9em;
+  padding: 0.5em;
+  white-space: pre;
+  background-color: #eee;
+  overflow-x: auto;
+}
