@@ -33,6 +33,12 @@ en:
     view: View
     details: Details
     or: Or
+    registration: Registration
+    finish: Finish
+    start: Start
+    submit: Submit
+    result: Result
+    description: Description
   messages:
     access_denied: Access denied
     resource_created: '%{name} was successfully created'
@@ -45,6 +51,7 @@ en:
     challenge_registration_closed: Sorry! The registration is already closed
     challenge_registration_not_opened_yet: Sorry! The registration is not yet opened
     are_you_sure: Are you sure?
+    task_description_will_be: Task description will be available after
   auth:
     profile: Profile
     log_in: Log In

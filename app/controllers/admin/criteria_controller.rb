@@ -51,7 +51,7 @@ module Admin
     private
 
     def task
-      @task ||= Repo::Task.friendly.find(params[:task_id])
+      @task ||= Repo::Task.preload(:challenge).friendly.find(params[:task_id])
     end
 
     def task_criteria

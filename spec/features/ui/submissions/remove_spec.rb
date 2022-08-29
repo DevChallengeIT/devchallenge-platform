@@ -3,7 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe 'UI/Submissions/Remove' do
-  let!(:task) { create(:task) }
+  let!(:task) do
+    create(:task,
+           require_attachment: true,
+           start_at:           1.minute.ago,
+           submit_at:          1.minute.from_now,
+           result_at:          2.minutes.from_now)
+  end
   let!(:member) { create(:member, challenge: task.challenge) }
   let!(:user) { member.user }
 
@@ -31,8 +37,7 @@ RSpec.describe 'UI/Submissions/Remove' do
       expect(task.task_submissions.count).to eq(0)
       expect(page).to have_current_path "/tasks/#{task.slug}"
       expect(page).to have_content 'Submission was successfully removed'
-      expect(page).to have_button 'Create Task submission'
-      expect(page).not_to have_button 'Update Task submission'
+      expect(page).to have_button 'Submit'
       expect(page).not_to have_button 'Remove'
     end
   end

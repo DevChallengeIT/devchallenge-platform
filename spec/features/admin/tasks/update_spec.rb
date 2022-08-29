@@ -78,16 +78,17 @@ RSpec.describe 'Admin/Tasks/Update' do
 
     click_button 'Update'
 
-    expect(page).to have_current_path "/admin/challenges/#{challenge.slug}/tasks"
+    task.reload
+
+    expect(page).to have_current_path "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/edit"
     expect(page).to have_content 'Task was successfully updated'
     expect(page).to have_content task.challenge.title
 
-    within "#task-#{task.id}" do
-      expect(page).to have_content 'OK task'
-      expect(page).to have_content Time.zone.parse('2022-05-01 10:00:00').strftime(UI::TimestampComponent::TIME_FORMAT)
-      expect(page).to have_content Time.zone.parse('2022-05-10 09:00:00').strftime(UI::TimestampComponent::TIME_FORMAT)
-      expect(page).to have_content Time.zone.parse('2022-05-15 18:00:00').strftime(UI::TimestampComponent::TIME_FORMAT)
-      expect(page).to have_content '100'
-    end
+    expect(task.title).to eq 'OK task'
+    expect(task.slug).to eq 'ok-task'
+    expect(task.start_at).to eq '2022-05-01 10:00:00'
+    expect(task.submit_at).to eq '2022-05-10 09:00:00'
+    expect(task.result_at).to eq '2022-05-15 18:00:00'
+    expect(task.min_assessment).to eq 100
   end
 end

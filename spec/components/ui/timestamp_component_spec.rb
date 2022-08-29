@@ -6,7 +6,7 @@ RSpec.describe UI::TimestampComponent, type: :component do
   it 'renders formatted timestamp value' do
     render_inline(described_class.new(data: Time.zone.parse('2022-04-04 18:13:00')))
 
-    expect(page).to have_css "span",
+    expect(page).to have_css 'span',
                              text: '2022 Apr 04 - 18:13'
   end
 

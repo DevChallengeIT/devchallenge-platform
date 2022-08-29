@@ -7,6 +7,9 @@ module Admin
     add_breadcrumb I18n.t('resources.challenges.plural'), :admin_challenges_path
     add_breadcrumb(proc { |ctx| ctx.challenge.title }, proc { |ctx| ctx.admin_challenges_path(ctx.challenge) })
     add_breadcrumb I18n.t('resources.tasks.plural'), :admin_challenge_tasks_path
+    add_breadcrumb(proc { |ctx| ctx.task.title }, proc { |ctx|
+                                                    ctx.edit_admin_challenge_task_path(ctx.challenge, ctx.task)
+                                                  })
     add_breadcrumb I18n.t('resources.task_submissions.plural'), :admin_challenge_task_submissions_path
 
     def index

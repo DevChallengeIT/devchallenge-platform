@@ -1,79 +1,81 @@
-<div>
-  <div class="flex items-center justify-between py-3">
-    <h2 class="<%= UI::H2 %>">
-      <%= task.title %>
-    </h2>
-    <div class="flex space-x-3">
-      <%= link_to t('resources.task_submissions.plural'), admin_challenge_task_submissions_path(challenge, task), class: UI::BUTTON_SECONDARY %>
-      <%= link_to t('resources.criteria.plural'), admin_challenge_task_criteria_path(challenge, task), class: UI::BUTTON_SECONDARY %>
-      <%= link_to t('words.view'), task_path(task), class: UI::BUTTON_PRIMARY %>
+<%= form_with(model: task, scope: :task, url: admin_challenge_task_path(challenge, task), method: :put, class: "contents") do |form| %>
+  <div>
+    <div class="flex items-center justify-between py-3">
+      <h2 class="<%= UI::H2 %>">
+        <%= task.title %>
+      </h2>
+      <div class="flex space-x-3">
+        <%= form.submit class: UI::BUTTON_PRIMARY %>
+        <%= link_to t('words.view'), task_path(task), class: UI::BUTTON_PRIMARY %>
+        <%= link_to t('resources.task_submissions.plural'), admin_challenge_task_submissions_path(challenge, task), class: UI::BUTTON_SECONDARY %>
+        <%= link_to t('resources.criteria.plural'), admin_challenge_task_criteria_path(challenge, task), class: UI::BUTTON_SECONDARY %>
+      </div>
     </div>
+
+    
+      <div class="flex my-5 items-center justify-between space-x-5">
+        <div class="w-full">
+          <%= form.label :title, class: UI::FORM_LABEL %>
+          <%= form.text_field :title, autofocus: true, class: UI::FORM_INPUT %>
+          <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :title)) %>
+        </div>
+
+        <div class="w-full">
+          <%= form.label :slug, class: UI::FORM_LABEL %>
+          <%= form.text_field :slug, class: UI::FORM_INPUT %>
+          <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :slug)) %>
+        </div>
+      </div>
+
+      <div class="flex my-5 items-center justify-between space-x-5">
+        <div class="w-full">
+          <%= form.label :start_at, class: UI::FORM_LABEL %>
+          <%= form.datetime_field :start_at, class: UI::FORM_INPUT %>
+          <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :start_at)) %>
+        </div>
+
+        <div class="w-full">
+          <%= form.label :submit_at, class: UI::FORM_LABEL %>
+          <%= form.datetime_field :submit_at, class: UI::FORM_INPUT %>
+          <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :submit_at)) %>
+        </div>
+
+        <div class="w-full">
+          <%= form.label :result_at, class: UI::FORM_LABEL %>
+          <%= form.datetime_field :result_at, class: UI::FORM_INPUT %>
+          <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :result_at)) %>
+        </div>
+      </div>
+
+      <div class="my-5 flex items-center space-x-5">
+        <div class="w-full">
+          <%= form.label :dependent_task_id, class: UI::FORM_LABEL %>
+          <%= form.select :dependent_task_id, challenge.tasks.map {|t| [t.title, t.id] }, {include_blank: true}, class: UI::FORM_SELECT %>
+          <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :dependent_task_id)) %>
+        </div>
+
+        <div class="w-full">
+          <%= form.label :min_assessment, class: UI::FORM_LABEL %>
+          <%= form.number_field :min_assessment, autofocus: true, class: UI::FORM_INPUT %>
+          <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :min_assessment)) %>
+        </div>
+
+         <div class="w-full flex items-center space-x-1.5">
+          <%= form.check_box :require_attachment %>
+          <%= form.label :require_attachment, class: UI::FORM_LABEL %>
+        </div>
+      </div>
+
+      <div class="my-5">
+        <%= form.label :description, class: UI::FORM_LABEL %>
+        <%= form.rich_text_area :description, rows: 4, class: UI::FORM_INPUT %>
+        <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :description)) %>
+      </div>
   </div>
+<% end %>
 
-  <%= form_with(model: task, scope: :task, url: admin_challenge_task_path(challenge, task), method: :put, class: "contents") do |form| %>
-    <div class="flex my-5 items-center justify-between space-x-5">
-      <div class="w-full">
-        <%= form.label :title, class: UI::FORM_LABEL %>
-        <%= form.text_field :title, autofocus: true, class: UI::FORM_INPUT %>
-        <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :title)) %>
-      </div>
-
-      <div class="w-full">
-        <%= form.label :slug, class: UI::FORM_LABEL %>
-        <%= form.text_field :slug, class: UI::FORM_INPUT %>
-        <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :slug)) %>
-      </div>
-    </div>
-
-    <div class="flex my-5 items-center justify-between space-x-5">
-      <div class="w-full">
-        <%= form.label :start_at, class: UI::FORM_LABEL %>
-        <%= form.datetime_field :start_at, class: UI::FORM_INPUT %>
-        <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :start_at)) %>
-      </div>
-
-      <div class="w-full">
-        <%= form.label :submit_at, class: UI::FORM_LABEL %>
-        <%= form.datetime_field :submit_at, class: UI::FORM_INPUT %>
-        <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :submit_at)) %>
-      </div>
-
-      <div class="w-full">
-        <%= form.label :result_at, class: UI::FORM_LABEL %>
-        <%= form.datetime_field :result_at, class: UI::FORM_INPUT %>
-        <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :result_at)) %>
-      </div>
-    </div>
-
-    <div class="my-5 flex items-center space-x-5">
-      <div class="w-full">
-        <%= form.label :dependent_task_id, class: UI::FORM_LABEL %>
-        <%= form.select :dependent_task_id, challenge.tasks.map {|t| [t.title, t.id] }, {include_blank: true}, class: UI::FORM_SELECT %>
-        <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :dependent_task_id)) %>
-      </div>
-
-      <div class="w-full">
-        <%= form.label :min_assessment, class: UI::FORM_LABEL %>
-        <%= form.number_field :min_assessment, autofocus: true, class: UI::FORM_INPUT %>
-        <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :min_assessment)) %>
-      </div>
-
-       <div class="w-full flex items-center space-x-1.5">
-        <%= form.check_box :require_attachment %>
-        <%= form.label :require_attachment, class: UI::FORM_LABEL %>
-      </div>
-    </div>
-
-    <div class="my-5">
-      <%= form.label :description, class: UI::FORM_LABEL %>
-      <%= form.rich_text_area :description, rows: 4, class: UI::FORM_INPUT %>
-      <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :description)) %>
-    </div>
-
-    <div class="flex items-center justify-between">
-      <%= form.submit class: UI::BUTTON_PRIMARY %>
-      <%= link_to t('words.back'), admin_challenge_tasks_path(challenge), class: UI::BUTTON_SECONDARY %>
-    </div>
-  <% end %>
-
+<div class="my-5">
+  <%= t('words.danger') %>
+  <%= button_to t('words.remove'), admin_challenge_task_path(challenge, task), class: UI::BUTTON_DANGER, form: {data: {turbo_confirm: 'Are you sure?'}}, method: :delete, type: 'button' %>
 </div>
+

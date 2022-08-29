@@ -39,7 +39,7 @@
             </div>
             <div>
               <nav id="profile-nav" class="flex space-x-5">
-                <div><%= Time.zone.now %></div>
+                <div><%= render(UI::TimestampComponent.new(data: Time.zone.now)) %></div>
                 <%= link_to t('words.app'), root_path %>
                 <%= link_to current_user.full_name, edit_user_registration_path %>
                 <%= link_to t('auth.log_out'), destroy_user_session_path %>

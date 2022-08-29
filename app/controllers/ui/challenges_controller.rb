@@ -4,7 +4,7 @@ module UI
   class ChallengesController < BaseController
     include CompetitionContext
 
-    helper_method :filter_taxon_ids, :challenge_task_step
+    helper_method :filter_taxon_ids
 
     def index
       @taxonomies = Competition.list_taxonomies(repo: :challenges).load_async
@@ -29,10 +29,6 @@ module UI
 
     def filter_taxon_ids
       @filter_taxon_ids ||= filter[:taxon_ids] || []
-    end
-
-    def challenge_task_step(task, idx)
-      [UI::STEP_POINT_ACTIVE, UI::STEP_POINT_DISABLED].sample
     end
   end
 end

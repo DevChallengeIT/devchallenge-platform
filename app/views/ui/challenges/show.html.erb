@@ -17,17 +17,17 @@
     
   </div>
 
-  <div class="my-3 text-gray-800 dark:text-gray-400">
+  <div class="my-5 text-gray-800 dark:text-gray-400">
     <%= challenge.description %>
   </div>
   
   <div class="flex space-x-5 justify-between">
     <div>
-      <h4 class="<%= UI::H3 %>">Registration</h4>
+      <h4 class="<%= UI::H3 %>"><%= t('words.registration') %></h4>
       <%= render(UI::TimestampComponent.new(data: challenge.registration_at)) %>
     </div>
     <div>
-      <h4 class="<%= UI::H3 %>">Finish</h4>
+      <h4 class="<%= UI::H3 %>"><%= t('words.finish') %></h4>
       <%= render(UI::TimestampComponent.new(data: challenge.finish_at)) %>
     </div>
   </div>
@@ -45,15 +45,15 @@
           </small>
         <% end %>
       <% else %>
-        <div class='p-4 h'>
-          <h3 class="<%= UI::H3 %>">
+        <div class='p-8'>
+          <h3 class="block lg:text-2xl md:text-l sm:text-m font-bold text-gray-800 dark:text-white">
             <%= task.title %>
           </h3>
           <small class="text-xs font-light">
             <%= render(UI::TimestampComponent.new(data: task.start_at)) %> -
             <%= render(UI::TimestampComponent.new(data: task.submit_at)) %>
           </small>
-        <div>
+        </div>
       <% end %>
       <% if idx + 1 < @tasks.size %>
         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#000000" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="96 48 176 128 96 208" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></polyline></svg>

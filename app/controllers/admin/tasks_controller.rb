@@ -34,9 +34,19 @@ module Admin
 
     def update
       if task.update(task_params)
-        redirect_to(admin_challenge_tasks_path(challenge), notice: flash_message(:updated, :tasks))
+        redirect_to(edit_admin_challenge_task_path(challenge, task), notice: flash_message(:updated, :tasks))
       else
         render :edit, status: :unprocessable_entity
+      end
+    end
+
+    def destroy
+      if task.task_submissions.count.zero?
+        task.destroy
+        redirect_to(admin_challenge_tasks_path(challenge), notice: flash_message(:removed, :tasks))
+      else
+        redirect_to(edit_admin_challenge_task_path(challenge, task),
+                    alert: 'Task can not be removed as it has dependent submissions')
       end
     end
 
