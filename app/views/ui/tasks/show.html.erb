@@ -1,7 +1,7 @@
 <div class="bg-white border my-3 shadow-sm rounded-md p-4 md:p-5 dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7] mb-3">
   <div class="flex justify-between">
     <h1 class="<%= UI::H1 %> mb-5">
-      <%= challenge.title %> / <%= task.title %>
+      <%= link_to challenge.title, challenge_path(challenge), class: UI::LINK %> / <%= task.title %>
       <% if Auth.admin?(current_user) %>
         <%= link_to t('words.edit'), edit_admin_challenge_task_path(challenge, task), class: UI::LINK %>
       <% end %>

@@ -14,14 +14,9 @@
     <% else %>
       <%= render(UI::ChallengeRegistrationInfoComponent.new(user: current_user, challenge:)) %>
     <% end %>
-    
-  </div>
-
-  <div class="my-5 text-gray-800 dark:text-gray-400">
-    <%= challenge.description %>
   </div>
   
-  <div class="flex space-x-5 justify-between">
+  <div class="my-5 flex space-x-5 justify-between">
     <div>
       <h4 class="<%= UI::H3 %>"><%= t('words.registration') %></h4>
       <%= render(UI::TimestampComponent.new(data: challenge.registration_at)) %>
@@ -30,6 +25,10 @@
       <h4 class="<%= UI::H3 %>"><%= t('words.finish') %></h4>
       <%= render(UI::TimestampComponent.new(data: challenge.finish_at)) %>
     </div>
+  </div>
+
+  <div class="my-5 text-gray-800 dark:text-gray-400">
+    <%= challenge.description %>
   </div>
 
   <nav class="my-12 flex items-center justify-between">

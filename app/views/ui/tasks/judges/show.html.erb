@@ -1,61 +1,83 @@
-<%= task.title %>
-<%= task.description %>
+<div class="bg-white border my-3 shadow-sm rounded-md p-4 md:p-5 dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7] mb-3">
+  <div class="flex justify-between">
+    <h1 class="<%= UI::H1 %> mb-5">
+      <%= link_to challenge.title, challenge_path(challenge), class: UI::LINK %> / <%= task.title %>
+      <% if Auth.admin?(current_user) %>
+        <%= link_to t('words.edit'), edit_admin_challenge_task_path(challenge, task), class: UI::LINK %>
+      <% end %>
+    </h1>
 
-Start at: <%= render(UI::TimestampComponent.new(data: task.start_at)) %>
-Submit at: <%= render(UI::TimestampComponent.new(data: task.submit_at)) %>
-Result at: <%= render(UI::TimestampComponent.new(data: task.result_at)) %>
+    <%= link_to t('words.back'), challenge_path(challenge), class: UI::BUTTON_SECONDARY %>
+  </div>
 
-<div class="my-5">
-  <% if Auth.admin?(current_user) %>
-    <%= link_to t('words.edit'), edit_admin_challenge_task_path(challenge, task), class: UI::BUTTON_SECONDARY %>
-  <% end %>
+  <div class="my-5 flex space-x-5 justify-between">
+    <div>
+      <h4 class="<%= UI::H3 %>"><%= t('words.start') %></h4>
+      <%= render(UI::TimestampComponent.new(data: task.start_at)) %>
+    </div>
+    <div>
+      <h4 class="<%= UI::H3 %>"><%= t('words.submit') %></h4>
+      <%= render(UI::TimestampComponent.new(data: task.submit_at)) %>
+    </div>
+    <div>
+      <h4 class="<%= UI::H3 %>"><%= t('words.result') %></h4>
+      <%= render(UI::TimestampComponent.new(data: task.result_at)) %>
+    </div>
+  </div>
+
+  <div class="my-8 text-gray-800 dark:text-gray-400">
+    <h2 class="<%= UI::H2 %> mb-3">
+      <%= t('words.description') %>
+    </h2>
+    <%= task.description %>
+  </div>
+
+  <div class="my-5">
+    <h2 class="<%= UI::H2 %>">
+      <%= t("resources.task_submissions.plural") %>
+    </h2>
+
+    <table id="submissions" class="table">
+      <thead>
+        <th>
+        </th>
+        <th>
+          <%= t('resources.task_assessments.points') %>
+        </th>
+        <th>
+          <%= t('resources.task_submissions.notes') %>
+        </th>
+        <th>
+        </th>
+      </thead>
+      <tbody>
+        <% @task_submissions.each do |task_submission| %>
+          <tr id="submission-<%= task_submission.id %>">
+            <td>
+              <% if task_submission.task_assessments.any? %>
+                <%= task_submission.task_assessments.pluck(:value).sum / task_submission.task_assessments.count.to_f %>
+              <% else %>
+                <%= t('words.pending') %>
+              <% end %>
+            </td>
+            <td>
+              <%= task_submission.notes %>
+            </td>
+            <td>
+              <% if task_submission.task_assessments.any? %>
+                <%= link_to t('resources.task_assessments.edit'), edit_assessment_path(task_submission.task_assessments.first, task_submission:) %>
+              <% else %>
+                <%= link_to t('resources.task_assessments.add'), new_assessment_path(task_submission:) %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= link_to t('words.back'), challenge_path(challenge), class: UI::BUTTON_SECONDARY %>
+
+    <%= render(UI::PaginatorComponent.new(paginator: @paginator)) %>
+
+  </div>
 </div>
-
-<%= t("resources.task_submissions.plural") %>
-
-<table id="submissions" class="table">
-  <thead>
-    <th>
-      <!-- TODO: change it -->
-      <%= "id" %>
-    </th>
-    <th>
-      <%= t('resources.task_assessments.points') %>
-    </th>
-    <th>
-      <%= t('resources.task_submissions.notes') %>
-    </th>
-    <th>
-    </th>
-  </thead>
-  <tbody>
-    <% @task_submissions.each do |task_submission| %>
-      <tr id="submission-<%= task_submission.id %>">
-        <td>
-          <%= task_submission.id %>
-        </td>
-        <td>
-          <% if task_submission.task_assessments.any? %>
-            <%= task_submission.task_assessments.pluck(:value).sum / task_submission.task_assessments.count.to_f %>
-          <% else %>
-            <%= t('words.pending') %>
-          <% end %>
-        </td>
-        <td>
-          <%= task_submission.notes %>
-        </td>
-        <td>
-          <% if task_submission.task_assessments.any? %>
-            <%= link_to t('resources.task_assessments.edit'), edit_assessment_path(task_submission.task_assessments.first, task_submission:) %>
-          <% else %>
-            <%= link_to t('resources.task_assessments.add'), new_assessment_path(task_submission:) %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= link_to t('words.back'), challenge_path(challenge), class: UI::BUTTON_SECONDARY %>
-
-<%= render(UI::PaginatorComponent.new(paginator: @paginator)) %>

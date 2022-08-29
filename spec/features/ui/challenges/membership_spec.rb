@@ -64,7 +64,7 @@ RSpec.describe 'UI/Challenges/Join' do
 
         expect(page).not_to have_button 'Join'
         expect(page).not_to have_button 'Leave'
-        expect(page).to have_content 'Sorry! The registration is not yet opened'
+        expect(page).to have_content 'Registration is not yet open'
       end
     end
 
