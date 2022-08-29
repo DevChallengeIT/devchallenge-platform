@@ -47,7 +47,7 @@ en:
     resource_removed: '%{name} was successfully removed'
     member_exists: 'User with such email is already assigned to the selected challenge'
     register_to_join: Please register to join this challenge
-    challenge_joined: Thanks! You joined the challenge
+    challenge_joined: Thank you for accepted the challenge
     challenge_leaved: So pity that you leaving us...
     challenge_registration_closed: Registration is already closed
     challenge_registration_not_opened_yet: Registration is not yet open

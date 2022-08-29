@@ -38,7 +38,7 @@ RSpec.describe 'UI/Challenges/Join' do
 
         click_button 'Join'
         expect(page).to have_current_path "/challenges/#{challenge.slug}"
-        expect(page).to have_content 'Thanks! You joined the challenge'
+        expect(page).to have_content 'Thank you for accepted the challenge'
         expect(page).not_to have_button 'Join'
         expect(page).to have_button 'Leave'
       end
