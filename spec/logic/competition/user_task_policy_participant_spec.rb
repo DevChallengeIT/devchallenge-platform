@@ -7,7 +7,7 @@ RSpec.describe Competition::UserTaskPolicy do
 
   let(:user) { participant.user }
   let(:participant) { create(:member) }
-  let(:task) { create(:task, challenge: participant.challenge, dependent_task:) }
+  let(:task) { create(:task, challenge: participant.challenge, min_assessment: 27, dependent_task:) }
   let(:dependent_task) {}
 
   context 'when a task is not started' do
@@ -32,8 +32,7 @@ RSpec.describe Competition::UserTaskPolicy do
           1,
           task_assessments: create_list(:task_assessment, 3, value:),
           member:           participant
-        ),
-        min_assessment:   27
+        )
       )
     end
     let(:value) { 10 }
