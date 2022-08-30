@@ -63,7 +63,7 @@ RSpec.describe 'Navigation' do
         expect(page).to have_current_path '/admin/judges'
       end
 
-      within '#profile-nav' do
+      within '#main-nav' do
         click_link 'Log Out'
         expect(page).to have_current_path '/'
       end
