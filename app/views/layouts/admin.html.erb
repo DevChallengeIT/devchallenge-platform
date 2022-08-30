@@ -14,7 +14,6 @@
     <div class="flex">
       <div class="w-1/6 border-r-2 border-gray-300 dark:border-gray-700">
         <nav id="main-nav" class="-mr-0.5 flex flex-col">
-          <%= controller_name %>
           <%= render(UI::TimestampComponent.new(data: Time.zone.now)) %>
           <%= link_to t('words.app'), root_path, class: 'font-medium py-2 inline-flex items-center whitespace-nowrap text-gray-500 hover:text-yellow-600' %>
           <hr class="my-2" />
