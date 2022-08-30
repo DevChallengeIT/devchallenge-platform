@@ -1,0 +1,25 @@
+<div class="py-5">
+  <h2 class="<%= UI::H2 %>">
+    <%= challenge.title %>
+  </h2>
+
+  <nav class="-mb-0.5 flex space-x-6">
+    <%= link_to t('words.main'), edit_admin_challenge_path(challenge), class: "py-4 px-1 inline-flex items-center gap-2 border-b-[3px] border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-yellow-600 #{'border-b-[3px] border-yellow-500' if selected == :general}" %>
+    <%= link_to admin_challenge_tasks_path(challenge), class: "py-4 px-1 inline-flex items-center gap-2 border-b-[3px] border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-yellow-600 #{'border-b-[3px] border-yellow-500' if selected == :tasks}" do %>
+      <span>
+        <%= t('resources.tasks.plural') %>
+      </span>
+      <span class="ml-1 py-0.5 px-1.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-600 dark:bg-yellow-500 dark:text-white">
+        <%= challenge.tasks.count %>
+      </span>
+    <% end %>
+    <%= link_to admin_challenge_members_path(challenge), class: "py-4 px-1 inline-flex items-center gap-2 border-b-[3px] border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-yellow-600 #{'border-b-[3px] border-yellow-500' if selected == :members}" do %>
+      <span>
+        <%= t('resources.members.plural') %>
+      </span>
+      <span class="ml-1 py-0.5 px-1.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-600 dark:bg-yellow-500 dark:text-white">
+        <%= challenge.members.count %>
+      </span>
+    <% end %>
+  </nav>
+</div>

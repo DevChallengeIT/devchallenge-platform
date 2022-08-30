@@ -26,7 +26,9 @@ RSpec.describe 'Admin/Tasks/Update' do
     visit "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/edit"
 
     fill_in 'Title', with: ''
-    click_button 'Update'
+    within '#top-controls' do
+      click_button 'Update'
+    end
     within '#title-errors' do
       expect(page).to have_content "can't be blank"
     end
@@ -42,7 +44,9 @@ RSpec.describe 'Admin/Tasks/Update' do
     fill_in 'Start at',        with: '2022-04-06 15:33:14'
     fill_in 'Submit at',       with: '2022-04-06 15:33:13'
     fill_in 'Result at',       with: '2022-04-06 15:33:12'
-    click_button 'Update'
+    within '#top-controls' do
+      click_button 'Update'
+    end
 
     within '#start_at-errors' do
       expect(page).to have_content 'must be less than 2022-04-06 15:33:12 UTC'
@@ -76,7 +80,9 @@ RSpec.describe 'Admin/Tasks/Update' do
     fill_in 'Result at',            with: '2022-05-15 18:00:00'
     fill_in 'Min assessment', with: '100'
 
-    click_button 'Update'
+    within '#top-controls' do
+      click_button 'Update'
+    end
 
     task.reload
 

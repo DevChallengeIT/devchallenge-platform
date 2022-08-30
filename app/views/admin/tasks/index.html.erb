@@ -1,8 +1,6 @@
-<div class="flex justify-between items-center py-3">
-  <h2 class="<%= UI::H2 %>">
-    <%=  challenge.title %> <%= t('resources.tasks.plural') %>
-  </h2>
+<%= render 'admin/shared/challenge_navbar', selected: :tasks %>
 
+<div class="py-5 flex justify-end">
   <%= link_to t('words.add'), new_admin_challenge_task_path(challenge), class: UI::BUTTON_PRIMARY %>
 </div>
 

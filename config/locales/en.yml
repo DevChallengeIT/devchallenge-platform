@@ -40,6 +40,7 @@ en:
     result: Result
     description: Description
     download: Download
+    main: Main
   messages:
     access_denied: Access denied
     resource_created: '%{name} was successfully created'

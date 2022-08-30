@@ -25,7 +25,9 @@ RSpec.describe 'Admin/Challenges/Update' do
     visit "/admin/challenges/#{challenge.slug}/edit"
 
     fill_in 'Title', with: ''
-    click_button 'Update'
+    within '#top-controls' do
+      click_button 'Update'
+    end
     within '#title-errors' do
       expect(page).to have_content "can't be blank"
     end
@@ -41,7 +43,9 @@ RSpec.describe 'Admin/Challenges/Update' do
     fill_in 'Registration at', with: '2022-04-06 15:33:14'
     fill_in 'Start at',        with: '2022-04-06 15:33:13'
     fill_in 'Finish at',       with: '2022-04-06 15:33:12'
-    click_button 'Update'
+    within '#top-controls' do
+      click_button 'Update'
+    end
 
     within '#registration_at-errors' do
       expect(page).to have_content 'must be less than 2022-04-06 15:33:13 UTC'
@@ -76,7 +80,9 @@ RSpec.describe 'Admin/Challenges/Update' do
     fill_in 'Start at',             with: '2022-05-10 09:00:00'
     fill_in 'Finish at',            with: '2022-05-15 18:00:00'
 
-    click_button 'Update'
+    within '#top-controls' do
+      click_button 'Update'
+    end
 
     expect(page).to have_current_path '/admin/challenges/ok-challnege/edit'
     expect(page).to have_content 'Challenge was successfully updated'
@@ -106,7 +112,9 @@ RSpec.describe 'Admin/Challenges/Update' do
     uncheck taxon_a.title
     check taxon_b.title
 
-    click_button 'Update'
+    within '#top-controls' do
+      click_button 'Update'
+    end
 
     expect(page).to have_current_path "/admin/challenges/#{challenge.slug}/edit"
     expect(page).to have_content 'Challenge was successfully updated'

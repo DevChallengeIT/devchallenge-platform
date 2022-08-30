@@ -1,8 +1,6 @@
-<div class="flex justify-between items-center py-3">
-  <h2 class="<%= UI::H2 %>">
-    <%= "#{task.title}: #{t('resources.task_submissions.plural')}"%>
-  </h2>
-</div>
+<%= render 'admin/shared/challenge_navbar', selected: :tasks %>
+
+<%= render 'admin/shared/task_navbar', selected: :submissions %>
 
 <table id="task_submissions" class="table">
   <thead>

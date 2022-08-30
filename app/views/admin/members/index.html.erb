@@ -1,16 +1,14 @@
-<div class="flex justify-between items-center py-3">
-  <h2 class="<%= UI::H2 %>"><%= t('resources.members.plural') %></h2>
-</div>
+<%= render 'admin/shared/challenge_navbar', selected: :members %>
 
 <table id="members" class="table">
   <thead>
     <th class="text-left">
       <%= t('resources.members.user') %>
     </th>
-    <th>
+    <th class="text-left">
       <%= t('resources.members.role') %>
     </th>
-    <th>
+    <th class="text-left">
       <%= t('resources.members.joined') %>
     </th>
   </thead>

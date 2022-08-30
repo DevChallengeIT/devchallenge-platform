@@ -50,7 +50,7 @@ module Admin
     end
 
     def roles
-      Repo::Member.roles.except(member.role)
+      Repo::Member.roles
     end
   end
 end
