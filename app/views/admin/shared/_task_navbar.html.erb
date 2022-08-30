@@ -4,8 +4,8 @@
   </h2>
 
   <nav class="-mb-0.5 flex space-x-6">
-    <%= link_to t('words.main'), edit_admin_challenge_task_path(challenge, task), class: "py-4 px-1 inline-flex items-center gap-2 border-b-[3px] border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-yellow-600 #{'border-b-[3px] border-yellow-500' if selected == :general}" %>
-    <%= link_to admin_challenge_task_submissions_path(challenge, task), class: "py-4 px-1 inline-flex items-center gap-2 border-b-[3px] border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-yellow-600 #{'border-b-[3px] border-yellow-500' if selected == :submissions}" do %>
+    <%= link_to t('words.main'), edit_admin_challenge_task_path(challenge, task), class: "py-4 px-1 inline-flex items-center gap-2 border-b-[3px] text-sm whitespace-nowrap text-gray-500 hover:text-yellow-600 #{'border-b-[3px] border-yellow-500' if selected == :general}" %>
+    <%= link_to admin_challenge_task_submissions_path(challenge, task), class: "py-4 px-1 inline-flex items-center gap-2 border-b-[3px] text-sm whitespace-nowrap text-gray-500 hover:text-yellow-600 #{'border-b-[3px] border-yellow-500' if selected == :submissions}" do %>
       <span>
         <%= t('resources.task_submissions.plural') %>
       </span>
@@ -13,7 +13,7 @@
         <%= task.task_submissions.count %>
       </span>
     <% end %>
-    <%= link_to admin_challenge_task_criteria_path(challenge, task), class: "py-4 px-1 inline-flex items-center gap-2 border-b-[3px] border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-yellow-600 #{'border-b-[3px] border-yellow-500' if selected == :criteria}" do %>
+    <%= link_to admin_challenge_task_criteria_path(challenge, task), class: "py-4 px-1 inline-flex items-center gap-2 border-b-[3px] text-sm whitespace-nowrap text-gray-500 hover:text-yellow-600 #{'border-b-[3px] border-yellow-500' if selected == :criteria}" do %>
       <span>
         <%= t('resources.criteria.plural') %>
       </span>

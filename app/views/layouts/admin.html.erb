@@ -14,15 +14,16 @@
     <div class="flex">
       <div class="w-1/6 border-r-2 border-gray-300 dark:border-gray-700">
         <nav id="main-nav" class="-mr-0.5 flex flex-col">
+          <%= controller_name %>
           <%= render(UI::TimestampComponent.new(data: Time.zone.now)) %>
-          <%= link_to t('words.app'), root_path, class: 'py-2 inline-flex items-center whitespace-nowrap text-gray-500 hover:text-yellow-600' %>
+          <%= link_to t('words.app'), root_path, class: 'font-medium py-2 inline-flex items-center whitespace-nowrap text-gray-500 hover:text-yellow-600' %>
           <hr class="my-2" />
-          <%= link_to t('words.dashboard'), admin_root_path,                           class: "py-2 inline-flex items-center whitespace-nowrap text-gray-500 hover:text-yellow-600 #{'border-r-[5px] text-yellow-600 border-yellow-500' if controller_name == 'dashboard'}" %>
-          <%= link_to t('resources.challenges.plural'), admin_challenges_path,         class: "py-2 inline-flex items-center whitespace-nowrap text-gray-500 hover:text-yellow-600 #{'border-r-[5px] text-yellow-600 border-yellow-500' if controller_name == 'challenges'}" %>
-          <%= link_to link_to t('resources.taxonomies.plural'), admin_taxonomies_path, class: "py-2 inline-flex items-center whitespace-nowrap text-gray-500 hover:text-yellow-600 #{'border-r-[5px] text-yellow-600 border-yellow-500' if controller_name == 'taxonomies'}" %>
-          <%= link_to link_to t('resources.judges.plural'), admin_judges_path,         class: "py-2 inline-flex items-center whitespace-nowrap text-gray-500 hover:text-yellow-600 #{'border-r-[5px] text-yellow-600 border-yellow-500' if controller_name == 'judges'}" %>
-          <%= link_to link_to link_to t('resources.users.plural'), admin_users_path,   class: "py-2 inline-flex items-center whitespace-nowrap text-gray-500 hover:text-yellow-600 #{'border-r-[5px] text-yellow-600 border-yellow-500' if controller_name == 'users'}" %>
-          <%= link_to t('auth.log_out'), destroy_user_session_path,                    class: "py-2 inline-flex items-center whitespace-nowrap text-gray-500 hover:text-yellow-600" %>
+          <%= link_to t('words.dashboard'), admin_root_path,                           class: "font-medium py-2 inline-flex items-center whitespace-nowrap text-gray-500 hover:text-yellow-600 #{'border-r-[5px] text-yellow-600 border-yellow-500' if controller_name == 'dashboard'}" %>
+          <%= link_to t('resources.challenges.plural'), admin_challenges_path,         class: "font-medium py-2 inline-flex items-center whitespace-nowrap text-gray-500 hover:text-yellow-600 #{'border-r-[5px] text-yellow-600 border-yellow-500' if controller_name.in?(['challenges', 'tasks', 'members', 'submissions', 'criteria'])}" %>
+          <%= link_to link_to t('resources.taxonomies.plural'), admin_taxonomies_path, class: "font-medium py-2 inline-flex items-center whitespace-nowrap text-gray-500 hover:text-yellow-600 #{'border-r-[5px] text-yellow-600 border-yellow-500' if controller_name.in?(['taxonomies', 'taxons'])}" %>
+          <%= link_to link_to t('resources.judges.plural'), admin_judges_path,         class: "font-medium py-2 inline-flex items-center whitespace-nowrap text-gray-500 hover:text-yellow-600 #{'border-r-[5px] text-yellow-600 border-yellow-500' if controller_name == 'judges'}" %>
+          <%= link_to link_to link_to t('resources.users.plural'), admin_users_path,   class: "font-medium py-2 inline-flex items-center whitespace-nowrap text-gray-500 hover:text-yellow-600 #{'border-r-[5px] text-yellow-600 border-yellow-500' if controller_name == 'users'}" %>
+          <%= link_to t('auth.log_out'), destroy_user_session_path,                    class: "font-medium py-2 inline-flex items-center whitespace-nowrap text-gray-500 hover:text-yellow-600" %>
         </nav>
       </div>
 

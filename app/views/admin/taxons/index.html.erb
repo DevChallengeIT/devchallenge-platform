@@ -14,7 +14,7 @@
 <ul id="taxons">
   <% @taxons.each do |taxon| %>
     <li id="taxon-<%= taxon.id %>" class="my-2">
-      <%= taxon.position %>. <%= link_to taxon.title, edit_admin_taxonomy_taxon_path(taxonomy, taxon) %>
+      <%= taxon.position %>. <%= link_to taxon.title, edit_admin_taxonomy_taxon_path(taxonomy, taxon), class: UI::LINK %>
     </li>
   <% end %>
 </ul>
