@@ -10,6 +10,7 @@ module UI
       @task_submission = Repo::TaskSubmission.new(task_submission_params)
 
       if task_submission.save
+        Competition.auto_assign_judge(task_submission:)
         redirect_to task_path(task), notice: flash_message(:created, :task_submissions)
       else
         redirect_to task_path(task), status: :unprocessable_entity

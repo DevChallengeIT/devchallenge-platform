@@ -35,6 +35,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'acts_as_list', '~> 1.0.4'
 gem 'awesome_print', '~> 1.9'
 gem 'aws-sdk-s3'
+gem 'circular_array'
 gem 'friendly_id', '~> 5.4.0'
 gem 'image_processing'
 gem 'lograge', '~> 0.12'

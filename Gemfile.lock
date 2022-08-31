@@ -104,6 +104,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    circular_array (0.2.1)
     coderay (1.1.3)
     concurrent-ruby (1.1.10)
     connection_pool (2.2.5)
@@ -408,6 +409,7 @@ DEPENDENCIES
   bootsnap
   breadcrumbs_on_rails (~> 4.1)
   capybara (~> 3.36)
+  circular_array
   cssbundling-rails
   debug
   devise (~> 4.8.1)
