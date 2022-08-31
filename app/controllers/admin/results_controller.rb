@@ -14,7 +14,7 @@ module Admin
 
     def show
       @calc = Competition.task_results_calculator(task:)
-      @members = challenge.members.participant.preload(:user)
+      @members = Competition.task_sum_results(task:)
       @criteria = task.task_criteria
       @judges = challenge.members.judge.preload(:user)
     end

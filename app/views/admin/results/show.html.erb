@@ -33,21 +33,21 @@
   </thead>
   <tbody>
     <% @members.each do |member| %>
-      <tr id="member-<%= member.id %>">
+      <tr id="member-<%= member['member_id'] %>">
         <td class="font-semibold">
-          <%= render(UI::UserNameComponent.new(user: member.user)) %>
+          <%= member['full_name'] %> (<%= member['email'] %>)
         </td>
-        <td id="member-<%= member.id %>-sum" class="bg-gray-200 font-bold text-center">
-          <%= @calc.sum_for(member_id: member.id) %>
+        <td id="member-<%= member['member_id'] %>-sum" class="bg-gray-200 font-bold text-center">
+          <%= @calc.sum_for(member_id: member['member_id']) %>
         </td>
         <% @criteria.each do |criteria| %>
           <% @judges.each do |judge| %>
-            <td id="member-<%= member.id %>-criteria-<%= criteria.id %>-judge-<%= judge.id %>" class="text-center">
-              <%= @calc.value_for(member_id: member.id, criteria_id: criteria.id, judge_id: judge.id) %>
+            <td id="member-<%= member['member_id'] %>-criteria-<%= criteria.id %>-judge-<%= judge.id %>" class="text-center">
+              <%= @calc.value_for(member_id: member['member_id'], criteria_id: criteria.id, judge_id: judge.id) %>
             </td>
           <% end %>
-          <td id="member-<%= member.id %>-criteria-<%= criteria.id %>-avg" class="bg-gray-200 font-bold text-center">
-            <%= @calc.avg_for(member_id: member.id, criteria_id: criteria.id) %>
+          <td id="member-<%= member['member_id'] %>-criteria-<%= criteria.id %>-avg" class="bg-gray-200 font-bold text-center">
+            <%= @calc.avg_for(member_id: member['member_id'], criteria_id: criteria.id) %>
           </td>
         <% end %>
       </tr>

@@ -14,5 +14,6 @@ module Competition
   delegate :can_user_do_task?,         to: UserTaskPolicy
   delegate :auto_assign_judge,         to: JudgeService
   delegate :task_results,              to: TaskResultsQuery
+  delegate :task_sum_results,          to: TaskResultsQuery
   delegate :task_results_calculator,   to: TaskResultsCalculator
 end
