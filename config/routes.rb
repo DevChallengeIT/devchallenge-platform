@@ -10,8 +10,10 @@ Rails.application.routes.draw do
              controllers: { omniauth_callbacks: 'callbacks', registrations: 'registrations' }
 
   resources :challenges, only: %i[index show], controller: 'ui/challenges' do
+    get :terms_and_conditions
     resources :members, only: %i[create destroy], controller: 'ui/members'
   end
+
   resources :tasks, only: :show, controller: 'ui/tasks' do
     resources :submissions, only: %i[create update destroy], controller: 'ui/submissions'
   end

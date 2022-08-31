@@ -28,6 +28,7 @@ en:
     search: Search
     filter: Filter
     join: Join
+    accept_and_join: Accept & Join
     leave: Leave
     pending: Pending
     view: View
@@ -41,6 +42,7 @@ en:
     description: Description
     download: Download
     main: Main
+    close: Close
   messages:
     access_denied: Access denied
     resource_created: '%{name} was successfully created'
@@ -59,6 +61,7 @@ en:
     you_not_qualified_to: You are not qualified to 
     submission_has_already_been_assessed: Your submission has already been assessed. Result will be available after
     submission_is_not_available: Submission is  not available
+    challenge_terms_and_conditions: By joining <strong>%{challenge_title}</strong> you accept it's <a href="%{url}" class="%{class}">terms and conditions</a>
   auth:
     profile: Profile
     log_in: Log In
@@ -97,6 +100,7 @@ en:
       registration_at: Registration At
       start_at: Start At
       finish_at: Finish At
+      terms_and_conditions: Terms & Conditions
     task_submissions:
       plural: Submissions
       singular: Submission

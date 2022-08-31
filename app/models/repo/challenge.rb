@@ -8,7 +8,7 @@ module Repo
     has_many :tasks, dependent: :destroy
 
     has_rich_text :description
-    has_rich_text :terms_and_condition
+    has_rich_text :terms_and_conditions
 
     enum status: {
       draft:      'draft',

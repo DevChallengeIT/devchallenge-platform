@@ -36,7 +36,7 @@ RSpec.describe 'UI/Challenges/Join' do
       it 'can join the challenge if not yet joined' do
         visit "/challenges/#{challenge.slug}"
 
-        click_button 'Join'
+        click_button 'Accept & Join'
         expect(page).to have_current_path "/challenges/#{challenge.slug}"
         expect(page).to have_content 'Thank you for accepted the challenge'
         expect(page).not_to have_button 'Join'
