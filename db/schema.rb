@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_29_160338) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_31_091148) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -113,6 +113,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_29_160338) do
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "judge_id"
+    t.index ["judge_id"], name: "index_task_submissions_on_judge_id"
     t.index ["member_id"], name: "index_task_submissions_on_member_id"
     t.index ["task_id", "member_id"], name: "index_task_submissions_on_task_id_and_member_id", unique: true
     t.index ["task_id"], name: "index_task_submissions_on_task_id"
@@ -209,6 +211,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_29_160338) do
   add_foreign_key "task_assessments", "task_submissions"
   add_foreign_key "task_criteria", "tasks"
   add_foreign_key "task_submissions", "members"
+  add_foreign_key "task_submissions", "members", column: "judge_id"
   add_foreign_key "task_submissions", "tasks"
   add_foreign_key "tasks", "challenges"
   add_foreign_key "tasks", "tasks", column: "dependent_task_id"

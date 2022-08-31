@@ -1,0 +1,23 @@
+<%= render 'admin/shared/challenge_navbar', selected: :tasks %>
+
+<%= render 'admin/shared/task_navbar', selected: :submissions %>
+
+<div class="md:w-2/3 w-full">
+  <%= form_with(model: task_submission, scope: :task_submission, url: admin_challenge_task_submission_path(challenge, task,  task_submission), method: :put, class: "contents") do |form| %>
+    <div class="my-5">
+      <%= form.label :judge_id, class: UI::FORM_LABEL %>
+      <%= form.select :judge_id, judges.map {|j| [j.user.full_name, j.id]}, {include_blank: true}, class: UI::FORM_INPUT %>
+      <%= render(UI::ErrorTagComponent.new(errors: task_submission.errors, field: :judge_id)) %>
+    </div>
+
+    <div class="flex items-center justify-between">
+      <%= form.submit t('words.update'), class: UI::BUTTON_PRIMARY %>
+      <%= link_to t('words.back'), admin_challenge_task_submission_path(challenge, task, task_submission), class: UI::BUTTON_SECONDARY %>
+    </div>
+  <% end %>
+</div>
+
+<div class="mt-8">
+  <%= t('words.danger') %>
+  <%= button_to t('words.remove'), admin_challenge_task_submission_path(challenge, task, task_submission), method: :delete, class: UI::BUTTON_DANGER, form: { data: { turbo_confirm: t('messages.are_you_sure') } } %>
+</div>

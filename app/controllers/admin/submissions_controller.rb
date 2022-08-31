@@ -2,7 +2,7 @@
 
 module Admin
   class SubmissionsController < BaseController
-    helper_method :task, :task_submission, :challenge, :task_criterium
+    helper_method :task, :task_submission, :challenge, :task_criterium, :judges
 
     add_breadcrumb I18n.t('resources.challenges.plural'), :admin_challenges_path
     add_breadcrumb(proc { |ctx| ctx.challenge.title }, proc { |ctx| ctx.admin_challenges_path(ctx.challenge) })
@@ -13,7 +13,12 @@ module Admin
     add_breadcrumb I18n.t('resources.task_submissions.plural'), :admin_challenge_task_submissions_path
 
     def index
-      @paginator, @task_submissions = paginate task.task_submissions.preload(member: :user)
+      @paginator, @task_submissions = paginate task.task_submissions.preload(judge: :user, member: :user)
+    end
+
+    def update
+      task_submission.update(task_submission_params)
+      redirect_to admin_challenge_task_submissions_path(challenge, task)
     end
 
     def destroy
@@ -24,8 +29,12 @@ module Admin
 
     private
 
+    def task_submission_params
+      params.require(:task_submission).permit(:judge_id)
+    end
+
     def task_submission
-      @task_submission ||= task.task_submissions.find(params[:id])
+      @task_submission ||= task.task_submissions.find(params[:id] || params[:task_submission_id])
     end
 
     def task_criterium
@@ -40,6 +49,10 @@ module Admin
 
     def challenge
       @challenge ||= task.challenge
+    end
+
+    def judges
+      @judges ||= challenge.members.judge.preload(:user)
     end
   end
 end

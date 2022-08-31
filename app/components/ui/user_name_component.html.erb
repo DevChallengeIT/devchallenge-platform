@@ -1,3 +1,5 @@
-<span>
-  <%= "#{@user.full_name} (#{@user.email})" %>
-</span>
+<% if @user %>
+  <span>
+    <%= "#{@user.full_name} (#{@user.email})" %>
+  </span>
+<% end %>

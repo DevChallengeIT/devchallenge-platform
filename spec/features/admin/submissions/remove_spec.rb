@@ -10,13 +10,9 @@ RSpec.describe 'Admin/TaskSubmissions/Remove' do
     challenge = task.challenge
 
     assume_logged_in(admin: true)
-    visit "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/submissions"
+    visit "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/submissions/#{task_submission.id}/edit"
 
-    expect(page).to have_content task_submission.member.user.email
-
-    within "#task_submission-#{task_submission.id}" do
-      click_button 'Remove'
-    end
+    click_button 'Remove'
 
     expect(page).to have_current_path "/admin/challenges/#{challenge.slug}/tasks/#{task.slug}/submissions"
     expect(page).to have_content 'Submission was successfully removed'

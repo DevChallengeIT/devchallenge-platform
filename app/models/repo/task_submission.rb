@@ -4,6 +4,7 @@ module Repo
   class TaskSubmission < ApplicationRecord
     belongs_to :task
     belongs_to :member
+    belongs_to :judge, class_name: 'Repo::Member', optional: true
 
     has_many :task_assessments, dependent: :destroy
 
