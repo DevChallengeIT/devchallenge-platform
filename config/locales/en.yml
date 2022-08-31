@@ -62,6 +62,7 @@ en:
   auth:
     profile: Profile
     log_in: Log In
+    log_in_as: Log In As
     log_out: Log Out
     full_name: Full Name
     time_zone: Time Zone

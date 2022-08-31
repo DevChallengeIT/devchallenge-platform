@@ -43,10 +43,15 @@ module Admin
       redirect_to(admin_users_path, notice: flash_message(:removed, :users))
     end
 
+    def log_in_as
+      sign_in(:user, user)
+      redirect_to root_url
+    end
+
     private
 
     def user
-      @user ||= Repo::User.friendly.find(params[:id])
+      @user ||= Repo::User.friendly.find(params[:id] || params[:user_id])
     end
 
     def user_params

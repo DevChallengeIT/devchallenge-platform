@@ -7,7 +7,7 @@
     <th class="text-left">
       <%= t('resources.judges.user') %>
     </th>
-    <th>
+    <th class="text-left">
       <%= t('resources.judges.challenge') %>
     </th>
   </thead>
@@ -15,10 +15,12 @@
     <% @judges.each do |judge| %>
       <tr id="judge-<%= judge.id %>">
         <td>
-          <%= render(UI::UserNameComponent.new(user: judge.user)) %>
+          <%= link_to edit_admin_user_path(judge.user), class: UI::LINK do %>
+            <%= render(UI::UserNameComponent.new(user: judge.user)) %>
+          <% end %>
         </td>
          <td>
-           <%= link_to judge.challenge.title, admin_challenge_members_path(judge.challenge) %>
+           <%= link_to judge.challenge.title, admin_challenge_members_path(judge.challenge), class: UI::LINK %>
         </td>
       </tr>
     <% end %>

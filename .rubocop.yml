@@ -51,3 +51,6 @@ RSpec/ExampleLength:
 
 RSpec/NamedSubject:
   Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false

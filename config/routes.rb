@@ -36,7 +36,9 @@ Rails.application.routes.draw do
       end
     end
     resources :judges, only: :index
-    resources :users, except: %i[show]
+    resources :users, except: %i[show] do
+      post :log_in_as
+    end
     resources :taxonomies, except: %i[destroy] do
       resources :taxons, except: %i[show]
     end

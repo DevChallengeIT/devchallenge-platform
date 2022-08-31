@@ -13,8 +13,24 @@ module Competition
       @task = task
     end
 
+    # rubocop:disable Metrics/MethodLength
     def total_assessment
-      task.task_submissions.joins(:task_assessments).where(task_submissions: { member: participant }).sum(:value) || 0
+      return 0 unless participant
+
+      query = <<-SQL
+        SELECT
+          SUM(ta.value) / COUNT(DISTINCT(ta.judge_id)) as total_assessment
+        FROM
+          task_assessments ta
+        JOIN task_criteria tc ON tc.id = ta.task_criterium_id
+        JOIN tasks t ON t.id = tc.task_id
+        JOIN task_submissions ts ON ts.task_id = t.id
+        JOIN challenges c ON c.id = t.challenge_id
+        WHERE t.id = #{task.id} AND ts.member_id = #{participant.id}
+      SQL
+
+      ActiveRecord::Base.connection.execute(query).as_json.dig(0, 'total_assessment') || 0
     end
+    # rubocop:enable Metrics/MethodLength
   end
 end

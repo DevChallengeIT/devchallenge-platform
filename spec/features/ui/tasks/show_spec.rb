@@ -75,16 +75,19 @@ RSpec.describe 'UI/Tasks/Show' do
 
     it 'can see some result and qualified message' do
       assume_logged_in
+
       member = create(:member, user: current_user, challenge: task.challenge)
-      create(:task, dependent_task: task)
+      dependent_task = create(:task, dependent_task: task, challenge: task.challenge)
+      judge = create(:member, :judge, challenge: task.challenge)
+      task_criterium = create(:task_criterium, task:)
       task_submission = create(:task_submission, task:, member:)
-      create(:task_assessment, task_submission:, value: 10)
+      create(:task_assessment, task_submission:, task_criterium:, judge:, value: 10)
 
       visit "/tasks/#{task.slug}"
 
       within '#result' do
         expect(page).to have_content 'Result: 10'
-        expect(page).to have_content 'You are qualified'
+        expect(page).to have_content "You are qualified to: #{dependent_task.title}"
       end
     end
   end

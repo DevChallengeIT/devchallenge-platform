@@ -8,9 +8,6 @@ module Repo
 
     has_one :task, through: :task_submission
 
-    validates :judge, presence: true
-    validates :task_submission, presence: true, uniqueness: { scope: :task_criterium_id }
-    validates :task_criterium, presence: true
     validates :value, presence: true
     validate :within_task_criterium_range?
 

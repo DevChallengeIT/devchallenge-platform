@@ -251,68 +251,68 @@ end
 # === ASSESSMENTS =============================================================
 # === FIRST PARICIPANT
 Repo::TaskAssessment.where(
-  member: judge_member,
+  judge: judge_member,
   task_submission: task_1_submission_1,
   task_criterium: be_task_1_criterium_1
 ).first_or_create(value: 1, comment: 'Passed!')
 
 Repo::TaskAssessment.where(
-  member: judge_member,
+  judge: judge_member,
   task_submission: task_2_submission_1,
   task_criterium: be_task_2_criterium_1
 ).first_or_create(value: 10, comment: 'Nice job!!!')
 
 Repo::TaskAssessment.where(
-  member: judge_member,
+  judge: judge_member,
   task_submission: task_2_submission_1,
   task_criterium: be_task_2_criterium_2
 ).first_or_create(value: 15, comment: 'Good job!!!')
 
 Repo::TaskAssessment.where(
-  member: judge_member,
+  judge: judge_member,
   task_submission: task_2_submission_1,
   task_criterium: be_task_2_criterium_3
 ).first_or_create(value: 20, comment: 'Excellent')
 
 Repo::TaskAssessment.where(
-  member: judge_member,
+  judge: judge_member,
   task_submission: task_2_submission_1,
   task_criterium: be_task_2_criterium_4
 ).first_or_create(value: 20, comment: 'OMG! It is so nice!')
 
 Repo::TaskAssessment.where(
-  member: judge_member,
+  judge: judge_member,
   task_submission: task_2_submission_1,
   task_criterium: be_task_2_criterium_5
 ).first_or_create(value: 20, comment: 'I want kids from this guy!')
 
 # === SECOND PARICIPANT
 Repo::TaskAssessment.where(
-  member: judge_member,
+  judge: judge_member,
   task_submission: task_1_submission_2,
   task_criterium: be_task_1_criterium_1
 ).first_or_create(value: 1, comment: 'Passed!')
 
 Repo::TaskAssessment.where(
-  member: judge_member,
+  judge: judge_member,
   task_submission: task_2_submission_2,
   task_criterium: be_task_2_criterium_1
 ).first_or_create(value: 5, comment: 'OK')
 
 Repo::TaskAssessment.where(
-  member: judge_member,
+  judge: judge_member,
   task_submission: task_2_submission_2,
   task_criterium: be_task_2_criterium_2
 ).first_or_create(value: 7, comment: 'OK too')
 
 Repo::TaskAssessment.where(
-  member: judge_member,
+  judge: judge_member,
   task_submission: task_2_submission_2,
   task_criterium: be_task_2_criterium_3
 ).first_or_create(value: 10, comment: 'So-so')
 
 Repo::TaskAssessment.where(
-  member: judge_member,
+  judge: judge_member,
   task_submission: task_2_submission_2,
   task_criterium: be_task_2_criterium_5
 ).first_or_create(value: 2, comment: 'No comments')

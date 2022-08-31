@@ -5,12 +5,16 @@ require 'rails_helper'
 RSpec.describe Competition::UserTaskPolicy do
   subject(:policy) { Competition.can_user_do_task?(user:, task:) }
 
-  let(:user) { participant.user }
-  let(:participant) { create(:member) }
-  let(:task) { create(:task, challenge: participant.challenge, min_assessment: 27, dependent_task:) }
-  let(:dependent_task) {}
+  let(:user)           { member.user }
+  let(:member)         { create(:member) }
+  let(:task)           { create(:task, challenge: member.challenge, min_assessment: 27, dependent_task:) }
+  let(:dependent_task) { create(:task) }
 
   context 'when a task is not started' do
+    before do
+      allow(Competition::TasksAssessmentCalculator).to receive(:total_assessment_for).with(participant: member, task: dependent_task).and_return(28)
+    end
+
     it 'returns true' do
       travel_to Time.parse('2022-04-30 10:00:00').utc do
         expect(policy).to be true
@@ -19,36 +23,32 @@ RSpec.describe Competition::UserTaskPolicy do
   end
 
   context 'when a task is started but with missing dependent task' do
+    let(:dependent_task) { nil }
+
     it { expect(policy).to be true }
   end
 
   context 'when a dependent task assessed enough' do
-    let(:dependent_task) do
-      create(
-        :task,
-        challenge:        participant.challenge,
-        task_submissions: create_list(
-          :task_submission,
-          1,
-          task_assessments: create_list(:task_assessment, 3, value:),
-          member:           participant
-        )
-      )
+    before do
+      allow(Competition::TasksAssessmentCalculator).to receive(:total_assessment_for).with(participant: member, task: dependent_task).and_return(28)
     end
-    let(:value) { 10 }
 
     it { expect(policy).to be true }
+  end
 
-    context 'when assessment is equal to min assessment' do
-      let(:value) { 9 }
-
-      it { expect(policy).to be true }
+  context 'when assessment is equal to min assessment' do
+    before do
+      allow(Competition::TasksAssessmentCalculator).to receive(:total_assessment_for).with(participant: member, task: dependent_task).and_return(27)
     end
 
-    context 'when a dependent task not assessed enough' do
-      let(:value) { 8 }
+    it { expect(policy).to be true }
+  end
 
-      it { expect(policy).to be_falsey }
+  context 'when a dependent task not assessed enough' do
+    before do
+      allow(Competition::TasksAssessmentCalculator).to receive(:total_assessment_for).with(participant: member, task: dependent_task).and_return(26)
     end
+
+    it { expect(policy).to be_falsey }
   end
 end
