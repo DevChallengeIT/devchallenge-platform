@@ -1,0 +1,56 @@
+<%= render 'admin/shared/challenge_navbar', selected: :tasks %>
+
+<%= render 'admin/shared/task_navbar', selected: :results %>
+
+
+<table id="results" class="table">
+  <thead>
+    <th>
+      <%= t('resources.members.singular') %>
+    </th>
+    <th class="text-center fond-bold">
+      <%= t('words.summary') %>
+    </th>
+    <% @criteria.each do |criteria| %>
+      <th class="text-center" colspan="<%= judges_count + 1 %>">
+        <%= criteria.title %> max (<%= criteria.max_value %>)
+      </th>
+    <% end %>
+  </thead>
+  <thead>
+    <th></th>
+    <th></th>
+    <% @criteria.each do |criteria| %>
+      <% @judges.each do |judge| %>
+        <th>
+          <%= judge.user.full_name %>
+        </th>
+      <% end %>
+      <th class="bg-gray-200 font-bold">
+        <%= t('words.average') %>
+      </th>
+    <% end %>
+  </thead>
+  <tbody>
+    <% @members.each do |member| %>
+      <tr id="member-<%= member.id %>">
+        <td class="font-semibold">
+          <%= render(UI::UserNameComponent.new(user: member.user)) %>
+        </td>
+        <td id="member-<%= member.id %>-sum" class="bg-gray-200 font-bold text-center">
+          <%= @calc.sum_for(member_id: member.id) %>
+        </td>
+        <% @criteria.each do |criteria| %>
+          <% @judges.each do |judge| %>
+            <td id="member-<%= member.id %>-criteria-<%= criteria.id %>-judge-<%= judge.id %>" class="text-center">
+              <%= @calc.value_for(member_id: member.id, criteria_id: criteria.id, judge_id: judge.id) %>
+            </td>
+          <% end %>
+          <td id="member-<%= member.id %>-criteria-<%= criteria.id %>-avg" class="bg-gray-200 font-bold text-center">
+            <%= @calc.avg_for(member_id: member.id, criteria_id: criteria.id) %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
