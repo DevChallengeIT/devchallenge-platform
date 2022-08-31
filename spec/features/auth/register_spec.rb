@@ -62,7 +62,7 @@ RSpec.describe 'Log In' do
     fill_in 'Confirm password', with: 'password'
     click_button 'Register'
 
-    expect(page).to have_current_path '/'
+    expect(page).to have_current_path '/profile'
     expect(page).to have_link 'Log Out'
   end
 end
