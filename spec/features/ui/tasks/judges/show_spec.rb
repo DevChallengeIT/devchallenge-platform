@@ -28,10 +28,17 @@ RSpec.describe 'UI/Tasks/Show' do
       it 'shows correct task submissions' do
         assume_logged_in
 
-        create(:member, :judge, user: current_user, challenge: task.challenge)
-        participant = create(:member, challenge: task.challenge)
-        current_task_submission = create(:task_submission, member: participant, notes: 'this is my submission', task:)
-        another_task_submission = create(:task_submission, notes: 'not current task submission')
+        judge_a = create(:member, :judge, user: current_user, challenge: task.challenge)
+        judge_b = create(:member, :judge, challenge: task.challenge)
+
+        participant_a = create(:member, challenge: task.challenge)
+        participant_b = create(:member, challenge: task.challenge)
+        participant_c = create(:member, challenge: task.challenge)
+
+        task_submission_a = create(:task_submission, member: participant_a, notes: 'this is my submission', task:, judge: judge_a)
+        task_submission_b = create(:task_submission, member: participant_b, notes: 'this is not my submission', task:, judge: judge_b)
+        task_submission_c = create(:task_submission, member: participant_c, notes: 'this is submission without judge', task:)
+        other_task_submission = create(:task_submission, notes: 'not current task submission')
 
         visit "/tasks/#{task.slug}"
 
@@ -39,8 +46,10 @@ RSpec.describe 'UI/Tasks/Show' do
         expect(page).to have_link 'Add assessment'
         expect(page).not_to have_link 'Edit assessment'
         expect(page).to have_content 'Submissions'
-        expect(page).to have_content current_task_submission.notes
-        expect(page).not_to have_content another_task_submission.notes
+        expect(page).to have_content task_submission_a.notes
+        expect(page).to have_content task_submission_c.notes
+        expect(page).not_to have_content task_submission_b.notes
+        expect(page).not_to have_content other_task_submission.notes
       end
     end
 

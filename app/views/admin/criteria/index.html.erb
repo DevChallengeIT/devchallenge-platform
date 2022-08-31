@@ -2,9 +2,7 @@
 
 <%= render 'admin/shared/task_navbar', selected: :criteria %>
 
-<div class="flex justify-between items-center py-3">
-  <h2 class="<%= UI::H2 %>"><%= t('resources.criteria.plural') %></h2>
-
+<div class="flex justify-end items-center py-3">
   <%= link_to t('words.add'), new_admin_challenge_task_criterium_path, class: UI::BUTTON_PRIMARY %>
 </div>
 

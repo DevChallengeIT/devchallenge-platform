@@ -50,7 +50,7 @@ module UI
     end
 
     def task_submissions
-      @task_submissions ||= task.task_submissions.preload(:task_assessments)
+      @task_submissions ||= task.task_submissions.preload(:task_assessments).where(judge_id: [nil, current_member&.id])
     end
   end
 end

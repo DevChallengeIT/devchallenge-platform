@@ -3,8 +3,6 @@
 <%= render 'admin/shared/task_navbar', selected: :criteria %>
 
 <div class="md:w-2/3 w-full">
-  <h2 class="<%= UI::H2 %>"><%= t('words.edit') %> <%= t('resources.criteria.singular') %></h2>
-
   <%= form_with(model: criterium, scope: :criterium, url: admin_challenge_task_criterium_path(challenge, task, criterium), method: :put, class: "contents") do |form| %>
     <div class="my-5">
       <%= form.label :title, class: UI::FORM_LABEL %>
