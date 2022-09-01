@@ -1,5 +1,6 @@
-<div class="flex">
-  <div class="hidden lg:inline lg:w-1/2">
+<div class="flex space-x-5">
+  <div class="hidden lg:inline lg:w-1/2 mx-auto mt-7">
+    <%= image_tag asset_path('bg_registration.jpg'), class: 'rounded-md' %>
   </div>
   <div class="md:w-1/2 mx-auto">
     <div class="mt-7 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:border-gray-700 p-6">
@@ -35,33 +36,38 @@
           <!-- Form -->
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { data: {turbo: false}}) do |f| %>
             <div class="grid gap-y-4">
-              <div>
-                <%= f.label :full_name, t('auth.full_name'), class: UI::FORM_LABEL %>
-                <%= f.text_field :full_name, autofocus: true, class: UI::FORM_INPUT %>
-                <%= render(UI::ErrorTagComponent.new(errors: resource.errors, field: :full_name)) %>
-              </div>
 
-              <div>
-                <%= f.label :email, t('auth.email'), class: UI::FORM_LABEL %>
-                <%= f.email_field :email, autocomplete: "email", class: UI::FORM_INPUT %>
-                <%= render(UI::ErrorTagComponent.new(errors: resource.errors, field: :email)) %>
-              </div>
-
-              <div>
-                <div class="flex space-x-1.5">
-                  <%= f.label :password, t('auth.password'), class: UI::FORM_LABEL %>
-                  <% if @minimum_password_length %>
-                  <em class="block text-sm font-normal mb-2 text-gray-900">(<%= @minimum_password_length %> characters minimum)</em>
-                  <% end %>
+              <div class="flex space-x-5 items-center">
+                <div class="w-full">
+                  <%= f.label :full_name, t('auth.full_name'), class: UI::FORM_LABEL %>
+                  <%= f.text_field :full_name, autofocus: true, class: UI::FORM_INPUT %>
+                  <%= render(UI::ErrorTagComponent.new(errors: resource.errors, field: :full_name)) %>
                 </div>
-                <%= f.password_field :password, autocomplete: "new-password", class: UI::FORM_INPUT %>
-                <%= render(UI::ErrorTagComponent.new(errors: resource.errors, field: :password)) %>
+
+                <div class="w-full">
+                  <%= f.label :email, t('auth.email'), class: UI::FORM_LABEL %>
+                  <%= f.email_field :email, autocomplete: "email", class: UI::FORM_INPUT %>
+                  <%= render(UI::ErrorTagComponent.new(errors: resource.errors, field: :email)) %>
+                </div>
               </div>
 
-              <div>
-                <%= f.label :password_confirmation, t('auth.confirm_password'), class: UI::FORM_LABEL %>
-                <%= f.password_field :password_confirmation, autocomplete: "new-password", class: UI::FORM_INPUT %>
-                <%= render(UI::ErrorTagComponent.new(errors: resource.errors, field: :password_confirmation)) %>
+              <div class="flex space-x-5 items-center">
+                <div class="w-full">
+                  <div class="flex space-x-1.5">
+                    <%= f.label :password, t('auth.password'), class: UI::FORM_LABEL %>
+                    <% if @minimum_password_length %>
+                    <em class="block text-sm font-normal mb-2 text-gray-900">(<%= @minimum_password_length %> characters minimum)</em>
+                    <% end %>
+                  </div>
+                  <%= f.password_field :password, autocomplete: "new-password", class: UI::FORM_INPUT %>
+                  <%= render(UI::ErrorTagComponent.new(errors: resource.errors, field: :password)) %>
+                </div>
+
+                <div class="w-full">
+                  <%= f.label :password_confirmation, t('auth.confirm_password'), class: UI::FORM_LABEL %>
+                  <%= f.password_field :password_confirmation, autocomplete: "new-password", class: UI::FORM_INPUT %>
+                  <%= render(UI::ErrorTagComponent.new(errors: resource.errors, field: :password_confirmation)) %>
+                </div>
               </div>
 
               <%= f.submit t('auth.register'), class: UI::BUTTON_PRIMARY %>
