@@ -104,6 +104,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    chartkick (4.2.1)
     circular_array (0.2.1)
     coderay (1.1.3)
     concurrent-ruby (1.1.10)
@@ -139,6 +140,8 @@ GEM
       activerecord (>= 4.0.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    groupdate (6.1.0)
+      activesupport (>= 5.2)
     guard (2.18.0)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -409,6 +412,7 @@ DEPENDENCIES
   bootsnap
   breadcrumbs_on_rails (~> 4.1)
   capybara (~> 3.36)
+  chartkick
   circular_array
   cssbundling-rails
   debug
@@ -416,6 +420,7 @@ DEPENDENCIES
   factory_bot_rails (~> 6.2)
   ffaker (~> 2.20)
   friendly_id (~> 5.4.0)
+  groupdate
   guard-rspec
   image_processing
   inline_svg

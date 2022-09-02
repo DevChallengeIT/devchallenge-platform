@@ -1,0 +1,31 @@
+<div class="flex items-center space-x-3 my-5">
+  <div class="text-center">
+    <h2 class="<%= UI::H2 %>">
+      Challenges by status
+    </h2>
+    <%= pie_chart Repo::Challenge.group(:status).count %>
+    <div class="text-center my-3">
+      <%= link_to 'All Challenges', admin_challenges_path, class: UI::LINK %>
+    </div>
+  </div>
+  <div class="text-center">
+    <h2 class="<%= UI::H2 %>">
+      Users by time zone
+    </h2>
+    <%= pie_chart Repo::User.group(:time_zone).count %>
+    <div class="text-center my-3">
+      <%= link_to 'All users', admin_users_path, class: UI::LINK %>
+    </div>
+  </div>
+</div>
+
+<div class="flex items-center space-x-3">
+  <div class="w-full">
+    <h2 class="<%= UI::H2 %>">
+      Users registrations by date
+    </h2>
+    <%= line_chart Repo::User.group_by_day(:created_at).count %>
+  </div> 
+</div>
+
+

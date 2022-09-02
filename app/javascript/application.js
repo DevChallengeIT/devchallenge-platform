@@ -4,3 +4,4 @@ import "./controllers"
 import 'preline'
 import "trix"
 import "@rails/actiontext"
+import "chartkick/chart.js"
