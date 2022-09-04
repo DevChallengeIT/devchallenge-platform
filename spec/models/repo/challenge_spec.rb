@@ -24,4 +24,12 @@ RSpec.describe Repo::Challenge do
       ).backed_by_column_of_type(:enum)
     end
   end
+
+  describe 'callbacks' do
+    it 'schedules CreateSubscribersGroupJob' do
+      allow(CreateSubscribersGroupJob).to receive(:perform_later).with(challenge: subject)
+      subject.save!
+      expect(CreateSubscribersGroupJob).to have_received(:perform_later).with(challenge: subject)
+    end
+  end
 end
