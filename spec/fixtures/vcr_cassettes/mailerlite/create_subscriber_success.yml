@@ -12,7 +12,7 @@ http_interactions:
       Content-Type:
       - application/json
       X-Mailerlite-Apikey:
-      - d09c7d60db0523b0407bdbfa80a5294e
+      - 116a2da4394845e8ab610fac77024c4d
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -23,7 +23,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sun, 04 Sep 2022 09:31:33 GMT
+      - Sun, 04 Sep 2022 13:30:22 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -33,13 +33,13 @@ http_interactions:
       Vary:
       - Accept-Encoding
       Set-Cookie:
-      - PHPSESSID=e855fe3ebbd217fb1bfda5d249528950; path=/
+      - PHPSESSID=d806a37436de2fac52fc399255efe3da; path=/
       X-Ratelimit-Limit:
       - '60'
       X-Ratelimit-Remaining:
       - '59'
       X-Ratelimit-Reset:
-      - '2022-09-04T09:32:32+00:00'
+      - '2022-09-04T13:31:22+00:00'
       X-Ratelimit-Retry-After:
       - '60'
       Access-Control-Allow-Credentials:
@@ -51,11 +51,69 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 7455b67a3afc6d7a-MUC
+      - 745714509b9e6d91-MUC
     body:
       encoding: ASCII-8BIT
       string: '{"id":1370929174537149040,"name":"Test User","email":"test-user-1@devchallenge.it","sent":0,"opened":0,"opened_rate":0,"clicked":0,"clicked_rate":0,"type":"active","country_id":null,"signup_ip":"","signup_timestamp":"","confirmation_ip":"","confirmation_timestamp":"","fields":[{"key":"email","value":"test-user-1@devchallenge.it","type":"TEXT"},{"key":"name","value":"Test
         User","type":"TEXT"},{"key":"last_name","value":"","type":"TEXT"},{"key":"company","value":"","type":"TEXT"},{"key":"country","value":"","type":"TEXT"},{"key":"city","value":"","type":"TEXT"},{"key":"phone","value":"","type":"TEXT"},{"key":"state","value":"","type":"TEXT"},{"key":"zip","value":"","type":"TEXT"},{"key":"kinoklub_pidbirka_filmiv_na_e_mail","value":"","type":"TEXT"},{"key":"question","value":"","type":"TEXT"},{"key":"mobile_notifications","value":"","type":"TEXT"},{"key":"season","value":"","type":"TEXT"},{"key":"expectations","value":"","type":"TEXT"},{"key":"sended_halffinale_task","value":"","type":"TEXT"},{"key":"category","value":"","type":"TEXT"},{"key":"stage","value":"","type":"TEXT"},{"key":"direction","value":"","type":"TEXT"},{"key":"nomination","value":"","type":"TEXT"},{"key":"db_user_id","value":"","type":"NUMBER"},{"key":"nomination1","value":"","type":"TEXT"},{"key":"nomination11","value":"","type":"TEXT"},{"key":"job_title","value":"","type":"TEXT"},{"key":"birth_date","value":"","type":"DATE"},{"key":"discount","value":"","type":"TEXT"},{"key":"payed","value":"","type":"NUMBER"}],"webform_subscribe_date":null,"date_subscribe":null,"date_unsubscribe":null,"date_created":"2022-09-04
-        09:31:32","date_updated":"2022-09-04 09:31:32","user_agent":null}'
-  recorded_at: Sun, 04 Sep 2022 09:31:32 GMT
+        09:31:32","date_updated":"2022-09-04 13:30:22","user_agent":null}'
+  recorded_at: Sun, 04 Sep 2022 13:30:22 GMT
+- request:
+    method: post
+    uri: https://api.mailerlite.com/api/v2/groups/111519982/subscribers
+    body:
+      encoding: UTF-8
+      string: '{"email":"test-user-1@devchallenge.it"}'
+    headers:
+      User-Agent:
+      - MailerLite Ruby v1.13.1
+      Content-Type:
+      - application/json
+      X-Mailerlite-Apikey:
+      - 116a2da4394845e8ab610fac77024c4d
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 04 Sep 2022 13:30:22 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Set-Cookie:
+      - PHPSESSID=128a2265689c2815c73f970dd2bedb75; path=/
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '59'
+      X-Ratelimit-Reset:
+      - '2022-09-04T13:31:22+00:00'
+      X-Ratelimit-Retry-After:
+      - '60'
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Via:
+      - 1.1 google
+      Cf-Cache-Status:
+      - DYNAMIC
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 745714527fd81e61-MUC
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":1370929174537149040,"name":"Test User","email":"test-user-1@devchallenge.it","sent":0,"opened":0,"opened_rate":0,"clicked":0,"clicked_rate":0,"type":"active","country_id":null,"signup_ip":"","signup_timestamp":"","confirmation_ip":"","confirmation_timestamp":"","fields":[{"key":"email","value":"test-user-1@devchallenge.it","type":"TEXT"},{"key":"name","value":"Test
+        User","type":"TEXT"},{"key":"last_name","value":"","type":"TEXT"},{"key":"company","value":"","type":"TEXT"},{"key":"country","value":"","type":"TEXT"},{"key":"city","value":"","type":"TEXT"},{"key":"phone","value":"","type":"TEXT"},{"key":"state","value":"","type":"TEXT"},{"key":"zip","value":"","type":"TEXT"},{"key":"kinoklub_pidbirka_filmiv_na_e_mail","value":"","type":"TEXT"},{"key":"question","value":"","type":"TEXT"},{"key":"mobile_notifications","value":"","type":"TEXT"},{"key":"season","value":"","type":"TEXT"},{"key":"expectations","value":"","type":"TEXT"},{"key":"sended_halffinale_task","value":"","type":"TEXT"},{"key":"category","value":"","type":"TEXT"},{"key":"stage","value":"","type":"TEXT"},{"key":"direction","value":"","type":"TEXT"},{"key":"nomination","value":"","type":"TEXT"},{"key":"db_user_id","value":"","type":"NUMBER"},{"key":"nomination1","value":"","type":"TEXT"},{"key":"nomination11","value":"","type":"TEXT"},{"key":"job_title","value":"","type":"TEXT"},{"key":"birth_date","value":"","type":"DATE"},{"key":"discount","value":"","type":"TEXT"},{"key":"payed","value":"","type":"NUMBER"}],"webform_subscribe_date":null,"date_subscribe":null,"date_unsubscribe":null,"date_created":"2022-09-04
+        09:31:32","date_updated":"2022-09-04 13:30:22","user_agent":null}'
+  recorded_at: Sun, 04 Sep 2022 13:30:22 GMT
 recorded_with: VCR 6.1.0
