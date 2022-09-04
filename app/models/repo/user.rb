@@ -15,5 +15,9 @@ module Repo
     has_many :members, dependent: :destroy_async
 
     validates :full_name, presence: true
+
+    after_create do
+      CreateSubscriberJob.perform_later(user: self)
+    end
   end
 end

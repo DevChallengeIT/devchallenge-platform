@@ -11,6 +11,7 @@ require 'capybara/rspec'
 require 'factory_bot_rails'
 require 'ffaker'
 require 'view_component/test_helpers'
+require 'vcr'
 
 Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
 
@@ -21,12 +22,18 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
+VCR.configure do |config|
+  config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
+  config.hook_into :webmock
+end
+
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
 end
+
 RSpec.configure do |config|
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!

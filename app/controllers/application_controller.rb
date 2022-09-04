@@ -3,6 +3,8 @@
 class ApplicationController < ActionController::Base
   include Pagy::Backend
 
+  protect_from_forgery with: :null_session, prepend: true
+
   before_action :configure_permitted_parameters, if: :devise_controller?
   around_action :within_time_zone, if: :current_user
 

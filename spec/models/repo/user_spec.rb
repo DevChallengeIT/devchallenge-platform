@@ -14,4 +14,12 @@ RSpec.describe Repo::User do
   describe 'validations' do
     it { is_expected.to validate_presence_of(:full_name) }
   end
+
+  describe 'callbacks' do
+    it 'schedules  CreateSubscriberJob' do
+      allow(CreateSubscriberJob).to receive(:perform_later).with(user: subject)
+      subject.save!
+      expect(CreateSubscriberJob).to have_received(:perform_later).with(user: subject)
+    end
+  end
 end
