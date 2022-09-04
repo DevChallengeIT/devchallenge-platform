@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
-class CreateSubscribersGroupJob < ApplicationJob
-  def perform(challenge:)
+class RemoveGroupSubscriberJob < ApplicationJob
+  def perform(email:, group_id:)
     return unless Rails.application.credentials.mailerlite_api_key
 
     client = MailerLite::Client.new(api_key: Rails.application.credentials.mailerlite_api_key)
-    group = client.create_group("platform-#{challenge.slug}")
-    challenge.update!(remote_email_group_id: group['id'])
+    client.delete_group_subscriber(group_id, email)
   end
 end

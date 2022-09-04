@@ -1,11 +1,11 @@
 ---
 http_interactions:
 - request:
-    method: post
-    uri: https://api.mailerlite.com/api/v2/groups
+    method: delete
+    uri: https://api.mailerlite.com/api/v2/groups/111519893/subscribers/test-user-1@devchallenge.it
     body:
-      encoding: UTF-8
-      string: '{"name":"platform-test-challenge"}'
+      encoding: US-ASCII
+      string: ''
     headers:
       User-Agent:
       - MailerLite Ruby v1.13.1
@@ -19,25 +19,23 @@ http_interactions:
       - "*/*"
   response:
     status:
-      code: 201
-      message: Created
+      code: 204
+      message: No Content
     headers:
       Date:
-      - Sun, 04 Sep 2022 12:01:34 GMT
+      - Sun, 04 Sep 2022 12:11:47 GMT
       Content-Type:
-      - application/json
-      Transfer-Encoding:
-      - chunked
+      - text/html; charset=UTF-8
       Connection:
       - keep-alive
       Set-Cookie:
-      - PHPSESSID=e8970cfdef9231442b2588631c10e4dc; path=/
+      - PHPSESSID=36e99901c530b30342c35bc40f493d71; path=/
       X-Ratelimit-Limit:
       - '60'
       X-Ratelimit-Remaining:
       - '59'
       X-Ratelimit-Reset:
-      - '2022-09-04T12:02:34+00:00'
+      - '2022-09-04T12:12:47+00:00'
       X-Ratelimit-Retry-After:
       - '60'
       Access-Control-Allow-Credentials:
@@ -49,10 +47,9 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 7456923ebb909226-FRA
+      - 7456a135cc0bb398-MUC
     body:
       encoding: UTF-8
-      string: '{"id":111519893,"name":"platform-test-challenge","total":0,"active":0,"unsubscribed":0,"bounced":0,"unconfirmed":0,"junk":0,"sent":0,"opened":0,"clicked":0,"parent_id":0,"date_created":"2022-09-04
-        15:01:34","date_updated":"2022-09-04 15:01:34"}'
-  recorded_at: Sun, 04 Sep 2022 12:01:34 GMT
+      string: ''
+  recorded_at: Sun, 04 Sep 2022 12:11:47 GMT
 recorded_with: VCR 6.1.0

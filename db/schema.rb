@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_31_091148) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_04_115220) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -69,6 +69,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_31_091148) do
     t.datetime "finish_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "remote_email_group_id"
     t.index ["slug"], name: "index_challenges_on_slug", unique: true
     t.index ["status"], name: "index_challenges_on_status"
     t.index ["title"], name: "index_challenges_on_title", unique: true
