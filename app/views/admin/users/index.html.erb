@@ -3,7 +3,7 @@
   <div class="flex justify-between items-center space-x-3">
     <div>
       <%= form_with(url: admin_users_path, method: :get, id: 'search-form') do |_form| %>
-        <%= text_field_tag :search, params[:search], placeholder: t('words.search') %>
+        <%= text_field_tag :search, params[:search], placeholder: t('words.search'), class: UI::FORM_INPUT %>
       <% end %>
     </div>
     <%= link_to t('words.add'), new_admin_user_path, class: UI::BUTTON_PRIMARY %>

@@ -5,7 +5,9 @@
     </h2>
     <%= pie_chart Repo::Challenge.group(:status).count %>
     <div class="text-center my-3">
-      <%= link_to 'All Challenges', admin_challenges_path, class: UI::LINK %>
+      <%= link_to admin_challenges_path, class: UI::LINK do %>
+        All Challenges (<%= Repo::Challenge.count %>)
+      <% end %>
     </div>
   </div>
   <div class="text-center">
@@ -14,7 +16,9 @@
     </h2>
     <%= pie_chart Repo::User.group(:time_zone).count %>
     <div class="text-center my-3">
-      <%= link_to 'All users', admin_users_path, class: UI::LINK %>
+      <%= link_to admin_users_path, class: UI::LINK do %>
+        All users (<%= Repo::User.count %>)
+      <% end %>
     </div>
   </div>
 </div>
@@ -22,10 +26,8 @@
 <div class="flex items-center space-x-3">
   <div class="w-full">
     <h2 class="<%= UI::H2 %>">
-      Users registrations by date
+      Users registrations by date (+ <%= Repo::User.where(created_at: [3.days.ago..Time.now]).count %> for last 3 days)
     </h2>
     <%= line_chart Repo::User.group_by_day(:created_at).count %>
   </div> 
 </div>
-
-
