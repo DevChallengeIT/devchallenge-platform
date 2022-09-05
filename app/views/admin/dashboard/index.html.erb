@@ -1,15 +1,16 @@
 <div class="flex items-center space-x-3 my-5">
   <div class="text-center">
     <h2 class="<%= UI::H2 %>">
-      Challenges by status
+      Members by challenge
     </h2>
-    <%= pie_chart Repo::Challenge.group(:status).count %>
+    <%= pie_chart Repo::Member.joins(:challenge).where(challenges: {status: 'ready'}).group("challenges.title").count %>
     <div class="text-center my-3">
       <%= link_to admin_challenges_path, class: UI::LINK do %>
         All Challenges (<%= Repo::Challenge.count %>)
       <% end %>
     </div>
   </div>
+
   <div class="text-center">
     <h2 class="<%= UI::H2 %>">
       Users by time zone
