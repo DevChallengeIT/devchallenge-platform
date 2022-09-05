@@ -46,7 +46,7 @@ en:
     results: Results
     average: Avg
     summary: Summary
-    help: Help
+    tutorial: Tutorial
   messages:
     access_denied: Access denied
     resource_created: '%{name} was successfully created'

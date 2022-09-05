@@ -16,8 +16,6 @@ Rails.application.routes.draw do
     resources :members, only: %i[create destroy], controller: 'ui/members'
   end
 
-  get :help, to: 'ui/help#index'
-
   resources :tasks, only: :show, controller: 'ui/tasks' do
     resources :submissions, only: %i[create update destroy], controller: 'ui/submissions'
   end
