@@ -10,5 +10,9 @@ class CreateSubscriberJob < ApplicationJob
       Rails.application.credentials.mailerlite.general_group_id,
       { email: user.email }
     )
+  rescue MailerLite::BadRequest => e
+    raise e unless e.message == 'Subscriber type is unsubscribed'
+
+    Rails.logger.info(e.message)
   end
 end

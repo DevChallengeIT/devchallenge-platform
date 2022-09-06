@@ -1,0 +1,57 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.mailerlite.com/api/v2/groups/111519893/subscribers
+    body:
+      encoding: UTF-8
+      string: '{"email":"vladyslav.shut@gmail.com"}'
+    headers:
+      User-Agent:
+      - MailerLite Ruby v1.13.1
+      Content-Type:
+      - application/json
+      X-Mailerlite-Apikey:
+      - b43e3ec77e03569fe071cf2cfe0b17b6
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Date:
+      - Tue, 06 Sep 2022 10:44:10 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - PHPSESSID=537f9c60b7ab0668265f8cb94d999ec8; path=/
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '59'
+      X-Ratelimit-Reset:
+      - '2022-09-06T10:45:10+00:00'
+      X-Ratelimit-Retry-After:
+      - '60'
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Via:
+      - 1.1 google
+      Cf-Cache-Status:
+      - DYNAMIC
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 74669b9d9bec6d77-MUC
+    body:
+      encoding: UTF-8
+      string: '{"error":{"code":400,"message":"Subscriber type is unsubscribed"}}'
+  recorded_at: Tue, 06 Sep 2022 10:44:10 GMT
+recorded_with: VCR 6.1.0
