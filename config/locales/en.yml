@@ -142,6 +142,7 @@ en:
       email: Email
       full_name: Full Name
       slug: Slug
+      provider: SSO
       time_zone: Time Zone
       reset_password_sent_at: Reset Password Sent At
       sign_in_count: Sign In Count

@@ -51,7 +51,6 @@ RSpec.describe 'Admin/Users/Update' do
     within "#user-#{user.id}" do
       expect(page).to have_content 'test1@mail.com'
       expect(page).to have_content 'Hawaii'
-      expect(page).to have_content 'test-user1'
       expect(page).to have_content 'Test User'
     end
   end
