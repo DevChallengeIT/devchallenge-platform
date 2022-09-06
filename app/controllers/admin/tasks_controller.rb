@@ -41,13 +41,11 @@ module Admin
     end
 
     def destroy
-      if task.task_submissions.count.zero?
-        task.destroy
-        redirect_to(admin_challenge_tasks_path(challenge), notice: flash_message(:removed, :tasks))
-      else
-        redirect_to(edit_admin_challenge_task_path(challenge, task),
-                    alert: 'Task can not be removed as it has dependent submissions')
-      end
+      task.destroy
+      redirect_to(admin_challenge_tasks_path(challenge), notice: flash_message(:removed, :tasks))
+    rescue ActiveRecord::InvalidForeignKey
+      redirect_to(edit_admin_challenge_task_path(challenge, task),
+                  alert: 'Task can not be removed as it has dependent tasks or submissions')
     end
 
     private
