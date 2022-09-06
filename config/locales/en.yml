@@ -66,6 +66,7 @@ en:
     submission_has_already_been_assessed: Your submission has already been assessed. Result will be available after
     submission_is_not_available: Submission is  not available
     challenge_terms_and_conditions: By joining <strong>%{challenge_title}</strong> you accept it's <a href="%{url}" class="%{class}">terms and conditions</a>
+    time_zone_config: Please check your profile time zone configuration. It should correspond to your current time zone if you don't want to miss any vital deadline
   auth:
     profile: Profile
     log_in: Log In
