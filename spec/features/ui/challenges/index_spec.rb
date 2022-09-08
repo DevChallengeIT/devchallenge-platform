@@ -107,7 +107,7 @@ RSpec.describe 'UI/Challenges/Index' do
     assume_logged_in
     visit '/challenges'
 
-    expect(page).to have_content 'Please check your profile time zone configuration'
+    expect(page).to have_content 'Your current profile time zone is UTC'
   end
 
   it 'does not display time_zone info if time_zone != UTC' do
@@ -115,6 +115,6 @@ RSpec.describe 'UI/Challenges/Index' do
     assume_logged_in(user)
     visit '/challenges'
 
-    expect(page).not_to have_content 'Please check your profile time zone configuration'
+    expect(page).not_to have_content 'Your current profile time zone is UTC'
   end
 end
