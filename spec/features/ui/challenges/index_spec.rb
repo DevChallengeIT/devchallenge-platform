@@ -102,19 +102,4 @@ RSpec.describe 'UI/Challenges/Index' do
     expect(page).to have_css "#challenge-#{challenge_b.id}"
     expect(page).not_to have_css "#challenge-#{challenge_a.id}"
   end
-
-  it 'displays time_zone info if time_zone == UTC and current_user not updated profile' do
-    assume_logged_in
-    visit '/challenges'
-
-    expect(page).to have_content 'Your current profile time zone is UTC'
-  end
-
-  it 'does not display time_zone info if time_zone != UTC' do
-    user = create(:user, time_zone: 'EET')
-    assume_logged_in(user)
-    visit '/challenges'
-
-    expect(page).not_to have_content 'Your current profile time zone is UTC'
-  end
 end
