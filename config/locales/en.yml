@@ -47,6 +47,7 @@ en:
     average: Avg
     summary: Summary
     tutorial: Tutorial
+    judges_tutorial: Judge's Tutorial
   messages:
     access_denied: Access denied
     resource_created: '%{name} was successfully created'

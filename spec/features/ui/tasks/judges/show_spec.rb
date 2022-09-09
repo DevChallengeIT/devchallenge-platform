@@ -51,6 +51,15 @@ RSpec.describe 'UI/Tasks/Show' do
         expect(page).not_to have_content task_submission_b.notes
         expect(page).not_to have_content other_task_submission.notes
       end
+
+      it 'displays judge tutorial link' do
+        assume_logged_in
+        create(:member, :judge, user: current_user, challenge: task.challenge)
+
+        visit "/tasks/#{task.slug}"
+
+        expect(page).to have_link "Judge's Tutorial"
+      end
     end
 
     context 'when member is not a challenge judge' do
