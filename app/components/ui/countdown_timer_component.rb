@@ -4,7 +4,7 @@ module UI
   class CountdownTimerComponent < ViewComponent::Base
     def initialize(id:, countdown_ts: 0)
       @id = "countdown-#{id}"
-      @milliseconds_left = calculate_milliseconds_left(countdown_ts + 80.days)
+      @milliseconds_left = calculate_milliseconds_left(countdown_ts)
     end
 
     def calculate_milliseconds_left(countdown_ts)
