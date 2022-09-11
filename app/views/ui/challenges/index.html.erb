@@ -60,9 +60,6 @@
             </p>
           </div>
           <div>
-            <%= render(UI::CountdownTimerComponent.new(id: challenge.id, countdown_ts: challenge.finish_at)) %>
-          </div>
-          <div>
             <%= render(UI::ChallengeStatusComponent.new(challenge: challenge)) %>
           </div>
         </div>
