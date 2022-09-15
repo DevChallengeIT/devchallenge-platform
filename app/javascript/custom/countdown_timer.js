@@ -2,29 +2,50 @@ const dayInMsec = 1000 * 60 * 60 * 24;
 const hourInMsec = 1000 * 60 * 60;
 const minuteInMsec = 1000 * 60;
 
-function updateTimer(id, millisecondsLeft) {
-  const msecLeft = millisecondsLeft < 1000 ? 0 : millisecondsLeft;
-
+function calcTimer(distance) {
   // Time calculations for days, hours, minutes and seconds
-  const days = Math.floor(msecLeft / dayInMsec);
-  const hours = Math.floor((msecLeft % dayInMsec) / hourInMsec);
-  const minutes = Math.floor((msecLeft % hourInMsec) / minuteInMsec);
-  const seconds = Math.floor((msecLeft % minuteInMsec) / 1000);
+  const days = Math.floor(distance / dayInMsec);
+  const hours = Math.floor((distance % dayInMsec) / hourInMsec);
+  const minutes = Math.floor((distance % hourInMsec) / minuteInMsec);
+  const seconds = Math.floor((distance % minuteInMsec) / 1000);
 
-  document.getElementById(id).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+  return days + "d " + hours + "h " + minutes + "m " + seconds + "s";
 }
 
-function initializeTimer(id, initialMsecLeft) {
-  let msecLeft = initialMsecLeft;
-  updateTimer(id, msecLeft);
+function calcDistance(countdownMs) {
+  const now = new Date().getTime();
+  const distance = countdownMs - now;
+  return distance < 0 ? 0 : distance;
+}
 
-  const x = setInterval(() => {
-    updateTimer(id, msecLeft -= 1000);
+function initializeTimer(id, countdownMs) {
+  let timerEl = document.getElementById(id);
+  let distance = calcDistance(countdownMs);
+  timerEl.innerHTML = calcTimer(distance);
 
-    if (msecLeft < 1000) {
-      clearInterval(x);
+  const intervalId = setInterval(() => {
+    timerEl = document.getElementById(id);
+    if (!timerEl) {
+      clearInterval(intervalId);
+      return;
     }
+
+    const currIntervalId = parseInt(timerEl.getAttribute('interval-id'));
+    if (currIntervalId && currIntervalId !== intervalId) {
+      clearInterval(intervalId);
+      return;
+    }
+
+    distance = calcDistance(countdownMs);
+    if (distance < 0) {
+      clearInterval(intervalId);
+      return;
+    }
+
+    timerEl.innerHTML = calcTimer(distance);
   }, 1000);
+
+  timerEl.setAttribute('interval-id', intervalId.toString());
 }
 
 window.initializeTimer = initializeTimer;

@@ -4,11 +4,11 @@ module UI
   class CountdownTimerComponent < ViewComponent::Base
     def initialize(id:, countdown_ts: 0)
       @id = "countdown-#{id}"
-      @milliseconds_left = calculate_milliseconds_left(countdown_ts)
+      @countdown_ms = countdown_in_mseconds(countdown_ts)
     end
 
-    def calculate_milliseconds_left(countdown_ts)
-      ((countdown_ts - Time.now.utc) * 1000.0).to_i
+    def countdown_in_mseconds(countdown_ts)
+      (countdown_ts.to_f * 1000.0).to_i
     end
   end
 end
