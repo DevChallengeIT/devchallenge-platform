@@ -1,6 +1,22 @@
 # frozen_string_literal: true
 
 class RegistrationsController < Devise::RegistrationsController
+  def new
+    tracker do |t|
+      t.facebook_pixel :track, { type: 'InitiateCheckout' }
+    end
+
+    super
+  end
+
+  def create
+    tracker do |t|
+      t.facebook_pixel :track, { type: 'InitiateCheckout' }
+    end
+
+    super
+  end
+
   protected
 
   def after_sign_up_path_for(_resource)

@@ -38,5 +38,10 @@ module Devchallenge
 
     # Use load_async
     config.active_record.async_query_executor = :global_thread_pool
+
+    # Middleware
+    config.middleware.use(Rack::Tracker) do
+      handler :facebook_pixel, { id: Rails.application.credentials.facebook_pixel_id.to_s }
+    end
   end
 end
