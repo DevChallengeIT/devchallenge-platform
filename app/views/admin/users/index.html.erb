@@ -12,15 +12,21 @@
 <table id="users" class="table">
   <thead>
     <th class="text-left">
+      ID
+    </th>
+    <th class="text-left">
       <%= t('resources.users.email') %>
     </th>
     <th class="text-left">
       <%= t('resources.users.full_name') %>
     </th>
+    <th class="text-left">
+      <%= t('resources.users.phone_number') %>
+    </th>
     <th>
       <%= t('resources.users.provider') %>
     </th>
-    <th>
+    <th class="text-left">
       <%= t('resources.users.time_zone') %>
     </th>
     <th>
@@ -33,11 +39,20 @@
   <tbody>
     <% @users.each do |user| %>
       <tr id="user-<%= user.id %>">
+        <td>
+          <%= user.id %>
+          <% if user.legacy_id %>
+            (<%= user.legacy_id %>)
+          <% end %>
+        </td>
         <td class="text-left">
           <%= link_to user.email, edit_admin_user_path(user), class: UI::LINK %>
         </td>
         <td>
           <%= user.full_name %>
+        </td>
+        <td>
+          <%= user.phone_number %>
         </td>
         <td>
           <%= user.provider %>

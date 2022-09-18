@@ -54,3 +54,6 @@ RSpec/NamedSubject:
 
 RSpec/MultipleMemoizedHelpers:
   Enabled: false
+
+RSpec/VerifiedDoubles:
+  Enabled: false

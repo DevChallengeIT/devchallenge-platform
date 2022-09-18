@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Users
-  class ListQuery
+  class UsersQuery
     include ActiveRecord::Sanitization::ClassMethods
 
     def self.list_users(**params)
@@ -28,7 +28,13 @@ module Users
       return scope if search.blank?
 
       sanitized_search = "%#{sanitize_sql_like(search)}%"
-      scope.where('users.email LIKE ? OR users.full_name LIKE ?', sanitized_search, sanitized_search)
+      scope.where(
+        'users.legacy_id LIKE ? OR users.email LIKE ? OR users.full_name ILIKE ? OR users.phone_number LIKE ? ',
+        sanitized_search,
+        sanitized_search,
+        sanitized_search,
+        sanitized_search
+      )
     end
   end
 end

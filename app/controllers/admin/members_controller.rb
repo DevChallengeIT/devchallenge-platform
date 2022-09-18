@@ -10,6 +10,7 @@ module Admin
 
     def index
       @paginator, @members = paginate challenge_members
+      @paginator, @users = paginate Users.list_users(search: params[:search])
     end
 
     def edit
@@ -38,7 +39,7 @@ module Admin
     end
 
     def challenge_members
-      @challenge_members ||= Repo::Member.preload(:user).where(challenge:)
+      @challenge_members ||= Users.list_members(challenge:, search: params[:search])
     end
 
     def member

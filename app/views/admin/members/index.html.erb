@@ -1,4 +1,12 @@
 <%= render 'admin/shared/challenge_navbar', selected: :members %>
+<div class="flex items-center justify-end space-x-3">
+  <%= form_with(url: admin_challenge_members_path(challenge), method: :get, id: 'search-form') do |_form| %>
+    <div class="flex items-center space-x-1.5">
+      <%= text_field_tag :search, params[:search], placeholder: t('words.search'), class: UI::FORM_INPUT %>
+      <%= submit_tag t('words.search'), class: UI::BUTTON_PRIMARY %>
+    </div>
+  <% end %>
+</div>
 
 <table id="members" class="table">
   <thead>

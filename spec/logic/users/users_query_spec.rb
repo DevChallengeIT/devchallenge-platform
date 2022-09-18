@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Users::ListQuery do
+RSpec.describe Users::UsersQuery do
   let!(:users_list) { create_list(:user, 10) }
 
   context 'without search param' do

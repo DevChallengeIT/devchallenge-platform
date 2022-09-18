@@ -20,6 +20,11 @@
       <%= render(UI::ErrorTagComponent.new(errors: user.errors, field: :full_name)) %>
     </div>
     <div class="my-5">
+      <%= form.label :phone_number, class: UI::FORM_LABEL %>
+      <%= form.text_field :phone_number, class: UI::FORM_INPUT %>
+      <%= render(UI::ErrorTagComponent.new(errors: user.errors, field: :phone_number)) %>
+    </div>
+    <div class="my-5">
       <%= form.label :time_zone, class: UI::FORM_LABEL %>
       <%= form.select :time_zone, ActiveSupport::TimeZone.all.map(&:name), {}, class: UI::FORM_INPUT %>
       <%= render(UI::ErrorTagComponent.new(errors: user.errors, field: :time_zone)) %>
