@@ -34,8 +34,8 @@
 <div class="flex items-center space-x-3">
   <div class="w-full">
     <h2 class="<%= UI::H2 %>">
-      Users registrations by date (+ <%= Repo::User.where(created_at: [3.days.ago..Time.now]).count %> for last 3 days)
+      Users registrations last month by day (+ <%= Repo::User.where(created_at: [3.days.ago..Time.now]).count %> for last 3 days)
     </h2>
-    <%= line_chart Repo::User.group_by_day(:created_at).count %>
+    <%= line_chart Repo::User.where(created_at: 1.month.ago..).group_by_day(:created_at).count %>
   </div> 
 </div>
