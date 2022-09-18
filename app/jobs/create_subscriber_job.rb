@@ -13,7 +13,8 @@ class CreateSubscriberJob < ApplicationJob
       { email: user.email }
     )
   rescue MailerLite::BadRequest => e
-    raise e unless e.message.in?(['Subscriber type is unsubscribed', 'Email temporarily blocked'])
+    raise e unless e.message.in?(['Subscriber type is unsubscribed', 'Email temporarily blocked',
+                                  'Subscriber type is bounced'])
 
     Rails.logger.info(e.message)
   end
