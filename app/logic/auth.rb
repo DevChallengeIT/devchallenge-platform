@@ -18,7 +18,6 @@ module Auth
   end
 
   # rubocop:disable Metrics/AbcSize
-  # rubocop:disable Metrics/MethodLength
   # TODO: Extract to separate service file
   def omniauth(auth)
     Repo::User.where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
@@ -38,5 +37,4 @@ module Auth
     user
   end
   # rubocop:enable Metrics/AbcSize
-  # rubocop:enable Metrics/MethodLength
 end

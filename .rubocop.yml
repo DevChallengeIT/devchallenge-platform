@@ -43,6 +43,9 @@ Layout/LineLength:
 Metrics/AbcSize:
   Max: 30
 
+Metrics/MethodLength:
+  Max: 15
+
 RSpec/MultipleExpectations:
   Enabled: false
 

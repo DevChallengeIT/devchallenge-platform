@@ -13,7 +13,6 @@ module Competition
       @task = task
     end
 
-    # rubocop:disable Metrics/MethodLength
     def total_assessment
       return 0 unless participant
 
@@ -31,6 +30,5 @@ module Competition
 
       ActiveRecord::Base.connection.execute(query).as_json.dig(0, 'total_assessment') || 0
     end
-    # rubocop:enable Metrics/MethodLength
   end
 end
