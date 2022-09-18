@@ -33,12 +33,21 @@
         </td>
         <td class="text-center">
           <%= render(UI::TimestampComponent.new(data: task.start_at, highlight_now: true)) %>
+          <% if task.start_at.future? %>
+            <%= render(UI::CountdownTimerComponent.new(id: "#{task.id}-start-at", countdown_ts: task.start_at)) %>
+          <% end %>
         </td>
         <td class="text-center">
           <%= render(UI::TimestampComponent.new(data: task.submit_at, highlight_now: true)) %>
+          <% if task.submit_at.future? %>
+            <%= render(UI::CountdownTimerComponent.new(id: "#{task.id}-submit-at", countdown_ts: task.submit_at)) %>
+          <% end %>
         </td>
         <td class="text-center">
           <%= render(UI::TimestampComponent.new(data: task.result_at, highlight_now: true)) %>
+          <% if task.result_at.future? %>
+            <%= render(UI::CountdownTimerComponent.new(id: "#{task.id}-result-at", countdown_ts: task.result_at)) %>
+          <% end %>
         </td>
         <td>
           <% if task.dependent_task %>

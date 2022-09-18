@@ -69,7 +69,7 @@
   <nav class="my-12 flex items-center justify-between">
     <% @tasks.each_with_index do |task, idx| %>
       <% if user_authorized_for_task?(task) %>
-        <%= link_to task_path(task), class: 'block p-8 rounded-md text-gray-800 hover:text-white hover:bg-yellow-500 duration-150' do %>
+        <%= link_to task_path(task), class: "block p-8 rounded-md text-gray-800 hover:text-white hover:bg-yellow-500 duration-150" do %>
           <h3 class="block lg:text-2xl md:text-l sm:text-m font-bold dark:text-white">
             <%= task.title %>
           </h3>

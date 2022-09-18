@@ -11,17 +11,28 @@
   </div>
 
   <div class="my-5 flex space-x-5 justify-between">
-    <div>
+    <div class="bg-gray-100 rounded-md text-gray-700 p-5 w-full">
       <h4 class="<%= UI::H3 %>"><%= t('words.start') %></h4>
       <%= render(UI::TimestampComponent.new(data: task.start_at)) %>
+      <% if task.start_at.future? %>
+        <%= render(UI::CountdownTimerComponent.new(id: 'start-at', countdown_ts: task.start_at)) %>
+      <% end %>
     </div>
-    <div>
+    
+    <div class="bg-gray-100 rounded-md text-gray-700 p-5 w-full">
       <h4 class="<%= UI::H3 %>"><%= t('words.submit') %></h4>
       <%= render(UI::TimestampComponent.new(data: task.submit_at)) %>
+      <% if task.submit_at.future? %>
+        <%= render(UI::CountdownTimerComponent.new(id: 'start-at', countdown_ts: task.submit_at)) %>
+      <% end %>
     </div>
-    <div>
+
+    <div class="bg-gray-100 rounded-md text-gray-700 p-5 w-full">
       <h4 class="<%= UI::H3 %>"><%= t('words.result') %></h4>
       <%= render(UI::TimestampComponent.new(data: task.result_at)) %>
+      <% if task.result_at.future? %>
+        <%= render(UI::CountdownTimerComponent.new(id: 'start-at', countdown_ts: task.result_at)) %>
+      <% end %>
     </div>
   </div>
 
