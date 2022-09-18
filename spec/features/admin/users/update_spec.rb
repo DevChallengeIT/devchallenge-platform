@@ -20,21 +20,31 @@ RSpec.describe 'Admin/Users/Update' do
     expect(page).to have_content 'Access denied'
   end
 
-  it 'failure with empty email' do
+  it 'success with password change' do
     assume_logged_in(admin: true)
     visit "/admin/users/#{user.slug}/edit"
 
-    fill_in 'Email', with: ''
+    fill_in 'Email',                with: 'test1@mail.com'
+    fill_in 'Slug',                 with: 'test-user1'
+    fill_in 'Full name',            with: 'Test User'
+    fill_in 'Password',             with: 'new-valid-password'
+    select 'Hawaii',                from: 'Time zone'
+
     click_button 'Update'
-    within '#email-errors' do
-      expect(page).to have_content "can't be blank"
+
+    expect(page).to have_current_path '/admin/users'
+    expect(page).to have_content 'User was successfully updated'
+
+    within "#user-#{user.id}" do
+      expect(page).to have_content 'test1@mail.com'
+      expect(page).to have_content 'Hawaii'
+      expect(page).to have_content 'Test User'
     end
 
-    expect(page).to have_current_path "/admin/users/#{user.slug}"
-    expect(page).not_to have_content 'User was successfully updated'
+    expect(user.reload.valid_password?('new-valid-password')).to eq true
   end
 
-  it 'success' do
+  it 'success without password change' do
     assume_logged_in(admin: true)
     visit "/admin/users/#{user.slug}/edit"
 
@@ -53,5 +63,7 @@ RSpec.describe 'Admin/Users/Update' do
       expect(page).to have_content 'Hawaii'
       expect(page).to have_content 'Test User'
     end
+
+    expect(user.reload.valid_password?('password')).to eq true
   end
 end

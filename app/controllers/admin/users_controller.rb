@@ -31,7 +31,7 @@ module Admin
     end
 
     def update
-      if user.update(user_params)
+      if user.update(user_params.compact_blank)
         redirect_to(admin_users_path, notice: flash_message(:updated, :users))
       else
         render :edit, status: :unprocessable_entity
