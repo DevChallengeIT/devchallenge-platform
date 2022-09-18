@@ -23,6 +23,7 @@ RSpec.describe 'Log In' do
 
     # Empty current_password
     fill_in 'Full Name', with: 'New User Name'
+    fill_in 'Phone', with: '123456789'
     fill_in 'Password', with: 'NewPassword'
     fill_in 'Confirm password', with: 'NewPassword'
     fill_in 'Current Password', with: ''
@@ -41,6 +42,7 @@ RSpec.describe 'Log In' do
     visit '/profile'
 
     fill_in 'Full Name', with: 'New User Name'
+    fill_in 'Phone', with: '123456789'
     select '(GMT+02:00) Kyiv', from: 'Time Zone'
     fill_in 'Current Password', with: 'password'
     click_button 'Update'
@@ -48,8 +50,9 @@ RSpec.describe 'Log In' do
     expect(page).to have_current_path '/'
     expect(page).to have_link 'New User Name'
     expect(user.reload).to have_attributes(
-      full_name: 'New User Name',
-      time_zone: 'Kyiv'
+      full_name:    'New User Name',
+      time_zone:    'Kyiv',
+      phone_number: '123456789'
     )
   end
 end

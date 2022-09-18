@@ -20,10 +20,18 @@
           </div>
         </div>
 
-        <div class="mb-4">
-          <%= f.label :time_zone, t('auth.time_zone'), class: UI::FORM_LABEL %>
-          <%= f.time_zone_select :time_zone, nil, {}, class: UI::FORM_SELECT %>
-          <%= render(UI::ErrorTagComponent.new(errors: resource.errors, field: :time_zone)) %>
+        <div class="flex space-x-5 mb-4">
+          <div class="w-full">
+            <%= f.label :time_zone, t('auth.time_zone'), class: UI::FORM_LABEL %>
+            <%= f.time_zone_select :time_zone, nil, {}, class: UI::FORM_SELECT %>
+            <%= render(UI::ErrorTagComponent.new(errors: resource.errors, field: :time_zone)) %>
+          </div>
+
+          <div class="w-full">
+            <%= f.label :phone_number, t('resources.users.phone_number'), class: UI::FORM_LABEL %>
+            <%= f.text_field :phone_number, class: UI::FORM_INPUT %>
+            <%= render(UI::ErrorTagComponent.new(errors: resource.errors, field: :phone_number)) %>
+          </div>
         </div>
 
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
