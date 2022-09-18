@@ -32,9 +32,11 @@ RSpec.describe 'Admin/Members/Update' do
     expect(page).to have_current_path "/admin/challenges/#{challenge.slug}/members"
     expect(page).to have_content 'Member was successfully updated'
 
+    member.reload
+
     within "#member-#{member.id}" do
-      expect(page).to have_link member.user.email, href: "/admin/challenges/#{challenge.slug}/members/#{member.id}/edit"
-      expect(page).to have_content 'judge'
+      expect(page).to have_link member.user.email, href: "/admin/users/#{member.user.slug}/edit"
+      expect(page).to have_link member.role, href: "/admin/challenges/#{challenge.slug}/members/#{member.id}/edit"
       expect(page).to have_content member.created_at.strftime(UI::TimestampComponent::TIME_FORMAT)
     end
   end

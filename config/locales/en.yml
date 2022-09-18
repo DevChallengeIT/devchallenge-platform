@@ -111,6 +111,8 @@ en:
       plural: Submissions
       singular: Submission
       notes: Notes
+      attachment: Attachment
+      assesment: Assesment
     tasks:
       plural: Tasks
       singular: Task

@@ -70,7 +70,7 @@
         <h2 class="<%= UI::H2 %>">
           <%= t('words.submit') %>
         </h2>
-        <%= form_with(model: task_submission, scope: :task_submission, url: (task_submission.new_record? ? task_submissions_path(task) : task_submission_path(task, task_submission)), method: (task_submission.new_record? ? :post : :put), class: "contents") do |form| %>
+        <%= form_with(model: task_submission, scope: :task_submission, url: (task_submission.new_record? ? task_submissions_path(task) : submission_path(task_submission)), method: (task_submission.new_record? ? :post : :put), class: "contents") do |form| %>
           <div class="flex my-5 items-center justify-between space-x-5">
             <div class="w-full">
               <%= form.label :notes, class: UI::FORM_LABEL %>
@@ -95,7 +95,7 @@
             <div class="mt-8 font-semibold">
               <% unless task_submission.new_record? %>
                 <%= t('messages.remove_my_submission') %>
-                <%= button_to t('words.remove'), task_submission_path(task, task_submission), method: :delete, class: UI::BUTTON_DANGER, form: {data: {turbo_confirm: t('messages.are_you_sure')}} %>
+                <%= button_to t('words.remove'), submission_path(task_submission), method: :delete, class: UI::BUTTON_DANGER, form: {data: {turbo_confirm: t('messages.are_you_sure')}} %>
               <% end %>
             </div>
           </div>

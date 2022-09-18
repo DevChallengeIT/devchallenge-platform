@@ -46,6 +46,9 @@ Metrics/AbcSize:
 Metrics/MethodLength:
   Max: 15
 
+Rails/SkipsModelValidations:
+  Enabled: false
+
 RSpec/MultipleExpectations:
   Enabled: false
 

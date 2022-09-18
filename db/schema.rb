@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_18_074322) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_18_151807) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -94,6 +94,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_18_074322) do
     t.bigint "task_submission_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["judge_id", "task_criterium_id", "task_submission_id"], name: "unique_index_for_task_assesments", unique: true
     t.index ["judge_id"], name: "index_task_assessments_on_judge_id"
     t.index ["task_criterium_id"], name: "index_task_assessments_on_task_criterium_id"
     t.index ["task_submission_id"], name: "index_task_assessments_on_task_submission_id"

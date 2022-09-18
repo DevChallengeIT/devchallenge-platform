@@ -12,35 +12,29 @@
     <% if task_submission.zip_file.present? %>
       <%= link_to t('words.download'), rails_blob_path(task_submission.zip_file, disposition: 'attachment'), class: UI::BUTTON_SECONDARY %>
     <% end %>
+  </div>
 
-    <%= form_with(model: task_submission, scope: :task_assessments, url: assessment_path(task_submission:), method: :put, class: "contents") do |form| %>
-      <div>
-        <%= form.fields_for :task_assessments do |task_assessment| %>
-          <div class="flex my-5 items-center justify-between space-x-5" id="assessment-<%= task_assessment.object.id %>">
-            <div class="w-full">
-              <%= "#{task_assessment.object.task_criterium.title} (max #{task_assessment.object.task_criterium.max_value})" %>
-              <%= task_assessment.hidden_field :id, class: UI::FORM_LABEL %>
-            </div>
-
-            <div class="w-full">
-              <%= task_assessment.label :value, class: UI::FORM_LABEL %>
-              <%= task_assessment.number_field :value, autofocus: true, class: UI::FORM_INPUT %>
-              <%= render(UI::ErrorTagComponent.new(errors: task_assessment.object.errors, field: :value)) %>
-            </div>
-
-            <div class="w-full">
-              <%= task_assessment.label :comment, class: UI::FORM_LABEL %>
-              <%= task_assessment.text_field :comment, autofocus: true, class: UI::FORM_INPUT %>
-              <%= render(UI::ErrorTagComponent.new(errors: task_assessment.object.errors, field: :comment)) %>
-            </div>
-          </div>
-        <% end %>
-      </div>
-
-      <div class="flex items-center justify-between">
-        <%= form.submit t('words.update'), class: UI::BUTTON_PRIMARY %>
-        <%= link_to t('words.back'), task_path(task), class: UI::BUTTON_SECONDARY %>
+  <%= form_with(model: task_submission, scope: :task_assessments, url: submission_assessments_path(task_submission:), method: :put, class: "contents") do |form| %>
+    <% task_criteria.each do |criteria| %>
+      <div class="grid grid-cols-3 gap-5 my-3">
+        <h4 class="<%= UI::H4 %>">
+          <%= criteria.title %> (Max <%= criteria.max_value %>)
+        </h4>
+        <div>
+          <%= label_tag :value, 'Value', class: UI::FORM_LABEL %>
+          <%= number_field_tag "assesment[#{criteria.id}][value]", @assesments.dig(criteria.id, :value), required: true, max: criteria.max_value, class: UI::FORM_INPUT %>
+        </div>
+        <div>
+          <%= label_tag :value, 'Comment', class: UI::FORM_LABEL %>
+          <%= text_field_tag "assesment[#{criteria.id}][comment]", @assesments.dig(criteria.id, :comment), class: UI::FORM_INPUT %>
+        </div>
       </div>
     <% end %>
-  </div>
+
+    <div class="flex items-center justify-between">
+      <%= form.submit t('words.update'), class: UI::BUTTON_PRIMARY %>
+      <%= link_to t('words.back'), task_path(task), class: UI::BUTTON_SECONDARY %>
+    </div>
+  <% end %>
 </div>
+

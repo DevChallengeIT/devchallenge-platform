@@ -27,13 +27,17 @@ module UI
 
     def destroy
       task_submission.destroy
-      redirect_to task_path(task), notice: flash_message(:removed, :task_submissions)
+      redirect_to task_path(task_submission.task), notice: flash_message(:removed, :task_submissions)
     end
 
     private
 
     def task
-      @task ||= Repo::Task.preload(:challenge, :rich_text_description).friendly.find(params[:task_id])
+      @task ||= if params[:task_id]
+                  Repo::Task.friendly.find(params[:task_id])
+                else
+                  task_submission.task
+                end
     end
 
     def challenge
@@ -41,7 +45,7 @@ module UI
     end
 
     def task_submission
-      @task_submission ||= task.task_submissions.preload(:task_assessments).find(params[:id])
+      @task_submission ||= Repo::TaskSubmission.preload(:task, :task_assessments).find(params[:id])
     end
 
     def task_submission_params

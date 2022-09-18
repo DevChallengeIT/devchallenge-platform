@@ -11,6 +11,8 @@ module Repo
     validates :value, presence: true
     validate :within_task_criterium_range?
 
+    scope :by_judge, ->(judge) { where(judge_id: judge.id) }
+
     def within_task_criterium_range?
       errors.add(:value, :larger_than_max_value) if task_criterium&.max_value && value > task_criterium.max_value
     end

@@ -17,9 +17,10 @@ Rails.application.routes.draw do
   end
 
   resources :tasks, only: :show, controller: 'ui/tasks' do
-    resources :submissions, only: %i[create update destroy], controller: 'ui/submissions'
+    resources :submissions, only: %i[create update destroy], controller: 'ui/submissions', shallow: true do
+      resource :assessments, only: %i[new create edit update], controller: 'ui/assessments'
+    end
   end
-  resources :assessments, only: %i[new create edit update], controller: 'ui/assessments'
 
   namespace :admin do
     root 'dashboard#index'

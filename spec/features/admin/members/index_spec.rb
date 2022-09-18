@@ -27,9 +27,8 @@ RSpec.describe 'Admin/Members/Index' do
     visit "/admin/challenges/#{challenge.slug}/members"
 
     within "#member-#{member1.id}" do
-      expect(page).to have_link member1.user.email,
-                                href: "/admin/challenges/#{challenge.slug}/members/#{member1.id}/edit"
-      expect(page).to have_content member1.role
+      expect(page).to have_link member1.user.email, href: "/admin/users/#{member1.user.slug}/edit"
+      expect(page).to have_link member1.role, href: "/admin/challenges/#{challenge.slug}/members/#{member1.id}/edit"
       expect(page).to have_content member1.created_at.strftime(UI::TimestampComponent::TIME_FORMAT)
     end
   end

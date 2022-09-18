@@ -24,10 +24,10 @@
     <% @members.each do |member| %>
       <tr id="member-<%= member.id %>">
         <td>
-          <%= link_to render(UI::UserNameComponent.new(user: member.user)), edit_admin_challenge_member_path(challenge, member), class: UI::LINK %>
+          <%= link_to render(UI::UserNameComponent.new(user: member.user)), edit_admin_user_path(member.user), class: UI::LINK %>
         </td>
         <td>
-          <%= member.role %>
+          <%= link_to member.role, edit_admin_challenge_member_path(challenge, member), class: UI::LINK %>
         </td>
         <td>
           <%= render(UI::TimestampComponent.new(data: member.created_at)) %>

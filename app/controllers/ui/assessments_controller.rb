@@ -9,26 +9,31 @@ module UI
     before_action :authenticate_user!
     before_action :authorize_judge!
 
-    def new
-      task_criteria.each do |criterium|
-        task_submission.task_assessments.build(task_criterium: criterium)
-      end
+    def create
+      Competition.create_assessments(
+        submission: task_submission,
+        judge:      current_member,
+        params:     params['assesment'].to_unsafe_hash
+      )
+      redirect_to task_path(task), notice: flash_message(:created, :task_assessments)
     end
 
-    def create
-      if task_submission.update(task_assessment_params)
-        redirect_to task_path(task), notice: flash_message(:created, :task_assessments)
-      else
-        render :new, status: :unprocessable_entity
+    def edit
+      @assesments = task_submission.task_assessments.by_judge(current_member).each_with_object({}) do |assesment, acum|
+        acum[assesment.task_criterium_id] = {
+          value:   assesment.value,
+          comment: assesment.comment
+        }
       end
     end
 
     def update
-      if task_submission.update(task_assessment_params)
-        redirect_to task_path(task), notice: flash_message(:updated, :task_assessments)
-      else
-        render :edit, status: :unprocessable_entity
-      end
+      Competition.update_assessments(
+        submission: task_submission,
+        judge:      current_member,
+        params:     params['assesment'].to_unsafe_hash
+      )
+      redirect_to task_path(task), notice: flash_message(:updated, :task_assessments)
     end
 
     private
@@ -54,23 +59,7 @@ module UI
         :zip_file_blob,
         task:             %i[challenge rich_text_description task_criteria],
         task_assessments: :task_criterium
-      ).find(params[:task_submission])
-    end
-
-    def task_assessment_params
-      @task_assessment_params ||= set_assessment_params
-    end
-
-    def set_assessment_params
-      assessment_params = params.require(:task_assessments).permit(
-        task_assessments_attributes: %i[id task_criterium_id value comment]
-      )
-
-      assessment_params[:task_assessments_attributes].each do |attributes|
-        attributes.last[:judge] = current_member
-      end
-
-      assessment_params
+      ).find(params[:submission_id])
     end
   end
 end

@@ -6,7 +6,7 @@ module UI
 
     before_action :authenticate_user!, :authorize_member!
     before_action :authorize_member_for_task!, only: :show
-    helper_method :task, :task_submission, :task_submissions
+    helper_method :task, :task_submission, :task_submissions, :get_judge_assesment
 
     def show
       if current_member&.judge?
@@ -36,7 +36,6 @@ module UI
     def task
       @task ||= Repo::Task.preload(
         :rich_text_description,
-        :task_submissions,
         :dependent_task,
         :dependency,
         challenge: :members
@@ -50,7 +49,17 @@ module UI
     end
 
     def task_submissions
-      @task_submissions ||= task.task_submissions.preload(:task_assessments).where(judge_id: [nil, current_member&.id])
+      @task_submissions ||= task.task_submissions.preload(:task_assessments,
+                                                          :zip_file_blob).where(judge_id: [nil, current_member&.id])
+    end
+
+    def get_judge_assesment(task_assessments)
+      result = task_assessments.select do |ta|
+        ta.judge_id == current_member.id
+      end.map(&:value).sum.to_f / task_assessments.select do |ta|
+                                    ta.judge_id == current_member.id
+                                  end.count
+      result.nan? ? 'Pending' : result.round(2)
     end
   end
 end
