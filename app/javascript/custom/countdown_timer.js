@@ -9,7 +9,12 @@ function calcTimer(distance) {
   const minutes = Math.floor((distance % hourInMsec) / minuteInMsec);
   const seconds = Math.floor((distance % minuteInMsec) / 1000);
 
-  return days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+  let value = '';
+  if (days > 0) value += days + "d ";
+  if (hours > 0) value += hours + "h ";
+  if (minutes > 0) value += minutes + "m ";
+  value += seconds + "s";
+  return value;
 }
 
 function calcDistance(countdownMs) {
