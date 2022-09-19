@@ -49,8 +49,10 @@ module UI
     end
 
     def task_submissions
-      @task_submissions ||= task.task_submissions.preload(:task_assessments,
-                                                          :zip_file_blob).where(judge_id: [nil, current_member&.id])
+      @task_submissions ||= task
+                            .task_submissions
+                            .preload(:task_assessments, :zip_file_blob, member: :user)
+                            .where(judge_id: [nil, current_member&.id])
     end
 
     def get_judge_assesment(task_assessments)

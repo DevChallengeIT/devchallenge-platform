@@ -69,6 +69,7 @@ RSpec.describe 'UI/Assessments/Show' do
 
       # Judge see his assigned submission
       within "#submission-#{submission_a.id}" do
+        expect(page).not_to have_content member_a.user.full_name
         expect(page).to have_content 'submission_a'
         expect(page).to have_content '7.5'
         expect(page).to have_link 'Edit assessment', href: "/submissions/#{submission_a.id}/assessments/edit"
@@ -79,6 +80,7 @@ RSpec.describe 'UI/Assessments/Show' do
 
       # Judge see submission without assigned judge
       within "#submission-#{submission_c.id}" do
+        expect(page).not_to have_content member_c.user.full_name
         expect(page).to have_content 'submission_c'
         expect(page).to have_content '8.5'
         expect(page).to have_link 'Edit assessment', href: "/submissions/#{submission_c.id}/assessments/edit"
@@ -97,12 +99,14 @@ RSpec.describe 'UI/Assessments/Show' do
       expect(page).not_to have_content 'submission_a'
 
       within "#submission-#{submission_b.id}" do
+        expect(page).not_to have_content member_b.user.full_name
         expect(page).to have_content 'submission_b'
         expect(page).to have_content '8.5'
         expect(page).to have_link 'Edit assessment', href: "/submissions/#{submission_b.id}/assessments/edit"
       end
 
       within "#submission-#{submission_c.id}" do
+        expect(page).not_to have_content member_c.user.full_name
         expect(page).to have_content 'submission_c'
         expect(page).to have_content '9'
         expect(page).to have_link 'Edit assessment', href: "/submissions/#{submission_c.id}/assessments/edit"
@@ -122,6 +126,29 @@ RSpec.describe 'UI/Assessments/Show' do
       expect(page).not_to have_content 'submission_b'
 
       within "#submission-#{submission_c.id}" do
+        expect(page).to have_content 'submission_c'
+        expect(page).to have_content 'Pending'
+        expect(page).to have_link 'Add assessment', href: "/submissions/#{submission_c.id}/assessments/new"
+      end
+    end
+  end
+
+  context 'when admin' do
+    before do
+      judge_c.user.update(email: 'tester@example.com')
+      assume_logged_in(judge_c.user)
+    end
+
+    it 'displays only judges related submissions' do
+      visit "/tasks/#{task.slug}"
+
+      expect(page).to have_content 'Submissions'
+
+      expect(page).not_to have_content 'submission_a'
+      expect(page).not_to have_content 'submission_b'
+
+      within "#submission-#{submission_c.id}" do
+        expect(page).to have_content member_c.user.full_name
         expect(page).to have_content 'submission_c'
         expect(page).to have_content 'Pending'
         expect(page).to have_link 'Add assessment', href: "/submissions/#{submission_c.id}/assessments/new"

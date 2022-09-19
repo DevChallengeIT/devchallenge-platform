@@ -39,6 +39,11 @@
         <th class="text-left">
           <%= t('resources.task_assessments.points') %>
         </th>
+        <% if Auth.admin?(current_user) %>
+          <th class="text-left">
+            <%= t('resources.users.singular') %>
+          </th>
+        <% end %>
         <th class="text-left">
           <%= t('resources.task_submissions.notes') %>
         </th>
@@ -63,6 +68,11 @@
                 </span>
               <% end %>
             </td>
+            <% if Auth.admin?(current_user) %>
+              <td>
+                <%= link_to render(UI::UserNameComponent.new(user: task_submission.member.user)), edit_admin_user_path(task_submission.member.user), class: UI::LINK %>
+              </td>
+            <% end %>
             <td>
               <%= task_submission.notes %>
             </td>
