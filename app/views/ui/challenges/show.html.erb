@@ -52,13 +52,26 @@
   </div>  
   
   <div class="my-5 flex space-x-5 justify-between">
-    <div>
+    <div class="bg-gray-100 rounded-md text-gray-700 p-5 w-full">
       <h4 class="<%= UI::H3 %>"><%= t('words.registration') %></h4>
       <%= render(UI::TimestampComponent.new(data: challenge.registration_at)) %>
+      <% if challenge.registration_at.future? %>
+        <%= render(UI::CountdownTimerComponent.new(id: 'registration_at', countdown_ts: challenge.registration_at)) %>
+      <% end %>
     </div>
-    <div>
+    <div class="bg-gray-100 rounded-md text-gray-700 p-5 w-full">
+      <h4 class="<%= UI::H3 %>"><%= t('words.live') %></h4>
+      <%= render(UI::TimestampComponent.new(data: challenge.start_at)) %>
+      <% if challenge.start_at.future? %>
+        <%= render(UI::CountdownTimerComponent.new(id: 'start_at', countdown_ts: challenge.start_at)) %>
+      <% end %>
+    </div>
+    <div class="bg-gray-100 rounded-md text-gray-700 p-5 w-full">
       <h4 class="<%= UI::H3 %>"><%= t('words.finish') %></h4>
       <%= render(UI::TimestampComponent.new(data: challenge.finish_at)) %>
+      <% if challenge.finish_at.future? %>
+        <%= render(UI::CountdownTimerComponent.new(id: 'finish_at', countdown_ts: challenge.finish_at)) %>
+      <% end %>
     </div>
   </div>
 
