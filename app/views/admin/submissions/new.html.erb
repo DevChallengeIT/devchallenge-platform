@@ -1,0 +1,32 @@
+<%= render 'admin/shared/challenge_navbar', selected: :tasks %>
+
+<%= render 'admin/shared/task_navbar', selected: :submissions %>
+
+<div class="md:w-2/3 w-full">
+  <%= form_with(model: task_submission, scope: :task_submission, url: admin_challenge_task_submissions_path(challenge, task), method: :post, class: "contents") do |form| %>
+    <%= render(UI::ErrorTagComponent.new(errors: task_submission.errors, field: :task)) %>
+
+    <div class="my-5">
+      <%= form.label :member_id, class: UI::FORM_LABEL %>
+      <%= form.select :member_id, members.map {|m| ["#{m.user.full_name} (#{m.user.email})", m.id]}, {include_blank: true}, class: UI::FORM_INPUT %>
+      <%= render(UI::ErrorTagComponent.new(errors: task_submission.errors, field: :member_id)) %>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :judge_id, class: UI::FORM_LABEL %>
+      <%= form.select :judge_id, judges.map {|j| [j.user.full_name, j.id]}, {include_blank: true}, class: UI::FORM_INPUT %>
+      <%= render(UI::ErrorTagComponent.new(errors: task_submission.errors, field: :judge_id)) %>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :zip_file, class: UI::FORM_LABEL %>
+      <%= form.file_field :zip_file, autofocus: true, class: UI::FORM_INPUT %>
+      <%= render(UI::ErrorTagComponent.new(errors: task_submission.errors, field: :zip_file)) %>
+    </div>
+
+    <div class="flex items-center justify-between">
+      <%= form.submit t('words.create'), class: UI::BUTTON_PRIMARY %>
+      <%= link_to t('words.back'), admin_challenge_task_submissions_path(challenge, task), class: UI::BUTTON_SECONDARY %>
+    </div>
+  <% end %>
+</div>

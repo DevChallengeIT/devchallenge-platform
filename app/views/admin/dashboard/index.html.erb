@@ -18,7 +18,7 @@
     <%= pie_chart Repo::User.where(created_at: 3.month.ago..).group(:time_zone).count %>
     <div class="text-center my-3">
       <%= link_to admin_users_path, class: UI::LINK do %>
-        New users (<%= Repo::User.count %> last 3 month)
+        New users (<%= Repo::User.where(created_at: 3.month.ago..).count %> last 3 month)
       <% end %>
     </div>
   </div>

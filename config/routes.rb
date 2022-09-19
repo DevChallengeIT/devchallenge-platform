@@ -37,7 +37,7 @@ Rails.application.routes.draw do
       resources :members, except: :show
       resources :tasks do
         resource :results, only: :show
-        resources :submissions, only: %i[index destroy edit update]
+        resources :submissions, only: %i[index new create edit update destroy]
         resources :criteria, except: :show
       end
     end

@@ -2,6 +2,18 @@
 
 <%= render 'admin/shared/task_navbar', selected: :submissions %>
 
+<div class="flex justify-between items-center space-x-3 py-3">
+  <div>
+    <%= form_with(url: admin_challenge_task_submissions_path(challenge, task), method: :get, id: 'search-form') do |_form| %>
+      <div class="flex items-center space-x-1.5">
+        <%= text_field_tag :search, params[:search], placeholder: t('words.search'), class: UI::FORM_INPUT %>
+        <%= submit_tag t('words.search'), class: UI::BUTTON_SECONDARY %>
+      </div>
+    <% end %>
+  </div>
+  <%= link_to t('words.add'), new_admin_challenge_task_submission_path, class: UI::BUTTON_PRIMARY %>
+</div>
+
 <table id="task_submissions" class="table">
   <thead>
     <th class="text-left">
@@ -9,6 +21,12 @@
     </th>
     <th class="text-left">
       <%= t('resources.judges.singular') %>
+    </th>
+    <th class="text-left">
+      <%= t('resources.task_submissions.notes') %>
+    </th>
+    <th class="text-left">
+      <%= t('resources.task_submissions.attachment') %>
     </th>
   </thead>
   <tbody>
@@ -21,6 +39,14 @@
         </td>
         <td>
           <%= render UI::UserNameComponent.new(user: task_submission&.judge&.user) %>
+        </td>
+        <td>
+          <%= task_submission.notes %>
+        </td>
+        <td>
+          <% if task_submission.zip_file.present? %>
+            <%= link_to t('words.download'), rails_blob_path(task_submission.zip_file, disposition: 'attachment'), class: UI::BUTTON_SECONDARY %>
+          <% end %>
         </td>
       </tr>
     <% end %>

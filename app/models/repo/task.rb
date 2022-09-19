@@ -16,6 +16,7 @@ inverse_of: :dependent_task
     has_many :task_criteria, dependent: :destroy_async
     has_many :task_submissions, dependent: :destroy_async
     has_many :task_assessments, through: :task_submissions, dependent: :destroy_async
+    has_many :members, through: :task_submissions, dependent: :destroy_async
 
     validates :title, presence: true
     validates :title, uniqueness: { case_sensitive: true, scope: :challenge_id }

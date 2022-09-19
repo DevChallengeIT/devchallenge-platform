@@ -18,4 +18,5 @@ module Competition
   delegate :task_results_calculator,   to: TaskResultsCalculator
   delegate :create_assessments,        to: AssessmentService
   delegate :update_assessments,        to: AssessmentService
+  delegate :list_submissions,          to: SubmissionsQuery
 end
