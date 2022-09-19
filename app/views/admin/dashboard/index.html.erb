@@ -3,31 +3,31 @@
     <h2 class="<%= UI::H2 %>">
       Members by challenge
     </h2>
-    <%= pie_chart Repo::Member.joins(:challenge).where(challenges: {status: 'ready'}).group("challenges.title").count %>
+    <%= pie_chart Repo::Member.joins(:challenge).where(challenges: {status: 'ready', created_at: 3.month.ago..}).group("challenges.title").count %>
     <div class="text-center my-3">
       <%= link_to admin_challenges_path, class: UI::LINK do %>
-        All Challenges (<%= Repo::Challenge.count %>)
+        Challenges (<%= Repo::Challenge.count %> last 3 month)
       <% end %>
     </div>
   </div>
 
   <div class="text-center">
     <h2 class="<%= UI::H2 %>">
-      Users by time zone
+      Users by time zone (last 3 month)
     </h2>
-    <%= pie_chart Repo::User.group(:time_zone).count %>
+    <%= pie_chart Repo::User.where(created_at: 3.month.ago..).group(:time_zone).count %>
     <div class="text-center my-3">
       <%= link_to admin_users_path, class: UI::LINK do %>
-        All users (<%= Repo::User.count %>)
+        New users (<%= Repo::User.count %> last 3 month)
       <% end %>
     </div>
   </div>
 
   <div class="text-center">
     <h2 class="<%= UI::H2 %>">
-      Users by auth strategy
+      Users by auth strategy (last 3 month)
     </h2>
-    <%= pie_chart Repo::User.group(:provider).count %>
+    <%= pie_chart Repo::User.where(created_at: 3.month.ago..).group(:provider).count %>
   </div>
 </div>
 
