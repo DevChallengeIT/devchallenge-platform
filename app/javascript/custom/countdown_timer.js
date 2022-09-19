@@ -27,6 +27,7 @@ function initializeTimer(id, countdownMs) {
   let timerEl = document.getElementById(id);
   let distance = calcDistance(countdownMs);
   timerEl.innerHTML = calcTimer(distance);
+  if (distance === 0) return;
 
   const intervalId = setInterval(() => {
     timerEl = document.getElementById(id);
@@ -42,8 +43,9 @@ function initializeTimer(id, countdownMs) {
     }
 
     distance = calcDistance(countdownMs);
-    if (distance < 0) {
+    if (distance === 0) {
       clearInterval(intervalId);
+      location.reload();
       return;
     }
 
