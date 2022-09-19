@@ -7,10 +7,6 @@ module UI
       @countdown_ms = countdown_in_mseconds(countdown_ts)
     end
 
-    def render?
-      false
-    end
-
     def countdown_in_mseconds(countdown_ts)
       (countdown_ts.to_f * 1000.0).to_i
     end

@@ -15,7 +15,7 @@
       <h4 class="<%= UI::H3 %>"><%= t('words.start') %></h4>
       <%= render(UI::TimestampComponent.new(data: task.start_at)) %>
       <% if task.start_at.future? %>
-        <%= render(UI::CountdownTimerComponent.new(id: 'start-at', countdown_ts: task.start_at)) %>
+        <%= render(UI::CountdownTimerComponent.new(id: "#{task.id}-start-at", countdown_ts: task.start_at)) %>
       <% end %>
     </div>
     
@@ -23,7 +23,7 @@
       <h4 class="<%= UI::H3 %>"><%= t('words.submit') %></h4>
       <%= render(UI::TimestampComponent.new(data: task.submit_at)) %>
       <% if task.submit_at.future? %>
-        <%= render(UI::CountdownTimerComponent.new(id: 'start-at', countdown_ts: task.submit_at)) %>
+        <%= render(UI::CountdownTimerComponent.new(id: "#{task.id}-submit-at", countdown_ts: task.submit_at)) %>
       <% end %>
     </div>
 
@@ -31,7 +31,7 @@
       <h4 class="<%= UI::H3 %>"><%= t('words.result') %></h4>
       <%= render(UI::TimestampComponent.new(data: task.result_at)) %>
       <% if task.result_at.future? %>
-        <%= render(UI::CountdownTimerComponent.new(id: 'start-at', countdown_ts: task.result_at)) %>
+        <%= render(UI::CountdownTimerComponent.new(id: "#{task.id}-result-at", countdown_ts: task.result_at)) %>
       <% end %>
     </div>
   </div>
@@ -53,7 +53,7 @@
           </span>
         <% end %>
       <% end %>
-    <div>
+    </div>
   <% end %>
 
   <div class="my-8 text-gray-800 dark:text-gray-400">
