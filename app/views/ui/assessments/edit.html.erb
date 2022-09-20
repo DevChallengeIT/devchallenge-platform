@@ -8,6 +8,10 @@
     </h1>
   </div>
 
+  <div class="my-5">
+    <%= task_submission.notes %>
+  </div>
+
   <div id="assessments" class="my-5">
     <% if task_submission.zip_file.present? %>
       <%= link_to t('words.download'), rails_blob_path(task_submission.zip_file, disposition: 'attachment'), class: UI::BUTTON_SECONDARY %>

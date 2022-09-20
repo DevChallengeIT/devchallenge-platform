@@ -47,7 +47,7 @@
             </td>
           <% end %>
           <td>
-            <%= task_submission.notes %>
+            <%= task_submission.notes.truncate(50) %>
           </td>
           <td>
             <% if task_submission.zip_file.present? %>
