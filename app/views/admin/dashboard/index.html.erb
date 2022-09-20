@@ -36,8 +36,7 @@
     <h2 class="<%= UI::H2 %>">
       Challenge members last month by day
     </h2>
-    <% sum = 0 %>
-    <%= line_chart Repo::Member.joins(:challenge).where(created_at: 1.month.ago..).group("challenges.title").group_by_day(:created_at).count.map { |x,y| { x => (sum += y)} } .reduce({}, :merge) %>
+    <%= line_chart members_by_challenge_per_day %>
   </div> 
 </div>
 
