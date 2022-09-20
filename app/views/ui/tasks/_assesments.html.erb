@@ -47,7 +47,9 @@
             </td>
           <% end %>
           <td>
-            <%= task_submission.notes.truncate(50) %>
+            <span class="whitespace-normal">
+              <%= task_submission.notes %>
+            </span>
           </td>
           <td>
             <% if task_submission.zip_file.present? %>
