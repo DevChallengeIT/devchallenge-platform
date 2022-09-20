@@ -1,4 +1,4 @@
-<div class="flex items-center space-x-3 my-5">
+<div class="flex items-center space-x-3">
   <div class="text-center">
     <h2 class="<%= UI::H2 %>">
       Members by challenge
@@ -31,7 +31,16 @@
   </div>
 </div>
 
-<div class="flex items-center space-x-3">
+<div class="flex items-center space-x-3 py-5">
+  <div class="w-full">
+    <h2 class="<%= UI::H2 %>">
+      Challenge members last month by day
+    </h2>
+    <%= line_chart Repo::Member.joins(:challenge).where(created_at: 1.month.ago..).group("challenges.title").group_by_day(:created_at).count %>
+  </div> 
+</div>
+
+<div class="flex items-center space-x-3 py-5">
   <div class="w-full">
     <h2 class="<%= UI::H2 %>">
       Users registrations last month by day (+ <%= Repo::User.where(created_at: [3.days.ago..Time.now]).count %> for last 3 days)
