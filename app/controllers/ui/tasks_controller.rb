@@ -9,16 +9,10 @@ module UI
     helper_method :task, :task_submission, :task_submissions, :get_judge_assesment
 
     def show
-      if current_member&.judge?
-        render 'ui/tasks/judges/show'
-      else
-        @result = Competition::TasksAssessmentCalculator.total_assessment_for(
-          participant: current_member,
-          task:
-        )
-
-        super
-      end
+      @result = Competition::TasksAssessmentCalculator.total_assessment_for(
+        participant: current_member,
+        task:
+      )
     end
 
     private

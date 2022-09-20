@@ -67,6 +67,7 @@ en:
     you_not_qualified_to: You are not qualified to 
     submission_has_already_been_assessed: Your submission has already been assessed. Result will be available after
     submission_is_not_available: Submission is  not available
+    task_result_pending: We have received your submition. The result will appear within 24 hours after sending the form.
     challenge_terms_and_conditions: By joining <strong>%{challenge_title}</strong> you accept it's <a href="%{url}" class="%{class}">terms and conditions</a>
     time_zone_config: Your current profile time zone is UTC. It should correspond to your current time zone if you don't want to miss any vital deadline.
   auth:

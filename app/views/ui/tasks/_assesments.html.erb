@@ -1,0 +1,68 @@
+<div class="my-5">
+  <%= link_to t('words.judges_tutorial'), 'https://devchallenge.notion.site/devchallenge/Judge-s-Tutorial-DEV-Challenge-XIX-f31cf03b4edc4193ac75d49d5625a212', class: UI::LINK  %>
+</div>
+
+<div class="my-5">
+  <h2 class="<%= UI::H2 %>">
+    <%= t("resources.task_submissions.plural") %>
+  </h2>
+
+  <table id="submissions" class="table">
+    <thead>
+      <th class="text-left">
+        <%= t('resources.task_assessments.points') %>
+      </th>
+      <% if Auth.admin?(current_user) %>
+        <th class="text-left">
+          <%= t('resources.users.singular') %>
+        </th>
+      <% end %>
+      <th class="text-left">
+        <%= t('resources.task_submissions.notes') %>
+      </th>
+      <th class="text-left">
+        <%= t('resources.task_submissions.attachment') %>
+      </th>
+      <th class="text-left">
+        <%= t('resources.task_submissions.assesment') %>
+      </th>
+    </thead>
+    <tbody>
+      <% task_submissions.each do |task_submission| %>
+        <tr id="submission-<%= task_submission.id %>">
+          <td>
+            <% if task_submission.task_assessments.select { |ta| ta.judge_id == current_member.id}.any? %>
+              <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-indigo-500 text-white">
+                <%= get_judge_assesment(task_submission.task_assessments) %>
+              </span>
+            <% else %>
+              <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                <%= t('words.pending') %>
+              </span>
+            <% end %>
+          </td>
+          <% if Auth.admin?(current_user) %>
+            <td>
+              <%= link_to render(UI::UserNameComponent.new(user: task_submission.member.user)), edit_admin_user_path(task_submission.member.user), class: UI::LINK %>
+            </td>
+          <% end %>
+          <td>
+            <%= task_submission.notes %>
+          </td>
+          <td>
+            <% if task_submission.zip_file.present? %>
+              <%= link_to t('words.download'), rails_blob_path(task_submission.zip_file, disposition: 'attachment'), class: UI::BUTTON_SECONDARY %>
+            <% end %>
+          </td>
+          <td>
+            <% if task_submission.task_assessments.select { |ta| ta.judge_id == current_member.id }.any? %>
+              <%= link_to t('resources.task_assessments.edit'), edit_submission_assessments_path(task_submission), class: UI::BUTTON_SECONDARY %>
+            <% else %>
+              <%= link_to t('resources.task_assessments.add'), new_submission_assessments_path(task_submission), class: UI::BUTTON_PRIMARY %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

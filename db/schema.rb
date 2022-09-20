@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_18_151807) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_20_124511) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -135,6 +135,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_18_151807) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "require_attachment", default: false
+    t.boolean "show_instant_result", default: false, null: false
     t.index ["challenge_id"], name: "index_tasks_on_challenge_id"
     t.index ["dependent_task_id"], name: "index_tasks_on_dependent_task_id"
     t.index ["slug", "challenge_id"], name: "index_tasks_on_slug_and_challenge_id", unique: true

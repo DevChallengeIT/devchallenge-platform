@@ -53,14 +53,15 @@ RSpec.describe 'UI/Tasks/Show' do
       visit "/tasks/#{task.slug}"
 
       within '#result' do
-        expect(page).to have_content 'Result: 0'
+        expect(page).to have_content 'We have received your submition. The result will appear within 24 hours after sending the form.'
         expect(page).not_to have_content 'You are not qualified'
+        expect(page).not_to have_content 'Result'
       end
     end
   end
 
   context 'with dependency' do
-    it 'can see 0 result and not qualified message' do
+    it 'can see result pending message' do
       assume_logged_in
       create(:member, user: current_user, challenge: task.challenge)
       create(:task, dependent_task: task, min_assessment: 100)
@@ -68,8 +69,9 @@ RSpec.describe 'UI/Tasks/Show' do
       visit "/tasks/#{task.slug}"
 
       within '#result' do
-        expect(page).to have_content 'Result: 0'
-        expect(page).to have_content 'You are not qualified'
+        expect(page).to have_content 'We have received your submition. The result will appear within 24 hours after sending the form.'
+        expect(page).not_to have_content 'You are not qualified'
+        expect(page).not_to have_content 'Result'
       end
     end
 

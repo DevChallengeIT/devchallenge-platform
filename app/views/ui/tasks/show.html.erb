@@ -36,7 +36,15 @@
     </div>
   </div>
 
-  <% if Time.zone.now > task.result_at %>
+  <% if @result.nil? && task_submission %>
+    <div id="result" class="my-5">
+      <p class="<%= UI::FLASH_NOTICE %>">
+        <%= t('messages.task_result_pending') %>
+      </p>
+    </div>
+  <% end %>
+
+  <% if @result && (Time.zone.now > task.result_at || task.show_instant_result?) %>
     <div id="result" class="my-5">
       <h2 class="<%= UI::H2 %>">
         <%= t('words.result') %>:
@@ -117,5 +125,11 @@
         </p>
       <% end %>
     <% end %>
+
+    <% if current_member&.judge? %>
+      <%= render('ui/tasks/assesments') %>
+    <% end %>
   </div>
 </div>
+
+

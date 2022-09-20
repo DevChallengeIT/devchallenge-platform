@@ -28,7 +28,7 @@ module Competition
         WHERE t.id = #{task.id} AND ts.member_id = #{participant.id}
       SQL
 
-      ActiveRecord::Base.connection.execute(query).as_json.dig(0, 'total_assessment') || 0
+      ActiveRecord::Base.connection.execute(query).as_json.dig(0, 'total_assessment')
     end
   end
 end

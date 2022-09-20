@@ -56,9 +56,16 @@
         <%= render(UI::ErrorTagComponent.new(errors: task.errors, field: :min_assessment)) %>
       </div>
 
-       <div class="w-full flex items-center space-x-1.5">
-        <%= form.check_box :require_attachment %>
-        <%= form.label :require_attachment, class: UI::FORM_LABEL %>
+      <div class="w-full flex items-center space-x-1.5">
+        <div class="w-full flex items-center space-x-1.5">
+          <%= form.check_box :require_attachment %>
+          <%= form.label :require_attachment, class: UI::FORM_LABEL %>
+        </div>
+
+        <div class="w-full flex items-center space-x-1.5">
+          <%= form.check_box :show_instant_result %>
+          <%= form.label :show_instant_result, class: UI::FORM_LABEL %>
+        </div>
       </div>
     </div>
 
