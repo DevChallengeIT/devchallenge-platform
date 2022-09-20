@@ -42,7 +42,7 @@ module Competition
       @current_assessment_value ||= TasksAssessmentCalculator.total_assessment_for(
         participant: member,
         task:        dependent_task
-      )
+      ) || 0
     end
   end
 end
