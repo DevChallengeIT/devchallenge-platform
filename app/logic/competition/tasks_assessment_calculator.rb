@@ -18,14 +18,12 @@ module Competition
 
       query = <<-SQL
         SELECT
-          SUM(ta.value) / COUNT(DISTINCT(ta.judge_id)) as total_assessment
+          SUM(ta.value) / COUNT(DISTINCT (ta.judge_id)) AS total_assessment
         FROM
           task_assessments ta
-        JOIN task_criteria tc ON tc.id = ta.task_criterium_id
-        JOIN tasks t ON t.id = tc.task_id
-        JOIN task_submissions ts ON ts.task_id = t.id
-        JOIN challenges c ON c.id = t.challenge_id
-        WHERE t.id = #{task.id} AND ts.member_id = #{participant.id}
+          JOIN task_submissions ts ON ts.id = ta.task_submission_id
+        WHERE
+          ts.task_id = #{task.id} AND ts.member_id = #{participant.id}
       SQL
 
       ActiveRecord::Base.connection.execute(query).as_json.dig(0, 'total_assessment')

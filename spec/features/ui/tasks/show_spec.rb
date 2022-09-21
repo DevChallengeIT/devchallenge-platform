@@ -88,11 +88,14 @@ RSpec.describe 'UI/Tasks/Show' do
       assume_logged_in
 
       member = create(:member, user: current_user, challenge: task.challenge)
+      other_member = create(:member, challenge: task.challenge)
       dependent_task = create(:task, dependent_task: task, challenge: task.challenge)
       judge = create(:member, :judge, challenge: task.challenge)
       task_criterium = create(:task_criterium, task:)
       task_submission = create(:task_submission, task:, member:)
+      other_task_submission = create(:task_submission, task:, member: other_member)
       create(:task_assessment, task_submission:, task_criterium:, judge:, value: 10)
+      create(:task_assessment, task_submission: other_task_submission, task_criterium:, judge:, value: 8)
 
       visit "/tasks/#{task.slug}"
 

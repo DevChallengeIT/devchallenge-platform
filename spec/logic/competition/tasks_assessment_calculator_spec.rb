@@ -24,6 +24,14 @@ RSpec.describe Competition::TasksAssessmentCalculator do
     create(:task_assessment, task_submission:, judge: judge_a, task_criterium: task_criterium_b, value: value_a2)
     create(:task_assessment, task_submission:, judge: judge_b, task_criterium: task_criterium_a, value: value_b1)
     create(:task_assessment, task_submission:, judge: judge_b, task_criterium: task_criterium_b, value: value_b2)
+
+    # Other member
+    other_member = create(:member, challenge:)
+    other_task_submission = create(:task_submission, member: other_member, task:)
+    create(:task_assessment, task_submission: other_task_submission, judge: judge_a, task_criterium: task_criterium_a, value: value_a1)
+    create(:task_assessment, task_submission: other_task_submission, judge: judge_a, task_criterium: task_criterium_b, value: value_a2)
+    create(:task_assessment, task_submission: other_task_submission, judge: judge_b, task_criterium: task_criterium_a, value: value_b1)
+    create(:task_assessment, task_submission: other_task_submission, judge: judge_b, task_criterium: task_criterium_b, value: value_b2)
   end
 
   it 'returns a sum of all assessments for a participant submission' do
