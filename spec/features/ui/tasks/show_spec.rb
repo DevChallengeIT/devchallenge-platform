@@ -45,15 +45,38 @@ RSpec.describe 'UI/Tasks/Show' do
     end
   end
 
-  context 'without dependency' do
-    it 'can see 0 result' do
+  context 'when just joined the challenge' do
+    it 'does not show pending message' do
       assume_logged_in
-      create(:member, user: current_user, challenge: task.challenge)
+      create(:member, challenge: task.challenge, user: current_user)
+
+      visit "/tasks/#{task.slug}"
+      expect(page).not_to have_content I18n.t('messages.task_result_pending')
+    end
+  end
+
+  context 'when post submition' do
+    it 'does not show pending message' do
+      assume_logged_in
+      member = create(:member, challenge: task.challenge, user: current_user)
+      create(:task_submission, member:, task:)
+
+      visit "/tasks/#{task.slug}"
+
+      expect(page).to have_content I18n.t('messages.task_result_pending')
+    end
+  end
+
+  context 'without dependency' do
+    it 'can see pending result result' do
+      assume_logged_in
+      member = create(:member, user: current_user, challenge: task.challenge)
+      create(:task_submission, member:, task:)
 
       visit "/tasks/#{task.slug}"
 
       within '#result' do
-        expect(page).to have_content 'We have received your submition. The result will appear within 24 hours after sending the form.'
+        expect(page).to have_content I18n.t('messages.task_result_pending')
         expect(page).not_to have_content 'You are not qualified'
         expect(page).not_to have_content 'Result'
       end
@@ -61,20 +84,6 @@ RSpec.describe 'UI/Tasks/Show' do
   end
 
   context 'with dependency' do
-    it 'can see result pending message' do
-      assume_logged_in
-      create(:member, user: current_user, challenge: task.challenge)
-      create(:task, dependent_task: task, min_assessment: 100)
-
-      visit "/tasks/#{task.slug}"
-
-      within '#result' do
-        expect(page).to have_content 'We have received your submition. The result will appear within 24 hours after sending the form.'
-        expect(page).not_to have_content 'You are not qualified'
-        expect(page).not_to have_content 'Result'
-      end
-    end
-
     it 'can see some result and qualified message' do
       assume_logged_in
 

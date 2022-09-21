@@ -36,7 +36,7 @@
     </div>
   </div>
 
-  <% if @result.nil? && task_submission %>
+  <% if @result.nil? && task_submission.persisted? %>
     <div id="result" class="my-5">
       <p class="<%= UI::FLASH_NOTICE %>">
         <%= t('messages.task_result_pending') %>
