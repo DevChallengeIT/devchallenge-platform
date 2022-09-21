@@ -70,7 +70,7 @@ module Admin
     end
 
     def members
-      @members ||= challenge.members.participant.preload(:user).where.not(id: task.member_ids)
+      @members ||= challenge.members.participant.includes(:user).where.not(id: task.member_ids).order('users.email desc')
     end
   end
 end

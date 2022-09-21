@@ -8,7 +8,7 @@
 
     <div class="my-5">
       <%= form.label :member_id, class: UI::FORM_LABEL %>
-      <%= form.select :member_id, members.map {|m| ["#{m.user.full_name} (#{m.user.email})", m.id]}, {include_blank: true}, class: UI::FORM_INPUT %>
+      <%= form.select :member_id, members.map {|m| [m.user.email, m.id]}, {include_blank: true}, class: UI::FORM_INPUT %>
       <%= render(UI::ErrorTagComponent.new(errors: task_submission.errors, field: :member_id)) %>
     </div>
 
