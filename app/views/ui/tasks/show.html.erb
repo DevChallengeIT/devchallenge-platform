@@ -77,13 +77,13 @@
     <% end %>
   </div>
 
-  <% if Time.zone.now < task.result_at && task.task_assessments.any? %>
+  <% if Time.zone.now < task.result_at && task_submission.task_assessments.any? && !task.show_instant_result? %>
     <p class="<%= UI::FLASH_NOTICE %>">
       <%= t('messages.submission_has_already_been_assessed') %> <%= render(UI::TimestampComponent.new(data: task.result_at)) %>
     </p>
   <% end %>
 
-  <% if !task.task_assessments.any? %>
+  <% if !task_submission.task_assessments.any? %>
     <% if (task.start_at..task.submit_at).cover?(Time.zone.now) %>
       <div class="my-8">
         <h2 class="<%= UI::H2 %>">

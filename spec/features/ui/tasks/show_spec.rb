@@ -67,6 +67,21 @@ RSpec.describe 'UI/Tasks/Show' do
     end
   end
 
+  context 'when has assesment before result_at' do
+    it 'does not show pending message' do
+      task.update!(result_at: 5.minutes.from_now)
+      assume_logged_in
+      member = create(:member, challenge: task.challenge, user: current_user)
+      task_submission = create(:task_submission, member:, task:)
+      task_criterium = create(:task_criterium, task:)
+      create(:task_assessment, task_criterium:, task_submission:, value: 1)
+
+      visit "/tasks/#{task.slug}"
+
+      expect(page).to have_content I18n.t('messages.submission_has_already_been_assessed')
+    end
+  end
+
   context 'without dependency' do
     it 'can see pending result result' do
       assume_logged_in
