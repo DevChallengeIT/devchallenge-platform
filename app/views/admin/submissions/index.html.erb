@@ -11,7 +11,10 @@
       </div>
     <% end %>
   </div>
-  <%= link_to t('words.add'), new_admin_challenge_task_submission_path, class: UI::BUTTON_PRIMARY %>
+  <div class="flex justify-between items-center space-x-3">
+    <%= link_to t('words.add'), new_admin_challenge_task_submission_path, class: UI::BUTTON_PRIMARY %>
+    <%= link_to t('words.import'), new_admin_challenge_task_submissions_import_path, class: UI::BUTTON_PRIMARY %>
+  </div>
 </div>
 
 <table id="task_submissions" class="table">

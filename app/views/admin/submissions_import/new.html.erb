@@ -1,0 +1,23 @@
+<%= render 'admin/shared/challenge_navbar', selected: :tasks %>
+
+<%= render 'admin/shared/task_navbar', selected: :submissions %>
+
+<div class="md:w-2/3 w-full">
+  <%= form_with(scope: :import, url: admin_challenge_task_submissions_import_path(challenge, task), method: :post, class: "contents") do |form| %>
+
+    <div class="my-5">
+      <%= form.label :emails, class: UI::FORM_LABEL %>
+      <%= form.text_area :emails, class: UI::FORM_INPUT %>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :judge_id, class: UI::FORM_LABEL %>
+      <%= form.select :judge_id, judges.map {|j| [j.user.full_name, j.id]}, {include_blank: true}, class: UI::FORM_INPUT %>
+    </div>
+
+    <div class="flex items-center justify-between">
+      <%= form.submit t('words.import'), class: UI::BUTTON_PRIMARY %>
+      <%= link_to t('words.back'), admin_challenge_task_submissions_path(challenge, task), class: UI::BUTTON_SECONDARY %>
+    </div>
+  <% end %>
+</div>

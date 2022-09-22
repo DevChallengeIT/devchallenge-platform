@@ -37,7 +37,11 @@ Rails.application.routes.draw do
       resources :members, except: :show
       resources :tasks do
         resource :results, only: :show
-        resources :submissions, only: %i[index new create edit update destroy]
+        resources :submissions, only: %i[index new create edit update destroy] do
+          collection do
+            resource :import, only: %i[new create], controller: 'submissions_import', as: :submissions_import
+          end
+        end
         resources :criteria, except: :show
       end
     end
