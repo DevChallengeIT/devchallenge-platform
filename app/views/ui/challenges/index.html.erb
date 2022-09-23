@@ -60,7 +60,9 @@
             </p>
           </div>
           <div>
-            <%= render(UI::ChallengeStatusComponent.new(challenge: challenge)) %>
+            <%= link_to challenge_path(challenge) do %>
+              <%= render(UI::ChallengeStatusComponent.new(challenge: challenge)) %>
+            <% end %>
           </div>
         </div>
 
