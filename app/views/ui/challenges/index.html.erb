@@ -45,6 +45,26 @@
       </div>
     </div>
 
+    <div id="welcome" class="mb-3 bg-yellow-50 border border-yellow-200 rounded-md p-4" role="alert">
+      <div class="flex">  
+        <div class="ml-4">
+          <h3 class="text-gray-800 font-semibold">
+            🤗 Welcome, to DEV Challenge.
+          </h3>
+          <div class="mt-2 text-sm text-gray-600">
+            <% if current_user&.challenges&.ready&.any? %>
+              <%= t('messages.welcome_to_joined') %>
+              <% current_user.challenges.ready.each do |challenge| %>
+                <%= link_to challenge.title, challenge_path(challenge), class: UI::LINK %>
+              <% end %>
+            <% else %>
+              <%= t('messages.welcome_to_join') %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <% @challenges.each do |challenge| %>
       <div id="challenge-<%= challenge.id %>" class="bg-white border shadow-sm rounded-md p-4 md:p-5 dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7] mb-3">
         <div class="flex justify-between">

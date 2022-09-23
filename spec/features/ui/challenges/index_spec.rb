@@ -18,6 +18,34 @@ RSpec.describe 'UI/Challenges/Index' do
     expect(page).not_to have_link challenge_canceled.title
   end
 
+  it 'displays welcome to join message if members.count = 0' do
+    visit '/'
+
+    within '#welcome' do
+      expect(page).to have_content I18n.t('messages.welcome_to_join')
+    end
+  end
+
+  it 'displays welcome and joined challenges if members.count > 1' do
+    challenge_a = create(:challenge, status: 'ready')
+    challenge_b = create(:challenge, status: 'ready')
+    challenge_c = create(:challenge, status: 'ready')
+
+    assume_logged_in
+    create(:member, user: current_user, challenge: challenge_a)
+    create(:member, user: current_user, challenge: challenge_b)
+
+    visit '/'
+
+    within '#welcome' do
+      expect(page).not_to have_content I18n.t('messages.welcome_to_join')
+      expect(page).to have_content I18n.t('messages.welcome_to_joined')
+      expect(page).to have_link challenge_a.title, href: "/challenges/#{challenge_a.slug}"
+      expect(page).to have_link challenge_b.title, href: "/challenges/#{challenge_b.slug}"
+      expect(page).not_to have_link challenge_c.title, href: "/challenges/#{challenge_c.slug}"
+    end
+  end
+
   it 'can search' do
     challenge_a = create(:challenge, title: 'Yellow')
     challenge_b = create(:challenge, title: 'Blue')
