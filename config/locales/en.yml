@@ -56,7 +56,7 @@ en:
     resource_updated: '%{name} was successfully updated'
     resource_removed: '%{name} was successfully removed'
     welcome_to_join: Please, select and join the challenge that you are interested in below
-    welcome_to_joined: Thanks for accepting the challenge. You are participating in
+    welcome_to_joined: Thanks for accept the challenge. You are participating in
     member_exists: 'User with such email is already assigned to the selected challenge'
     register_to_join: Join
     challenge_joined: Thank you for accepted the challenge
