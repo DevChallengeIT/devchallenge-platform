@@ -6,7 +6,7 @@
     <%= pie_chart Repo::Member.joins(:challenge).where(challenges: {status: 'ready', created_at: 3.month.ago..}).group("challenges.title").count %>
     <div class="text-center my-3">
       <%= link_to admin_challenges_path, class: UI::LINK do %>
-        Challenges (<%= Repo::Challenge.count %> last 3 month)
+        Members (<%= Repo::Member.where(created_at: 3.month.ago..).count %> last 3 month)
       <% end %>
     </div>
   </div>
