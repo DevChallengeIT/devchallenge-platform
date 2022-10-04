@@ -7,6 +7,8 @@ module Repo
     belongs_to :judge, class_name: 'Repo::Member', optional: true
 
     has_many :task_assessments, dependent: :destroy
+    has_many :task_submission_judges, dependent: :destroy
+    has_many :judges, through: :task_submission_judges
 
     has_one_attached :zip_file
 

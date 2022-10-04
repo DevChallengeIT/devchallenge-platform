@@ -1,0 +1,38 @@
+<%= render 'admin/shared/challenge_navbar', selected: :tasks %>
+
+<%= render 'admin/shared/task_navbar', selected: :submissions %>
+
+<div id="assigned-judges" class="py-5">
+  <h3 class="<%= UI::H3 %>">
+    <%= t('words.assigned') %>
+  </h3>
+
+  <% if task_submission.task_submission_judges.any? %>
+    <ul>
+      <% task_submission.task_submission_judges.each do |task_judge| %>
+        <li id="task_judge-<%= task_judge.id %>" class="my-2">
+          <%= button_to "- #{task_judge.judge.user.full_name}", admin_challenge_task_submission_judge_path(challenge, task, task_submission, task_judge.id), method: :delete  %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <small><%= t('words.none') %></small>
+  <% end %>
+</div>
+
+<div  id="potential-judges" class="py-5">
+  <h3 class="<%= UI::H3 %>">
+    <%= t('words.potential') %>
+  </h3>
+  <% if potential_judges.any? %>
+    <ul>
+      <% potential_judges.each do |judge| %>
+        <li id="judge-<%= judge.id %>" class="my-2">
+          <%= button_to "+ #{judge.user.full_name}", admin_challenge_task_submission_judges_path(challenge, task, task_submission, judge_id: judge.id), method: :post %>
+        </li>
+      <% end %>
+    </ul>
+   <% else %>
+    <small><%= t('words.none') %></small>
+  <% end %>
+</div>

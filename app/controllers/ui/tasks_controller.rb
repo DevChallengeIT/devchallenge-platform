@@ -42,11 +42,21 @@ module UI
       @task_submission ||= task.task_submissions.find_by(member: current_member) || Repo::TaskSubmission.new
     end
 
+    def judge_submission_ids
+      @judge_submission_ids ||= Repo::TaskSubmissionJudge
+                                .where(
+                                  task_submission_id: task.task_submissions.ids,
+                                  judge_id:           current_member&.id
+                                )
+                                .map(&:task_submission_id)
+    end
+
     def task_submissions
       @task_submissions ||= task
                             .task_submissions
                             .preload(:task_assessments, :zip_file_blob, member: :user)
                             .where(judge_id: [nil, current_member&.id])
+                            .or(task.task_submissions.where(id: judge_submission_ids))
     end
 
     def get_judge_assesment(task_assessments)

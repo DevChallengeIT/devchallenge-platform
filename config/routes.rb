@@ -38,6 +38,7 @@ Rails.application.routes.draw do
       resources :tasks do
         resource :results, only: :show
         resources :submissions, only: %i[index new create edit update destroy] do
+          resources :judges, only: %i[index create destroy], controller: 'task_judges'
           collection do
             resource :import, only: %i[new create], controller: 'submissions_import', as: :submissions_import
           end

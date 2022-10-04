@@ -34,10 +34,13 @@ RSpec.describe 'UI/Tasks/Show' do
         participant_a = create(:member, challenge: task.challenge)
         participant_b = create(:member, challenge: task.challenge)
         participant_c = create(:member, challenge: task.challenge)
+        participant_d = create(:member, challenge: task.challenge)
 
         task_submission_a = create(:task_submission, member: participant_a, notes: 'this is my submission', task:, judge: judge_a)
         task_submission_b = create(:task_submission, member: participant_b, notes: 'this is not my submission', task:, judge: judge_b)
         task_submission_c = create(:task_submission, member: participant_c, notes: 'this is submission without judge', task:)
+        task_submission_d = create(:task_submission, member: participant_d, notes: 'this is submission where i am additional judge', task:, judge: judge_b)
+        create(:task_submission_judge, task_submission: task_submission_d, judge: judge_a)
         other_task_submission = create(:task_submission, notes: 'not current task submission')
 
         visit "/tasks/#{task.slug}"
@@ -48,6 +51,7 @@ RSpec.describe 'UI/Tasks/Show' do
         expect(page).to have_content 'Submissions'
         expect(page).to have_content task_submission_a.notes
         expect(page).to have_content task_submission_c.notes
+        expect(page).to have_content task_submission_d.notes
         expect(page).not_to have_content task_submission_b.notes
         expect(page).not_to have_content other_task_submission.notes
       end

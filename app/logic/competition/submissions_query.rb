@@ -22,7 +22,8 @@ module Competition
     private
 
     def scope
-      @scope ||= task.task_submissions.preload(:zip_file_blob, judge: :user, member: :user)
+      @scope ||= task.task_submissions.preload(:zip_file_blob, judge: :user, member: :user,
+task_submission_judges: [judge: :user])
     end
 
     def maybe_search

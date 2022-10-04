@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_20_124511) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_04_100025) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -107,6 +107,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_20_124511) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["task_id"], name: "index_task_criteria_on_task_id"
+  end
+
+  create_table "task_submission_judges", force: :cascade do |t|
+    t.bigint "task_submission_id", null: false
+    t.bigint "judge_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["judge_id"], name: "index_task_submission_judges_on_judge_id"
+    t.index ["task_submission_id"], name: "index_task_submission_judges_on_task_submission_id"
   end
 
   create_table "task_submissions", force: :cascade do |t|
@@ -215,6 +224,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_20_124511) do
   add_foreign_key "task_assessments", "task_criteria"
   add_foreign_key "task_assessments", "task_submissions"
   add_foreign_key "task_criteria", "tasks"
+  add_foreign_key "task_submission_judges", "members", column: "judge_id", on_delete: :cascade
+  add_foreign_key "task_submission_judges", "task_submissions", on_delete: :cascade
   add_foreign_key "task_submissions", "members"
   add_foreign_key "task_submissions", "members", column: "judge_id"
   add_foreign_key "task_submissions", "tasks"

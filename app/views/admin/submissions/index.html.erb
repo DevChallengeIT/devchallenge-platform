@@ -40,8 +40,12 @@
             <%= render UI::UserNameComponent.new(user: task_submission.member.user) %>
           <% end %>
         </td>
-        <td>
-          <%= render UI::UserNameComponent.new(user: task_submission&.judge&.user) %>
+        <td id="judges-<%= task_submission.id %>">
+          <%= task_submission&.judge&.user&.full_name %>
+          <%= link_to "+", admin_challenge_task_submission_judges_path(challenge, task, task_submission), class: UI::LINK %>
+          <% task_submission.task_submission_judges.each do |task_submission_judge| %>
+            <%= task_submission_judge&.judge&.user&.full_name %>
+          <% end %>
         </td>
         <td>
           <%= task_submission.notes %>

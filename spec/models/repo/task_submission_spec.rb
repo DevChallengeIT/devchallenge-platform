@@ -10,6 +10,7 @@ RSpec.describe Repo::TaskSubmission, type: :model do
     it { is_expected.to belong_to(:task) }
     it { is_expected.to belong_to(:judge).optional }
     it { is_expected.to have_many(:task_assessments) }
+    it { is_expected.to have_many(:task_submission_judges) }
   end
 
   describe 'validations' do
