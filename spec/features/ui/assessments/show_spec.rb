@@ -71,7 +71,7 @@ RSpec.describe 'UI/Assessments/Show' do
       within "#submission-#{submission_a.id}" do
         expect(page).not_to have_content member_a.user.full_name
         expect(page).to have_content 'submission_a'
-        expect(page).to have_content '7.5'
+        expect(page).to have_content '15.0'
         expect(page).to have_link 'Edit assessment', href: "/submissions/#{submission_a.id}/assessments/edit"
       end
 
@@ -82,7 +82,7 @@ RSpec.describe 'UI/Assessments/Show' do
       within "#submission-#{submission_c.id}" do
         expect(page).not_to have_content member_c.user.full_name
         expect(page).to have_content 'submission_c'
-        expect(page).to have_content '8.5'
+        expect(page).to have_content '17.0'
         expect(page).to have_link 'Edit assessment', href: "/submissions/#{submission_c.id}/assessments/edit"
       end
     end
@@ -101,14 +101,14 @@ RSpec.describe 'UI/Assessments/Show' do
       within "#submission-#{submission_b.id}" do
         expect(page).not_to have_content member_b.user.full_name
         expect(page).to have_content 'submission_b'
-        expect(page).to have_content '8.5'
+        expect(page).to have_content '17.0'
         expect(page).to have_link 'Edit assessment', href: "/submissions/#{submission_b.id}/assessments/edit"
       end
 
       within "#submission-#{submission_c.id}" do
         expect(page).not_to have_content member_c.user.full_name
         expect(page).to have_content 'submission_c'
-        expect(page).to have_content '9'
+        expect(page).to have_content '18.0'
         expect(page).to have_link 'Edit assessment', href: "/submissions/#{submission_c.id}/assessments/edit"
       end
     end

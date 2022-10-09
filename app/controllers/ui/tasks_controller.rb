@@ -62,9 +62,8 @@ module UI
     def get_judge_assesment(task_assessments)
       result = task_assessments.select do |ta|
         ta.judge_id == current_member.id
-      end.map(&:value).sum.to_f / task_assessments.select do |ta|
-                                    ta.judge_id == current_member.id
-                                  end.count
+      end.map(&:value).sum.to_f
+
       result.nan? ? 'Pending' : result.round(2)
     end
   end
