@@ -48,7 +48,7 @@
           <% end %>
           <td>
             <span class="whitespace-normal">
-              <%= task_submission.notes %>
+              <%= task_submission.notes.truncate(30) %>
             </span>
           </td>
           <td>
