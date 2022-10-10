@@ -6,7 +6,6 @@
 <table id="results" class="table">
   <thead>
     <th>
-      ID
     </th>
     <th>
       <%= t('resources.members.singular') %>
@@ -36,13 +35,13 @@
     <% end %>
   </thead>
   <tbody>
-    <% @members.each do |member| %>
+    <% @members.each_with_index do |member, idx| %>
       <tr id="member-<%= member['member_id'] %>">
         <td>
           #<%= member['submission_id'] %>
         </td>
         <td class="font-semibold">
-          <%= member['full_name'] %> (<%= member['email'] %>)
+          <%= idx + 1 %>. <%= member['full_name'] %> (<%= member['email'] %>)
         </td>
         <td id="member-<%= member['member_id'] %>-sum" class="bg-gray-200 font-bold text-center">
           <%= @calc.sum_for(member_id: member['member_id']) %>
