@@ -49,11 +49,12 @@ RSpec.describe 'UI/Tasks/Show' do
         expect(page).to have_link 'Add assessment'
         expect(page).not_to have_link 'Edit assessment'
         expect(page).to have_content 'Submissions'
-        expect(page).to have_content task_submission_a.notes
-        expect(page).to have_content task_submission_c.notes
-        expect(page).to have_content task_submission_d.notes
-        expect(page).not_to have_content task_submission_b.notes
-        expect(page).not_to have_content other_task_submission.notes
+        expect(page).to have_content "##{task_submission_a.id}"
+        expect(page).to have_content "##{task_submission_c.id}"
+        expect(page).to have_content "##{task_submission_d.id}"
+        expect(page).to have_content "##{task_submission_a.id}"
+        expect(page).not_to have_content "##{task_submission_b.id}"
+        expect(page).not_to have_content "##{other_task_submission.id}"
       end
 
       it 'displays judge tutorial link' do

@@ -10,6 +10,9 @@
   <table id="submissions" class="table">
     <thead>
       <th class="text-left">
+        ID
+      </th>
+      <th class="text-left">
         <%= t('resources.task_assessments.points') %>
       </th>
       <% if Auth.admin?(current_user) %>
@@ -30,6 +33,9 @@
     <tbody>
       <% task_submissions.each do |task_submission| %>
         <tr id="submission-<%= task_submission.id %>">
+          <td>
+            #<%= task_submission.id %>
+          </td>
           <td>
             <% if task_submission.task_assessments.select { |ta| ta.judge_id == current_member.id}.any? %>
               <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-indigo-500 text-white">
