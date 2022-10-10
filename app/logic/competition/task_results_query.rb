@@ -42,6 +42,7 @@ module Competition
     def task_sum_results
       query = <<-SQL
         SELECT
+          ts.id as submission_id,
           ts.member_id,
           u.full_name,
           u.email,
@@ -54,7 +55,7 @@ module Competition
           JOIN members m ON m.id = ts.member_id
           JOIN users u ON u.id = m.user_id
           WHERE tc.task_id = #{task.id}
-        GROUP BY ts.member_id, u.id
+        GROUP BY ts.id, ts.member_id, u.id
         ORDER BY sum desc
       SQL
 

@@ -6,6 +6,9 @@
 <table id="results" class="table">
   <thead>
     <th>
+      ID
+    </th>
+    <th>
       <%= t('resources.members.singular') %>
     </th>
     <th class="text-center fond-bold">
@@ -34,6 +37,9 @@
   <tbody>
     <% @members.each do |member| %>
       <tr id="member-<%= member['member_id'] %>">
+        <td>
+          #<%= member['submission_id'] %>
+        </td>
         <td class="font-semibold">
           <%= member['full_name'] %> (<%= member['email'] %>)
         </td>
