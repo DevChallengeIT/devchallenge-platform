@@ -44,7 +44,7 @@
           <%= idx + 1 %>. <%= member['full_name'] %> (<%= member['email'] %>)
         </td>
         <td id="member-<%= member['member_id'] %>-sum" class="bg-gray-200 font-bold text-center">
-          <%= @calc.sum_for(member_id: member['member_id']) %>
+          <%= member['sum'] %>
         </td>
         <% @criteria.each do |criteria| %>
           <% @judges.each do |judge| %>
