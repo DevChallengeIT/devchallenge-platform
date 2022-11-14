@@ -1,0 +1,25 @@
+<div class="flex justify-between items-center py-3">
+  <h2 class="<%= UI::H2 %>"><%= t('resources.vendors.plural') %></h2>
+  <div class="flex justify-between items-center space-x-3">
+    <div>
+    </div>
+    <%= link_to t('words.add'), new_admin_vendor_path, class: UI::BUTTON_PRIMARY %>
+  </div>
+</div>
+<table id="vendors" class="table">
+  <thead>
+    <th class="text-left">
+      <%= t('resources.vendors.name') %>
+    </th>
+  </thead>
+  <tbody>
+    <% @vendors.each do |vendor| %>
+      <tr id="vendor-<%= vendor.id %>">
+        <td class="text-left">
+          <%= link_to vendor.name, edit_admin_vendor_path(vendor), class: UI::LINK %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= render(UI::PaginatorComponent.new(paginator: @paginator)) %>

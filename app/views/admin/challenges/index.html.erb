@@ -20,6 +20,9 @@
     <th>
       <%= t('resources.challenges.title') %>
     </th>
+    <th>
+      <%= t('resources.vendors.singular') %>
+    </th>
     <th class="text-center">
       <%= t('resources.challenges.registration_at') %>
     </th>
@@ -38,6 +41,9 @@
         </td>
         <td>
           <%= link_to challenge.title, edit_admin_challenge_path(challenge), class: UI::LINK %>
+        </td>
+        <td>
+          <%= challenge.vendor&.name %>
         </td>
         <td class="text-center">
           <%= render(UI::TimestampComponent.new(data: challenge.registration_at, highlight_now: true)) %>

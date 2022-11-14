@@ -2,7 +2,7 @@
 
 module Admin
   class ChallengesController < BaseController
-    helper_method :challenge, :taxonomies
+    helper_method :challenge, :taxonomies, :vendors
 
     add_breadcrumb I18n.t('resources.challenges.plural'), :admin_challenges_path
 
@@ -56,10 +56,13 @@ module Admin
       params[:taxons]&.keys
     end
 
+    def vendors
+      @vendors ||= Repo::Vendor.all
+    end
+
     def challenge_params
-      params.require(:challenge).permit(
-        :status, :title, :description, :terms_and_conditions, :slug, :registration_at, :start_at, :finish_at, :taxons
-      )
+      params.require(:challenge).permit(:status, :title, :description, :terms_and_conditions, :slug, :registration_at,
+                                        :start_at, :finish_at, :taxons, :vendor_id)
     end
   end
 end

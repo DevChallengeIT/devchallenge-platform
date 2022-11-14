@@ -165,3 +165,7 @@ en:
       singular: Criterion
       title: Title
       max_value: Max value
+    vendors:
+      plural: Vendors
+      singular: Vendor
+      name: Name

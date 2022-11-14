@@ -26,7 +26,13 @@
     </div>
   </div>
 
-    <div class="flex my-5 items-center justify-between space-x-5">
+  <div class="my-5">
+    <%= form.label :vendor_id, class: UI::FORM_LABEL %>
+    <%= form.select :vendor_id, vendors.map {|v| [v.name, v.id]}, {include_blank: true}, class: UI::FORM_INPUT %>
+    <%= render(UI::ErrorTagComponent.new(errors: challenge.errors, field: :vendor_id)) %>
+  </div>
+
+  <div class="flex my-5 items-center justify-between space-x-5">
     <div class="w-full">
       <%= form.label :registration_at, class: UI::FORM_LABEL %>
       <%= form.datetime_field :registration_at, class: UI::FORM_INPUT %>

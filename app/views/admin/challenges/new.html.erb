@@ -2,11 +2,17 @@
   <h2 class="<%= UI::H2 %>"><%= t('words.new') %> <%= t('resources.challenges.singular') %></h2>
 
   <%= form_with(model: @challenge, scope: :challenge, url: admin_challenges_path, method: :post, class: "contents") do |form| %>
-  <div class="my-5">
-    <%= form.label :title, class: UI::FORM_LABEL %>
-    <%= form.text_field :title, autofocus: true, class: UI::FORM_INPUT %>
-    <%= render(UI::ErrorTagComponent.new(errors: @challenge.errors, field: :title)) %>
-  </div>
+    <div class="my-5">
+      <%= form.label :title, class: UI::FORM_LABEL %>
+      <%= form.text_field :title, autofocus: true, class: UI::FORM_INPUT %>
+      <%= render(UI::ErrorTagComponent.new(errors: @challenge.errors, field: :title)) %>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :vendor_id, class: UI::FORM_LABEL %>
+      <%= form.select :vendor_id, vendors.map {|v| [v.name, v.id]}, {include_blank: true}, class: UI::FORM_INPUT %>
+      <%= render(UI::ErrorTagComponent.new(errors: challenge.errors, field: :vendor_id)) %>
+    </div>
 
   <div class="flex items-center justify-between">
     <%= form.submit t('words.create'), class: UI::BUTTON_PRIMARY %>

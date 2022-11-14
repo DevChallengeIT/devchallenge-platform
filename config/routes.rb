@@ -47,6 +47,7 @@ Rails.application.routes.draw do
       end
     end
     resources :judges, only: :index
+    resources :vendors, except: %i[destroy]
     resources :users, except: %i[show] do
       post :log_in_as
     end

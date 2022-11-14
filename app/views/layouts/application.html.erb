@@ -44,7 +44,6 @@
           <div class="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:pl-5">
             <%= link_to 'Slack', 'https://join.slack.com/t/devchallengehq/shared_invite/zt-1fbuqk5cn-G1aG5KMQtx7DIA6SjT~F0g', class: UI::NAVBAR_LINK, target: :blank %>
             <%= link_to 'Github', 'https://github.com/DevChallengeIT/devchallenge-platform', class: UI::NAVBAR_LINK, target: :blank %>
-            <%= link_to t('words.tutorial'), 'https://devchallenge.notion.site/devchallenge/Participant-s-Tutorial-11c1c0356a5e4f799bfc6e167714b1ee', class: UI::NAVBAR_LINK, target: :blank %>
             <% if current_user %>
               <%= render(UI::TimestampComponent.new(data: Time.zone.now)) %>
               
