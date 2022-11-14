@@ -6,7 +6,6 @@ class CallbacksController < Devise::OmniauthCallbacksController
 
     if @user.persisted?
       flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: 'Github'
-      tracker { |t| t.facebook_pixel(:track, { type: 'InitiateCheckout' }) }
       sign_in_and_redirect @user, event: :authentication
     else
       redirect_to new_user_registration_url, alert: @user.errors.full_messages.join("\n")
@@ -18,7 +17,6 @@ class CallbacksController < Devise::OmniauthCallbacksController
 
     if @user.persisted?
       flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: 'Google'
-      tracker { |t| t.facebook_pixel(:track, { type: 'InitiateCheckout' }) }
       sign_in_and_redirect @user, event: :authentication
     else
       session['devise.google_data'] = request.env['omniauth.auth'].except(:extra)

@@ -43,7 +43,6 @@ gem 'image_processing'
 gem 'lograge', '~> 0.12'
 gem 'mailerlite', github: 'jpalumickas/mailerlite-ruby', branch: 'dependabot/bundler/faraday-gte-1.0.1-and-lt-3'
 gem 'newrelic_rpm'
-gem 'rack-tracker', '~> 1.13'
 gem 'sentry-rails'
 gem 'sentry-ruby'
 
