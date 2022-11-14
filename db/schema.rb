@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_04_100025) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_14_140357) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
 
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
-  create_enum "challenge_status", ["draft", "moderation", "ready", "canceled"]
+  create_enum "challenge_status", ["draft", "moderation", "ready", "canceled", "completed"]
   create_enum "member_role", ["participant", "judge"]
 
   create_table "action_text_rich_texts", force: :cascade do |t|

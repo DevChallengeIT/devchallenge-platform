@@ -14,7 +14,8 @@ module Repo
       draft:      'draft',
       moderation: 'moderation',
       ready:      'ready',
-      canceled:   'canceled'
+      canceled:   'canceled',
+      completed:  'completed'
     }
 
     has_many :taxon_entities, as: :entity, dependent: :destroy_async

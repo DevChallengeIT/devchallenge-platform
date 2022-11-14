@@ -20,7 +20,8 @@ RSpec.describe Repo::Challenge do
         draft:      'draft',
         moderation: 'moderation',
         ready:      'ready',
-        canceled:   'canceled'
+        canceled:   'canceled',
+        completed:  'completed'
       ).backed_by_column_of_type(:enum)
     end
   end
