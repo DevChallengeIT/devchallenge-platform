@@ -106,6 +106,40 @@ RSpec.describe 'UI/Challenges/Index' do
     expect(page).not_to have_content challenge_b.title
   end
 
+  it 'can filter by status' do
+    challenge_a = create(:challenge, status: 'ready')
+    challenge_b = create(:challenge, status: 'completed')
+
+    visit '/'
+
+    # Filter by taxon_a
+    check 'ready'
+    click_button 'Filter'
+
+    expect(page).to have_checked_field 'ready'
+    expect(page).not_to have_checked_field 'completed'
+    expect(page).to have_content challenge_a.title
+    expect(page).not_to have_content challenge_b.title
+
+    # Filter by taxon_a + taxon_b
+    check 'completed'
+    click_button 'Filter'
+
+    expect(page).to have_checked_field 'ready'
+    expect(page).to have_checked_field 'completed'
+    expect(page).to have_content challenge_a.title
+    expect(page).to have_content challenge_b.title
+
+    # Filter by taxon_b
+    uncheck 'completed'
+    click_button 'Filter'
+
+    expect(page).to have_checked_field 'ready'
+    expect(page).not_to have_checked_field 'completed'
+    expect(page).to have_content challenge_a.title
+    expect(page).not_to have_content challenge_b.title
+  end
+
   it 'handles pagination' do
     challenge_a = create(:challenge)
     challenge_b = create(:challenge)

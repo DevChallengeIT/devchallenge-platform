@@ -107,6 +107,8 @@ en:
       plural: Challenges
       singular: Challenge
       status: Status
+      open: Open
+      completed: Completed
       title: Title
       registration_at: Registration At
       start_at: Start At
