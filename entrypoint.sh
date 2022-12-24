@@ -8,7 +8,7 @@ rm -f /devchallenge/tmp/pids/server.pid
 bundle exec rails assets:precompile
 
 # Prepare database
-bundle exec rails db:create db:schema:load db:migrate db:seed
+bundle exec rails db:migrate
 
 # Start nginx server
 service nginx restart

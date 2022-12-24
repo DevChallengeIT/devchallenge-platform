@@ -13,3 +13,7 @@ digitalocean:
   secret_access_key: <%= Rails.application.credentials.dig(:digitalocean, :secret) %>
   bucket: devchallenge
   region: fra1
+
+s3:
+  service: Disk
+  root: <%= Rails.root.join("storage") %>
