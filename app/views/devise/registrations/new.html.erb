@@ -51,6 +51,12 @@
                 </div>
               </div>
 
+              <div class="w-full">
+                <%= f.label :time_zone, t('auth.time_zone'), class: UI::FORM_LABEL %>
+                <%= f.time_zone_select :time_zone, nil, {}, class: UI::FORM_SELECT %>
+                <%= render(UI::ErrorTagComponent.new(errors: resource.errors, field: :time_zone)) %>
+              </div>
+
               <div class="flex space-x-5 items-center">
                 <div class="w-full">
                   <div class="flex space-x-1.5">
