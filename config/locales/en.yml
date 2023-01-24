@@ -40,6 +40,7 @@ en:
     live: Live
     start: Start
     submit: Submit
+    resubmit: Resubmit
     result: Result
     description: Description
     download: Download

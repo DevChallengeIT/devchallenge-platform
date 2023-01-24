@@ -39,7 +39,8 @@
   <% if @result.nil? && task_submission.persisted? %>
     <div id="result" class="my-5">
       <p class="<%= UI::FLASH_NOTICE %>">
-        <%= t('messages.task_result_pending') %>
+        <%= t('messages.task_result_pending') %>:
+        <%= task_submission.zip_file.filename %> (<%= number_to_human_size(task_submission.zip_file.byte_size) %>)
       </p>
     </div>
   <% end %>
@@ -87,7 +88,11 @@
     <% if (task.start_at..task.submit_at).cover?(Time.zone.now) %>
       <div class="my-8">
         <h2 class="<%= UI::H2 %>">
-          <%= t('words.submit') %>
+          <% if task_submission.persisted? %>
+            <%= t('words.resubmit') %>
+          <% else %>
+            <%= t('words.submit') %>
+          <% end %>
         </h2>
         <%= form_with(model: task_submission, scope: :task_submission, url: (task_submission.new_record? ? task_submissions_path(task) : submission_path(task_submission)), method: (task_submission.new_record? ? :post : :put), class: "contents") do |form| %>
           <div class="flex my-5 items-center justify-between space-x-5">
