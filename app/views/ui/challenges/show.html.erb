@@ -8,7 +8,7 @@
     </h1>
 
     <% if current_user && Competition.can_join?(user: current_user, challenge: challenge) %>
-      <button type="button" class="<%= UI::BUTTON_PRIMARY %>" data-hs-modal="#terms-and-conditions-modal">
+      <button type="button" class="<%= UI::BUTTON_DANGER %>" data-hs-modal="#terms-and-conditions-modal">
         <%= t('words.join') %>
       </button>
 
@@ -41,7 +41,7 @@
         </div>
       </div>
     <% elsif current_member && Competition.can_leave?(user: current_user, challenge: challenge) %>
-      <%= button_to t('words.leave'), challenge_member_path(challenge, current_member), method: :delete, class: UI::BUTTON_DANGER, form: { data: {turbo_confirm: t('messages.are_you_sure')}} %>
+      <%= button_to t('words.leave'), challenge_member_path(challenge, current_member), method: :delete, class: UI::BUTTON_GHOST, form: { data: {turbo_confirm: t('messages.are_you_sure')}} %>
     <% else %>
       <%= render(UI::ChallengeRegistrationInfoComponent.new(user: current_user, challenge:)) %>
     <% end %>
