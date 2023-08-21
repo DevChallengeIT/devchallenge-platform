@@ -60,7 +60,7 @@ en:
     welcome_to_joined: Thanks for accept the challenge. You are participating in
     member_exists: 'User with such email is already assigned to the selected challenge'
     register_to_join: Join
-    challenge_joined: Thank you for accepted the challenge
+    challenge_joined: Your challenge is accepted
     challenge_leaved: So pity that you leaving us...
     challenge_registration_closed: Registration is already closed
     challenge_registration_not_opened_yet: Registration is not yet open
