@@ -71,7 +71,7 @@ en:
     you_not_qualified_to: You are not qualified to 
     submission_has_already_been_assessed: Your submission has already been assessed. Result will be available after
     submission_is_not_available: Submission is  not available
-    task_result_pending: We have received your submition
+    task_result_pending: We have received your submission
     challenge_terms_and_conditions: By joining <strong>%{challenge_title}</strong> you accept it's <a href="%{url}" class="%{class}">terms and conditions</a>
     time_zone_config: Your current profile time zone is UTC. It should correspond to your current time zone if you don't want to miss any vital deadline.
   auth:
@@ -95,7 +95,7 @@ en:
     donot_have_an_account: Don't have an account yet?
     log_in_here: Log In here
     sign_up_with_google: Sign up with Google
-    sign_up_with_github: Sign up with Github
+    sign_up_with_github: Sign up with GitHub
   resources:
     task_assessments:
       plural: Task Assessments
@@ -120,7 +120,7 @@ en:
       singular: Submission
       notes: Notes
       attachment: Attachment
-      assesment: Assesment
+      assesment: Assessment
     tasks:
       plural: Tasks
       singular: Task

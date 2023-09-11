@@ -50,7 +50,7 @@ be_task_3 = Repo::Task.where(
   title:           'Final'
 ).first_or_create(
   challenge:      be_challenge,
-  description:    'This is extra task wich depends on the first one',
+  description:    'This is extra task which depends on the first one',
   dependent_task: be_task_2,
   start_at:       be_task_2.result_at + 5.days,
   submit_at:      be_task_2.result_at + 6.days,
@@ -71,7 +71,7 @@ fe_task_2 = Repo::Task.where(
   title:           'FE Online'
 ).first_or_create(
   challenge:      fe_challenge,
-  description:    'This is extra task wich depends on the first one',
+  description:    'This is extra task which depends on the first one',
   dependent_task: fe_task_1,
   start_at:       fe_task_1.result_at + 6.days,
   submit_at:      fe_task_1.result_at + 7.days,
