@@ -38,5 +38,8 @@ module Devchallenge
 
     # Use load_async
     config.active_record.async_query_executor = :global_thread_pool
+
+    # Use RackAttack
+    config.middleware.use Rack::Attack
   end
 end
