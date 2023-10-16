@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base
   include Pagy::Backend
 
-  respond_to :html, :json
+  respond_to :html
 
   protect_from_forgery with: :null_session, prepend: true
 
