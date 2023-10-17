@@ -46,7 +46,7 @@ module Competition
           ts.member_id,
           u.full_name,
           u.email,
-          SUM(ta.value) / COUNT(DISTINCT(ta.judge_id)) as sum
+          ROUND(SUM(ta.value)::DECIMAL / COUNT(DISTINCT (ta.judge_id)), 2) AS sum
         FROM
           task_assessments ta
           JOIN task_criteria tc ON tc.id = ta.task_criterium_id
