@@ -21,7 +21,7 @@ module Competition
     def avg_for(**args)
       assesments = results.select { |result| result.symbolize_keys >= args }
       sum = assesments.map { |asm| asm['value'] }.sum
-      (sum / assesments.count)
+      (sum.to_f / assesments.count)
     rescue ZeroDivisionError
       0
     end
@@ -32,7 +32,7 @@ module Competition
         .group_by { |r| r['criteria_id'] }
         .map do |_criteria_id, values|
           sum = values.map { |asm| asm['value'] }.sum
-          (sum / values.count)
+          (sum.to_f / values.count)
         rescue ZeroDivisionError
           0
         end.sum
