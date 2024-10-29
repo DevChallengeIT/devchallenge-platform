@@ -59,7 +59,7 @@
           </td>
           <td>
             <% if task_submission.zip_file.present? %>
-              <%= link_to t('words.download'), rails_blob_path(task_submission.zip_file, filename: "#{task_submission.id}.zip" disposition: 'attachment'), class: UI::BUTTON_SECONDARY %>
+              <%= link_to t('words.download'), rails_blob_path(task_submission.zip_file, filename: "#{task_submission.id}.zip", disposition: 'attachment'), class: UI::BUTTON_SECONDARY %>
             <% end %>
           </td>
           <td>
