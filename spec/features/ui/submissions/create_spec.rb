@@ -72,6 +72,7 @@ RSpec.describe 'UI/Submissions/Create' do
 
       expect(task.task_submissions.count).to eq(1)
       expect(task.task_submissions.first.zip_file.attachment.present?).to eq(true)
+      expect(task.task_submissions.first.zip_file.blob.filename).to eq("#{task.task_submissions.first.id}.zip")
       expect(page).to have_content 'Submission was successfully created'
     end
   end

@@ -17,5 +17,11 @@ module Repo
     validates :task, presence: true
     validates :member, presence: true
     validates :task, uniqueness: { scope: :member_id }
+
+    after_save :update_file_name
+
+    def update_file_name
+      zip_file.blob.update(filename: "#{id}.#{zip_file.filename.extension}") if zip_file.attached?
+    end
   end
 end
