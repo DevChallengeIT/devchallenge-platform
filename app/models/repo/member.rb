@@ -18,10 +18,17 @@ module Repo
 
     after_create do
       CreateGroupSubscriberJob.perform_later(member: self)
+      CreateSendpulseMemberJob.perform_later(member: self)
     end
 
     before_destroy do
       RemoveGroupSubscriberJob.perform_later(email: user.email, group_id: challenge.remote_email_group_id)
+      RemoveSendpulseMemberJob.perform_later(
+        email:     user.email,
+        phone:     user.phone_number.presence || '',
+        challenge: challenge.title,
+        fullname:  user.full_name
+      )
     end
   end
 end

@@ -19,6 +19,7 @@ module Repo
 
     after_create do
       CreateSubscriberJob.perform_later(user: self)
+      CreateSendpulseSubscriberJob.perform_later(user: self)
     end
   end
 end

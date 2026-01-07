@@ -18,8 +18,16 @@ RSpec.describe Repo::User do
   describe 'callbacks' do
     it 'schedules CreateSubscriberJob' do
       allow(CreateSubscriberJob).to receive(:perform_later).with(user: subject)
+      allow(CreateSendpulseSubscriberJob).to receive(:perform_later).with(user: subject)
       subject.save!
       expect(CreateSubscriberJob).to have_received(:perform_later).with(user: subject)
+    end
+
+    it 'schedules CreateSendpulseSubscriberJob' do
+      allow(CreateSubscriberJob).to receive(:perform_later).with(user: subject)
+      allow(CreateSendpulseSubscriberJob).to receive(:perform_later).with(user: subject)
+      subject.save!
+      expect(CreateSendpulseSubscriberJob).to have_received(:perform_later).with(user: subject)
     end
   end
 end

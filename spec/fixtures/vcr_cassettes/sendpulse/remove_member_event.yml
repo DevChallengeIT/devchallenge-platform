@@ -1,0 +1,27 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://events.sendpulse.com/events/id/d42eed421367484bb4967b13caeb1aad/8623852
+    body:
+      encoding: UTF-8
+      string: '{"email":"tester@devchallenge.it","phone":"","challenge":"Test Challenge","fullname":"Test User"}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 07 Jan 2026 12:00:00 GMT
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"result":true}'
+  recorded_at: Tue, 07 Jan 2026 12:00:00 GMT
+recorded_with: VCR 6.1.0
