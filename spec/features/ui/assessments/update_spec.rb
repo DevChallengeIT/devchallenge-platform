@@ -43,17 +43,13 @@ RSpec.describe 'UI/Assessments/Update' do
       expect(page).to have_current_path "/tasks/#{task.slug}"
       expect(page).to have_content 'Task Assessment was successfully updated'
 
-      expect(task.task_assessments).to match_array(
-        [
-          have_attributes(
-            value:              5,
-            comment:            'not so nice :(',
-            judge_id:           judge.id,
-            task_criterium_id:  task_criterium.id,
-            task_submission_id: submission.id
-          )
-        ]
-      )
+      expect(task.task_assessments).to contain_exactly(have_attributes(
+                                                         value:              5,
+                                                         comment:            'not so nice :(',
+                                                         judge_id:           judge.id,
+                                                         task_criterium_id:  task_criterium.id,
+                                                         task_submission_id: submission.id
+                                                       ))
     end
   end
 

@@ -36,24 +36,19 @@ RSpec.describe 'UI/Assessments/Create' do
       expect(page).not_to have_content 'Pending'
 
       expect(task.task_assessments.count).to eq 2
-      expect(task.task_assessments).to match_array(
-        [
-          have_attributes(
-            value:              10,
-            comment:            'Awesome job!',
-            judge_id:           judge.id,
-            task_criterium_id:  task_criterium_a.id,
-            task_submission_id: submission.id
-          ),
-          have_attributes(
-            value:              8,
-            comment:            'Also ok',
-            judge_id:           judge.id,
-            task_criterium_id:  task_criterium_b.id,
-            task_submission_id: submission.id
-          )
-        ]
-      )
+      expect(task.task_assessments).to contain_exactly(have_attributes(
+                                                         value:              10,
+                                                         comment:            'Awesome job!',
+                                                         judge_id:           judge.id,
+                                                         task_criterium_id:  task_criterium_a.id,
+                                                         task_submission_id: submission.id
+                                                       ), have_attributes(
+                                                            value:              8,
+                                                            comment:            'Also ok',
+                                                            judge_id:           judge.id,
+                                                            task_criterium_id:  task_criterium_b.id,
+                                                            task_submission_id: submission.id
+                                                          ))
     end
   end
 

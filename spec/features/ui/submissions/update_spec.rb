@@ -44,7 +44,7 @@ RSpec.describe 'UI/Submissions/Update' do
       click_button 'Update'
 
       expect(task.task_submissions.count).to eq(1)
-      expect(task.task_submissions.first.zip_file.attachment.present?).to eq(false)
+      expect(task.task_submissions.first.zip_file.attachment.present?).to be(false)
       expect(page).to have_current_path "/tasks/#{task.slug}"
       expect(page).to have_content 'Submission was successfully updated'
       expect(page).not_to have_button 'Create Task submission'
@@ -66,7 +66,7 @@ RSpec.describe 'UI/Submissions/Update' do
       click_button 'Update'
 
       expect(task.task_submissions.count).to eq(1)
-      expect(task.task_submissions.first.zip_file.attachment.present?).to eq(true)
+      expect(task.task_submissions.first.zip_file.attachment.present?).to be(true)
       expect(page).to have_content 'Submission was successfully updated'
     end
   end

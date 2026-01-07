@@ -3,15 +3,15 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.3.4'
+ruby '3.4.5'
 
 # CORE
-gem 'devise', '~> 4.8.1'
+gem 'devise', '~> 4.9'
 gem 'omniauth-github', '~> 2.0'
 gem 'omniauth-google-oauth2'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.6.7'
-gem 'rails', '~> 7.0.3', '>= 7.0.3.1'
+gem 'rails', '~> 7.2.3'
 gem 'redis', '~> 5.0'
 gem 'sidekiq', '~> 6.4.1'
 gem 'sprockets-rails'

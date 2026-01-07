@@ -11,7 +11,7 @@ RSpec.describe CreateGroupSubscriberJob do
 
     it 'executes MailerLite::Client#create_group_subscriber' do
       VCR.use_cassette('mailerlite/create_group_subscriber_success') do
-        described_class.perform_now(member:)
+        expect { described_class.perform_now(member:) }.not_to raise_error
       end
     end
   end
@@ -21,7 +21,7 @@ RSpec.describe CreateGroupSubscriberJob do
 
     it 'executes MailerLite::Client#create_group_subscriber' do
       VCR.use_cassette('mailerlite/create_group_subscriber_failure') do
-        described_class.perform_now(member:)
+        expect { described_class.perform_now(member:) }.not_to raise_error
       end
     end
   end

@@ -21,19 +21,14 @@ RSpec.describe 'Admin/TaskSubmissions/Import' do
     expect(page).to have_content 'Import has been successful'
 
     expect(Repo::TaskSubmission.count).to eq 2
-    expect(Repo::TaskSubmission.all).to match_array(
-      [
-        have_attributes(
-          task_id:   task.id,
-          member_id: member_a.id,
-          judge_id:  nil
-        ),
-        have_attributes(
-          task_id:   task.id,
-          member_id: member_b.id,
-          judge_id:  nil
-        )
-      ]
-    )
+    expect(Repo::TaskSubmission.all).to contain_exactly(have_attributes(
+                                                          task_id:   task.id,
+                                                          member_id: member_a.id,
+                                                          judge_id:  nil
+                                                        ), have_attributes(
+                                                             task_id:   task.id,
+                                                             member_id: member_b.id,
+                                                             judge_id:  nil
+                                                           ))
   end
 end

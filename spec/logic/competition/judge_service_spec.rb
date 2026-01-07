@@ -9,7 +9,7 @@ RSpec.describe Competition::JudgeService do
     context 'when no judges' do
       it 'skips judge assigment' do
         Competition.auto_assign_judge(task_submission:)
-        expect(task_submission.reload.judge_id).to eq nil
+        expect(task_submission.reload.judge_id).to be_nil
       end
     end
 

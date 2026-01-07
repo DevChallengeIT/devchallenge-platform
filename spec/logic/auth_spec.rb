@@ -7,17 +7,17 @@ RSpec.describe Auth do
     it 'returns true for admin user' do
       user = create(:user, :admin)
 
-      expect(described_class.admin?(user)).to eq true
+      expect(described_class.admin?(user)).to be true
     end
 
     it 'reutrns fallse for regular user' do
       user = create(:user)
 
-      expect(described_class.admin?(user)).to eq false
+      expect(described_class.admin?(user)).to be false
     end
 
     it 'reutrns fallse for nil user' do
-      expect(described_class.admin?(nil)).to eq false
+      expect(described_class.admin?(nil)).to be false
     end
   end
 
@@ -44,7 +44,7 @@ RSpec.describe Auth do
       before { create(:user, email: info.email) }
 
       it 'does not create a new user record' do
-        expect { subject }.to change(Repo::User, :count).by(0)
+        expect { subject }.not_to change(Repo::User, :count)
       end
 
       it 'returns errors' do
@@ -56,7 +56,7 @@ RSpec.describe Auth do
       before { create(:user, email: info.email, legacy_id: '333') }
 
       it 'does not create a new user record' do
-        expect { subject }.to change(Repo::User, :count).by(0)
+        expect { subject }.not_to change(Repo::User, :count)
       end
 
       it 'allow to use existing record and update it provider/uid' do

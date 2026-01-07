@@ -38,14 +38,14 @@ RSpec.describe 'Admin/Users/Index' do
     end
 
     context 'when with search param' do
-      let!(:user1) { create(:user, email: 'stan.rock@gmail.com') }
-      let!(:user2) { create(:user, email: 'stan.rick@gmail.com') }
+      let!(:matching_user) { create(:user, email: 'stan.rock@gmail.com') }
+      let!(:non_matching_user) { create(:user, email: 'stan.rick@gmail.com') }
 
       it 'searches' do
         visit '/admin/users?search=ock'
 
-        expect(page).to have_content user1.email
-        expect(page).not_to have_content user2.email
+        expect(page).to have_content matching_user.email
+        expect(page).not_to have_content non_matching_user.email
       end
     end
   end

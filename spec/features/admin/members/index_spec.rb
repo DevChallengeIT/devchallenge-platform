@@ -4,8 +4,8 @@ require 'rails_helper'
 
 RSpec.describe 'Admin/Members/Index' do
   let!(:challenge) { create(:challenge) }
-  let!(:member1) { create(:member, challenge:) }
-  let!(:member2) { create(:member, challenge:) }
+  let!(:first_member) { create(:member, challenge:) }
+  let!(:second_member) { create(:member, challenge:) }
 
   it 'failure without session' do
     visit "/admin/challenges/#{challenge.slug}/members"
@@ -26,10 +26,10 @@ RSpec.describe 'Admin/Members/Index' do
     assume_logged_in(admin: true)
     visit "/admin/challenges/#{challenge.slug}/members"
 
-    within "#member-#{member1.id}" do
-      expect(page).to have_link member1.user.email, href: "/admin/users/#{member1.user.slug}/edit"
-      expect(page).to have_link member1.role, href: "/admin/challenges/#{challenge.slug}/members/#{member1.id}/edit"
-      expect(page).to have_content member1.created_at.strftime(UI::TimestampComponent::TIME_FORMAT)
+    within "#member-#{first_member.id}" do
+      expect(page).to have_link first_member.user.email, href: "/admin/users/#{first_member.user.slug}/edit"
+      expect(page).to have_link first_member.role, href: "/admin/challenges/#{challenge.slug}/members/#{first_member.id}/edit"
+      expect(page).to have_content first_member.created_at.strftime(UI::TimestampComponent::TIME_FORMAT)
     end
   end
 
@@ -43,15 +43,15 @@ RSpec.describe 'Admin/Members/Index' do
       expect(page).to have_css "a[href='/admin/challenges/#{challenge.slug}/members?per_page=1&page=2']", text: 'Next'
     end
 
-    expect(page).to have_css "#member-#{member1.id}"
-    expect(page).not_to have_css "#member-#{member2.id}"
+    expect(page).to have_css "#member-#{first_member.id}"
+    expect(page).not_to have_css "#member-#{second_member.id}"
 
     within '.pagination' do
       click_link 'Next'
       expect(page).to have_current_path "/admin/challenges/#{challenge.slug}/members?per_page=1&page=2"
     end
 
-    expect(page).to have_css "#member-#{member2.id}"
-    expect(page).not_to have_css "#member-#{member1.id}"
+    expect(page).to have_css "#member-#{second_member.id}"
+    expect(page).not_to have_css "#member-#{first_member.id}"
   end
 end

@@ -1,4 +1,4 @@
-require:
+plugins:
   - rubocop-rails
   - rubocop-rspec
 
@@ -30,15 +30,15 @@ Lint/MissingSuper:
 
 Metrics/BlockLength:
   Exclude:
-    - 'spec/**/*'
-    - 'config/initializers/**/*'
-    - 'config/environments/*'
-    - 'config/routes.rb'
+    - "spec/**/*"
+    - "config/initializers/**/*"
+    - "config/environments/*"
+    - "config/routes.rb"
 
 Layout/LineLength:
   Exclude:
-    - 'app/components/ui.rb'
-    - 'spec/**/*'
+    - "app/components/ui.rb"
+    - "spec/**/*"
 
 Metrics/AbcSize:
   Max: 30

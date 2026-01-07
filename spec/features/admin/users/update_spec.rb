@@ -41,7 +41,7 @@ RSpec.describe 'Admin/Users/Update' do
       expect(page).to have_content 'Test User'
     end
 
-    expect(user.reload.valid_password?('new-valid-password')).to eq true
+    expect(user.reload.valid_password?('new-valid-password')).to be true
   end
 
   it 'success without password change' do
@@ -64,6 +64,6 @@ RSpec.describe 'Admin/Users/Update' do
       expect(page).to have_content 'Test User'
     end
 
-    expect(user.reload.valid_password?('password')).to eq true
+    expect(user.reload.valid_password?('password')).to be true
   end
 end
