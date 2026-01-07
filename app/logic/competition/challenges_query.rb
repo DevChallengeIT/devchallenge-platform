@@ -20,7 +20,7 @@ module Competition
       scope = maybe_search(scope)
       scope = maybe_filter_by_status(scope, filter[:status_in])
       scope = maybe_filter_by_taxons(scope, filter[:taxon_ids])
-      scope.distinct
+      scope.distinct.order(start_at: :desc)
     end
 
     private

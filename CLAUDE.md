@@ -35,6 +35,9 @@ bin/dev
 bundle exec rspec
 ```
 
+## Testing Guidelines
+- Use meaningful variable names that describe the object's purpose or state (e.g., `challenge_old`, `challenge_new` instead of `challenge_a`, `challenge_b`)
+
 ## Key Dependencies
 - Devise for authentication
 - OmniAuth (GitHub, Google) for OAuth

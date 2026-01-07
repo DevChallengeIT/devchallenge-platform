@@ -82,4 +82,16 @@ RSpec.describe 'Admin/Challenges/Index' do
     expect(page).to have_content challenge_a.title
     expect(page).not_to have_content challenge_b.title
   end
+
+  it 'orders challenges by start_at descending' do
+    challenge_old = create(:challenge, title: 'Old Challenge', start_at: 1.week.from_now)
+    challenge_new = create(:challenge, title: 'New Challenge', start_at: 2.weeks.from_now)
+
+    assume_logged_in(admin: true)
+    visit '/admin/challenges'
+
+    challenges = page.all('tbody tr')
+    expect(challenges[0]).to have_content challenge_new.title
+    expect(challenges[1]).to have_content challenge_old.title
+  end
 end

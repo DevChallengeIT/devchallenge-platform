@@ -12,6 +12,15 @@ RSpec.describe Competition::ChallengesQuery do
       expect(result.count).to eq 2
       expect(result).to include(challenge_a, challenge_b)
     end
+
+    it 'orders challenges by start_at descending' do
+      challenge_old = create(:challenge, start_at: 1.week.from_now)
+      challenge_new = create(:challenge, start_at: 2.weeks.from_now)
+
+      result = Competition.list_challenges
+      expect(result.first).to eq(challenge_new)
+      expect(result.second).to eq(challenge_old)
+    end
   end
 
   context 'with search param' do

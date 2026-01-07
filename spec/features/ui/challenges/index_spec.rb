@@ -141,8 +141,8 @@ RSpec.describe 'UI/Challenges/Index' do
   end
 
   it 'handles pagination' do
-    challenge_a = create(:challenge)
-    challenge_b = create(:challenge)
+    challenge_old = create(:challenge, start_at: 1.week.from_now)
+    challenge_new = create(:challenge, start_at: 2.weeks.from_now)
 
     assume_logged_in(admin: true)
     visit '/challenges?per_page=1'
@@ -153,15 +153,15 @@ RSpec.describe 'UI/Challenges/Index' do
       expect(page).to have_css "a[href='/challenges?per_page=1&page=2']", text: 'Next'
     end
 
-    expect(page).to have_css "#challenge-#{challenge_a.id}"
-    expect(page).not_to have_css "#challenge-#{challenge_b.id}"
+    expect(page).to have_css "#challenge-#{challenge_new.id}"
+    expect(page).not_to have_css "#challenge-#{challenge_old.id}"
 
     within '.pagination' do
       click_link 'Next'
       expect(page).to have_current_path '/challenges?per_page=1&page=2'
     end
 
-    expect(page).to have_css "#challenge-#{challenge_b.id}"
-    expect(page).not_to have_css "#challenge-#{challenge_a.id}"
+    expect(page).to have_css "#challenge-#{challenge_old.id}"
+    expect(page).not_to have_css "#challenge-#{challenge_new.id}"
   end
 end
